@@ -35,7 +35,7 @@ div.ink {
     transform: scale(0);
     border-radius: 100%;
     opacity: 0.3;
-    background-color: #4CAF50;
+    background-color: #607D8B;
 }
 div.ink.animate {
     transition: all 0.65s linear;
@@ -100,7 +100,7 @@ article[update] {
     width: 24px;
     height: 24px;
     padding: 1px;
-    background-color: #4CAF50;
+    background-color: #607D8B;
     background-repeat: no-repeat;
     background-position: 5px;
     float: right;
@@ -114,18 +114,18 @@ article[update]:after{
     font-style: initial;
 }
 article[update]:hover {
-    color:#4CAF50;
+    color:#607D8B;
     background-color: white;
 }
 article[update].edicion {
-    background-color: #4CAF50;
+    background-color: #607D8B;
 }
 article[update].edicion:after{
     content: 'save';
 }
 article[update].edicion:hover {
     background-color: white;
-    color:#4CAF50
+    color:#607D8B
 }
 section[sector]:last-child {
     bottom: 1px;
@@ -149,7 +149,7 @@ section[contenedor] article {
 article:first-child {
     margin-left: 10px;
 }
-section[contenedor] article[add]{background-color: #4CAF50;
+section[contenedor] article[add]{background-color: #607D8B;
     max-height: 32px;
     padding: 0px;
 }
@@ -233,12 +233,12 @@ div.group label {
 div.group input:focus~ label, div.group input:valid~ label {
     top: -20px;
     font-size: 12px;
-    color: #4CAF50;
+    color: #607D8B;
 }
 div.group textarea:focus~ label, div.group textarea:valid~ label {
     top: -20px;
     font-size: 12px;
-    color: #4CAF50;
+    color: #607D8B;
 }
 div.group.deshabilitado > label{
     top: -20px;
@@ -260,7 +260,7 @@ div.group.deshabilitado > label{
     width: 0px;
     bottom: 1px;
     position: absolute;
-    background: #4CAF50;
+    background: #607D8B;
     transition: 0.2s ease all;
     -moz-transition: 0.2s ease all;
     -webkit-transition: 0.2s ease all;
@@ -361,7 +361,7 @@ div.desahbilitado label.radio span.outer{
     opacity: 1;
 }
 .radio input:checked+ .outer {
-    border: 2px solid #4CAF50;
+    border: 2px solid #607D8B;
 }
 .radio input:focus+ .outer .inner {
     -webkit-transform: scale(1);
@@ -376,7 +376,7 @@ div.desahbilitado label.radio span.outer{
     display: block;
     float: left;
     margin: 12px -4px 0px 0px;
-    border: 2px solid #4CAF50;
+    border: 2px solid #607D8B;
     border-radius: 50%;
     background-color: #fff;
 }
@@ -452,7 +452,7 @@ div[tooltip] {
     width: 100%;
     height: 40px;
     font-size: 10px;
-    background-color: #4CAF50;
+    background-color: #607D8B;
     border-radius: 3px;
     overflow: visible;
     box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 2px 1px;
@@ -468,7 +468,7 @@ div[tooltip]:before {
     left: 50px;
     border-width: 10px;
     border-style: solid;
-    border-color: #4CAF50 transparent transparent #4CAF50;
+    border-color: #607D8B transparent transparent #607D8B;
 }
 
 /*--------------------------ELEMENTOS DE EDICION-------------------------------*/
@@ -477,7 +477,7 @@ section[titulo][area] {
     transition: all 0.5s ease-in-out;
     padding: 10px 0px 0px 50px;
     font-size: 23px;
-    background-color: #4CAF50;
+    background-color: #607D8B;
     color: white;
 }
 section[titulo][area]> article[update] {
@@ -511,7 +511,7 @@ section[titulo] div[cont] {
     float: left;
 }
 div[formUpdate] label {
-    color: #1B5E20;
+    color: #263238;
 }
 div[formUpdate] div input[type='text'] {
     position: absolute;
@@ -634,15 +634,15 @@ div[mat-window] section[titulo] {
 }
 div[mat-window] section[titulo].basico {
     color: white;
-    background-color: #4CAF50;
+    background-color: #607D8B;
 }
 div[mat-window] section[titulo].inverso {
-    color: #4CAF50;
+    color: #607D8B;
     background-color: white;
     border-bottom: 1px solid rgba(160, 160, 160, 0.5);
 }
 div[mat-window] section[titulo].liso,div[mat-window] section[titulo].liso-centrado {
-    color: #4CAF50;
+    color: #607D8B;
     background-color: white;
 }
 div[mat-window] section[titulo].liso-centrado {

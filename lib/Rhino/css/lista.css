@@ -20,7 +20,7 @@ div[lista] section[cont-slots]{
     height: auto;
 }
 div[lista] section[busqueda]{
-  background-color: #4CAF50;
+  background-color: #607D8B;
   position: absolute;
   z-index: 2;
   padding: 10px 0px;
@@ -58,7 +58,7 @@ div[lista] section[busqueda] div[titulo]{
     height: 32px;
 }
 div[lista].inversa section[busqueda] div[titulo]{
-  color: #4CAF50;
+  color: #607D8B;
 }
 div[lista] section[busqueda] input[campBusq]{
     transition:all 0.3s ease-in-out;
@@ -80,7 +80,7 @@ div[lista] section[busqueda] button[btnBusq]:after {
     color:white;
 }
 div[lista].inversa section[busqueda] button[btnBusq]:after {
-  color: #4CAF50;
+  color: #607D8B;
 }
 div[lista] section[busqueda] button[btnBusq].invisible{
   visibility: hidden;
@@ -161,7 +161,7 @@ div[lista] section[slot].barra-paginacion article[pagina].primera{
 div[lista] section[slot].barra-paginacion article[pagina].actual{
   margin-left: 5px;
   margin-right:  5px;
-  background-color: #4CAF50;
+  background-color: #607D8B;
   color:white;
 }
 div[lista] section[slot].barra-paginacion article[pagina].ultima{
@@ -177,19 +177,19 @@ div[lista] section[slot].barra-paginacion div[busq-pag] input[type='text']{
   height: 100%;
   width: 35px;
   padding: 3px 10px;
-  color: #4caf50;
+  color: #607D8B;
   font-size: 16px;
   margin-left: 0px;
-  border-top: 2px solid #4caf50;
-  border-bottom: 2px solid #4caf50;
-  border-left: 2px solid #4caf50;
+  border-top: 2px solid #607D8B;
+  border-bottom: 2px solid #607D8B;
+  border-left: 2px solid #607D8B;
   border-style: solid;
   border-right: 0px;
   float: left;
 }
 div[lista] section[slot].barra-paginacion div[busq-pag] l{
   padding: 5px 10px;
-  background-color: #4CAF50;
+  background-color: #607D8B;
   color: white;
   float: left;
 

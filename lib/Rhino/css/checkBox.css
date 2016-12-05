@@ -49,7 +49,7 @@ div[checkbox] div[check]{
 }
 div[checkbox] div[check]:after{
   content: 'check';
-  color: #4CAF50;
+  color: #607D8B;
   position: absolute;
   top: 6px;
   left: 3px;

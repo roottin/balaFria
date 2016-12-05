@@ -35,7 +35,7 @@ div[capa='contenido'].completo {
 div[capa='contenido'] section[cabecera] {
     width: 100%;
     height: 20px;
-    background-color: #4CAF50;
+    background-color: #607D8B;
     color: white;
     padding: 20px;
     font-size: 25px;

@@ -147,7 +147,7 @@ div[botonera] button[btnCancelar]:hover:before{
 div[botonera] button[btnAceptar]:hover:before{
     content: 'Aceptar';
     color:white;
-    background-color: #4CAF50;
+    background-color: #607D8B;
     margin-left:-55px;
     border-radius:5px;
     padding:5px;
@@ -158,7 +158,7 @@ div[botonera] button[btnAbrir]{
     width: 60px;
     height: 60px;
     border-radius: 60px;
-    background-color: #4CAF50;
+    background-color: #03A9F4;
     background-position: 14px;
     z-index: 999;
     margin-left: 0px;
