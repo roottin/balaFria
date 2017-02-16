@@ -1,7 +1,7 @@
 function construirUI(){
 	var lista = UI.agregarLista({
   	titulo: 'Tiendas',
-  	clases: ['completa'],
+  	clases: ['completa','tiendas'],
     campo_nombre: 'nombre',
 		carga: {
 			uso:true,
@@ -30,4 +30,12 @@ var esconderBarraBusqueda = function(lista){
 };
 var armarTienda = function(slot){
 	var datos = slot.atributos;
+	console.log(datos);
+	slot.nodo.classList.add('tienda');
+	var html = "<div parte-izq><img class='muestra' src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/220px-Eq_it-na_pizza-margherita_sep2005_sml.jpg'></img></div>"+
+							"<div parte-der>"+
+								"<div titulo>"+datos.nombre+"</div>"+
+								"<div detalle>"+datos.descripcion+"</div>"+
+							"</div>";
+		slot.nodo.innerHTML = html;
 };

@@ -27,15 +27,21 @@ modelo.listar = function(){
 		{
 			"nombre":"Lalo Burguer",
 			"rif":"j0000",
-			"direccion":"la guajira"
+			"direccion":"la guajira",
+			"descripcion":"Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam interdum sed mi eget malesuada. Nunc commodo lorem nec felis mattis rutrum. In.",
+			"puntuacion":"7.6"
 		},{
 			"nombre":"Pizzeria el Aguila",
 			"rif":"j1111",
-			"direccion":"avenida municipalidad"
+			"direccion":"avenida municipalidad",
+			"descripcion":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus bibendum aliquam nulla at fermentum. Curabitur eu sapien id velit suscipit varius. Suspendisse sit amet mattis ante, commodo fringilla sapien. Duis et mauris in purus rhoncus rhoncus. In consequat magna et ligula rutrum volutpat et ac eros. Quisque vitae tempor lorem",
+			"puntuacion":"7.6"
 		},{
 			"nombre":"a que Memo",
 			"rif":"j2222",
-			"direccion":"calle del hambre el pilar"
+			"direccion":"calle del hambre el pilar",
+			"descripcion":"Morbi eget eros quis mauris interdum tempus sed sed nisl. Nunc dolor est, pretium et urna ut, finibus cursus est. Praesent ac accumsan mi.",
+			"puntuacion":"7.6"
 		}
 	];
 };
