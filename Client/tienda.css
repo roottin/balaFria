@@ -9,13 +9,13 @@
 }
 .tienda div[parte-izq]{
   float:left;
-  width: 200px;
+  width: 180px;
   overflow: visible;
   height: 100%;
 }
 .tienda div[parte-izq] img.muestra{
   float:left;
-  width: 100%;
+  width: calc(100%);
   border-radius: 5px;
   height: calc(100% - 20px);
   margin-left:-20px;
@@ -32,15 +32,15 @@
     width: 100%;
     height: auto;
     font-size: 30px;
-    padding-left: 10px;
+    padding-left: -10px;
     padding-top: 15px;
     color: #1a237e;
 }
 .tienda div[parte-der] div[detalle]{
     float: left;
-    width: calc(100% - 60px);
+    width: calc(100% - 40px);
     height: auto;
-    padding-left: 30px;
+    padding-left: 20px;
     padding-top: 10px;
     word-break: break-all;
 }
@@ -49,9 +49,10 @@
 }
 .tiendas section[cont-slots]{
   background-color: #7986CB;
+  padding-bottom: 20px;
 }
 .tiendas section.primero{
-  margin-top: 15px;
+  margin-top: 15px !important;
 }
 .tiendas section[busqueda]{
   display:none;

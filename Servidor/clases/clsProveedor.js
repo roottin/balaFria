@@ -34,7 +34,7 @@ modelo.listar = function(){
 			"nombre":"Pizzeria el Aguila",
 			"rif":"j1111",
 			"direccion":"avenida municipalidad",
-			"descripcion":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus bibendum aliquam nulla at fermentum. Curabitur eu sapien id velit suscipit varius. Suspendisse sit amet mattis ante, commodo fringilla sapien. Duis et mauris in purus rhoncus rhoncus. In consequat magna et ligula rutrum volutpat et ac eros. Quisque vitae tempor lorem",
+			"descripcion":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus bibendum aliquam nulla at fermentum. Curabitur eu sapien id velit os. Quisque vitae tempor lorem",
 			"puntuacion":"7.6"
 		},{
 			"nombre":"a que Memo",
