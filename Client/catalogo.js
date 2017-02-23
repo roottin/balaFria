@@ -67,7 +67,7 @@ var esconderBarraBusqueda = function(lista){
 var armarTienda = function(slot){
 	var datos = slot.atributos;
 	slot.nodo.classList.add('tienda');
-	var html = "<div parte-izq><img class='muestra' src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/220px-Eq_it-na_pizza-margherita_sep2005_sml.jpg'></img></div>"+
+	var html = "<div parte-izq><img class='muestra' src='"+slot.atributos.img+"'></img></div>"+
 							"<div parte-der>"+
 								"<div titulo>"+datos.nombre+"</div>"+
 								"<div detalle>"+datos.descripcion+"</div>"+
