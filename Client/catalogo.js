@@ -2,6 +2,7 @@ var map;
 function construirUI(){
 	var lista = UI.agregarLista({
   	titulo: 'Tiendas',
+		nombre: 'tiendas',
   	clases: ['completa','tiendas'],
     campo_nombre: 'nombre',
 		carga: {
@@ -36,6 +37,7 @@ function construirUI(){
 		]
 	},document.querySelector('div[contenedor]'));
 }
+
 function initMap() {
 	return new Promise(function(resolve,reject){
 		setTimeout(function(){
@@ -51,8 +53,14 @@ function initMap() {
 			zoom: 14,
 			mapTypeId: google.maps.MapTypeId.ROADMAP
 		});
+		return map;
+	}).then(function(mapa){
+		var lista = UI.buscarVentana('tiendas');
+		console.log(lista);
+		agregarTiendasAlMapa(mapa,lista);
 	});
 }
+
 var esconderBarraBusqueda = function(lista){
 
 };
@@ -65,4 +73,12 @@ var armarTienda = function(slot){
 								"<div detalle>"+datos.descripcion+"</div>"+
 							"</div>";
 		slot.nodo.innerHTML = html;
+};
+var agregarTiendasAlMapa = function(mapa,lista){
+	lista.Slots.forEach(function(tienda){
+	  tienda.marker = new google.maps.Marker({
+	    position: {lat: parseFloat(tienda.atributos.lat), lng: parseFloat(tienda.atributos.lng)},
+	    map: mapa
+	  });
+	});
 };
