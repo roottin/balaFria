@@ -1,0 +1,12 @@
+.contMapa{
+  width: 60%;
+  margin-top: 50px !important;
+  margin-left: 0px !important;
+  float: left;
+  height: calc(100% - 51px);
+  margin-bottom: 0px !important;
+}
+.contMapa section[sector]{
+  height: 100%;
+  width: 100%;
+}

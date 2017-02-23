@@ -1,3 +1,4 @@
+var map;
 function construirUI(){
 	var lista = UI.agregarLista({
   	titulo: 'Tiendas',
@@ -24,13 +25,39 @@ function construirUI(){
 			}
 		}
 	},document.querySelector('div[contenedor]'));
+	var mapa = UI.agregarVentana({
+	  nombre:'contMapa',
+		clases:['contMapa'],
+	  sectores:[
+			{
+				nombre:'mapa',
+				html:'<div mapa></div>'
+			}
+		]
+	},document.querySelector('div[contenedor]'));
+}
+function initMap() {
+	return new Promise(function(resolve,reject){
+		setTimeout(function(){
+			if(UI.buscarVentana('contMapa')){
+				resolve(UI.buscarVentana('contMapa'));
+			}else{
+				reject('error');
+			}
+		},100);
+	}).then(function(contMapa){
+		map = new google.maps.Map(contMapa.buscarSector('mapa').nodo, {
+			center: {lat: 9.55972, lng: -69.20194},
+			zoom: 14,
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		});
+	});
 }
 var esconderBarraBusqueda = function(lista){
 
 };
 var armarTienda = function(slot){
 	var datos = slot.atributos;
-	console.log(datos);
 	slot.nodo.classList.add('tienda');
 	var html = "<div parte-izq><img class='muestra' src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/220px-Eq_it-na_pizza-margherita_sep2005_sml.jpg'></img></div>"+
 							"<div parte-der>"+

@@ -1,4 +1,8 @@
-@import url('tienda.css');
+@import url('tiendaMapa.css');
+@import url('mapa.css');
+body,div[contenedor]{
+	height: 100% ;
+}
 div[lista].completa{
 	margin-top: 49px;
 	margin-left: 0px;
