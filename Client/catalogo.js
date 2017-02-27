@@ -50,14 +50,22 @@ function initMap() {
 	}).then(function(contMapa){
 		map = new google.maps.Map(contMapa.buscarSector('mapa').nodo, {
 			center: {lat: 9.55972, lng: -69.20194},
-			zoom: 14,
+			zoom: 12,
 			mapTypeId: google.maps.MapTypeId.ROADMAP
 		});
 		return map;
 	}).then(function(mapa){
 		var lista = UI.buscarVentana('tiendas');
-		console.log(lista);
 		agregarTiendasAlMapa(mapa,lista);
+		return mapa;
+	}).then(function(map){
+		//BUG: El Marker no aparece donde debe debido al cambio subito de tamaño 
+		// I create an OverlayView, and set it to add the "markerLayer" class to the markerLayer DIV
+	    var myoverlay = new google.maps.OverlayView();
+	    myoverlay.draw = function () {
+	        this.getPanes().markerLayer.id='markerLayer';
+	    };
+	    myoverlay.setMap(map);
 	});
 }
 
@@ -75,10 +83,13 @@ var armarTienda = function(slot){
 		slot.nodo.innerHTML = html;
 };
 var agregarTiendasAlMapa = function(mapa,lista){
+	var myIcon='http://ruralshores.com/assets/marker-icon.png';
 	lista.Slots.forEach(function(tienda){
 	  tienda.marker = new google.maps.Marker({
 	    position: {lat: parseFloat(tienda.atributos.lat), lng: parseFloat(tienda.atributos.lng)},
-	    map: mapa
+	    map: mapa,
+	    icon:tienda.atributos.img,
+	    optimized:false
 	  });
 	});
 };

@@ -1,5 +1,8 @@
 @import url('tiendaMapa.css');
 @import url('mapa.css');
+*{
+	overflow: visible;
+}
 body,div[contenedor]{
 	height: 100% ;
 }

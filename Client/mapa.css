@@ -10,3 +10,17 @@
   height: 100%;
   width: 100%;
 }
+#markerLayer img,.gmnoprint img, .gmnoprint{
+	width: 40px !important;
+	height: 40px !important;
+	border-radius: 100px;
+}
+#markerLayer img{	
+	border: 2px solid #3F51B5;
+}
+
+#markerLayer div{	
+	width: 40px !important;
+	height: 40px !important;
+	border-radius: 100px;
+}
