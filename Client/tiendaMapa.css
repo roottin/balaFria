@@ -8,8 +8,9 @@ section[cont-slots]{
 	height: 100% !important;
 }
 .tiendas{
-  width: 40%;
-  float: left;
+  width: calc(40% - 2px);
+  float: right;
+  border: 1px solid rgba(0, 0, 0, 0.5);
 }
 .tienda{
   margin-top: 0px;

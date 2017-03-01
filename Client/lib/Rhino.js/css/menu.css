@@ -30,6 +30,7 @@ div[capaMenu] section[titulo]{
     color: white;
     padding-left:5px;
     font-size: 22px;
+    width: calc(100% - 5px);
 }
 div[capaMenu] section[pie]{
     bottom:48px;
