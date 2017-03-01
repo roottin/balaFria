@@ -30,11 +30,10 @@ section[cont-slots]{
   width: calc(100%);
   height: calc(100%);
   margin: 0px;
-  /*box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);*/
 }
 .tienda div[parte-der]{
   float:left;
-  width: calc(100% - 200px);
+  width: calc(100% - 110px);
   height: 100%;
 }
 .tienda div[parte-der] div[titulo]{

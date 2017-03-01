@@ -10,15 +10,17 @@
   height: 100%;
   width: 100%;
 }
-#markerLayer img,.gmnoprint img, .gmnoprint{
-	width: 40px !important;
-	height: 40px !important;
-	border-radius: 100px;
+#markerLayer img{
+  border-radius: 100px;
+  border: 2px solid #000 !important;
+  width: 85% !important;
+  height: 90% !important;
+  transition:all 0.3s ease-in-out;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
-#markerLayer img{	
-	border: 2px solid #3F51B5;
+#markerLayer div:hover{
+  transform: scale(1.2);
 }
-
 #markerLayer div{	
 	width: 40px !important;
 	height: 40px !important;

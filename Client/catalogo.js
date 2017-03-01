@@ -50,7 +50,7 @@ function initMap() {
 	}).then(function(contMapa){
 		map = new google.maps.Map(contMapa.buscarSector('mapa').nodo, {
 			center: {lat: 9.55972, lng: -69.20194},
-			zoom: 12,
+			zoom: 13,
 			mapTypeId: google.maps.MapTypeId.ROADMAP
 		});
 		return map;
@@ -75,7 +75,7 @@ var esconderBarraBusqueda = function(lista){
 var armarTienda = function(slot){
 	var datos = slot.atributos;
 	slot.nodo.classList.add('tienda');
-	var html = "<div parte-izq><img class='muestra' src='"+slot.atributos.img+"'></img></div>"+
+	var html = "<div parte-izq><img class='muestra' src='img/"+slot.atributos.img+"'></img></div>"+
 							"<div parte-der>"+
 								"<div titulo>"+datos.nombre+"</div>"+
 								"<div detalle>"+datos.descripcion+"</div>"+
@@ -83,13 +83,12 @@ var armarTienda = function(slot){
 		slot.nodo.innerHTML = html;
 };
 var agregarTiendasAlMapa = function(mapa,lista){
-	var myIcon='http://ruralshores.com/assets/marker-icon.png';
 	lista.Slots.forEach(function(tienda){
-	  tienda.marker = new google.maps.Marker({
-	    position: {lat: parseFloat(tienda.atributos.lat), lng: parseFloat(tienda.atributos.lng)},
-	    map: mapa,
-	    icon:tienda.atributos.img,
-	    optimized:false
-	  });
+		tienda.marker = new google.maps.Marker({
+		    position: {lat: parseFloat(tienda.atributos.lat), lng: parseFloat(tienda.atributos.lng)},
+		    map: mapa,
+		    icon:'img/thumbnails/'+tienda.atributos.img,
+		    optimized:false
+	  	});
 	});
 };

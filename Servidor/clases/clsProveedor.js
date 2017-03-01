@@ -32,7 +32,7 @@ modelo.listar = function(){
 			"puntuacion":"7.6",
 			"lat":"9.55441727599",
 			"lng":"-69.191708788",
-			'img':'https://igx.4sqi.net/img/general/600x600/26790829_kXq_i2Jk1IF4cGL-M6QvjtNMRAUBynbz4lkAr6sOKcg.jpg'
+			'img':'lalo.jpg'
 		},{
 			"nombre":"Pizzeria el Aguila",
 			"rif":"j1111",
@@ -41,7 +41,7 @@ modelo.listar = function(){
 			"puntuacion":"7.6",
 			"lat":"9.579154",
 			"lng":"-69.219986",
-			"img":"https://pbs.twimg.com/profile_images/1161214461/LOGO_AGUILA_PIZZAS.JPG"
+			"img":"pizzaAguila.jpg"
 		},{
 			"nombre":"a que Memo",
 			"rif":"j2222",
@@ -50,7 +50,7 @@ modelo.listar = function(){
 			"puntuacion":"7.6",
 			"lat":"9.572159",
 			"lng":"-69.209555",
-			'img':'https://scontent.cdninstagram.com/t51.2885-19/s150x150/14478296_203976560055074_4562986007028301824_a.jpg'
+			'img':'a_que_memo.jpg'
 		}
 	];
 };
