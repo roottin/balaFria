@@ -22,7 +22,6 @@ function construirUI(){
 				lista.Slots.forEach(function(slot){
 					armarTienda(slot);
 				});
-				esconderBarraBusqueda(lista);
 			}
 		}
 	},document.querySelector('div[contenedor]'));
@@ -55,23 +54,78 @@ function initMap() {
 		});
 		return map;
 	}).then(function(mapa){
+
+		window.CustomMarker = function(cons) {
+			this.latlng = cons.position;
+			this.args = cons;
+			this.setMap(cons.map);
+		};
+
+		window.CustomMarker.prototype = new google.maps.OverlayView();
+
+		window.CustomMarker.prototype.draw = function() {
+
+			var self = this;
+
+			var div = this.div;
+
+			if (!div) {
+
+				div = this.div = document.createElement('div');
+
+				div.className = 'marker';
+
+				div.style.position = 'absolute';
+				div.style.cursor = 'pointer';
+				div.style.width = '40px';
+				div.style.height = '40px';
+				div.classList.add("markerLayer");
+
+				if (typeof(self.args.marker_id) !== 'undefined') {
+					div.dataset.marker_id = self.args.marker_id;
+				}
+
+				if (typeof(self.args.img) !== 'undefined') {
+					div  = self.armarImagen(self.args.img,div);
+				}
+
+				google.maps.event.addDomListener(div, "click", function(event) {
+					google.maps.event.trigger(self, "click");
+				});
+
+				var panes = this.getPanes();
+				panes.overlayImage.appendChild(div);
+			}
+
+			var point = this.getProjection().fromLatLngToDivPixel(this.latlng);
+
+			if (point) {
+				div.style.left = point.x + 'px';
+				div.style.top = point.y + 'px';
+			}
+		};
+
+		window.CustomMarker.prototype.remove = function() {
+			if (this.div) {
+				this.div.parentNode.removeChild(this.div);
+				this.div = null;
+			}
+		};
+
+		window.CustomMarker.prototype.getPosition = function() {
+			return this.latlng;
+		};
+		window.CustomMarker.prototype.armarImagen = function(img,div){
+			div.innerHTML='<img src="'+img+'"></img>';
+			return div;
+		};
+		return mapa;
+	}).then(function(mapa){
 		var lista = UI.buscarVentana('tiendas');
 		agregarTiendasAlMapa(mapa,lista);
 		return mapa;
-	}).then(function(map){
-		//BUG: El Marker no aparece donde debe debido al cambio subito de tamaño 
-		// I create an OverlayView, and set it to add the "markerLayer" class to the markerLayer DIV
-	    var myoverlay = new google.maps.OverlayView();
-	    myoverlay.draw = function () {
-	        this.getPanes().markerLayer.id='markerLayer';
-	    };
-	    myoverlay.setMap(map);
 	});
 }
-
-var esconderBarraBusqueda = function(lista){
-
-};
 var armarTienda = function(slot){
 	var datos = slot.atributos;
 	slot.nodo.classList.add('tienda');
@@ -84,11 +138,11 @@ var armarTienda = function(slot){
 };
 var agregarTiendasAlMapa = function(mapa,lista){
 	lista.Slots.forEach(function(tienda){
-		tienda.marker = new google.maps.Marker({
-		    position: {lat: parseFloat(tienda.atributos.lat), lng: parseFloat(tienda.atributos.lng)},
+		tienda.marker = new CustomMarker({
+		    position: new google.maps.LatLng(parseFloat(tienda.atributos.lat),parseFloat(tienda.atributos.lng)),
 		    map: mapa,
-		    icon:'img/thumbnails/'+tienda.atributos.img,
-		    optimized:false
+		    img:'img/thumbnails/'+tienda.atributos.img,
+				id: tienda.atributos.id
 	  	});
 	});
 };

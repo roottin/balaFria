@@ -25,6 +25,7 @@ modelo.gestionar = function(pet,res){
 modelo.listar = function(){
 	return [
 		{
+			"id":'01',
 			"nombre":"Lalo Burguer",
 			"rif":"j0000",
 			"direccion":"la guajira",
@@ -34,6 +35,7 @@ modelo.listar = function(){
 			"lng":"-69.191708788",
 			'img':'lalo.jpg'
 		},{
+			"id":'02',
 			"nombre":"Pizzeria el Aguila",
 			"rif":"j1111",
 			"direccion":"avenida municipalidad",
@@ -43,6 +45,7 @@ modelo.listar = function(){
 			"lng":"-69.219986",
 			"img":"pizzaAguila.jpg"
 		},{
+			"id":'03',
 			"nombre":"a que Memo",
 			"rif":"j2222",
 			"direccion":"calle del hambre el pilar",
