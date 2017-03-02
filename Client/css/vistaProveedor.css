@@ -34,6 +34,7 @@
 .proveedor section[cabecera] div[puntuacion] i{
   position: static;
 }
+
 /*------------------- Cuerpo -----------------*/
 .proveedor section[cuerpo]{
   padding: 0px !important;
@@ -61,8 +62,8 @@
 }
 .proveedor section[cuerpo] div[barra] div:hover,
 .proveedor section[cuerpo] div[barra] div.seleccionado{
-  background-color: white;
-  color: #1A237E;
+  background-color: white !important;
+  color: #1A237E !important;
 }
 .proveedor section[cuerpo] section{
   transition: all 0.3s ease-in-out;
@@ -70,15 +71,7 @@
   top:30px;
   width: 100%;
   height: 200px;
-}
-.proveedor section[cuerpo] section[home]{
-  background-color: blue;
-}
-.proveedor section[cuerpo] section[star]{
-  background-color: yellow;
-}
-.proveedor section[cuerpo] section[menu]{
-  background-color: red;
+  border-right: 1px solid rgba(0, 0, 0, 0.5);
 }
 .proveedor section[cuerpo] section.seleccionado{
   margin-left: 0px;

@@ -164,7 +164,7 @@ var abrirTienda = function(tienda){
 	  cuerpo:{
 			html:'<div barra>'+
 							'<div star class="material-icons white md-32">star</div>'+
-							'<div home class="material-icons white md-32">home</div>'+
+							'<div home class="material-icons white md-32 seleccionado">home</div>'+
 							'<div menu class="material-icons white md-32">list</div>'+
 						'</div>'+
 						'<section star class="izquierda">opiniones</section>'+
@@ -186,18 +186,21 @@ function funcionamientoCapas(modal){
 	var btnMenu = modal.partes.cuerpo.nodo.querySelector('div[menu]');
 	btnHome.onclick=function(){
 		limpiarCapas(modal);
+		btnHome.classList.add('seleccionado');
 		capaHome.classList.add('seleccionado');
 		capaMenu.classList.add('derecha');
 		capaStar.classList.add('izquierda');
 	};
 	btnStar.onclick=function(){
 		limpiarCapas(modal);
+		btnStar.classList.add('seleccionado');
 		capaHome.classList.add('derecha');
 		capaMenu.classList.add('derecha');
 		capaStar.classList.add('seleccionado');
 	};
 	btnMenu.onclick=function(){
 		limpiarCapas(modal);
+		btnMenu.classList.add('seleccionado');
 		capaHome.classList.add('izquierda');
 		capaMenu.classList.add('seleccionado');
 		capaStar.classList.add('izquierda');
@@ -208,5 +211,10 @@ function limpiarCapas(modal){
 		section.classList.forEach(function(clase){
 			section.classList.remove(clase);
 		});
+	});
+	modal.partes.cuerpo.nodo.querySelector('div[barra]').childNodes.forEach(function(div){
+		if(div.classList.contains('seleccionado')){
+			div.classList.remove('seleccionado');
+		}
 	});
 }
