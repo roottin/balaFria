@@ -19,6 +19,11 @@ section[cont-slots]{
   height: 100px !important;
   padding: 10px;
   overflow: visible;
+  cursor:pointer;
+  transition: all 0.3s ease-in-out;
+}
+.tienda:hover{
+  background-color: #e8e8e8;
 }
 .tienda div[parte-izq]{
   float:left;

@@ -23,7 +23,8 @@ function construirUI(){
 					armarTienda(slot);
 				});
 			}
-		}
+		},
+		onclickSlot: abrirTienda
 	},document.querySelector('div[contenedor]'));
 	var mapa = UI.agregarVentana({
 	  nombre:'contMapa',
@@ -126,15 +127,16 @@ function initMap() {
 		return mapa;
 	});
 }
+//---------------------------------------------- Manejo de tiendas --------------------------------------
 var armarTienda = function(slot){
 	var datos = slot.atributos;
 	slot.nodo.classList.add('tienda');
 	var html = "<div parte-izq><img class='muestra' src='img/"+slot.atributos.img+"'></img></div>"+
-							"<div parte-der>"+
-								"<div titulo>"+datos.nombre+"</div>"+
-								"<div detalle>"+datos.descripcion+"</div>"+
-							"</div>";
-		slot.nodo.innerHTML = html;
+				"<div parte-der>"+
+					"<div titulo>"+datos.nombre+"</div>"+
+					"<div detalle>"+datos.descripcion+"</div>"+
+				"</div>";
+	slot.nodo.innerHTML = html;
 };
 var agregarTiendasAlMapa = function(mapa,lista){
 	lista.Slots.forEach(function(tienda){
@@ -145,4 +147,7 @@ var agregarTiendasAlMapa = function(mapa,lista){
 				id: tienda.atributos.id
 	  	});
 	});
+};
+var abrirTienda = function(slotTienda){
+	console.log(slotTienda);
 };

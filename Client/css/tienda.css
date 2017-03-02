@@ -6,6 +6,7 @@
   border-radius: 3px;
   padding: 10px;
   overflow: visible;
+  cursor:pointer;
 }
 .tienda div[parte-izq]{
   float:left;

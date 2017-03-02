@@ -10,7 +10,7 @@ var Arquitecto = function(){
 		objetoInicializar = objetoInicializar || {};
 		this.elementos = {
 			 menu : new Menu(),
-			 cabecera : new Cabecera(),
+			 cabecera : new Cabecera(objetoInicializar.cabecera),
 			 url: new Url(),
 			 maestro : 'noPosee',
 			 botonera : 'noPosee',
@@ -384,21 +384,24 @@ var Url = function(){
 /*----------------------------------------------------------------------------------------------------*/
 /*------------------------------------------------Objeto Cabecera ------------------------------------*/
 /*----------------------------------------------------------------------------------------------------*/
-var Cabecera = function(){
-
+var Cabecera = function(cons){
+	this.cons = cons || {};
 	this.estado = 'porConstriur';
 	this.nodo = null;
+	this.clases = cons.clases || [];
 	this.construir();
 };
 Cabecera.prototype.construir = function(){
 	var contenedor = obtenerContenedor();
 	var elemento = document.createElement('div');
 	elemento.setAttribute('cabecera','');
-	elemento.innerHTML = "<button type='button' menuBtn id='menuBtn'><i class='material-icons md-36 white'>menu</i></button><div titulo>SOCA PORTUGUESA</div>";
+	var html = this.cons.html || "<div titulo>TITULO</div>";
+	elemento.innerHTML = "<button type='button' menuBtn id='menuBtn'><i class='material-icons md-36 white'>menu</i></button>"+html;
 	contenedor.insertBefore(elemento,contenedor.firstChild);
 	this.funcionamientoBoton();
 	this.estado='enUso';
 	this.nodo = elemento;
+	UI.manejoDeClases(this);
 };
 Cabecera.prototype.cambiarTexto = function(texto){
 	this.nodo.querySelector('div[titulo]').innerHTML = texto;

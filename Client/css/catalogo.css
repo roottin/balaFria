@@ -10,3 +10,10 @@ div[lista].completa{
 	margin-top: 49px;
 	margin-left: 0px;
 }
+.cabecera{
+	background: #1A237E !important;
+}
+.cabecera div[titulo]{
+	margin-left: 40px;
+    margin-top: -4px;
+}
