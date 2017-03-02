@@ -163,9 +163,9 @@ var abrirTienda = function(tienda){
 	  },
 	  cuerpo:{
 			html:'<div barra>'+
-							'<div class="material-icons white md-32">star</div>'+
-							'<div class="material-icons white md-32">home</div>'+
-							'<div class="material-icons white md-32">list</div>'+
+							'<div star class="material-icons white md-32">star</div>'+
+							'<div home class="material-icons white md-32">home</div>'+
+							'<div menu class="material-icons white md-32">list</div>'+
 						'</div>'+
 						'<section star class="izquierda">opiniones</section>'+
 						'<section home class="seleccionado">home</section>'+
@@ -173,5 +173,40 @@ var abrirTienda = function(tienda){
 	  }
 	});
 	modal.nodo.classList.remove('ancho');
-	modal.partes.cuerpo.nodo.querySelectorAll()
+	funcionamientoCapas(modal);
 };
+function funcionamientoCapas(modal){
+	//capas
+	var capaHome = modal.partes.cuerpo.nodo.querySelector('section[home]');
+	var capaStar = modal.partes.cuerpo.nodo.querySelector('section[star]');
+	var capaMenu = modal.partes.cuerpo.nodo.querySelector('section[menu]');
+	//botones
+	var btnHome = modal.partes.cuerpo.nodo.querySelector('div[home]');
+	var btnStar = modal.partes.cuerpo.nodo.querySelector('div[star]');
+	var btnMenu = modal.partes.cuerpo.nodo.querySelector('div[menu]');
+	btnHome.onclick=function(){
+		limpiarCapas(modal);
+		capaHome.classList.add('seleccionado');
+		capaMenu.classList.add('derecha');
+		capaStar.classList.add('izquierda');
+	};
+	btnStar.onclick=function(){
+		limpiarCapas(modal);
+		capaHome.classList.add('derecha');
+		capaMenu.classList.add('derecha');
+		capaStar.classList.add('seleccionado');
+	};
+	btnMenu.onclick=function(){
+		limpiarCapas(modal);
+		capaHome.classList.add('izquierda');
+		capaMenu.classList.add('seleccionado');
+		capaStar.classList.add('izquierda');
+	};
+}
+function limpiarCapas(modal){
+	modal.partes.cuerpo.nodo.querySelectorAll('section').forEach(function(section){
+		section.classList.forEach(function(clase){
+			section.classList.remove(clase);
+		});
+	});
+}

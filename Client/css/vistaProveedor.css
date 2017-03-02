@@ -1,6 +1,7 @@
 .proveedor{
   width: 100% !important;
   left: 0% !important;
+  margin-bottom: 100px !important;
 }
 /*------------------ -Cabecera ----------------*/
 .proveedor section[cabecera]{
@@ -41,7 +42,7 @@
   margin-right: 0px !important;
   margin-top: -7px !important;
   position: relative;
-  overflow: hidden;
+  overflow: hidden !important;
 }
 .proveedor section[cuerpo] div[barra]{
   width: 100%;
