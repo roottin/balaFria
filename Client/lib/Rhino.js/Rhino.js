@@ -1422,6 +1422,7 @@ var modalWindow = function(){
 		this.partes = {};
 		this.nodo = null;
 		this.tipo = 'contenido';
+		this.clases = [];
 
 		this.construirNodo = function(){
 			var nodo=document.createElement('div');
@@ -1478,6 +1479,8 @@ var modalWindow = function(){
 		};
 
 		this.dibujarUI = function(data){
+			this.clases = data.clases || [];
+			UI.manejoDeClases(this);
 			data.tipo=data.tipo || 'contenedor';
 			data.contenido = data.contenido || 'normal';
 			if(data.cabecera!==undefined){
@@ -1573,7 +1576,6 @@ var modalWindow = function(){
 			setTimeout(function(){
 				nodo.style.opacity='0.8';
 			},10);
-
 		};
 		this.construirNodo();
 	};
