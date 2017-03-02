@@ -148,6 +148,30 @@ var agregarTiendasAlMapa = function(mapa,lista){
 	  	});
 	});
 };
-var abrirTienda = function(slotTienda){
-	console.log(slotTienda);
+var abrirTienda = function(tienda){
+	var puntuacion = '<i class="material-icons white md-24">star</i>'+
+									 '<i class="material-icons white md-24">star</i>'+
+									 '<i class="material-icons white md-24">star</i>'+
+									 '<i class="material-icons white md-24">star</i>';
+	var modal = UI.crearVentanaModal({
+	  contenido: 'ancho',
+		clases: ['proveedor'],
+	  cabecera:{
+	    html: '<img src="img/banner/'+tienda.atributos.img+'"></img>'+
+						'<div nombre>'+tienda.atributos.nombre+'</div>'+
+						'<div puntuacion>'+puntuacion+'</div>'
+	  },
+	  cuerpo:{
+			html:'<div barra>'+
+							'<div class="material-icons white md-32">star</div>'+
+							'<div class="material-icons white md-32">home</div>'+
+							'<div class="material-icons white md-32">list</div>'+
+						'</div>'+
+						'<section star class="izquierda">opiniones</section>'+
+						'<section home class="seleccionado">home</section>'+
+						'<section menu class="derecha">MENU</section>'
+	  }
+	});
+	modal.nodo.classList.remove('ancho');
+	modal.partes.cuerpo.nodo.querySelectorAll()
 };

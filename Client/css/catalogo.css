@@ -1,3 +1,4 @@
+@import url('vistaProveedor.css');
 @import url('tiendaMapa.css');
 @import url('mapa.css');
 *{
@@ -15,5 +16,5 @@ div[lista].completa{
 }
 .cabecera div[titulo]{
 	margin-left: 40px;
-    margin-top: -4px;
+  margin-top: -4px;
 }
