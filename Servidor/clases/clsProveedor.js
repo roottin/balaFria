@@ -1,5 +1,6 @@
 var express = require('express');
-
+var fs = require("fs");
+var path = require('path');
 var utils = require('../utils');
 
 var modelo = {};
@@ -10,63 +11,54 @@ modelo.gestionar = function(pet,res){
 	var respuesta;
 	switch(pet.operacion){
 		case 'listar':
-			var resultado = yo.listar();
-			if (resultado) {
-				respuesta = {
-					"success":1,
-					"registros":resultado
-				};
-			}
+			yo.listar()
+				.then(JSON.parse)
+				.then(function(resultado){
+					respuesta = {
+						"success":1,
+						"registros":resultado
+					};
+					utils.enviar(respuesta,res);
+				},function(error){
+					console.error(error,'linea 23');
+				});
+		break;
+		case "buscarOpinion":
+			yo.buscarOpinion()
+				.then(JSON.parse)
+				.then(function(resultado){
+					respuesta = {
+						"success":1,
+						"registro":resultado
+					};
+					utils.enviar(respuesta,res);
+				});
 		break;
 	}
-	utils.enviar(respuesta,res);
 };
 
 modelo.listar = function(){
-	return [
-		{
-			"id":'01',
-			"nombre":"Lalo Burguer",
-			"rif":"j0000",
-			"direccion":"la guajira",
-			"descripcion":"Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam interdum sed mi eget malesuada. Nunc commodo lorem nec felis mattis rutrum. In.",
-			"puntuacion":"3.3",
-			"lat":"9.55441727599",
-			"lng":"-69.191708788",
-			'img':'lalo.jpg',
-			"contacto":[
-				{'tipo':"telefono","valor":"0416-0566555"},
-			]
-		},{
-			"id":'02',
-			"nombre":"Pizzeria el Aguila",
-			"rif":"j1111",
-			"direccion":"avenida municipalidad",
-			"descripcion":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus bibendum aliquam nulla at fermentum. Curabitur eu sapien id velit os. Quisque vitae tempor lorem",
-			"puntuacion":"4.8",
-			"lat":"9.579154",
-			"lng":"-69.219986",
-			"img":"pizzaAguila.jpg",
-			"contacto":[
-				{'tipo':"telefono","valor":"0412-0566755"},
-				{'tipo':"telefono","valor":"0416-3216755"},
-				{'tipo':"telefono","valor":"0412-2363185"},
-			]
-		},{
-			"id":'03',
-			"nombre":"a que Memo",
-			"rif":"j2222",
-			"direccion":"calle del hambre el pilar",
-			"descripcion":"Morbi eget eros quis mauris interdum tempus sed sed nisl. Nunc dolor est, pretium et urna ut, finibus cursus est. Praesent ac accumsan mi.",
-			"puntuacion":"3.9",
-			"lat":"9.572159",
-			"lng":"-69.209555",
-			'img':'a_que_memo.jpg',
-			"contacto":[
-				{'tipo':"telefono","valor":"0412-7689002"},
-				{'tipo':"telefono","valor":"0424-0565785"},
-			]
-		}
-	];
+	return new Promise(function(resolve,reject){
+		var ruta = path.join(__dirname, '../json/db_proveedor.json');
+		fs.readFile(ruta, 'utf8', function(error,data){
+			if(error){
+				reject(error);
+			}else{
+				resolve(data);
+			}
+		});
+	});
+};
+modelo.buscarOpinion = function(){
+	return new Promise(function(resolve,reject){
+		var ruta = path.join(__dirname, '../json/db_opinion.json');
+		fs.readFile(ruta, 'utf8', function(error,data){
+			if(error){
+				reject(error);
+			}else{
+				resolve(data);
+			}
+		});
+	});
 };
 module.exports = modelo;

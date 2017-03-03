@@ -150,7 +150,6 @@ var agregarTiendasAlMapa = function(mapa,lista){
 };
 var abrirTienda = function(tienda){
 	var puntuacion = armarPuntuacion(tienda.atributos.puntuacion);
-	var contactosHTML = armarContactos(tienda.atributos.contacto);
 	var modal = UI.crearVentanaModal({
 	  contenido: 'ancho',
 		clases: ['proveedor'],
@@ -165,14 +164,13 @@ var abrirTienda = function(tienda){
 							'<div home class="material-icons white md-32 seleccionado">home</div>'+
 							'<div menu class="material-icons white md-32">list</div>'+
 						'</div>'+
-						'<section star class="izquierda">opiniones</section>'+
+						'<section star class="izquierda">'+
+							'<div puntuacion></div>'+
+							'<div opiniones></div>'+
+						'</section>'+
 						'<section home class="seleccionado">'+
-							'<div descripcion>'+tienda.atributos.descripcion+'</div>'+
-							'<div contacto>'+
-								'<aside titulo>Contacto</aside>'+
-									contactosHTML+
-								'<div style="clear:both"></div>'+
-							'</div>'+
+							'<div descripcion></div>'+
+							'<div contacto></div>'+
 							'<div horarios>'+
 								'<aside titulo>Horarios</aside>'+
 							'</div>'+
@@ -181,40 +179,60 @@ var abrirTienda = function(tienda){
 	  }
 	});
 	modal.nodo.classList.remove('ancho');
+	//asigno la tienda a la ventana modal de manera de usar su contenido cuando lo necesite
+	modal.tienda = tienda;
+	//inicializo las capas
+	inicializarCapas(modal);
+	//las lleno y les doy funcionamiento
 	funcionamientoCapas(modal);
 };
-function funcionamientoCapas(modal){
+function inicializarCapas(modal){
+	var cuerpo = modal.partes.cuerpo;
 	//capas
-	var capaHome = modal.partes.cuerpo.nodo.querySelector('section[home]');
-	var capaStar = modal.partes.cuerpo.nodo.querySelector('section[star]');
-	var capaMenu = modal.partes.cuerpo.nodo.querySelector('section[menu]');
+	cuerpo.capaHome = modal.partes.cuerpo.nodo.querySelector('section[home]');
+		//secciones
+		cuerpo.capaHome.contacto = cuerpo.capaHome.querySelector('div[contacto]');
+		cuerpo.capaHome.descripcion = cuerpo.capaHome.querySelector('div[descripcion]');
+		cuerpo.capaHome.horarios = cuerpo.capaHome.querySelector('div[horarios]');
+
+	cuerpo.capaStar = modal.partes.cuerpo.nodo.querySelector('section[star]');
+		//secciones
+		cuerpo.capaStar.puntuacion = cuerpo.capaStar.querySelector('div[puntuacion]');
+		cuerpo.capaStar.opiniones = cuerpo.capaStar.querySelector('div[opiniones]');
+
+	cuerpo.capaMenu = modal.partes.cuerpo.nodo.querySelector('section[menu]');
 	//botones
-	var btnHome = modal.partes.cuerpo.nodo.querySelector('div[home]');
-	var btnStar = modal.partes.cuerpo.nodo.querySelector('div[star]');
-	var btnMenu = modal.partes.cuerpo.nodo.querySelector('div[menu]');
-	btnHome.onclick=function(){
+	cuerpo.btnHome = modal.partes.cuerpo.nodo.querySelector('div[home]');
+	cuerpo.btnStar = modal.partes.cuerpo.nodo.querySelector('div[star]');
+	cuerpo.btnMenu = modal.partes.cuerpo.nodo.querySelector('div[menu]');
+
+	llenarCapa('home',modal);
+}
+function funcionamientoCapas(modal){
+	var cuerpo = modal.partes.cuerpo;
+	cuerpo.btnHome.onclick=function(){
 		limpiarCapas(modal);
-		btnHome.classList.add('seleccionado');
-		capaHome.classList.add('seleccionado');
-		capaMenu.classList.add('derecha');
-		capaStar.classList.add('izquierda');
-		llenarCapa("home",capaHome);
+		cuerpo.btnHome.classList.add('seleccionado');
+		cuerpo.capaHome.classList.add('seleccionado');
+		cuerpo.capaMenu.classList.add('derecha');
+		cuerpo.capaStar.classList.add('izquierda');
+		llenarCapa("home",modal);
 	};
-	btnStar.onclick=function(){
+	cuerpo.btnStar.onclick=function(){
 		limpiarCapas(modal);
-		btnStar.classList.add('seleccionado');
-		capaHome.classList.add('derecha');
-		capaMenu.classList.add('derecha');
-		capaStar.classList.add('seleccionado');
-		llenarCapa("star",capaStar);
+		cuerpo.btnStar.classList.add('seleccionado');
+		cuerpo.capaHome.classList.add('derecha');
+		cuerpo.capaMenu.classList.add('derecha');
+		cuerpo.capaStar.classList.add('seleccionado');
+		llenarCapa("star",modal);
 	};
-	btnMenu.onclick=function(){
+	cuerpo.btnMenu.onclick=function(){
 		limpiarCapas(modal);
-		btnMenu.classList.add('seleccionado');
-		capaHome.classList.add('izquierda');
-		capaMenu.classList.add('seleccionado');
-		capaStar.classList.add('izquierda');
-		llenarCapa("menu",capaMenu);
+		cuerpo.btnMenu.classList.add('seleccionado');
+		cuerpo.capaHome.classList.add('izquierda');
+		cuerpo.capaMenu.classList.add('seleccionado');
+		cuerpo.capaStar.classList.add('izquierda');
+		llenarCapa("menu",modal);
 	};
 }
 function limpiarCapas(modal){
@@ -229,6 +247,43 @@ function limpiarCapas(modal){
 		}
 	});
 }
+function llenarCapa(capa,modal){
+	var tienda = modal.tienda;
+	var cuerpo = modal.partes.cuerpo;
+	var html = "";
+	switch (capa) {
+		case 'home':
+			//lleno descricpcion
+			cuerpo.capaHome.descripcion.innerHTML = tienda.atributos.descripcion;
+			//armo contactos
+			html = '<aside titulo>Contacto</aside>'+armarContactos(tienda.atributos.contacto)+'<div style="clear:both"></div>';
+			cuerpo.capaHome.contacto.innerHTML = html;
+			//TODO: armar horarios
+			break;
+		case 'star':
+			//busco en la bd los valores
+			var peticion = {
+			   entidad: "proveedor",
+			   operacion: "buscarOpinion",
+			   codigo: tienda.atributos.id
+			};
+			var cuadro = {
+				contenedor: cuerpo.capaStar.opiniones,
+				cuadro:{
+				  nombre: 'puntuacion',
+				  mensaje: 'Cargando puntuacion'
+				}
+			};
+			torque.manejarOperacion(peticion,cuadro)
+				.then(function(resultado){
+					cuerpo.capaStar.puntuacion.innerHTML = armarStar(resultado.registro);
+					cuerpo.capaStar.opiniones.innerHTML = armarOpiniones(resultado.registro);
+				});
+			break;
+		default:
+
+	}
+}
 function armarContactos(contactos){
 	var html="";
 	if(contactos){
@@ -242,7 +297,43 @@ function armarContactos(contactos){
 	}
 	return html;
 }
+function armarStar(obj){
+		var html = "<aside valor>"+obj.puntuacion+"</aside>"+
+								"<aside estrellas class='material-icons amber500 md-48'>";
+
+		html += calcularPuntuacion(obj.puntuacion);
+		html += "</aside>";
+		return html;
+}
+
 function armarPuntuacion(puntuacion){
-	var html = '<i>star</i><i class="material-icons white md-24">star star star</i>';
+	var html = '<i>star</i><i class="material-icons amber md-24">'+calcularPuntuacion(puntuacion)+'</i>';
+	return html;
+}
+function calcularPuntuacion(puntuacion){
+	var texto = "";
+	//puntuacion de estrellas marcadas
+	for(var x = 0; x < parseInt(puntuacion);x++){
+		texto += 'star ';
+	}
+	//puntuacion estrella faltantes
+	for(var y = 0; y < 5 - parseInt(puntuacion);y++){
+		texto += 'star_border ';
+	}
+	return texto;
+}
+function armarOpiniones(obj){
+	console.log(obj);
+	var html = "";
+	obj.opiniones.forEach(function(opinion){
+		html += '<div opinion>'+
+							'<div cab>'+
+								'<aside logo></aside>'+
+								'<aside nombre>'+opinion.usuario+'</aside>'+
+								'<aside puntuacion class="material-icons amber500 md-16">'+calcularPuntuacion(opinion.puntuacion)+'</aside>'+
+							'</div>'+
+							'<div texto>'+opinion.opinion+'</div>'+
+						'</div>';
+	});
 	return html;
 }

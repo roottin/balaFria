@@ -133,6 +133,43 @@ div[capa="contenido"].proveedor section[cuerpo]{
   position: absolute;
   bottom: 0px;
 }
+/*-------------------------------- Capa Star -----------------------------*/
+.proveedor section[cuerpo] section[star] div[puntuacion],
+.proveedor section[cuerpo] section[star] div[opiniones]{
+    background-color: white;
+    margin-bottom: 10px;
+    padding: 10px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+}
+.proveedor section[cuerpo] section[star] div[puntuacion] aside[valor]{
+  font-size: 60px;
+  text-align: center;
+}
+.proveedor section[cuerpo] section[star] div[puntuacion] aside[estrellas]{
+  width: 100%;
+  text-align: center;
+}
+.proveedor section[cuerpo] section[star] div[opiniones] div[opinion]{
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+.proveedor section[cuerpo] section[star] div[opiniones] div[opinion] aside[puntuacion]{
+  font-size: 14px;
+}
+.proveedor section[cuerpo] section[star] div[opiniones] div[opinion] aside[logo]{
+  width: 40px;
+  height: 40px;
+  background-color: #1a237e;
+  float: left;
+  margin-left: 0px;
+  margin-right: 5px;
+  border-radius: 100px;
+}
+.proveedor section[cuerpo] section[star] div[opiniones] div[opinion] div[texto]{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 50px;
+}
 /*-----------------------------------MEDIA QUERYS-------------------------*/
 @media (min-width: 1000px) {
   div[capa="contenido"].proveedor{
