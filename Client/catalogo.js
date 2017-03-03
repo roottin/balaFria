@@ -149,10 +149,8 @@ var agregarTiendasAlMapa = function(mapa,lista){
 	});
 };
 var abrirTienda = function(tienda){
-	var puntuacion = '<i class="material-icons white md-24">star</i>'+
-									 '<i class="material-icons white md-24">star</i>'+
-									 '<i class="material-icons white md-24">star</i>'+
-									 '<i class="material-icons white md-24">star</i>';
+	var puntuacion = armarPuntuacion(tienda.atributos.puntuacion);
+	var contactosHTML = armarContactos(tienda.atributos.contacto);
 	var modal = UI.crearVentanaModal({
 	  contenido: 'ancho',
 		clases: ['proveedor'],
@@ -168,7 +166,17 @@ var abrirTienda = function(tienda){
 							'<div menu class="material-icons white md-32">list</div>'+
 						'</div>'+
 						'<section star class="izquierda">opiniones</section>'+
-						'<section home class="seleccionado">home</section>'+
+						'<section home class="seleccionado">'+
+							'<div descripcion>'+tienda.atributos.descripcion+'</div>'+
+							'<div contacto>'+
+								'<aside titulo>Contacto</aside>'+
+									contactosHTML+
+								'<div style="clear:both"></div>'+
+							'</div>'+
+							'<div horarios>'+
+								'<aside titulo>Horarios</aside>'+
+							'</div>'+
+						'</section>'+
 						'<section menu class="derecha">MENU</section>'
 	  }
 	});
@@ -190,6 +198,7 @@ function funcionamientoCapas(modal){
 		capaHome.classList.add('seleccionado');
 		capaMenu.classList.add('derecha');
 		capaStar.classList.add('izquierda');
+		llenarCapa("home",capaHome);
 	};
 	btnStar.onclick=function(){
 		limpiarCapas(modal);
@@ -197,6 +206,7 @@ function funcionamientoCapas(modal){
 		capaHome.classList.add('derecha');
 		capaMenu.classList.add('derecha');
 		capaStar.classList.add('seleccionado');
+		llenarCapa("star",capaStar);
 	};
 	btnMenu.onclick=function(){
 		limpiarCapas(modal);
@@ -204,6 +214,7 @@ function funcionamientoCapas(modal){
 		capaHome.classList.add('izquierda');
 		capaMenu.classList.add('seleccionado');
 		capaStar.classList.add('izquierda');
+		llenarCapa("menu",capaMenu);
 	};
 }
 function limpiarCapas(modal){
@@ -217,4 +228,21 @@ function limpiarCapas(modal){
 			div.classList.remove('seleccionado');
 		}
 	});
+}
+function armarContactos(contactos){
+	var html="";
+	if(contactos){
+		contactos.forEach(function(contacto){
+			if (contacto.tipo == "telefono") {
+					html+='<aside contacto class="mat-green500 white"><i class="material-icons  icon md-36">call</i> <div>'+contacto.valor+'</div></aside>';
+			}
+		});
+	}else{
+		html = "No Posee Datos de Contacto";
+	}
+	return html;
+}
+function armarPuntuacion(puntuacion){
+	var html = '<i>star</i><i class="material-icons white md-24">star star star</i>';
+	return html;
 }
