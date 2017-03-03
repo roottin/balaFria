@@ -44,7 +44,7 @@ div[capa="contenido"].proveedor section[cuerpo]{
   margin-top: -7px ;
   position: relative;
   overflow: hidden;
-  min-height: 400px;
+  min-height: 600px;
 }
 .proveedor section[cuerpo] div[barra]{
   width: 100%;
@@ -93,6 +93,7 @@ div[capa="contenido"].proveedor section[cuerpo]{
   margin-bottom: 10px;
   padding: 10px;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  overflow: auto;
 }
 .proveedor section[cuerpo] section[home] div[descripcion]{
   padding: 20px;
