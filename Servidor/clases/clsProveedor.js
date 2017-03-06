@@ -34,6 +34,18 @@ modelo.gestionar = function(pet,res){
 					utils.enviar(respuesta,res);
 				});
 		break;
+		case "buscarMenu":
+			yo.buscarMenu()
+				.then(JSON.parse)
+				.then(function(resultado){
+					console.log(resultado);
+					respuesta = {
+						"success":1,
+						"registro":resultado
+					};
+					utils.enviar(respuesta,res);
+				});
+		break;
 	}
 };
 
@@ -52,6 +64,18 @@ modelo.listar = function(){
 modelo.buscarOpinion = function(){
 	return new Promise(function(resolve,reject){
 		var ruta = path.join(__dirname, '../json/db_opinion.json');
+		fs.readFile(ruta, 'utf8', function(error,data){
+			if(error){
+				reject(error);
+			}else{
+				resolve(data);
+			}
+		});
+	});
+};
+modelo.buscarMenu = function(){
+	return new Promise(function(resolve,reject){
+		var ruta = path.join(__dirname, '../json/db_menu.json');
 		fs.readFile(ruta, 'utf8', function(error,data){
 			if(error){
 				reject(error);

@@ -175,7 +175,8 @@ var abrirTienda = function(tienda){
 								'<aside titulo>Horarios</aside>'+
 							'</div>'+
 						'</section>'+
-						'<section menu class="derecha">MENU</section>'
+						'<section menu class="derecha">'+
+						'</section>'
 	  }
 	});
 	modal.nodo.classList.remove('ancho');
@@ -250,6 +251,8 @@ function limpiarCapas(modal){
 function llenarCapa(capa,modal){
 	var tienda = modal.tienda;
 	var cuerpo = modal.partes.cuerpo;
+	var peticion;
+	var cuadro;
 	var html = "";
 	switch (capa) {
 		case 'home':
@@ -262,12 +265,12 @@ function llenarCapa(capa,modal){
 			break;
 		case 'star':
 			//busco en la bd los valores
-			var peticion = {
+			peticion = {
 			   entidad: "proveedor",
 			   operacion: "buscarOpinion",
 			   codigo: tienda.atributos.id
 			};
-			var cuadro = {
+			 cuadro = {
 				contenedor: cuerpo.capaStar.opiniones,
 				cuadro:{
 				  nombre: 'puntuacion',
@@ -280,6 +283,18 @@ function llenarCapa(capa,modal){
 					cuerpo.capaStar.opiniones.innerHTML = armarOpiniones(resultado.registro);
 				});
 			break;
+			case "menu":
+				 peticion = {
+				   entidad: "proveedor",
+				   operacion: "buscarMenu",
+				   codigo: tienda.atributos.id
+				};
+				torque.Operacion(peticion)
+					.then(JSON.parse)
+					.then(function(respuesta){
+						armarCategoria(respuesta.registro,modal.partes.cuerpo.capaMenu);
+					});
+				break;
 		default:
 
 	}
@@ -336,4 +351,13 @@ function armarOpiniones(obj){
 						'</div>';
 	});
 	return html;
+}
+function armarCategoria(categorias,capa){
+		capa.innerHTML = '<aside titulo>Menu</aside>';
+		capa.categorias = [];
+		categorias.forEach(function(newCat){
+			var categoria = new Categoria(newCat);
+			capa.appendChild(categoria.nodo);
+			capa.categorias.push(categoria);
+		});
 }

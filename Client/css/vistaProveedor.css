@@ -1,3 +1,4 @@
+@import url("capaMenu.css");
 div[capa="contenido"].proveedor{
   width: 100%;
   left: 0%;
@@ -44,7 +45,7 @@ div[capa="contenido"].proveedor section[cuerpo]{
   margin-top: -7px ;
   position: relative;
   overflow: hidden;
-  min-height: 600px;
+  min-height: 1000px;
 }
 .proveedor section[cuerpo] div[barra]{
   width: 100%;
@@ -66,7 +67,9 @@ div[capa="contenido"].proveedor section[cuerpo]{
   background-color: white !important;
   color: #1A237E !important;
 }
-.proveedor section[cuerpo] section{
+.proveedor section[cuerpo] section[star],
+.proveedor section[cuerpo] section[home],
+.proveedor section[cuerpo] section[menu]{
   transition: all 0.3s ease-in-out;
   position: absolute;
   top:30px;
