@@ -18,3 +18,10 @@ div[lista].completa{
 	margin-left: 40px;
   margin-top: -4px;
 }
+.cabecera i.acc{
+	position: absolute;
+  right: 20px;
+  bottom: 10px;
+  width: 32px;
+  height: 32px;
+}

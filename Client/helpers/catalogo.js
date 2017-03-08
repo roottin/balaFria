@@ -50,6 +50,16 @@ function construirUI(){
 				onclickSlot: abrirTienda
 			},document.querySelector('div[contenedor]'));
 		});
+		var login = UI.elementos.cabecera.nodo.querySelector('i.acc');
+		login.onclick = function(event){
+			bone.usarLib('logIn')
+				.then(function(lib){
+					if(!lib.op){
+						lib.op = new Login();
+					}
+					lib.op.contruirLogin();
+				});
+		};
 }
 //---------------------------------------------- Manejo de tiendas --------------------------------------
 var armarTienda = function(slot){
