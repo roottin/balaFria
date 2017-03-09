@@ -49,17 +49,28 @@ function construirUI(){
 				},
 				onclickSlot: abrirTienda
 			},document.querySelector('div[contenedor]'));
+
+			//funcionamiento botones cabecera
+			UI.elementos.cabecera.nodo.querySelector('div.btnLog').onclick = function(){
+				bone.usarLib('logIn')
+					.then(function(lib){
+						if(!lib.op){
+							lib.op = new Login();
+						}
+						lib.op.construirLogin();
+					});
+			};
+			UI.elementos.cabecera.nodo.querySelector('div.btnMap').onclick = function(){
+				var mapa = UI.buscarVentana('contMapa').nodo;
+				if(mapa.classList.contains('visible')){
+					mapa.classList.remove('visible');
+					lista.nodo.classList.remove('oculto');
+				}else{
+					mapa.classList.add('visible');
+					lista.nodo.classList.add('oculto');
+				}
+			};
 		});
-		var login = UI.elementos.cabecera.nodo.querySelector('i.acc');
-		login.onclick = function(event){
-			bone.usarLib('logIn')
-				.then(function(lib){
-					if(!lib.op){
-						lib.op = new Login();
-					}
-					lib.op.contruirLogin();
-				});
-		};
 }
 //---------------------------------------------- Manejo de tiendas --------------------------------------
 var armarTienda = function(slot){

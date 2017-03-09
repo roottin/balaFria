@@ -1,6 +1,7 @@
 @import url('vistaProveedor.css');
 @import url('tiendaMapa.css');
 @import url('mapa.css');
+@import url('logIn.css');
 *{
 	overflow: visible;
 }
@@ -14,14 +15,64 @@ div[lista].completa{
 .cabecera{
 	background: #1A237E !important;
 }
-.cabecera div[titulo]{
-	margin-left: 40px;
-  margin-top: -4px;
+.cabecera div.acc.btnMap{
+    display: none;
 }
-.cabecera i.acc{
-	position: absolute;
-  right: 20px;
-  bottom: 10px;
-  width: 32px;
-  height: 32px;
+.cabecera div[titulo]{ 
+    width: calc(100% - 200px);
+    float: left;
+    margin-left: 0px;
+}
+.cabecera div.acc{
+    float: right;
+	width: 32px;
+	height: 32px; 
+	cursor:pointer;
+    margin-right: 15px;
+    margin-top: 6px;
+}
+.cabecera div.btnLog:hover:before{
+	content: 'Iniciar Sesion';
+    color: white;
+    border-radius: 5px;
+    padding: 10px;
+    position: absolute;
+    font-family: "Open Sans";
+    margin-top: 45px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    margin-left: -47px;
+    font-size: 12px;
+    background-color: #8BC34A;
+}
+.cabecera div.btnLog:hover:after{
+	content: '';
+    background-color: transparent;
+    position: absolute;
+    margin-top: 25px;
+    margin-left: -28px;
+    border-bottom: 10px solid #8BC34A;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+    z-index: 3;
+    border-top: 10px solid transparent !important;
+}
+@media only screen and (max-device-width: 480px) {
+    div[mat-window].tiendas{
+        width: 100%;
+        transition: all 0.3s ease-in-out;
+    }
+    div[mat-window].contMapa{
+        margin-left: -100% !important;
+        width: 100%;
+        transition: all 0.3s ease-in-out;
+    }
+    .cabecera div.acc.btnMap{
+        display: block;
+    }
+    div[mat-window].contMapa.visible{
+        margin-left: 0% !important;
+    }
+    div[mat-window].tiendas.oculto{
+        margin-left: 100% !important;
+    }
 }

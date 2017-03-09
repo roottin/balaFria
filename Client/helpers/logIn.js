@@ -1,19 +1,34 @@
 var Login = function(){
-  var construirLogin = function(){
+
+  var self = this;
+
+  self.construirLogin = function(){
     var modal = UI.crearVentanaModal({
-      contenido: 'ancho',
+      clases:['logIn'],
       cabecera:{
-        html: 'Nuevo '
+        html: '<div class="material-icons md-36 lightgreen500">account_circle</div>'
       },
       cuerpo:{
-        html:'hola'
+        formulario:
+          {
+            altura: 150,
+            campos:[
+              {
+                tipo : 'campoDeTexto',
+                parametros : {requerido:true,titulo:'Nombre de Usuario o Email',nombre:'user',tipo:'simple',eslabon:'area',usaToolTip:true}
+              },{
+                tipo : 'campoDeTexto',
+                parametros : {requerido:true,titulo:'Clave',nombre:'clave',tipo:'password',eslabon:'area',usaToolTip:true}
+              }
+            ]
+          },
+        tipo: 'nuevo', //operacion a realizar
       },
       pie:{
-          html:   '<section modalButtons>'+
-                  '<button type="button" class="icon icon-guardar-indigo-32"> </button>'+
-                  '<button type="button" class="icon icon-cerrar-rojo-32"> </button>'+
-                  '</section>'
+          clases:['botonera'],
+          html:'<button type="button" class="icon material-icons green500">send</button>'
       }
     });
   };
+
 };

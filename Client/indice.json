@@ -40,6 +40,10 @@
 				"nombre":"customMarker",
 				"ruta":"helpers/customMarker.js",
 				"noUsaCarga":true
+			},{
+				"nombre":"logIn",
+				"ruta":"helpers/logIn.js",
+				"noUsaCarga":true
 			}
 		],
 		"css":[
@@ -50,7 +54,7 @@
 				"nombre":"Estilos Rhino",
 				"ruta":"lib/Rhino/css/Rhino.css"
 			},{
-				"ruta":"https://fonts.googleapis.com/css?family=Open+Sans|Oswald",
+				"ruta":"https://fonts.googleapis.com/css?family=Roboto",
 				"nombre" : "fuente"
 			},{
 				"ruta":"https://fonts.googleapis.com/icon?family=Material+Icons",
