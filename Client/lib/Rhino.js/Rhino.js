@@ -1387,6 +1387,7 @@ var modalWindow = function(){
 		var Pie = function(contenido){
 			this.estado = 'sinConstruir';
 			this.nodo = null;
+			this.botones = [];
 			this.clases = [];
 			//funcion para agregar funcionamiento a los elementos hijos
 			this.funcionamiento = null;
@@ -1414,6 +1415,29 @@ var modalWindow = function(){
 			this.desaparecer = function(){
 				this.nodo.style.height = '0px';
 				this.nodo.innerHTML='';
+			};
+			this.detectarBotones = function(){
+				var botHtml = this.nodo.querySelectorAll('button[type="button"]');
+				this.botones = [];
+				var yo = this;
+				botHtml.forEach(function(bot){
+					yo.botones.push({
+						"nodo":bot,
+						"nombre":bot.getAttribute('nombre')
+					});
+				});
+			};
+			this.buscarBoton = function(nombre){
+				var resultado = false;
+				if(!this.botones.length){
+					this.detectarBotones();
+				}
+				this.botones.forEach(function(boton){
+					if(boton.nombre == nombre){
+						resultado = boton;
+					}
+				});
+				return resultado;
 			};
 			this.construirNodo();
 		};
