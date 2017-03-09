@@ -1,5 +1,5 @@
 //se hace el llamdo a la conexion con la base de datos
-var connection = require('../Core/Core');
+//var connection = require('../Core/Core');
 //llamamos a crypto para encriptar la contraseña
 var crypto = require('crypto');
 var utils = require('../utils');
