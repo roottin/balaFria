@@ -15,10 +15,7 @@ div[lista].completa{
 .cabecera{
 	background: #1A237E !important;
 }
-.cabecera div.acc.btnMap{
-    display: none;
-}
-.cabecera div[titulo]{ 
+.cabecera div[titulo]{
     width: calc(100% - 200px);
     float: left;
     margin-left: 0px;
@@ -26,7 +23,7 @@ div[lista].completa{
 .cabecera div.acc{
     float: right;
 	width: 32px;
-	height: 32px; 
+	height: 32px;
 	cursor:pointer;
     margin-right: 15px;
     margin-top: 6px;
@@ -56,23 +53,71 @@ div[lista].completa{
     z-index: 3;
     border-top: 10px solid transparent !important;
 }
+div[mat-window].movilOnly{
+    display:none;
+	margin-top: 50px;
+	margin-bottom: 0px;
+	position: absolute;
+	width: 100%;
+	height: 29px;
+	z-index: 3;
+	margin-left: 0px;
+}
+div[mat-window].movilOnly div{
+    width: calc(50% - 1px);
+    text-align: center;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    float: left;
+    border-left:1px solid;
+}
+div[mat-window].movilOnly section[sector]{
+    min-height: 30px !important;
+}
 @media only screen and (max-device-width: 480px) {
-    div[mat-window].tiendas{
+    div[mat-window].tiendas,
+    div[mat-window].contMapa{
         width: 100%;
         transition: all 0.3s ease-in-out;
+        position: absolute;
+        height: calc(100% - 80px);
+        margin-top: 80px !important;
     }
     div[mat-window].contMapa{
         margin-left: -100% !important;
-        width: 100%;
-        transition: all 0.3s ease-in-out;
-    }
-    .cabecera div.acc.btnMap{
-        display: block;
     }
     div[mat-window].contMapa.visible{
         margin-left: 0% !important;
     }
-    div[mat-window].tiendas.oculto{
+    div[mat-window][lista].tiendas.oculto{
         margin-left: 100% !important;
+    }
+	div[mat-window].movilOnly{
+		display:block;
+	}
+    div[capa="contenido"].aparecer{
+        top: calc(10%);
+    }
+    .producto{
+        margin: 0px 0px 10px 0px;
+        width: 100% !important;
+    }
+    .producto div[parte-der] button{
+        right: 5px;
+        bottom: 5px;
+    }
+    .producto div[parte-der] div[detalle]{
+        width: calc(100%);
+        padding-left: 0px;
+        font-size: 12px;
+    }
+    .producto div[parte-der] div[titulo]{
+        font-size: 15px;
+    }
+    .producto div[parte-izq] img.muestra{
+        height: 100%;
+        margin-top: 0px;
+        border-radius: 0px;
+        width: calc(100%);
     }
 }

@@ -12,20 +12,23 @@ div[capa="contenido"].logIn section[cabecera]{
 	padding-left: 0px;
 	padding-right: 0px;
 }
+div[capa='contenido'].aparecer.logIn section[cuerpo]{
+	margin-top: 45px;
+}
 div[capa="contenido"].logIn section[pie].botonera{
 	background-color: #8BC34A;
 }
 
-div[capa="contenido"].logIn div.group input:focus~ label, 
+div[capa="contenido"].logIn div.group input:focus~ label,
 div[capa="contenido"].logIn div.group input:valid~ label {
 
     color: #8BC34A;
 }
-div[capa="contenido"].logIn div.group textarea:focus~ label, 
+div[capa="contenido"].logIn div.group textarea:focus~ label,
 div[capa="contenido"].logIn div.group textarea:valid~ label {
     color: #8BC34A;
 }
-div[capa="contenido"].logIn .bar:before, 
+div[capa="contenido"].logIn .bar:before,
 div[capa="contenido"].logIn .bar:after {
     background: #8BC34A;
 }

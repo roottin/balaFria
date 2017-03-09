@@ -1,5 +1,17 @@
 var map;
 function construirUI(){
+	//barra solo activa para movil
+	var barraMovil = UI.agregarVentana({
+		nombre:'barraMovil',
+		clases:['movilOnly'],
+		sectores:[
+			{
+				nombre:'barra',
+				html:'<div mapa class="material-icons mat-indigo500 white md-24">explore</div><div lista class="material-icons mat-indigo500 white md-24">list</div>'
+			}
+		]
+	},document.querySelector('div[contenedor]'));
+
 	bone.usarLib('customMarker')
 		.then(function(lib){
 			//armo el contenedor
@@ -49,7 +61,6 @@ function construirUI(){
 				},
 				onclickSlot: abrirTienda
 			},document.querySelector('div[contenedor]'));
-
 			//funcionamiento botones cabecera
 			UI.elementos.cabecera.nodo.querySelector('div.btnLog').onclick = function(){
 				bone.usarLib('logIn')
@@ -60,14 +71,18 @@ function construirUI(){
 						lib.op.construirLogin();
 					});
 			};
-			UI.elementos.cabecera.nodo.querySelector('div.btnMap').onclick = function(){
+			UI.buscarVentana('barraMovil').nodo.querySelector('div[mapa]').onclick = function(){
+				var mapa = UI.buscarVentana('contMapa').nodo;
+				if(!mapa.classList.contains('visible')){
+					mapa.classList.add('visible');
+					lista.nodo.classList.add('oculto');
+				}
+			};
+			UI.buscarVentana('barraMovil').nodo.querySelector('div[lista]').onclick = function(){
 				var mapa = UI.buscarVentana('contMapa').nodo;
 				if(mapa.classList.contains('visible')){
 					mapa.classList.remove('visible');
 					lista.nodo.classList.remove('oculto');
-				}else{
-					mapa.classList.add('visible');
-					lista.nodo.classList.add('oculto');
 				}
 			};
 		});
