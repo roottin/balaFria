@@ -57,7 +57,7 @@ div[mat-window].movilOnly{
     display:none;
 	margin-top: 50px;
 	margin-bottom: 0px;
-	position: absolute;
+	position: fixed;
 	width: 100%;
 	height: 29px;
 	z-index: 3;
@@ -113,6 +113,9 @@ div[mat-window].movilOnly section[sector]{
     }
     .producto div[parte-der] div[titulo]{
         font-size: 15px;
+    }
+    .producto div[parte-izq]{
+        overflow: hidden;
     }
     .producto div[parte-izq] img.muestra{
         height: 100%;
