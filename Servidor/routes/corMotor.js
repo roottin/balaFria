@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-//var acceso = require('./corAcceso');
+var cliente = require('../clases/clsCliente');
 var proveedor= require('../clases/clsProveedor');
 var utils = require('../utils');
 
@@ -10,8 +10,8 @@ router.post("/", function(req,res)
 	var pet = req.body;
 	if(pet.tipopet=="web"){
 		switch(pet.entidad){
-			case 'acceso':
-				//acceso.gestionar(pet,res);
+			case 'cliente':
+				cliente.gestionar(pet,res);
 				break;
 			case 'proveedor':
 				proveedor.gestionar(pet,res);

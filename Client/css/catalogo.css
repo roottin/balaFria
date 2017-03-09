@@ -1,6 +1,7 @@
 @import url('vistaProveedor.css');
 @import url('tiendaMapa.css');
 @import url('mapa.css');
+@import url('logIn.css');
 *{
 	overflow: visible;
 }
@@ -15,6 +16,111 @@ div[lista].completa{
 	background: #1A237E !important;
 }
 .cabecera div[titulo]{
-	margin-left: 40px;
-  margin-top: -4px;
+    width: calc(100% - 200px);
+    float: left;
+    margin-left: 0px;
+}
+.cabecera div.acc{
+    float: right;
+	width: 32px;
+	height: 32px;
+	cursor:pointer;
+    margin-right: 15px;
+    margin-top: 6px;
+}
+.cabecera div.btnLog:hover:before{
+	content: 'Iniciar Sesion';
+    color: white;
+    border-radius: 5px;
+    padding: 10px;
+    position: absolute;
+    font-family: "Open Sans";
+    margin-top: 45px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    margin-left: -47px;
+    font-size: 12px;
+    background-color: #8BC34A;
+}
+.cabecera div.btnLog:hover:after{
+	content: '';
+    background-color: transparent;
+    position: absolute;
+    margin-top: 25px;
+    margin-left: -28px;
+    border-bottom: 10px solid #8BC34A;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+    z-index: 3;
+    border-top: 10px solid transparent !important;
+}
+div[mat-window].movilOnly{
+    display:none;
+	margin-top: 50px;
+	margin-bottom: 0px;
+	position: fixed;
+	width: 100%;
+	height: 29px;
+	z-index: 3;
+	margin-left: 0px;
+}
+div[mat-window].movilOnly div{
+    width: calc(50% - 1px);
+    text-align: center;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    float: left;
+    border-left:1px solid;
+}
+div[mat-window].movilOnly section[sector]{
+    min-height: 30px !important;
+}
+@media only screen and (max-device-width: 480px) {
+    div[mat-window].tiendas,
+    div[mat-window].contMapa{
+        width: 100%;
+        transition: all 0.3s ease-in-out;
+        position: absolute;
+        height: calc(100% - 80px);
+        margin-top: 80px !important;
+    }
+    div[mat-window].contMapa{
+        margin-left: -100% !important;
+    }
+    div[mat-window].contMapa.visible{
+        margin-left: 0% !important;
+    }
+    div[mat-window][lista].tiendas.oculto{
+        margin-left: 100% !important;
+    }
+	div[mat-window].movilOnly{
+		display:block;
+	}
+    div[capa="contenido"].aparecer{
+        top: calc(10%);
+    }
+    .producto{
+        margin: 0px 0px 10px 0px;
+        width: 100% !important;
+    }
+    .producto div[parte-der] button{
+        right: 5px;
+        bottom: 5px;
+    }
+    .producto div[parte-der] div[detalle]{
+        width: calc(100%);
+        padding-left: 0px;
+        font-size: 12px;
+    }
+    .producto div[parte-der] div[titulo]{
+        font-size: 15px;
+    }
+    .producto div[parte-izq]{
+        overflow: hidden;
+    }
+    .producto div[parte-izq] img.muestra{
+        height: 100%;
+        margin-top: 0px;
+        border-radius: 0px;
+        width: calc(100%);
+    }
 }

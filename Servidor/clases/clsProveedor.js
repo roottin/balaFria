@@ -38,7 +38,6 @@ modelo.gestionar = function(pet,res){
 			yo.buscarMenu()
 				.then(JSON.parse)
 				.then(function(resultado){
-					console.log(resultado);
 					respuesta = {
 						"success":1,
 						"registro":resultado

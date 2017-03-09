@@ -1,0 +1,65 @@
+{
+	"librerias": {
+		"javascript":[
+			{
+				"nombre":"boneCrusher",
+				"ruta":"lib/boneCrusher/boneCrusher.js",
+				"noUsaCarga":true
+			},{
+				"nombre":"Maps",
+				"ruta":"https://maps.googleapis.com/maps/api/js?key=AIzaSyA5ZzMnef5igKAiE6UZjxbVt_EYo0eTwcs",
+				"noUsaCarga":true
+			},{
+				"nombre":"Sesion",
+				"ruta":"lib/boneCrusher/sesion.js",
+				"noUsaCarga":true
+			},{
+				"nombre":"Rhino",
+				"ruta":"lib/Rhino.js/Rhino.js",
+				"noUsaCarga":true
+			},{
+				"nombre":"torque",
+				"ruta":"lib/Rhino.js/motorRegistros.js",
+				"noUsaCarga":true
+			},{
+				"nombre":"catalogo",
+				"ruta":"helpers/catalogo.js",
+				"noUsaCarga":true,
+				"dependencias":[
+					{
+						"nombre":"tienda",
+						"ruta":"helpers/tienda.js",
+						"noUsaCarga":true
+					}
+				]
+			},{
+				"nombre":"categoria",
+				"ruta":"helpers/o_categoria.js",
+				"noUsaCarga":true
+			},{
+				"nombre":"customMarker",
+				"ruta":"helpers/customMarker.js",
+				"noUsaCarga":true
+			},{
+				"nombre":"logIn",
+				"ruta":"helpers/logIn.js",
+				"noUsaCarga":true
+			}
+		],
+		"css":[
+			{
+				"nombre":"catalogo",
+				"ruta":"css/catalogo.css"
+			},{
+				"nombre":"Estilos Rhino",
+				"ruta":"lib/Rhino/css/Rhino.css"
+			},{
+				"ruta":"https://fonts.googleapis.com/css?family=Roboto",
+				"nombre" : "fuente"
+			},{
+				"ruta":"https://fonts.googleapis.com/icon?family=Material+Icons",
+				"nombre":"gooIconos"
+			}
+		]
+	}
+}

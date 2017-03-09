@@ -1,0 +1,46 @@
+div[capa="contenido"].logIn{
+	width: 300px;
+	left: calc(50% - 150px);
+}
+div[capa="contenido"].logIn section[cabecera]{
+	width: 100%;
+	background-color: transparent;
+	text-align: center;
+	color: #1a237e;
+	padding-top: 20px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+div[capa='contenido'].aparecer.logIn section[cuerpo]{
+	margin-top: 45px;
+}
+div[capa="contenido"].logIn section[pie].botonera{
+	background-color: #8BC34A;
+}
+
+div[capa="contenido"].logIn div.group input:focus~ label,
+div[capa="contenido"].logIn div.group input:valid~ label {
+
+    color: #8BC34A;
+}
+div[capa="contenido"].logIn div.group textarea:focus~ label,
+div[capa="contenido"].logIn div.group textarea:valid~ label {
+    color: #8BC34A;
+}
+div[capa="contenido"].logIn .bar:before,
+div[capa="contenido"].logIn .bar:after {
+    background: #8BC34A;
+}
+@media only screen and (max-device-width: 480px) {
+    div[capa='contenido'].logIn {
+        width: 100%;
+        left: 0% !important;
+    }
+    div[capa='contenido'].aparecer.logIn {
+	    top: calc(60px);
+	}
+	div[capa='contenido'].aparecer.logIn section[cuerpo]{
+	    margin-bottom: 6px;
+	}
+}
