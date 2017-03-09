@@ -101,10 +101,15 @@ div[mat-window].movilOnly section[sector]{
     .producto{
         margin: 0px 0px 10px 0px;
         width: 100% !important;
+        height: 150px !important;
     }
     .producto div[parte-der] button{
         right: 5px;
         bottom: 5px;
+    }
+
+    .producto div[parte-der]{
+        width: calc(100% - 145px);
     }
     .producto div[parte-der] div[detalle]{
         width: calc(100%);
@@ -116,11 +121,12 @@ div[mat-window].movilOnly section[sector]{
     }
     .producto div[parte-izq]{
         overflow: hidden;
+        width: 130px;
     }
     .producto div[parte-izq] img.muestra{
-        height: 100%;
-        margin-top: 0px;
+        height: 90%;
+        margin: 5%;
         border-radius: 0px;
-        width: calc(100%);
+        width: calc(90%);
     }
 }
