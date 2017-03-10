@@ -18,7 +18,11 @@ div[capa='contenido'].aparecer.logIn section[cuerpo]{
 div[capa="contenido"].logIn section[pie].botonera{
 	background-color: #8BC34A;
 }
-
+div[capa="contenido"].logIn section[pie] button.mat-text-but{
+	color:white;
+	border: 1px solid white;
+}
+/*---------------- campos -------------------------*/
 div[capa="contenido"].logIn div.group input:focus~ label,
 div[capa="contenido"].logIn div.group input:valid~ label {
 
