@@ -36,17 +36,17 @@ var Login = function(){
         ]
       }
     };
+
   self.get = function(atributo){
-    var resultado = null;
-    if(atributo === 'modal'){
-      if(!self.modal){
-        resultado = self.crearModal();
-      }else{
-        resultado = self.modal;
-      }
+    var resultado = false;
+    if(self.hasOwnProperty(atributo)){
+        resultado = atributo;
+    }else{
+      console.error("self no posee la propiedad "+atributo);
     }
     return resultado;
   };
+
   self.crearModal = function(){
     self.modal = UI.crearVentanaModal({
       clases:['logIn'],
@@ -71,6 +71,11 @@ var Login = function(){
 
   self.construirLogin = function(){
     var modal = self.get("modal");
+    if(!self.modal){
+      resultado = self.crearModal();
+    }else{
+      resultado = self.modal;
+    }
     modal.partes.cuerpo.nodo.innerHTML = '';
     modal.partes.cuerpo.agregarFormulario({
       "formulario":self.plano.logIn,
@@ -104,13 +109,26 @@ var Login = function(){
             if(!resultado.success){            
               self.modal.partes.cuerpo.nodo.innerHTML = JSON.stringify(resultado.registro);
             }else{
-              var html = "<div mensaje>Bienvenido <span resaltado>"+resultado.perfil.nombre.toLowerCase()+" "+resultado.perfil.apellido.toLowerCase()+"</span>";
-              self.modal.partes.cuerpo.nodo.style.height = "80px";
-              self.modal.partes.pie.desaparecer();
-              self.modal.nodo.classList.add('exitoso');
-              self.modal.partes.cabecera.nodo.querySelector('div.md-36').classList.remove('lightgreen500');
-              self.modal.partes.cabecera.nodo.querySelector('div.md-36').classList.add('white');
-              self.modal.partes.cuerpo.nodo.innerHTML = html;
+              //Arranco y creo la session
+              Sesion
+                .autenticar(resultado)
+                .then(function(){
+                  var html = "<div mensaje>Bienvenido <span resaltado>"+resultado.perfil.nombre.toLowerCase()+" "+resultado.perfil.apellido.toLowerCase()+"</span></div>";
+                  self.modal.partes.cuerpo.nodo.style.height = "80px";
+                  self.modal.partes.pie.desaparecer();
+                  self.modal.nodo.classList.add('exitoso');
+                  self.modal.partes.cabecera.nodo.querySelector('div.md-36').classList.remove('lightgreen500');
+                  self.modal.partes.cabecera.nodo.querySelector('div.md-36').classList.add('white');
+                  self.modal.partes.cuerpo.nodo.innerHTML = html;
+                },function(){
+                  var html = "<div mensaje>Error de Autenticacion</div>";
+                  self.modal.partes.cuerpo.nodo.style.height = "80px";
+                  self.modal.partes.pie.desaparecer();
+                  self.modal.nodo.classList.add('fallido');
+                  self.modal.partes.cabecera.nodo.querySelector('div.md-36').classList.remove('lightgreen500');
+                  self.modal.partes.cabecera.nodo.querySelector('div.md-36').classList.add('white');
+                  self.modal.partes.cuerpo.nodo.innerHTML = html;
+                });                
             }
           });
       }
@@ -119,8 +137,14 @@ var Login = function(){
       self.construirRegistro(modal);
     };
   };
+
   self.construirRegistro = function(){
     var modal = self.get("modal");
+    if(!self.modal){
+      resultado = self.crearModal();
+    }else{
+      resultado = self.modal;
+    }
     modal.partes.cuerpo.nodo.innerHTML = '';
     modal.partes.cuerpo.agregarFormulario({
       "formulario" : self.plano.registrate,

@@ -3,6 +3,30 @@ var connection = require('../Core/Core');
 //llamamos a crypto para encriptar la contraseña
 var crypto = require('crypto');
 var utils = require('../utils');
+//uso de hilos de ejecucion
+var events  = require('events');
+var channel = new events.EventEmitter();
+
+channel.on('armarSession', function(data,emisor){
+    var mensajes = [];
+	var plugEmisor = rack.buscarPlug(emisor.toUpperCase());
+    data.forEach(function(each){
+		if(each.emisor === emisor){
+			if(each.estado!='L'){
+				each.estado = 'L';
+				mensajes.push(each.id);
+				if(plugEmisor){
+					each.tipo = "cambioEstado";
+					plugEmisor.socket.emit('chatMsg',each);
+				}
+			}
+		}
+    });
+    if(mensajes.length){
+    	chatModel.actualizar(mensajes,'leidos');
+    }
+});
+
 //creamos un objeto para ir almacenando todo lo que necesitemos
 var modelo = {};
 
@@ -25,6 +49,10 @@ modelo.encriptarPass = function(pass,key){
 	pass = crypto.createHmac('sha1',key).update(pass).digest('hex');
 	return pass;
 };
+modelo.crearTokenKey = function(profile,pass){
+	var tokenKey = this.encriptarPass(profile.nombre,pass);
+	return tokenKey;
+}
 modelo.gestionar = function(pet,res){
 	var yo = this;
 	var reqData = {};
@@ -111,7 +139,8 @@ modelo.accesar = function(){
 							"mensaje":"acceso realizado con exito",
 							"success":"1",
 							"HoraCon": obtenerHoraActual(),
-							"perfil" : result
+							"perfil" : result,
+							"tokenKey":this.crearTokenKey(result)
 						};
 						data.perfil.clave = "";
 						resolve(data);

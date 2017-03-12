@@ -1,51 +1,53 @@
 var socketio = require('socket.io');
-var rack = require('./racks');
+var Server = require('./server');
 var dateParser = require('./dateParser');
 var plugAssembler = require('./plug');
-var evento  = require('events');
-var channel = new evento.EventEmitter();
 
 function init(server) {
-
 	var io = socketio(server);
+	io.use(function(socket, next){
+		// handShake = {id: ,tokenKey: ,tipo: }
+	    console.log("Query: ", socket.handshake.query);
+	    var usuario = Server.buscarUsuario(socket.handshake.query.id);
+
+	    if(!usuario){
+	    	next(new Error('Error de Autenticacion: Usuario no existe'));
+	    }else{
+	    	if(!usuario.tokenKey == socket.handshake.query.tokenKey){
+	    		next(new Error('Error de Autenticacion: token no valida para usuario'));
+	    	}else{
+	    		if(!usuario.buscarConexionPorIp(socket.client.conn.remoteAddress)){
+	    			usuario.agregarConexion(socket,socket.handshake.query.tipo);
+	    			socket.emit('autorizado',{"autorizado":true});
+	    			return next();
+	    		}else{
+	    			console.log('conexion ya existe');
+	    		}	
+	    	}
+	    }	    
+	});
 
 	io.sockets.on('connection',function(socket){
-	  //--------inicio identificacion ------------------------
-	  socket.on('identificacion',function(data){
-	    var atributos = {
-	      nombreusu:data.nombre,
-	      horaDeConeccion:data.HDC,
-	      ultimaConeccion:new Date(),
-	    };
-	    if(rack.buscarPlug(atributos.nombreusu)){
-	      socket.emit('identificacion',{text:"falsa"});
-	      rack.buscarPlug(atributos.nombreusu).socket.emit('session',{text:"dobleSession"});
-	      console.log('doble session');
-	    }else{
-	      var plug = plugAssembler.configure(atributos,socket);
-	      rack.addPlug(plug);
-	      //identificacion en servidor
-	      console.log('\nconexion establecida con: '+plug.nombreusu+"\nde direccion: "+plug.ip+"\n");
-	      rack.mostrarListaPlugs();
-	    }
-	  });
 	  //-----------inicio SESSION--- ------------------------
 	  socket.on('session',function(data){
 	    if(data.text=='cerrar')
-	    {
-	      rack.removePlug(data.nombreusu);
+	    {	    	
+	      var Usuario = Server.buscarUsuario(socket.handshake.query.id);
+	      usuario.conexiones.splice(usuario.conexiones.indexOf(usuario.buscarConexion('socket',socket)),1);
 	      socket.emit('session',{text:"cerrada"});
+	      socket.disconnect();
 	      console.log('session de: '+data.nombreusu+" cerrada");
 	    }
 	    else if(data.text=="recuperar")
 	    {
-	      var plug = rack.buscarPlugPorIp(socket.client.conn.remoteAddress);
+	      var usuario = Server.buscarUsuario(socket.handshake.query.id);
+	      var plug = usuario.buscarConexion('ip',socket.client.conn.remoteAddress);
 	      if(plug)
 	      {
 	        socket.emit('session',{
 	          text:"recuperada",
-	          nombreusu:plug.nombreusu,
-	          horaDeConeccion:plug.horaDeConeccion
+	          usuario:usuario.perfil,
+	          horaDeConeccion:plug.horaDeConexion
 	        });
 	        //activo el plug
 	        plug.estado='conectado';
@@ -56,38 +58,39 @@ function init(server) {
 	      {
 	        socket.emit('session',{
 	          text:"no recuperada",
-	          nombreusu:"",
-	          horaDeConeccion:""
+	          usuario:"",
+	          horaDeConexion:""
 	        });
 	      }
 	    }
 	  });
-	  socket.on('plugs',function(data){
-	  	console.log('peticion de control');
-	  	if(data.operacion == "listar"){
-	  		rack.mostrarListaPlugs();
-	  	}
-	  });
+	socket.on('plugs',function(data){
+		console.log('peticion de control');
+		if(data.operacion == "listar"){
+			rack.mostrarListaPlugs();
+		}
+	});
     socket.on('contacto',function(data){
-      console.log('data');
+      console.log(data);
     });
-	  socket.on('connect_failed', function(){
-	    console.log('Connection Failed');
-	  });
-	  socket.on('disconnect',function(){
-	    plug=rack.buscarPlugPorSocket(socket);
-	    if(plug){
-	      plug.estado='esperando';
-	      //funcion settimeout
-	      plug.idIntSes=setTimeout(
-	        (function(plug){
-	          return function(){
-	            if(plug.estado=='esperando'){
-	              rack.removePlug(plug.nombreusu);
-	            }
-	      		};
-					})(plug), 120000);
-	    }
+	socket.on('connect_failed', function(){
+		console.log('Connection Failed');
+	});
+	socket.on('disconnect',function(){
+		var usuario = Server.buscarUsuario(socket.handshake.query.id);
+	    var plug = usuario.buscarConexion('socket',socket);
+		if(plug){
+			plug.estado='esperando';
+			//funcion settimeout
+			plug.idIntSes=setTimeout(
+				(function(plug){
+					return function(){
+					if(plug.estado=='esperando'){
+						rack.removePlug(plug.nombreusu);
+					}
+				};
+			})(plug), 120000);
+		}
 	  });
 	});
     return io;

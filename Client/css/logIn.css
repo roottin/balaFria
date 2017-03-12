@@ -15,6 +15,10 @@ div[capa="contenido"].logIn section[cabecera]{
 div[capa='contenido'].aparecer.logIn section[cuerpo]{
 	margin-top: 45px;
 }
+div[capa='contenido'].aparecer.logIn.fallido {
+	color:white;
+	background-color: #f44336;
+}
 div[capa='contenido'].aparecer.logIn.exitoso {
 	color:white;
 	background-color: #8BC34A;

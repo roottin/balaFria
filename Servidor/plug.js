@@ -1,15 +1,14 @@
 var plugAssembler= {};
 
-plugAssembler.configure = function(attr,socket){
+plugAssembler.configure = function(tipo,socket){
 	var plug = {
-		nombreusu : attr.nombreusu,
-		ultimaConexion : attr.ultimaConexion,
-		horaDeConexion : attr.horaDeConexion,
-		socket : socket,
-		estado : "conectado",
-		idIntSes : null,
-		ip : socket.client.conn.remoteAddress
+		ultimaConexion: new Date(),
+		horaDeConexion: new Date(),
+		socket: socket,
+		estado: "conectado",
+		idIntSes: null,
+		ip: socket.client.conn.remoteAddress
 	};
 	return plug;
 };
-module.exports=plugAssembler;
+module.exports = plugAssembler;
