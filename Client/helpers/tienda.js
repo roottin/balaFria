@@ -158,7 +158,11 @@ function armarContactos(contactos){
 	if(contactos){
 		contactos.forEach(function(contacto){
 			if (contacto.tipo == "telefono") {
-					html+='<aside contacto class="mat-green500 white"><i class="material-icons  icon md-36">call</i> <div>'+contacto.valor+'</div></aside>';
+					html+='<aside contacto class="mat-blue500 white"><i class="material-icons  icon md-36">call</i> <div>'+contacto.valor+'</div></aside>';
+			}else if(contacto.tipo == "app"){
+					html+='<aside contacto class="mat-green500 white"><i class="material-icons  icon md-36">android</i> <div>'+contacto.valor+'</div></aside>';
+			}else if(contacto.tipo == "web"){
+					html+='<aside contacto class="mat-deeppurple500 white"><i class="material-icons  icon md-36">web</i> <div>'+contacto.valor+'</div></aside>';
 			}
 		});
 	}else{

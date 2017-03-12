@@ -10,6 +10,7 @@ modelo.innerData = [];
 
 modelo.setData = function(outData){
 	if(outData.clave){
+		outData.claveRaw=outData.clave;
 		outData.clave=modelo.encriptarPass(outData.clave,outData.nombre);
 	}
 	modelo.innerData=outData;
@@ -35,15 +36,29 @@ modelo.gestionar = function(pet,res){
 				.then(function(resultado){
 					utils.enviar(resultado,res);
 				},function(error){
-					console.error(error,'linea 38');
+					console.log(error);
+					utils.error(error,38,res);
 				});
 			break;
 			case 'registrar':
 				yo.registrar()
 					.then(function(resultado){
-						utils.enviar(resultado,res);
+						if(resultado.rowCount){
+							respuesta = {
+								"success": 1,
+								"registro":resultado.rows[0]
+							}
+							utils.enviar(respuesta,res);
+						}else{
+							utils.error(resultado,51,res);
+						}
 					},function(error){
-						console.error(error,'linea 45');
+						respuesta = {
+							"success": 0,
+							"registro": JSON.stringify(error)
+						}
+						console.error(error,'linea 51');
+						utils.error(respuesta,51,res);
 					});
 		break;
 		default:
@@ -86,10 +101,11 @@ modelo.accesar = function(){
 				{
 					data={
 						"mensaje":"usuario no existe",
-						"success":"0"
+						"success":0
 					};
 					reject(data);
 				}else{
+					modelo.innerData.clave = modelo.encriptarPass(modelo.innerData.claveRaw,result.nombre);
 					if(result.clave==modelo.innerData.clave){
 						data={
 							"mensaje":"acceso realizado con exito",
@@ -133,7 +149,7 @@ modelo.registrar = function(){
 		if(connection){
 			var data = [modelo.innerData.nombre,modelo.innerData.apellido,modelo.innerData.clave,modelo.innerData.email];
 			console.log(data);
-			connection.query("INSERT INTO cliente (nombre,apellido,clave,email) values ($1,$2,$3,$4)", data, function(error, result){
+			connection.query("INSERT INTO cliente (nombre,apellido,clave,email) values ($1,$2,$3,$4) RETURNING *", data, function(error, result){
 				if(error)
 				{
 					reject(error);

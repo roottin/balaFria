@@ -25,7 +25,7 @@ var Login = function(){
             "parametros" : {requerido:true,titulo:'Apellido',nombre:'apellido',tipo:'simple',eslabon:'area',usaToolTip:true}
           },{
             "tipo" : 'campoDeTexto',
-            "parametros" : {requerido:true,titulo:'Correo Electronico',nombre:'clave',tipo:'simple',eslabon:'area',usaToolTip:true}
+            "parametros" : {requerido:true,titulo:'Correo Electronico',nombre:'email',tipo:'simple',eslabon:'area',usaToolTip:true}
           },{
             "tipo" : 'campoDeTexto',
             "parametros" : {requerido:true,titulo:'Clave',nombre:'clave',tipo:'password',eslabon:'area',usaToolTip:true}
@@ -61,6 +61,11 @@ var Login = function(){
           html: ""
       }
     });
+    //agregamos que al precionar la capa exterior nos limpie el valor de modal de la libreria
+    UI.elementos.modalWindow.capas[0].nodo.onclick = function(){
+     self.modal=null;
+     UI.elementos.modalWindow.eliminarUltimaCapa();   
+    }
     return self.modal;
   };
 
@@ -93,10 +98,20 @@ var Login = function(){
             mensaje: 'Verificando Datos de Sesion'
           }
         };
+        modal.partes.pie.desaparecer();
         torque.manejarOperacion(peticion,cuadro)
           .then(function(resultado){
-            //TODO: autenticacion correocta
-            console.log(resultado);
+            if(!resultado.success){            
+              self.modal.partes.cuerpo.nodo.innerHTML = JSON.stringify(resultado.registro);
+            }else{
+              var html = "<div mensaje>Bienvenido <span resaltado>"+resultado.perfil.nombre.toLowerCase()+" "+resultado.perfil.apellido.toLowerCase()+"</span>";
+              self.modal.partes.cuerpo.nodo.style.height = "80px";
+              self.modal.partes.pie.desaparecer();
+              self.modal.nodo.classList.add('exitoso');
+              self.modal.partes.cabecera.nodo.querySelector('div.md-36').classList.remove('lightgreen500');
+              self.modal.partes.cabecera.nodo.querySelector('div.md-36').classList.add('white');
+              self.modal.partes.cuerpo.nodo.innerHTML = html;
+            }
           });
       }
     };
@@ -138,8 +153,19 @@ var Login = function(){
         };
         torque.manejarOperacion(peticion,cuadro)
           .then(function(resultado){
-            //TODO: hacer respuesta de registro exitoso
-            console.log(resultado);
+            if(!resultado.success){            
+              self.modal.partes.cuerpo.nodo.innerHTML = JSON.stringify(resultado.registro);
+            }else{
+              var html = "<div mensaje>Bienvenido <span resaltado>"+resultado.registro.nombre.toLowerCase()+" "+resultado.registro.apellido.toLowerCase()+"</span>"+
+                        "<br>Revisa tu correo electronico(<span resaltado>"+resultado.registro.email.toLowerCase()+"</span>)"+
+                        " te hemos enviado un regalo ;)</div>";
+              self.modal.partes.cuerpo.nodo.style.height = "120px"
+              self.modal.partes.pie.desaparecer();
+              self.modal.nodo.classList.add('exitoso');
+              self.modal.partes.cabecera.nodo.querySelector('div.md-36').classList.remove('lightgreen500');
+              self.modal.partes.cabecera.nodo.querySelector('div.md-36').classList.add('white');
+              self.modal.partes.cuerpo.nodo.innerHTML = html;
+            }
           });
       }
     };

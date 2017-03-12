@@ -23,8 +23,8 @@
   "img":"pizzaAguila.jpg",
   "contacto":[
     {"tipo":"telefono","valor":"0412-0566755"},
-    {"tipo":"telefono","valor":"0416-3216755"},
-    {"tipo":"telefono","valor":"0412-2363185"}
+    {"tipo":"app","valor":"pizzaYA"},
+    {"tipo":"web","valor":"www.app.com"}
   ]
 },{
   "id":"03",
