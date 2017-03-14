@@ -1,13 +1,11 @@
-var Usuario = require('./usuario');
-var Server = {};
+var consUsuario = require('./usuario');
+var Servidor = {};
 
-Server.usuarios=[];
+Servidor.usuarios=[];
 
-Server.buscarUsuario = function(id){
+Servidor.buscarUsuario = function(id){
   var resultado = false;
-  if(!this.usuarios.lenght){
-    console.log('no posee usuarios conectados');
-  }else{
+  if(this.usuarios.length){
     this.usuarios.forEach(function(usuario){
       if(usuario.perfil.id == id){
         resultado = usuario;
@@ -16,20 +14,20 @@ Server.buscarUsuario = function(id){
     return resultado;
   }
 };
-Server.addUsuario = function(perfil,socket){
+Servidor.addUsuario = function(perfil,socket){
   var nuevoUsuario = this.buscarUsuario(perfil.id);
   if(nuevoUsuario){
     console.warn('server.js - linea:22 - usuario ya esta conectado');
     return false;
   }else{
-    var nuevoUsuario = new Usuario();
+    var nuevoUsuario = consUsuario.crear();
     nuevoUsuario.crear(perfil).agregarConexion(socket);
     this.usuarios.push(nuevoUsuario); 
   }
   return nuevoUsuario;
 };
 
-Server.removeUsuario = function(id){
+Servidor.removeUsuario = function(id){
   var yo = this;
   var usuario =  this.buscarUsuario(id);
   if(!usuario){    
@@ -42,11 +40,11 @@ Server.removeUsuario = function(id){
   }
 };
 
-Server.mostrarListaUsuarios = function(){
+Servidor.mostrarListaUsuarios = function(){
   console.log('------------------------ Usuario Conectados-----------------------');
   this.usuarios.forEach(function(usuario){
     console.log(JSON.stringify(usuario));
   });
   console.log('------------------------ Usuario Conectados-----------------------');
 };
-module.exports=Server;
+module.exports=Servidor;

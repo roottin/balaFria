@@ -15,11 +15,12 @@
 	<div contenedor></div>
 </body>
 
-<script type="text/javascript" nombre='motorLib' src='lib/boneCrusher/boneCrusher.js'>	</script>
+<script type="text/javascript" nombre='motorLib' src='lib/boneCrusher/boneCrusher.js'></script>
+<script type="text/javascript" nombre='Socket.io' src='/socket.io/socket.io.js'></script>
 
 <script type="text/javascript">
 	var bone = new Asistente({
-		LibreriasArranque:['torque','Rhino','catalogo',"Maps"],
+		LibreriasArranque:['torque','Rhino','catalogo',"Maps","Sesion"],
 		onLoad: function(){
 			UI = new Arquitecto();
 			UI.configure({

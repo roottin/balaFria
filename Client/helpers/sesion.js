@@ -1,84 +1,64 @@
-//TODO: Armar session
 
 var Sesion = function(){
 	var self = this;
+	self.perfil = {};
+	self.horaDeConexion = "";
+	self.estado = "cerrada";
+	self.socket = null;
+	self.tokenKey = null;
 
-	self.autenticar = function(cons){
-
+	self.crear = function(perfil,tokenKey){
+		self.perfil = perfil;
+		self.estado = "creando";
+		self.horaDeConexion = new Date();
+		self.tokenKey = tokenKey;
+		self.autenticar();
+		return Promise.resolve();
 	}
-}
-var Session = function(){
 
-	this.perfil = {};
-
-	this.horaDeConexion = "";
-
-	this.estado = "cerrada";
-
-	this.socket = null;
-
-	this.tokenKey = null;
-
-	this.cerrarSession= function(){
-		this.destruirSession();
+	self.cerrarSession= function(){
+		self.destruirSession();
 	};
 
-	this.destruirSession = function(){
-		this.socket.emit('session',{
+	self.destruirSession = function(){
+		self.socket.emit('session',{
 			text:'cerrar',
-			id:this.perfil.id
+			id:self.perfil.id
 		});
 	};
 
-	this.recuperarSession = function(){
+	self.recuperarSession = function(){
 		jarvis.traza("peticion de recuperacion enviada",'session');
-		this.socket.emit('session',{
+		self.socket.emit('session',{
 			text:"recuperar",
-			id:this.perfil.id
+			id:self.perfil.id
 		});
-		this.sesIntId = setInterval(function(){
+		self.sesIntId = setInterval(function(){
 			if(jarvis.session.nombreusu!==""){
 				jarvis.traza("temporalmente sin conexion",'session');
 			}
 		},30000);
 	};
 
-	this.listarPlugs = function(){
-		this.socket.emit('plugs',{
+	self.listarPlugs = function(){
+		self.socket.emit('plugs',{
 			operacion: 'listar',
 		});
 	};
-	this.inicializarConexion = function(){
-		this.socket=io(window.location.origin);
-		this.socket.on('connect',function(){
-			jarvis.traza('conectado2: '+jarvis.session.socket.connected,'session');
-		});
-		var obj = this.socket;
-		this.socket.on('identificacion',function(data){
-			if(data.text=="falsa"){
-				jarvis.session.nombreusu="";
-				jarvis.session.horaDeConexion="";
-				jarvis.session.estado="cerrada";
-				jarvis.construc.construirAcceso();
-			}
-		});
-		this.socket.on('session',function(data){
+	self.autenticar = function(){
+		self.socket=io(window.location.origin,{"query":"id="+self.perfil.id+"&tipo="+self.perfil.tipo+"&tokenKey="+self.tokenKey});
+		self.socket.on('session',function(data){
 			jarvis.traza('peticion recivida: '+data.text,'session');
 			if(data.text=="recuperada")
 			{
-				jarvis.session.nombreusu=data.nombreusu;
-				jarvis.session.horaDeConexion=data.horaCon;
 				jarvis.session.estado="abierta";
-				clearInterval(jarvis.session.sesIntId);
-				jarvis.session.sesIntId=null;
-				if(jarvis.construc.estructuraActiva===null){
-					jarvis.construc.construirInicio();
-					jarvis.construc.llenarMenu();
-					UI.agregarToasts({
-						texto: "Bienvenido "+jarvis.session.nombreusu,
-						tipo: 'web-arriba-derecha'
+				bone.usarLib("Usuario")
+					.then(function(lib){
+						if(!lib.op){
+							lib.op = new ConsUsuario();
+						}
+						lib.op.contruirUI(self);
 					});
-				}
 			}
 			else if(data.text=="cerrada")
 			{
@@ -102,9 +82,9 @@ var Session = function(){
 			}
 			else if(data.text=="no recuperada")
 			{
-				if(this.sesIntId!==null){
-					clearInterval(this.sesIntId);
-					this.sesIntId=null;
+				if(self.sesIntId!==null){
+					clearInterval(self.sesIntId);
+					self.sesIntId=null;
 				}
 			}
 			else
@@ -112,21 +92,6 @@ var Session = function(){
 				jarvis.traza('no hay sesion abierta','session');
 			}
 		});
-		this.socket.on('contacto',function(data){
-			if(data.accion === 'seguir'){
-				var newContac = jarvis.buscarLib('Chat').op.crearChatUnit(data.user);
-				UI.buscarVentana('ListadoChats').nodo.appendChild(newContac.userChatCard);
-			  UI.agregarToasts({
-			    texto: data.user.nombreusu+' te ha agregado',
-			    tipo: 'web-arriba-derecha-alto'
-			  });
-			}else if(data.accion === 'borrar'){
-				jarvis.buscarLib('Chat').op.eliminarChatUnit(data.user.nombreusu);
-			}
-		});
-		this.recuperarSession();
+		
 	};
-
-	//metodos ejecutados en la instanciacion del objeto
-	this.inicializarConexion();
 };

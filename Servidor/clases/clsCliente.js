@@ -3,28 +3,13 @@ var connection = require('../Core/Core');
 //llamamos a crypto para encriptar la contraseña
 var crypto = require('crypto');
 var utils = require('../utils');
+var servidor = require("../servidor");
 //uso de hilos de ejecucion
 var events  = require('events');
 var channel = new events.EventEmitter();
 
-channel.on('armarSession', function(data,emisor){
-    var mensajes = [];
-	var plugEmisor = rack.buscarPlug(emisor.toUpperCase());
-    data.forEach(function(each){
-		if(each.emisor === emisor){
-			if(each.estado!='L'){
-				each.estado = 'L';
-				mensajes.push(each.id);
-				if(plugEmisor){
-					each.tipo = "cambioEstado";
-					plugEmisor.socket.emit('chatMsg',each);
-				}
-			}
-		}
-    });
-    if(mensajes.length){
-    	chatModel.actualizar(mensajes,'leidos');
-    }
+channel.on('armarSesion', function(perfil){
+    servidor.addUsuario(perfil);
 });
 
 //creamos un objeto para ir almacenando todo lo que necesitemos
@@ -49,8 +34,8 @@ modelo.encriptarPass = function(pass,key){
 	pass = crypto.createHmac('sha1',key).update(pass).digest('hex');
 	return pass;
 };
-modelo.crearTokenKey = function(profile,pass){
-	var tokenKey = this.encriptarPass(profile.nombre,pass);
+modelo.crearTokenKey = function(profile){
+	var tokenKey = this.encriptarPass(profile.nombre,profile.clave);
 	return tokenKey;
 }
 modelo.gestionar = function(pet,res){
@@ -120,7 +105,7 @@ modelo.accesar = function(){
 	return new Promise(function(resolve,reject){
 		if (connection)
 		{
-			var sql = 'SELECT * FROM cliente  WHERE nombre = $1 or email = $1';
+			var sql = 'SELECT *,id_cliente as id FROM cliente  WHERE nombre = $1 or email = $1';
 			var query = connection.query(sql,[modelo.innerData.nombre]);
 
 			query.on('row',function(result){
@@ -140,9 +125,11 @@ modelo.accesar = function(){
 							"success":"1",
 							"HoraCon": obtenerHoraActual(),
 							"perfil" : result,
-							"tokenKey":this.crearTokenKey(result)
+							"tokenKey":modelo.crearTokenKey(result)
 						};
 						data.perfil.clave = "";
+						data.perfil.tipo = "cliente";
+						channel.emit("armarSesion",data.perfil);
 						resolve(data);
 					}else{
 						data={

@@ -40,7 +40,7 @@ var Login = function(){
   self.get = function(atributo){
     var resultado = false;
     if(self.hasOwnProperty(atributo)){
-        resultado = atributo;
+        resultado = self[atributo];
     }else{
       console.error("self no posee la propiedad "+atributo);
     }
@@ -71,10 +71,8 @@ var Login = function(){
 
   self.construirLogin = function(){
     var modal = self.get("modal");
-    if(!self.modal){
-      resultado = self.crearModal();
-    }else{
-      resultado = self.modal;
+    if(!modal){
+      modal = self.crearModal();
     }
     modal.partes.cuerpo.nodo.innerHTML = '';
     modal.partes.cuerpo.agregarFormulario({
@@ -110,8 +108,9 @@ var Login = function(){
               self.modal.partes.cuerpo.nodo.innerHTML = JSON.stringify(resultado.registro);
             }else{
               //Arranco y creo la session
-              Sesion
-                .autenticar(resultado)
+              var sesion = new Sesion();
+              sesion
+                .crear(resultado.perfil,resultado.tokenKey)
                 .then(function(){
                   var html = "<div mensaje>Bienvenido <span resaltado>"+resultado.perfil.nombre.toLowerCase()+" "+resultado.perfil.apellido.toLowerCase()+"</span></div>";
                   self.modal.partes.cuerpo.nodo.style.height = "80px";
@@ -140,10 +139,8 @@ var Login = function(){
 
   self.construirRegistro = function(){
     var modal = self.get("modal");
-    if(!self.modal){
-      resultado = self.crearModal();
-    }else{
-      resultado = self.modal;
+    if(!modal){
+      modal = self.crearModal();
     }
     modal.partes.cuerpo.nodo.innerHTML = '';
     modal.partes.cuerpo.agregarFormulario({

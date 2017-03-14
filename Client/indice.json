@@ -11,7 +11,7 @@
 				"noUsaCarga":true
 			},{
 				"nombre":"Sesion",
-				"ruta":"lib/boneCrusher/sesion.js",
+				"ruta":"helpers/sesion.js",
 				"noUsaCarga":true
 			},{
 				"nombre":"Rhino",
@@ -43,6 +43,10 @@
 			},{
 				"nombre":"logIn",
 				"ruta":"helpers/logIn.js",
+				"noUsaCarga":true
+			},{
+				"nombre":"Usuario",
+				"ruta":"helpers/usuario.js",
 				"noUsaCarga":true
 			}
 		],

@@ -1,24 +1,28 @@
 var socketio = require('socket.io');
-var Server = require('./server');
+var servidor = require('./servidor');
 var dateParser = require('./dateParser');
 var plugAssembler = require('./plug');
 
-function init(server) {
-	var io = socketio(server);
+function init(app) {
+	var io = socketio(app);
 	io.use(function(socket, next){
-		// handShake = {id: ,tokenKey: ,tipo: }
-	    console.log("Query: ", socket.handshake.query);
-	    var usuario = Server.buscarUsuario(socket.handshake.query.id);
-
+	    servidor.mostrarListaUsuarios();
+	    var usuario = servidor.buscarUsuario(socket.handshake.query.id);
+	    var error;
 	    if(!usuario){
-	    	next(new Error('Error de Autenticacion: Usuario no existe'));
+	    	error = new Error('Error de Autenticacion: Usuario no existe');
+	    	console.error(error);
+	    	next(error);
 	    }else{
 	    	if(!usuario.tokenKey == socket.handshake.query.tokenKey){
-	    		next(new Error('Error de Autenticacion: token no valida para usuario'));
+	    		error = new Error('Error de Autenticacion: token no valida para usuario');
+	    		console.error(error)
+	    		next(error);
 	    	}else{
-	    		if(!usuario.buscarConexionPorIp(socket.client.conn.remoteAddress)){
-	    			usuario.agregarConexion(socket,socket.handshake.query.tipo);
-	    			socket.emit('autorizado',{"autorizado":true});
+	    		console.log("Usuario: "+usuario.perfil.nombre+" "+usuario.perfil.apellido+" autenticado");
+	    		if(!usuario.buscarConexion("ip",socket.conn.remoteAddress)){
+	    			usuario.agregarConexion(socket);
+	    			socket.emit('session',{"texto":"recuperda"});
 	    			return next();
 	    		}else{
 	    			console.log('conexion ya existe');
@@ -32,7 +36,7 @@ function init(server) {
 	  socket.on('session',function(data){
 	    if(data.text=='cerrar')
 	    {	    	
-	      var Usuario = Server.buscarUsuario(socket.handshake.query.id);
+	      var Usuario = servidor.buscarUsuario(socket.handshake.query.id);
 	      usuario.conexiones.splice(usuario.conexiones.indexOf(usuario.buscarConexion('socket',socket)),1);
 	      socket.emit('session',{text:"cerrada"});
 	      socket.disconnect();
@@ -40,7 +44,7 @@ function init(server) {
 	    }
 	    else if(data.text=="recuperar")
 	    {
-	      var usuario = Server.buscarUsuario(socket.handshake.query.id);
+	      var usuario = servidor.buscarUsuario(socket.handshake.query.id);
 	      var plug = usuario.buscarConexion('ip',socket.client.conn.remoteAddress);
 	      if(plug)
 	      {
@@ -77,7 +81,7 @@ function init(server) {
 		console.log('Connection Failed');
 	});
 	socket.on('disconnect',function(){
-		var usuario = Server.buscarUsuario(socket.handshake.query.id);
+		var usuario = servidor.buscarUsuario(socket.handshake.query.id);
 	    var plug = usuario.buscarConexion('socket',socket);
 		if(plug){
 			plug.estado='esperando';
