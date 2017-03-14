@@ -22,36 +22,31 @@ var Sesion = function(){
 
 	self.destruirSession = function(){
 		self.socket.emit('session',{
-			text:'cerrar',
+			texto:'cerrar',
 			id:self.perfil.id
 		});
 	};
 
 	self.recuperarSession = function(){
-		jarvis.traza("peticion de recuperacion enviada",'session');
+		bone.traza("peticion de recuperacion enviada",'session');
 		self.socket.emit('session',{
-			text:"recuperar",
+			texto:"recuperar",
 			id:self.perfil.id
 		});
 		self.sesIntId = setInterval(function(){
-			if(jarvis.session.nombreusu!==""){
-				jarvis.traza("temporalmente sin conexion",'session');
+			if(self.nombreusu!==""){
+				bone.traza("temporalmente sin conexion",'session');
 			}
 		},30000);
 	};
-
-	self.listarPlugs = function(){
-		self.socket.emit('plugs',{
-			operacion: 'listar',
-		});
-	};
 	self.autenticar = function(){
 		self.socket=io(window.location.origin,{"query":"id="+self.perfil.id+"&tipo="+self.perfil.tipo+"&tokenKey="+self.tokenKey});
+		
 		self.socket.on('session',function(data){
-			jarvis.traza('peticion recivida: '+data.text,'session');
-			if(data.text=="recuperada")
+			bone.traza('peticion recivida: '+JSON.stringify(data),'session');
+			if(data.texto=="recuperada")
 			{
-				jarvis.session.estado="abierta";
+				this.estado="abierta";
 				bone.usarLib("Usuario")
 					.then(function(lib){
 						if(!lib.op){
@@ -60,27 +55,33 @@ var Sesion = function(){
 						lib.op.contruirUI(self);
 					});
 			}
-			else if(data.text=="cerrada")
+			else if(data.texto=="cerrada")
 			{
-				jarvis.session.nombreusu="";
-				jarvis.session.horaDeConexion="";
-				jarvis.session.estado="cerrada";
-				jarvis.construc.construirAcceso();
+				self.nombreusu="";
+				self.horaDeConexion="";
+				self.estado="cerrada";
+				bone.construc.construirAcceso();
 			}
-			else if(data.text=="agotada")
+			else if(data.texto=="agotada")
 			{
-				jarvis.traza('tiempo agotado inicie de nuevo','session');
-				jarvis.session.nombreusu="";
-				jarvis.session.horaDeConexion="";
-				jarvis.session.estado="cerrada";
-				jarvis.construc.construirAcceso();
+				bone.traza('tiempo agotado inicie de nuevo','session');
+				self.nombreusu="";
+				self.horaDeConexion="";
+				self.estado="cerrada";
+				bone.usarLib("Usuario")
+					.then(function(lib){
+						if(!lib.op){
+							lib.op = new ConsUsuario();
+						}
+						lib.op.destruirUI(self);
+					});
 			}
-			else if(data.text=="dobleSession")
+			else if(data.texto=="dobleSession")
 			{
-				jarvis.traza('sesion ya se encuentra iniciada en otro lugar','session');
+				bone.traza('sesion ya se encuentra iniciada en otro lugar','session');
 				alert("hubo un intento de acceso a su cuenta desde otra ubicacion");
 			}
-			else if(data.text=="no recuperada")
+			else if(data.texto=="no recuperada")
 			{
 				if(self.sesIntId!==null){
 					clearInterval(self.sesIntId);
@@ -89,7 +90,7 @@ var Sesion = function(){
 			}
 			else
 			{
-				jarvis.traza('no hay sesion abierta','session');
+				bone.traza('no hay sesion abierta','session');
 			}
 		});
 		

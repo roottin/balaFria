@@ -22,7 +22,7 @@ function init(app) {
 	    		console.log("Usuario: "+usuario.perfil.nombre+" "+usuario.perfil.apellido+" autenticado");
 	    		if(!usuario.buscarConexion("ip",socket.conn.remoteAddress)){
 	    			usuario.agregarConexion(socket);
-	    			socket.emit('session',{"texto":"recuperda"});
+	    			socket.emit('session',{"texto":"recuperada"});
 	    			return next();
 	    		}else{
 	    			console.log('conexion ya existe');
@@ -34,22 +34,22 @@ function init(app) {
 	io.sockets.on('connection',function(socket){
 	  //-----------inicio SESSION--- ------------------------
 	  socket.on('session',function(data){
-	    if(data.text=='cerrar')
+	    if(data.texto=='cerrar')
 	    {	    	
 	      var Usuario = servidor.buscarUsuario(socket.handshake.query.id);
 	      usuario.conexiones.splice(usuario.conexiones.indexOf(usuario.buscarConexion('socket',socket)),1);
-	      socket.emit('session',{text:"cerrada"});
+	      socket.emit('session',{texto:"cerrada"});
 	      socket.disconnect();
 	      console.log('session de: '+data.nombreusu+" cerrada");
 	    }
-	    else if(data.text=="recuperar")
+	    else if(data.texto=="recuperar")
 	    {
 	      var usuario = servidor.buscarUsuario(socket.handshake.query.id);
 	      var plug = usuario.buscarConexion('ip',socket.client.conn.remoteAddress);
 	      if(plug)
 	      {
 	        socket.emit('session',{
-	          text:"recuperada",
+	          texto:"recuperada",
 	          usuario:usuario.perfil,
 	          horaDeConeccion:plug.horaDeConexion
 	        });
@@ -61,7 +61,7 @@ function init(app) {
 	      else
 	      {
 	        socket.emit('session',{
-	          text:"no recuperada",
+	          texto:"no recuperada",
 	          usuario:"",
 	          horaDeConexion:""
 	        });
@@ -71,7 +71,7 @@ function init(app) {
 	socket.on('plugs',function(data){
 		console.log('peticion de control');
 		if(data.operacion == "listar"){
-			rack.mostrarListaPlugs();
+			servidor.mostrarListaPlugs();
 		}
 	});
     socket.on('contacto',function(data){
@@ -90,7 +90,7 @@ function init(app) {
 				(function(plug){
 					return function(){
 					if(plug.estado=='esperando'){
-						rack.removePlug(plug.nombreusu);
+						usuario.cerrarConexion(plug);
 					}
 				};
 			})(plug), 120000);

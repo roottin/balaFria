@@ -119,16 +119,16 @@ var Login = function(){
                   self.modal.partes.cabecera.nodo.querySelector('div.md-36').classList.remove('lightgreen500');
                   self.modal.partes.cabecera.nodo.querySelector('div.md-36').classList.add('white');
                   self.modal.partes.cuerpo.nodo.innerHTML = html;
-                },function(){
-                  var html = "<div mensaje>Error de Autenticacion</div>";
-                  self.modal.partes.cuerpo.nodo.style.height = "80px";
-                  self.modal.partes.pie.desaparecer();
-                  self.modal.nodo.classList.add('fallido');
-                  self.modal.partes.cabecera.nodo.querySelector('div.md-36').classList.remove('lightgreen500');
-                  self.modal.partes.cabecera.nodo.querySelector('div.md-36').classList.add('white');
-                  self.modal.partes.cuerpo.nodo.innerHTML = html;
                 });                
             }
+          },function(){
+            var html = "<div mensaje>Error de Autenticacion</div>";
+            self.modal.partes.cuerpo.nodo.style.height = "80px";
+            self.modal.partes.pie.desaparecer();
+            self.modal.nodo.classList.add('fallido');
+            self.modal.partes.cabecera.nodo.querySelector('div.md-36').classList.remove('lightgreen500');
+            self.modal.partes.cabecera.nodo.querySelector('div.md-36').classList.add('white');
+            self.modal.partes.cuerpo.nodo.innerHTML = html;
           });
       }
     };

@@ -62,7 +62,7 @@ var Asistente = function(objArranque){
 		//inactiva: no muestra ninguna
 		//o recibe un arreglo con los tipos que desea mostrar
 		//disponibles: chat, session y libreria
-	this.trazas = [];
+	this.trazas = ['session'];
 	this.objArranque =objArranque;
 	this.indice = null;
 	//-------------------------------------------METODOS---------------------------------------------//

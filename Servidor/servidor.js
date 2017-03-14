@@ -43,7 +43,8 @@ Servidor.removeUsuario = function(id){
 Servidor.mostrarListaUsuarios = function(){
   console.log('------------------------ Usuario Conectados-----------------------');
   this.usuarios.forEach(function(usuario){
-    console.log(JSON.stringify(usuario));
+    console.log("nombre: "+usuario.perfil.nombre+" "+usuario.perfil.apellido);
+    console.log("conexiones: "+usuario.conexiones.length);
   });
   console.log('------------------------ Usuario Conectados-----------------------');
 };
