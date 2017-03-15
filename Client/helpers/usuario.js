@@ -18,7 +18,7 @@ var ConsUsuario = function(){
 				html: "<article opcion class='mat-lightgreen500 white'>Actualizar Datos<i class='material-icons md-24 icon '>account_circle</i></article>"+
 					  "<article opcion class='mat-bluegrey500 white'>Datos de Pago<i class='material-icons md-24 icon '>payment</i></article>"+
 					  "<article opcion class='mat-deeporange500 white'>Historial de Pedidos<i class='material-icons md-24 icon '>history</i></article>"+
-					  "<article opcion class='mat-amber500 white'>Ver Favoritos<i class='material-icons md-24 icon '>grade</i></article>"
+					  "<article opcion class='mat-amber500 white'>Favoritos<i class='material-icons md-24 icon '>grade</i></article>"
 			}
 		});
 	}
