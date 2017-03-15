@@ -2,6 +2,7 @@
 @import url('tiendaMapa.css');
 @import url('mapa.css');
 @import url('logIn.css');
+@import url('UICliente.css');
 *{
 	overflow: visible;
 }

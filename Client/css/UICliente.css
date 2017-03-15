@@ -1,0 +1,24 @@
+div[capa="contenido"].angosto{
+	width: 300px;
+	left: calc(50% - 150px);
+}
+div[capa="contenido"] section[cabecera].titulo-opciones{
+	background-color: transparent;
+	width: calc(100% - 40px);
+	text-align: center;
+}
+div[capa="contenido"].opciones section[cuerpo]{
+	padding: 0px;
+    margin-bottom: 0px;
+    border-top: 1px solid rgba(0,0,0,0.1);
+}
+div[capa="contenido"].opciones section[cuerpo] article[opcion]{
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    width: calc(100% - 20px);
+    padding: 10px;
+    position: relative;
+    margin:0px;
+}
+div[capa="contenido"].opciones section[cuerpo] article[opcion] i{
+	right: 10px;
+}

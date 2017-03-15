@@ -26,6 +26,8 @@ function init(app) {
 	    			return next();
 	    		}else{
 	    			console.log('conexion ya existe');
+	    			socket.emit('session',{"texto":"recuperada"});
+	    			return next();
 	    		}	
 	    	}
 	    }	    

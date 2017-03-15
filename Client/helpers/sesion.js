@@ -52,7 +52,7 @@ var Sesion = function(){
 						if(!lib.op){
 							lib.op = new ConsUsuario();
 						}
-						lib.op.contruirUI(self);
+						lib.op.construirUI(self);
 					});
 			}
 			else if(data.texto=="cerrada")
