@@ -64,8 +64,8 @@ var Login = function(){
     //agregamos que al precionar la capa exterior nos limpie el valor de modal de la libreria
     UI.elementos.modalWindow.capas[0].nodo.onclick = function(){
      self.modal=null;
-     UI.elementos.modalWindow.eliminarUltimaCapa();   
-    }
+     UI.elementos.modalWindow.eliminarUltimaCapa();
+   };
     return self.modal;
   };
 
@@ -104,7 +104,7 @@ var Login = function(){
         modal.partes.pie.desaparecer();
         torque.manejarOperacion(peticion,cuadro)
           .then(function(resultado){
-            if(!resultado.success){            
+            if(!resultado.success){
               self.modal.partes.cuerpo.nodo.innerHTML = JSON.stringify(resultado.registro);
             }else{
               //Arranco y creo la session
@@ -119,7 +119,7 @@ var Login = function(){
                   self.modal.partes.cabecera.nodo.querySelector('div.md-36').classList.remove('lightgreen500');
                   self.modal.partes.cabecera.nodo.querySelector('div.md-36').classList.add('white');
                   self.modal.partes.cuerpo.nodo.innerHTML = html;
-                });                
+                });
             }
           },function(){
             var html = "<div mensaje>Error de Autenticacion</div>";
@@ -174,13 +174,13 @@ var Login = function(){
         };
         torque.manejarOperacion(peticion,cuadro)
           .then(function(resultado){
-            if(!resultado.success){            
+            if(!resultado.success){
               self.modal.partes.cuerpo.nodo.innerHTML = JSON.stringify(resultado.registro);
             }else{
               var html = "<div mensaje>Bienvenido <span resaltado>"+resultado.registro.nombre.toLowerCase()+" "+resultado.registro.apellido.toLowerCase()+"</span>"+
                         "<br>Revisa tu correo electronico(<span resaltado>"+resultado.registro.email.toLowerCase()+"</span>)"+
                         " te hemos enviado un regalo ;)</div>";
-              self.modal.partes.cuerpo.nodo.style.height = "120px"
+              self.modal.partes.cuerpo.nodo.style.height = "120px";
               self.modal.partes.pie.desaparecer();
               self.modal.nodo.classList.add('exitoso');
               self.modal.partes.cabecera.nodo.querySelector('div.md-36').classList.remove('lightgreen500');
