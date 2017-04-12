@@ -4,22 +4,28 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-//archivos que se encargan de manejar la rutas
-var motor = require('./Servidor/routes/corMotor');
-//aplicacion
+
+
 var app = express();
 
+// view engine setup
+app.set('views', path.join(__dirname, 'cliente/views'));
+app.set('view engine', 'ejs');
+
+// uncomment after placing your favicon in /public
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'Client')));
+app.use(express.static(path.join(__dirname, '/cliente')));
+app.use('/node_modules',express.static(path.join(__dirname, 'node_modules')));
 
-//rutas externas
-app.use('/corMotor', motor);
+app.get('/', function(req, res, next) {
+    res.render('index', {});
+  });
+require('./api/rutas/index')(app);
 
-
-app.set('view engine', 'jade');
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -27,81 +33,15 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-// error handlers
-
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
-    });
-  });
-}
-
-// production error handler
-// no stacktraces leaked to user
+// error handler
 app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // render the error page
   res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
+  res.render('error');
 });
-
-//-----------------------------------------------funcionamiento http ----------------------------------------//
-var http = require('http');
-var port = normalizePort(process.env.PORT || '4000');
-app.set('port', port);
-var server = http.createServer(app);
-
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
-var debug = require('debug')('');
-
-function onListening() {
-  var addr = server.address();
-  var bind = typeof addr === 'string'? 'pipe ' + addr: 'port ' + addr.port;
-  debug('Listening on ' + bind);
-}
-
-function normalizePort(val) {
-  var port = parseInt(val, 10);
-
-  if (isNaN(port)) {
-    // named pipe
-    return val;
-  }
-  if (port >= 0) {
-    // port number
-    return port;
-  }
-  return false;
-}
-function onError(error) {
-  if (error.syscall !== 'listen') {
-    throw error;
-  }
-
-  var bind = typeof port === 'string'? 'Pipe ' + port: 'Port ' + port;
-
-  switch (error.code) {
-    case 'EACCES':
-      console.error(bind + ' requires elevated privileges');
-      process.exit(1);
-      break;
-    case 'EADDRINUSE':
-      console.error(bind + ' is already in use');
-      process.exit(1);
-      break;
-    default:
-      throw error;
-  }
-}
-var io = require('./Servidor/sockets')(server);
-
 
 module.exports = app;

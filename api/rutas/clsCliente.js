@@ -2,8 +2,7 @@
 var connection = require('../Core/Core');
 //llamamos a crypto para encriptar la contraseña
 var crypto = require('crypto');
-var utils = require('../utils');
-var servidor = require("../servidor");
+var servidor = require("../../Servidor/servidor");
 //uso de hilos de ejecucion
 var events  = require('events');
 var channel = new events.EventEmitter();
@@ -47,10 +46,10 @@ modelo.gestionar = function(pet,res){
 		case 'accesar':
 			yo.accesar()
 				.then(function(resultado){
-					utils.enviar(resultado,res);
+					//utils.enviar(resultado,res);
 				},function(error){
 					console.log(error);
-					utils.error(error,38,res);
+					//utils.error(error,38,res);
 				});
 			break;
 			case 'registrar':
@@ -61,9 +60,9 @@ modelo.gestionar = function(pet,res){
 								"success": 1,
 								"registro":resultado.rows[0]
 							}
-							utils.enviar(respuesta,res);
+							//utils.enviar(respuesta,res);
 						}else{
-							utils.error(resultado,51,res);
+							//utils.error(resultado,51,res);
 						}
 					},function(error){
 						respuesta = {
@@ -71,7 +70,7 @@ modelo.gestionar = function(pet,res){
 							"registro": JSON.stringify(error)
 						}
 						console.error(error,'linea 51');
-						utils.error(respuesta,51,res);
+						//utils.error(respuesta,51,res);
 					});
 		break;
 		default:
@@ -79,7 +78,7 @@ modelo.gestionar = function(pet,res){
 				"success":0,
 				"mensaje":"Operacion no permitida"
 			};
-			utils.enviar(resultado,res);
+			//utils.enviar(resultado,res);
 	}
 };
 modelo.buscar = function(){
