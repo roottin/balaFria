@@ -16,7 +16,7 @@ function init(app) {
 	    }else{
 	    	if(!usuario.tokenKey == socket.handshake.query.tokenKey){
 	    		error = new Error('Error de Autenticacion: token no valida para usuario');
-	    		console.error(error)
+	    		console.error(error);
 	    		next(error);
 	    	}else{
 	    		console.log("Usuario: "+usuario.perfil.nombre+" "+usuario.perfil.apellido+" autenticado");
@@ -28,18 +28,18 @@ function init(app) {
 	    			console.log('conexion ya existe');
 	    			socket.emit('session',{"texto":"recuperada"});
 	    			return next();
-	    		}	
+	    		}
 	    	}
-	    }	    
+	    }
 	});
 
 	io.sockets.on('connection',function(socket){
 	  //-----------inicio SESSION--- ------------------------
 	  socket.on('session',function(data){
 	    if(data.texto=='cerrar')
-	    {	    	
+	    {
 	      var Usuario = servidor.buscarUsuario(socket.handshake.query.id);
-	      usuario.conexiones.splice(usuario.conexiones.indexOf(usuario.buscarConexion('socket',socket)),1);
+	      Usuario.conexiones.splice(Usuario.conexiones.indexOf(Usuario.buscarConexion('socket',socket)),1);
 	      socket.emit('session',{texto:"cerrada"});
 	      socket.disconnect();
 	      console.log('session de: '+data.nombreusu+" cerrada");
