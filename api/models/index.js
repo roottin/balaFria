@@ -29,17 +29,17 @@ Object.keys(db).forEach(function(modelName) {
     db[modelName].associate(db);
   }
 });
-console.log('entro');
+
+db.sequelize = sequelize;
+db.Sequelize = Sequelize;
+
 db.sequelize.sync({force:true})
   .then(function(resultado){
-    console.log(resultado);
+    console.log('servidor de Base de Datos inicializado');
   })
   .catch(function(err) {
     console.log('Server failed to start due to error: %s', err);
   });
-
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
 
 
 module.exports = db;

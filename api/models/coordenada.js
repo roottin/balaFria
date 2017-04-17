@@ -10,13 +10,11 @@ module.exports = function(sequelize, DataTypes) {
     },
     latitud: {
       type: DataTypes.DOUBLE,
-      allowNull: true,
-      unique: true
+      allowNull: true
     },
     logitud: {
       type: DataTypes.DOUBLE,
-      allowNull: true,
-      primaryKey: true
+      allowNull: true
     }
   }, {
     tableName: 'coordenada'

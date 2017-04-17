@@ -1,5 +1,5 @@
 var service = require('../tokenAut');
-var servidor = require('../../servidor/servidor');
+var servidor = require('../../Servidor/servidor');
 //uso de hilos de ejecucion
 var events  = require('events');
 var channel = new events.EventEmitter();

@@ -1,0 +1,11 @@
+@font-face {
+  font-family: 'Roboto-b';
+  font-style: normal;
+  font-weight: 400;
+  src: url(fonts/roboto/Roboto-Bold.eot); /* For IE6-8 */
+  src: local('fonts/roboto/Roboto-b'),
+       local('fonts/roboto/Roboto-Bold'),
+       url(fonts/roboto/Roboto-Bold.woff2) format('woff2'),
+       url(fonts/roboto/Roboto-Bold.woff) format('woff'),
+       url(fonts/roboto/Roboto-Bold.ttf) format('truetype');
+}

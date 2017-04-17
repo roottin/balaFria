@@ -1,0 +1,28 @@
+<div layout-padding registro layout="column" layout-sm="column"  layout-wrap>
+  <div cabecera class="md-primary">
+    Registro
+  </div>
+
+  <md-input-container md-no-float class="md-block">
+    <label>Nombre</label>
+    <input ng-model="nombre">
+  </md-input-container>
+  <md-input-container md-no-float class="md-block">
+    <label>Apellido</label>
+    <input ng-model="apellido">
+  </md-input-container>
+  <md-input-container md-no-float class="md-block">
+    <label>Correo</label>
+    <input ng-model="correo">
+  </md-input-container>
+  <md-radio-group ng-model="sexo" layout="row">
+
+      <md-radio-button value="M" >Hombre</md-radio-button>
+      <md-radio-button value="F">Mujer</md-radio-button>
+
+    </md-radio-group>
+  <section layout="row"  layout-align="center" >
+    <md-button class="md-raised md-primary">Enviar</md-button>
+    <md-button class="md-raised md-primary" ui-sref="frontPage.main">Volver</md-button>
+  </section>
+</div>
