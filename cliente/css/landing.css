@@ -1,263 +1,3 @@
-md-content[landing] {
-  overflow: auto !important; }
-
-div[titulo-trabajo] {
-  width: 96%;
-  border-bottom: 1px solid white;
-  padding: 10px 0px;
-  font-size: 25px;
-  margin: 90px auto 0 auto; }
-  div[titulo-trabajo] h4 {
-    margin: 0; }
-
-div[contenedor-trabajo] {
-  width: 96%;
-  margin: 0px auto; }
-  div[contenedor-trabajo] div[row] {
-    float: left;
-    width: calc((100%/2) - 13px);
-    margin-left: 10px;
-    margin-bottom: 10px; }
-    @media screen and (max-width: 720px) {
-      div[contenedor-trabajo] div[row] {
-        width: 100% !important;
-        margin: 0px; } }
-  div[contenedor-trabajo] div[trabajo-descripcion] {
-    border: 1px solid silver;
-    margin-top: 10px;
-    padding: 0px 5px;
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 3px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); }
-    div[contenedor-trabajo] div[trabajo-descripcion] div[contenedor-avatar] {
-      width: calc(100% + 10px);
-      margin-left: -5px;
-      height: 60px;
-      background-color: rgba(0, 155, 219, 0.6); }
-      div[contenedor-trabajo] div[trabajo-descripcion] div[contenedor-avatar] div[avatar] {
-        width: 50px;
-        height: 50px;
-        border-radius: 100px;
-        background: white;
-        margin: 5px 0 0 5px;
-        position: absolute;
-        overflow: hidden; }
-        div[contenedor-trabajo] div[trabajo-descripcion] div[contenedor-avatar] div[avatar] img {
-          width: 100%;
-          height: 100%; }
-      div[contenedor-trabajo] div[trabajo-descripcion] div[contenedor-avatar] h4 {
-        position: absolute;
-        margin-left: 62px;
-        font-size: 15px;
-        margin-top: 12px; }
-      div[contenedor-trabajo] div[trabajo-descripcion] div[contenedor-avatar] h6 {
-        position: absolute;
-        margin-left: 60px;
-        margin-top: 35px; }
-        div[contenedor-trabajo] div[trabajo-descripcion] div[contenedor-avatar] h6 i {
-          font-size: 15px;
-          color: #FFEB3B; }
-    div[contenedor-trabajo] div[trabajo-descripcion] div[imagen] {
-      width: calc(100% + 10px);
-      height: 400px;
-      margin-left: -5px; }
-      div[contenedor-trabajo] div[trabajo-descripcion] div[imagen] img {
-        width: 100%;
-        height: 100%; }
-      div[contenedor-trabajo] div[trabajo-descripcion] div[imagen] div[titulo-img] {
-        position: relative;
-        margin-top: -50px;
-        color: white;
-        text-shadow: 1px 3px 3px black;
-        font-weight: bold;
-        padding: 5px 10px;
-        background-color: rgba(0, 0, 0, 0.5);
-        padding: 10px; }
-    div[contenedor-trabajo] div[trabajo-descripcion] div[titulo] {
-      font-size: 20px;
-      padding: 10px 5px;
-      background-color: rgba(0, 155, 219, 0.6);
-      width: 100%;
-      margin-left: -5px; }
-      div[contenedor-trabajo] div[trabajo-descripcion] div[titulo] md-chip-template i {
-        transform: translateY(3px);
-        margin-right: 5px;
-        padding: 5px;
-        font-size: 20px; }
-      div[contenedor-trabajo] div[trabajo-descripcion] div[titulo] .md-chip-content {
-        margin-top: -3px; }
-    div[contenedor-trabajo] div[trabajo-descripcion] div[acciones] i {
-      float: right;
-      margin: 5px 20px 15px 0;
-      font-size: 25px;
-      cursor: pointer;
-      padding: 5px;
-      border: 1px solid transparent;
-      transition: all 0.3s ease-in-out;
-      color: #f44336; }
-      div[contenedor-trabajo] div[trabajo-descripcion] div[acciones] i:hover {
-        border: 1px solid;
-        border-radius: 100px; }
-    div[contenedor-trabajo] div[trabajo-descripcion] div[clear] {
-      width: 100%;
-      clear: both; }
-
-div[row-trabajo] {
-  width: calc(80% - 5px);
-  height: 400px;
-  float: left;
-  margin-right: 5px;
-  margin-top: 10px; }
-  div[row-trabajo] div[contenedor] {
-    width: calc(85% - 7px);
-    margin-right: 5px;
-    float: left;
-    height: 398px; }
-    div[row-trabajo] div[contenedor] img {
-      width: 100%;
-      height: 100%;
-      border-radius: 5px;
-      border: 1px solid white;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); }
-  div[row-trabajo] div[ver-img] {
-    width: calc(15% - 7px);
-    margin-left: 5px;
-    float: left;
-    overflow-y: auto;
-    height: 398px;
-    border-bottom: 1px solid silver; }
-    div[row-trabajo] div[ver-img] img {
-      width: calc(100% - 4px);
-      height: 80px;
-      border: 1px solid white;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-      border-radius: 5px;
-      margin-right: 2px;
-      cursor: pointer; }
-      div[row-trabajo] div[ver-img] img:hover {
-        opacity: 0.8; }
-  div[row-trabajo] p {
-    background: rgba(0, 0, 0, 0.5);
-    padding: 10px 20px;
-    width: calc(100% -6px); }
-
-div[row-acciones] {
-  width: calc(20% - 5px);
-  float: left;
-  height: auto;
-  margin-left: 5px;
-  margin-top: 10px; }
-  div[row-acciones] div[cabecera] {
-    background: #009BDB;
-    border-radius: 5px 5px 0 0;
-    padding: 15px 20px;
-    font-weight: bold; }
-    div[row-acciones] div[cabecera] div[precio] {
-      float: right;
-      margin-right: 10px; }
-  div[row-acciones] div[comprar] {
-    width: 100%;
-    height: 40px;
-    background: white;
-    border-radius: 3px;
-    color: grey; }
-    div[row-acciones] div[comprar] .comprar {
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      border-radius: 0 0 5px 5px; }
-  div[row-acciones] div[informacion-vendedor] {
-    width: 100%;
-    height: auto; }
-    div[row-acciones] div[informacion-vendedor] ul {
-      list-style: none;
-      padding: 0;
-      border: 1px solid white;
-      padding: 3px;
-      border-radius: 3px;
-      background-color: #303030; }
-      div[row-acciones] div[informacion-vendedor] ul li {
-        font-size: 15px;
-        width: calc(100% - 13px);
-        margin-left: -4px; }
-        div[row-acciones] div[informacion-vendedor] ul li img {
-          width: 60px;
-          height: 60px;
-          margin: 10px;
-          border-radius: 3px;
-          border: 1px solid white; }
-          div[row-acciones] div[informacion-vendedor] ul li img:hover {
-            opacity: 0.8;
-            cursor: pointer; }
-        div[row-acciones] div[informacion-vendedor] ul li a {
-          position: absolute;
-          text-decoration: none;
-          float: left;
-          color: white; }
-        div[row-acciones] div[informacion-vendedor] ul li .vendedor {
-          margin: 10px 0 5px 5px;
-          font-weight: bold; }
-        div[row-acciones] div[informacion-vendedor] ul li .seguir {
-          margin-top: 33px;
-          background: silver;
-          padding: 5px 10px;
-          color: grey;
-          border-radius: 3px;
-          margin-left: 5px; }
-        div[row-acciones] div[informacion-vendedor] ul li .email {
-          margin-top: 33px;
-          background: silver;
-          border-radius: 3px;
-          color: grey;
-          margin-left: 80px; }
-          div[row-acciones] div[informacion-vendedor] ul li .email i {
-            transform: translateY(2px);
-            padding: 0 5px 0 5px; }
-        div[row-acciones] div[informacion-vendedor] ul li .email:hover, div[row-acciones] div[informacion-vendedor] ul li .seguir:hover {
-          background: #e5e5e5; }
-        div[row-acciones] div[informacion-vendedor] ul li:nth-child(2) {
-          border-top: 1px solid white;
-          padding: 8px 10px;
-          font-size: 12px; }
-  div[row-acciones] div[informacion-producto] {
-    width: 100%;
-    height: auto; }
-    div[row-acciones] div[informacion-producto] ul {
-      list-style: none;
-      padding: 0;
-      border: 1px solid white;
-      padding: 3px;
-      border-radius: 3px;
-      background-color: #303030; }
-      div[row-acciones] div[informacion-producto] ul li {
-        border-bottom: 1px solid;
-        padding: 0;
-        margin-bottom: 0px;
-        margin-left: -3px;
-        margin-top: -56;
-        width: calc(100% + 6px); }
-        div[row-acciones] div[informacion-producto] ul li dl {
-          height: 20px;
-          margin-top: 0;
-          font-size: 12px; }
-          div[row-acciones] div[informacion-producto] ul li dl dt {
-            float: left; }
-            div[row-acciones] div[informacion-producto] ul li dl dt i {
-              transform: translateY(6px);
-              margin-left: 5px; }
-          div[row-acciones] div[informacion-producto] ul li dl dd {
-            float: right;
-            margin-top: 10px;
-            margin-right: 8px; }
-        div[row-acciones] div[informacion-producto] ul li:first-child {
-          margin-top: -4px; }
-        div[row-acciones] div[informacion-producto] ul li:last-child {
-          margin-bottom: -4px; }
-
-div[clear] {
-  width: 100%;
-  clear: both; }
-
 html, body {
   min-height: 100%; }
 
@@ -276,7 +16,6 @@ md-content[landing] {
     width: 100%;
     height: 60px;
     background-color: transparent;
-    position: absolute;
     top: 0; }
     md-content[landing] header div[titulo] {
       font-family: 'Bebas';
@@ -346,17 +85,24 @@ md-content[landing] {
           position: absolute; }
           md-content[landing] header div[sociales] i:hover div[tooltip]:after {
             border-bottom: 10px solid #009BDB; }
-  md-content[landing] div[logo] img {
-    width: 700px;
-    height: 450px;
-    position: absolute;
-    top: 200px;
-    left: calc(50% - 350px); }
-  md-content[landing] div[logo] section {
-    position: absolute;
-    top: 600px;
-    left: calc(50% - 132px);
-    width: auto; }
+  md-content[landing] div[principal] {
+    width: 100%;
+    height: calc(100% - 60px); }
+    md-content[landing] div[principal] div.angular-leaflet-map {
+      width: calc(100% - 241px);
+      height: 100%;
+      float: left; }
+    md-content[landing] div[principal] div[lista] {
+      width: 240px;
+      height: 100%;
+      float: left;
+      border-top: 1px solid silver;
+      border-left: 1px solid silver; }
+      md-content[landing] div[principal] div[lista] div[categoria] {
+        width: 118px;
+        height: 118px;
+        float: left;
+        border: 1px solid silver; }
   md-content[landing] div[registro] {
     background-color: rgba(0, 0, 0, 0.6);
     position: absolute;

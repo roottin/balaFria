@@ -1,4 +1,4 @@
-angular.module('sketch')
+angular.module('balafria')
 .service('$sesion',function(){
   var self = this;
   self.perfil = {};

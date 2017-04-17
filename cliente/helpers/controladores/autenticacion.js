@@ -1,5 +1,5 @@
 angular
-    .module("sketch")
+    .module("balafria")
     .controller("ctrlRegistro", SignUpController)
     .controller("ctrlInicio", LoginController);
 

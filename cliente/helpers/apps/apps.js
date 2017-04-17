@@ -1,34 +1,34 @@
-angular.module('sketch', ['ngMaterial','ngMessages','ngRoute', 'ngResource','ui.router',"satellizer",'leaflet-directive'])
+angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','ui.router',"satellizer",'leaflet-directive'])
 .config(['$stateProvider','$urlRouterProvider','$mdThemingProvider','$authProvider', function ($stateProvider,$urlRouterProvider,$mdThemingProvider,$authProvider) {
+  //-------------------------------- Autenticacion ----------------------------------------
   $authProvider.loginUrl = "/api/autenticar";
   $authProvider.signupUrl = "/api/registrar";
   $authProvider.tokenName = "token";
-  $authProvider.tokenPrefix = "SketchSpace";
+  $authProvider.tokenPrefix = "balaFria";
   // Google
   $authProvider.google({
       clientId: '163659061347-caaqel0ef9nid4nv79kamoofcvkche33.apps.googleusercontent.com'
     });
 
   var skipIfLoggedIn = ['$q', '$auth', function($q, $auth) {
+    var deferred = $q.defer();
+    if ($auth.isAuthenticated()) {
+      deferred.reject();
+    } else {
+      deferred.resolve();
+    }
+    return deferred.promise;
+  }];
 
-      var deferred = $q.defer();
-      if ($auth.isAuthenticated()) {
-        deferred.reject();
-      } else {
-        deferred.resolve();
-      }
-      return deferred.promise;
-    }];
-
-    var loginRequired = ['$q', '$location', '$auth', function($q, $location, $auth) {
-      var deferred = $q.defer();
-      if ($auth.isAuthenticated()) {
-        deferred.resolve();
-      } else {
-        $location.path('/Autenticar');
-      }
-      return deferred.promise;
-    }];
+  var loginRequired = ['$q', '$location', '$auth', function($q, $location, $auth) {
+    var deferred = $q.defer();
+    if ($auth.isAuthenticated()) {
+      deferred.resolve();
+    } else {
+      $location.path('/Autenticar');
+    }
+    return deferred.promise;
+  }];
 
   //------------------------ Rutas ---------------------------------------------------
   $urlRouterProvider.otherwise('/');
@@ -40,7 +40,8 @@ angular.module('sketch', ['ngMaterial','ngMessages','ngRoute', 'ngResource','ui.
     })
       .state('frontPage.main', {
         url: 'main',
-        templateUrl: '/views/plantillas/front-main.html'
+        templateUrl: '/views/plantillas/front-main.html',
+        controller: 'ctrlMap'
       })
       .state('frontPage.registro', {
         url: 'registro',
@@ -77,11 +78,14 @@ angular.module('sketch', ['ngMaterial','ngMessages','ngRoute', 'ngResource','ui.
       //   loginRequired: loginRequired
       // }
     });
+    //------------------------ Tema -------------------------------------------------------
     $mdThemingProvider.theme('default')
           .primaryPalette('cyan')
           .accentPalette('blue-grey')
           .dark();
-}]).config(['$httpProvider', '$authProvider', function($httpProvider, config) {
+}])
+//--------------------------------------- Manejo de Token en localStorage ----------------------------------
+.config(['$httpProvider', '$authProvider', function($httpProvider, config) {
       $httpProvider.interceptors.push(['$q', function($q) {
         var tokenName = config.tokenPrefix ? config.tokenPrefix + '_' + config.tokenName : config.tokenName;
         return {
