@@ -1,17 +1,9 @@
 <div principal>
     <leaflet lf-center="Acarigua"></leaflet>
     <div lista>
-        <div categoria>
-            pizza
-        </div>
-        <div categoria>
-            hamburguesa
-        </div>
-        <div categoria>
-            camida china
-        </div>
-        <div categoria>
-            gourmet
+        <div categoria ng-repeat="categoria in categorias">
+            <div nombre>{{categoria.nombres}}</div>
+            <img src="/img/menu/productos/pizzaMargarita2.jpg" alt="">
         </div>
     </div>
 </div>

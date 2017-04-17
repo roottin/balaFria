@@ -1,0 +1,44 @@
+<md-content landing>
+  <header>
+    <div titulo>
+      Sketch
+    </div>
+    <div sociales>
+        <i class="ion-social-instagram ">
+          <div tooltip>
+              Instagram
+          </div>
+        </i>
+        <i class="ion-social-twitter " ui-sref="trabajos">
+          <div tooltip>
+              Twitter
+          </div>
+        </i>
+        <i class="ion-social-facebook ">
+          <div tooltip>
+              Facebook
+          </div>
+        </i>
+        <md-button class="md-raised md-primary" ng-click="logout()">cerrar sesion</md-button>
+    </div>
+  </header>
+  <div layout-padding registro layout="column" layout-sm="column"  layout-wrap>
+    <div cabecera class="md-primary">
+      Rubro
+    </div>
+      <form enctype="multipart/form-data" name="formRubro" method="post">
+        <md-input-container md-no-float class="md-block">
+          <label>Nombre</label>
+          <input ng-model="nombre">
+        </md-input-container>
+        <md-input-container md-no-float class="md-block">
+          <label>Apellido</label>
+          <input ng-model="apellido" type="file">
+        </md-input-container>
+        <section layout="row"  layout-align="center" >
+          <md-button class="md-raised md-primary" ng-click="enviar()">Enviar</md-button>
+          <md-button class="md-raised md-primary" ui-sref="frontPage.main">Volver</md-button>
+        </section>
+      </form>
+  </div>
+</md-content>

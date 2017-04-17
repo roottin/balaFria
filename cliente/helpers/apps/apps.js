@@ -62,21 +62,10 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
         }
       })
     //trabajos
-    .state('trabajos',{
-      url:'/trabajos',
-      templateUrl: '/views/plantillas/inicio.html',
-      controller: 'ctrlLanding',
-      resolve: {
-        loginRequired: loginRequired
-      }
-    })
-    .state('trabajo',{
-      url:'/trabajo?id',
-      templateUrl: '/views/plantillas/trabajo.html',
-      controller: 'ctrlTrabajo',
-      // resolve: {
-      //   loginRequired: loginRequired
-      // }
+    .state('rubro',{
+      url:'/rubros',
+      templateUrl: '/views/plantillas/rubro.html',
+      controller: 'ctrlRubro',
     });
     //------------------------ Tema -------------------------------------------------------
     $mdThemingProvider.theme('default')

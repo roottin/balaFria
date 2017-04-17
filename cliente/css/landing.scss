@@ -107,22 +107,47 @@ md-content[landing]{
     width: 100%;
     height: calc(100% - 60px);
     div.angular-leaflet-map{
-      width: calc(100% - 241px);
+      width: calc(100% - 301px);
       height: 100%;
       float: left;
     }
     div[lista]{
-      width: 240px;
+      width: 300px;
       height: 100%;
       float: left;
       border-top: 1px solid silver;
       border-left: 1px solid silver;
 
       div[categoria]{
-        width: 118px;
-        height: 118px;
+        width: 148px;
+        height: 148px;
         float: left;
-        border: 1px solid silver;
+        border: 1px solid white;
+        position: relative;
+        
+        div[nombre]{
+          color: white;
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          cursor: pointer;
+          background-color: rgba(0, 0, 0, 0.6);
+          text-align: center;
+          z-index: 2;
+          font-family: bebas;
+          display: flex;
+          align-content: space-between;
+          justify-content: center;
+          align-items: center;
+          font-size: 31px;
+        }
+        img{
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          cursor: pointer;
+          z-index: 1;
+        }
       }
     }
   }
