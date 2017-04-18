@@ -15,6 +15,10 @@ module.exports = function(sequelize, DataTypes) {
     archivo: {
       type: "BYTEA",
       allowNull: true
+    },
+    content_type:{
+      type: DataTypes.STRING,
+      allowNull: true
     }
   }, {
     tableName: 'imagen'

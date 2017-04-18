@@ -31,10 +31,7 @@
           <label>Nombre</label>
           <input ng-model="nombre">
         </md-input-container>
-        <md-input-container md-no-float class="md-block">
-          <label>Apellido</label>
-          <input ng-model="apellido" type="file">
-        </md-input-container>
+        <lf-ng-md-file-input lf-files="file" preview ></lf-ng-md-file-input>
         <section layout="row"  layout-align="center" >
           <md-button class="md-raised md-primary" ng-click="enviar()">Enviar</md-button>
           <md-button class="md-raised md-primary" ui-sref="frontPage.main">Volver</md-button>

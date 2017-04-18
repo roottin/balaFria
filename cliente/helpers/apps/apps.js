@@ -1,4 +1,4 @@
-angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','ui.router',"satellizer",'leaflet-directive'])
+angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','ui.router',"satellizer",'leaflet-directive','lfNgMdFileInput'])
 .config(['$stateProvider','$urlRouterProvider','$mdThemingProvider','$authProvider', function ($stateProvider,$urlRouterProvider,$mdThemingProvider,$authProvider) {
   //-------------------------------- Autenticacion ----------------------------------------
   $authProvider.loginUrl = "/api/autenticar";

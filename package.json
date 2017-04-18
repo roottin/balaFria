@@ -22,6 +22,7 @@
     "ejs": "~2.5.5",
     "express": "~4.14.1",
     "jwt-simple": "^0.5.1",
+    "lf-ng-md-file-input": "^1.5.1",
     "moment": "^2.18.1",
     "morgan": "~1.7.0",
     "pg": "^4.5.6",

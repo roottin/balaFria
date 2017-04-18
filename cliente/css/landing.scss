@@ -1,5 +1,6 @@
 @import "mixins.scss";
 @import "paleta-colores.scss";
+@import "rubro.scss";
 
 html,body{
   min-height: 100%;
@@ -124,7 +125,7 @@ md-content[landing]{
         float: left;
         border: 1px solid white;
         position: relative;
-        
+
         div[nombre]{
           color: white;
           position: absolute;
