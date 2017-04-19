@@ -1,4 +1,4 @@
-angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','ui.router',"satellizer",'leaflet-directive','lfNgMdFileInput'])
+angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','ui.router',"satellizer",'leaflet-directive','ngFileUpload'])
 .config(['$stateProvider','$urlRouterProvider','$mdThemingProvider','$authProvider', function ($stateProvider,$urlRouterProvider,$mdThemingProvider,$authProvider) {
   //-------------------------------- Autenticacion ----------------------------------------
   $authProvider.loginUrl = "/api/autenticar";
@@ -65,7 +65,7 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
     .state('rubro',{
       url:'/rubros',
       templateUrl: '/views/plantillas/rubro.html',
-      controller: 'ctrlRubro',
+      controller: 'ctrlRubro as up',
     });
     //------------------------ Tema -------------------------------------------------------
     $mdThemingProvider.theme('default')

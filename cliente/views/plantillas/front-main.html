@@ -1,9 +1,9 @@
 <div principal>
     <leaflet lf-center="Acarigua"></leaflet>
     <div lista>
-        <div categoria ng-repeat="categoria in categorias">
-            <div nombre>{{categoria.nombres}}</div>
-            <img src="/img/menu/productos/pizzaMargarita2.jpg" alt="">
+        <div categoria ng-repeat="rubro in rubros">
+            <div nombre>{{rubro.nombre}}</div>
+            <img src="{{rubro.imagen_ruta}}" alt="">
         </div>
     </div>
 </div>

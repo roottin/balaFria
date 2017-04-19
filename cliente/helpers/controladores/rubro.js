@@ -1,49 +1,34 @@
 angular.module('balafria')
-.controller('ctrlRubro', ['$scope','$http', function ($scope,$http) {
-  $scope.$watch('file.length',function(newVal,oldVal){
-      console.log($scope.file);
-  });
-  var prepararImagen = function(){
-    return new Promise(function(completada,rechazada){
-      var f = $scope.file[0].lfFile;
-      var r = new FileReader();
-      r.onloadend = function(e){
-        var data = {
-          'byteArray':e.target.result,
-          'content_type':f.type,
-          'nombre':f.name
-        };
-        completada(data);
-      };
-      r.readAsBinaryString(f);
-    });
-  };
-  $scope.enviar = function(){
-      prepararImagen()
-      .then(function(dataImagen){
-        var peticion = {
-          "imagen": dataImagen,
-          "nombre": $scope.nombre
-        };
-        return peticion;
-      })
-      .then(function(formData){
-        return $http({
-          'method':'POST',
-          'data':JSON.stringify(formData),
-          'transformRequest': [],
-          'headers': {'Content-Type': 'application/json;charset=UTF-8'},
-          'url':'./api/rubros'
+.controller('ctrlRubro', ['Upload','$mdToast', function( Upload,$mdToast) {
+
+ var vm = this;
+    vm.submit = function(){ //function to call on form submit
+        if (vm.upload_form.file.$valid && vm.file) { //check if from is valid
+            vm.upload(vm.file); //call upload function
+        }
+    }
+    vm.upload = function (file) {
+        Upload.upload({
+            url: '/api/rubros', //webAPI exposed to upload the file
+            data:{
+              file:file,
+              nombre:vm.nombre,
+              descripcion:vm.descripcion
+            }
+        }).then(function (resp) { //upload function returns a promise
+            vm.nombre = "";
+            vm.descripcion = "";
+            vm.file = "";
+            $mdToast.showSimple('Hello');
+        }, function (resp) { //catch error
+            console.log('Error status: ' + resp.status);
+            $window.alert('Error status: ' + resp.status);
+        }, function (evt) { 
+            console.log(evt);
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+            vm.progress = 'progress: ' + progressPercentage + '% '; // capture upload progress
         });
-      })
-      .then(function(result){
-          var blob = new Blob([result.data.imagen.archivo.data],{type:result.data.imagen.content_type});
-          var vinculo = document.createElement('a');
-          vinculo.download = 'imagen.jpg';
-          vinculo.href = window.URL.createObjectURL(blob);
-          vinculo.click();
-      },function(err){
-          console.error(err);
-      });
-  };
+    };
 }]);
+

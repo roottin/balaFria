@@ -12,11 +12,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: true
     },
-    archivo: {
-      type: "BYTEA",
+    ruta: {
+      type: DataTypes.STRING,
       allowNull: true
     },
-    content_type:{
+    mimetype:{
       type: DataTypes.STRING,
       allowNull: true
     }

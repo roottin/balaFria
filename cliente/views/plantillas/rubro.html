@@ -26,16 +26,32 @@
     <div cabecera class="md-primary">
       Rubro
     </div>
-      <form enctype="multipart/form-data" name="formRubro" method="post">
-        <md-input-container md-no-float class="md-block">
-          <label>Nombre</label>
-          <input ng-model="nombre">
-        </md-input-container>
-        <lf-ng-md-file-input lf-files="file" preview ></lf-ng-md-file-input>
-        <section layout="row"  layout-align="center" >
-          <md-button class="md-raised md-primary" ng-click="enviar()">Enviar</md-button>
-          <md-button class="md-raised md-primary" ui-sref="frontPage.main">Volver</md-button>
-        </section>
-      </form>
+        <form name="up.upload_form"> 
+          <md-input-container md-no-float class="md-block">
+            <label>Nombre</label>
+            <input required name="nombre" minlength="5"  ng-model="up.nombre">
+              <!-- mensajes  -->
+            <div ng-messages="up.upload_form.nombre.$error" role="alert">
+              <div ng-message="required">Este campo es requerido</div>
+              <div ng-message="minlength">Debe poseer al menos 5 carateres</div>
+            </div>
+          </md-input-container>
+          <md-input-container md-no-float class="md-block">
+            <label>Descripcion</label>
+            <input required name="descripcion" minlength="5"  ng-model="up.descripcion">
+              <!-- mensajes  -->
+            <div ng-messages="up.upload_form.descripcion.$error" role="alert">
+              <div ng-message="required">Este campo es requerido</div>
+              <div ng-message="minlength">Debe poseer al menos 10 carateres</div>
+            </div>
+          </md-input-container>
+            <input type="file" ngf-select ng-model="up.file" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" />
+            Image thumbnail: <img style="width:100px;" ngf-thumbnail="up.file || '/thumb.jpg'"/>
+            <i ng-show="up.upload_form.file.$error.required">*required</i><br>
+            <i ng-show="up.upload_form.file.$error.maxSize">File too large 
+            {{up.file.size / 1000000|number:1}}MB: max 20M</i>
+            <button type="submit" ng-click="up.submit()">submit</button>
+            <p>{{up.progress}}
+        </form>
   </div>
 </md-content>

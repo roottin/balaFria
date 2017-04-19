@@ -2,7 +2,7 @@ angular.module('balafria')
 .controller('ctrlFront', ['$scope','$state', function ($scope,$state) {
   $state.go('frontPage.main');
 }])
-.controller('ctrlMap', ['$scope','$state', function ($scope) {
+.controller('ctrlMap', ['$scope','Rubros', function ($scope,Rubros) {
   angular.extend($scope, {
         Acarigua: {
             lat: 9.55972,
@@ -10,4 +10,7 @@ angular.module('balafria')
             zoom: 13
         }
     });
+  $scope.rubros = Rubros.query(function(){
+  	
+  });
 }]);

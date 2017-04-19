@@ -1,23 +1,48 @@
 var models = require('../models/index');
 var fs = require('fs');
+//configuracion subida de archivos
+
+//ruta por defecto para rubro
+var ruta  = './storage/rubro';
+
+//multer
+var Multer = require('multer');
+
+var upload = Multer({storage: Multer.diskStorage({
+    destination: function (req, file, callback) { 
+      callback(null, ruta);
+    },
+    filename: function (req, file, callback) { 
+      var datetimestamp = Date.now();
+      var nombreArchivo = file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1];
+      callback(null, nombreArchivo);}
+    })
+}).single('file');
+
+
 
 module.exports = function(app){
   //obtener rubros
   app.get('/api/rubros', function(req, res) {
-    models.rubro.findAll({}).then(function(rubros) {
-      res.json(rubros);
-    });
+    models.sequelize.query('SELECT r.*,i.ruta as imagen_ruta FROM rubro r '+
+                    ' join imagen_rubro ir on r.id_rubro = ir.id_rubro AND ir.estado = '+"'A'"+
+                    ' join imagen i on ir.id_imagen = i.id_imagen  ',
+      { model: models.rubro}
+    )
+      .then(function(rubros) {
+        res.json(rubros);
+      });
   });
   //guardar registro
-  app.post('/api/rubros', function(req, res) {
+  app.post('/api/rubros',upload, function(req, res) {
     models.rubro.create({
       nombre: req.body.nombre,
+      descripcion: req.body.descripcion,
     }).then(function(rubro) {
-      var imageData = new Buffer(req.body.imagen.byteArray);
       models.imagen.create({
-        nombre: req.body.imagen.nombre,
-        archivo: imageData,
-        content_type: req.body.imagen.content_type
+        nombre: req.file.filename,
+        ruta: req.file.path,
+        mimetype: req.file.mimetype
       }).then(function(imagen){
         models.imagen_rubro.create({
           id_rubro:rubro.id_rubro,
@@ -47,7 +72,7 @@ module.exports = function(app){
             id_imagen: imagen_rubro.id_imagen
           }
         }).then(function(imagen){
-          rubro.imagen = imagen;
+          rubro.dataValues.imagen = imagen;
           res.json(rubro);
         });
       });
