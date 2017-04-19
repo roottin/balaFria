@@ -31,21 +31,23 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
   }];
 
   //------------------------ Rutas ---------------------------------------------------
-  $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('/cliente');
+
+  //cliente
   $stateProvider
     .state('frontPage', {
-      url: '/',
-      templateUrl: '/views/plantillas/frontPage.html',
+      url: '/cliente',
+      templateUrl: '/views/plantillas/cliente/front.html',
       controller: 'ctrlFront'
     })
       .state('frontPage.main', {
-        url: 'main',
-        templateUrl: '/views/plantillas/front-main.html',
+        url: '/main',
+        templateUrl: '/views/plantillas/cliente/front-main.html',
         controller: 'ctrlMap'
       })
       .state('frontPage.registro', {
-        url: 'registro',
-        templateUrl: '/views/plantillas/front-registro.html',
+        url: '/registro',
+        templateUrl: '/views/plantillas/cliente/front-registro.html',
         controller: 'ctrlRegistro',
         controllerAs: 'registro',
         resolve: {
@@ -53,20 +55,31 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
         }
       })
       .state('frontPage.inicio', {
-        url: 'Autenticar',
-        templateUrl: '/views/plantillas/front-inicio.html',
+        url: '/Autenticar',
+        templateUrl: '/views/plantillas/cliente/front-inicio.html',
         controller: 'ctrlInicio',
         controllerAs: 'inicio',
         resolve: {
           skipIfLoggedIn: skipIfLoggedIn
         }
       })
-    //trabajos
-    .state('rubro',{
-      url:'/rubros',
-      templateUrl: '/views/plantillas/rubro.html',
-      controller: 'ctrlRubro as up',
-    });
+    //proveedor
+    .state('proveedor',{
+      url: '/proveedor',
+      templateUrl: '/views/plantillas/proveedor/front.html',
+      controller: 'ctrlProveedor',
+    })
+    //admin
+    .state('admin',{
+      url: '/admin',
+      templateUrl: '/views/plantillas/admin/front.html',
+      controller: 'ctrlAdmin',
+    })
+      .state('admin.rubro',{
+        url:'/rubros',
+        templateUrl: '/views/plantillas/admin/rubro.html',
+        controller: 'ctrlRubro as up',
+      });
     //------------------------ Tema -------------------------------------------------------
     $mdThemingProvider.theme('default')
           .primaryPalette('cyan')
