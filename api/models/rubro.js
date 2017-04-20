@@ -13,6 +13,10 @@ module.exports = function(sequelize, DataTypes) {
     descripcion: {
       type: DataTypes.STRING,
       allowNull: true
+    },
+    color: {
+      type: DataTypes.STRING,
+      allowNull: true
     }
   }, {
     tableName: 'rubro'

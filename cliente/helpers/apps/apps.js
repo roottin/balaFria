@@ -37,8 +37,16 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
   $stateProvider
     .state('frontPage', {
       url: '/cliente',
-      templateUrl: '/views/plantillas/cliente/front.html',
-      controller: 'ctrlFront'
+      controller: 'ctrlFront',
+      views:{
+        "@":{
+          templateUrl: '/views/plantillas/cliente/front.html',
+        },
+        "header@frontPage":{
+          templateUrl:"/views/plantillas/cliente/headerLogOff.html",
+          controller:'ctrlInicio'
+        }
+      }
     })
       .state('frontPage.main', {
         url: '/main',
@@ -82,7 +90,7 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
       });
     //------------------------ Tema -------------------------------------------------------
     $mdThemingProvider.theme('default')
-          .primaryPalette('cyan')
+          .primaryPalette('indigo')
           .accentPalette('blue-grey')
           .dark();
 }])

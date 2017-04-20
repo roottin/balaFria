@@ -2,7 +2,7 @@
     <div cabecera class="md-primary">
       Rubro
     </div>
-        <form name="up.upload_form"> 
+        <form name="up.upload_form">
           <md-input-container md-no-float class="md-block">
             <label>Nombre</label>
             <input required name="nombre" minlength="5"  ng-model="up.nombre">
@@ -21,12 +21,13 @@
               <div ng-message="minlength">Debe poseer al menos 10 carateres</div>
             </div>
           </md-input-container>
-            <input type="file" ngf-select ng-model="up.file" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" />
-            Image thumbnail: <img style="width:100px;" ngf-thumbnail="up.file || '/thumb.jpg'"/>
-            <i ng-show="up.upload_form.file.$error.required">*required</i><br>
-            <i ng-show="up.upload_form.file.$error.maxSize">File too large 
-            {{up.file.size / 1000000|number:1}}MB: max 20M</i>
+          <md-input-container md-no-float class="md-block">
+            <label>Color</label>
+            <input required name="color" minlength="5"  ng-model="up.color">
+          </md-input-container>
+            <file-input ng-model="up.file"></file-input>
+
             <button type="submit" ng-click="up.submit()">submit</button>
-            <p>{{up.progress}}
+            <p>{{up.progress}}</p>
         </form>
   </div>

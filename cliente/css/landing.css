@@ -1,8 +1,61 @@
+div[input-file] {
+  border: 1px solid silver;
+  width: 140px;
+  padding: 10px;
+  margin-bottom: 10px; }
+  div[input-file] input[type="file"] {
+    display: none; }
+  div[input-file] label {
+    color: grey; }
+  div[input-file] img[ngf-thumbnail] {
+    width: 140px !important;
+    height: 140px !important;
+    cursor: pointer; }
+
 html, body {
   min-height: 100%; }
 
+.leaflet-bottom {
+  display: none; }
+
+md-menu-content h4 {
+  background-color: #303030 !important;
+  padding: 15px;
+  margin: -10px 0px 0px 0px; }
+
+md-menu-item {
+  padding-left: 15px; }
+  md-menu-item:hover {
+    background-color: silver; }
+
+md-checkbox div.md-container div.md-icon {
+  border-color: #303030 !important; }
+
+[login] {
+  max-width: 500px;
+  width: 100%; }
+  [login] .inicio {
+    background-color: rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 500px;
+    padding: 10px 10px;
+    color: white;
+    border: none;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    border-radius: 3px; }
+    [login] .inicio.google {
+      background: #dd4b39; }
+    [login] .inicio.md-raised {
+      background: #009BDB; }
+
+div[divider] {
+  margin: 10px 10px;
+  width: calc(100% - 0px);
+  height: 1px;
+  background: silver;
+  margin-left: -2px; }
+
 md-content[landing] {
-  background: url("../img/3.jpg") no-repeat;
   background-size: cover;
   overflow: hidden;
   width: 100%;
@@ -16,7 +69,15 @@ md-content[landing] {
     width: 100%;
     height: 60px;
     background-color: transparent;
-    top: 0; }
+    margin-top: -10px; }
+    md-content[landing] header i.material-icons {
+      float: right;
+      margin-top: 10px;
+      padding: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out; }
+      md-content[landing] header i.material-icons:hover {
+        background: #009BDB; }
     md-content[landing] header div[titulo] {
       font-family: 'Bebas';
       font-size: 40px;
@@ -36,7 +97,8 @@ md-content[landing] {
         color: white;
         border: 1px solid !important;
         box-shadow: none;
-        top: -3px; }
+        top: -3px;
+        float: right; }
         md-content[landing] header div[sociales] .md-raised:hover span {
           color: white; }
       md-content[landing] header div[sociales] i {
@@ -87,17 +149,40 @@ md-content[landing] {
             border-bottom: 10px solid #009BDB; }
   md-content[landing] div[principal] {
     width: 100%;
-    height: calc(100% - 60px); }
-    md-content[landing] div[principal] div.angular-leaflet-map {
-      width: calc(100% - 301px);
+    height: calc(100% - 50px); }
+    md-content[landing] div[principal] div[mapa] {
+      float: left;
       height: 100%;
-      float: left; }
+      width: calc(100% - 301px);
+      position: relative; }
+      md-content[landing] div[principal] div[mapa] md-toolbar {
+        min-height: 48px !important;
+        height: 48px !important; }
+        md-content[landing] div[principal] div[mapa] md-toolbar div[rubros-tab] {
+          padding: 15px;
+          color: white;
+          font-size: 14px;
+          text-transform: uppercase;
+          transition: border 0.3s;
+          border-bottom: 4px solid; }
+          md-content[landing] div[principal] div[mapa] md-toolbar div[rubros-tab].active {
+            background-color: rgba(0, 0, 0, 0.2); }
+      md-content[landing] div[principal] div[mapa] div.angular-leaflet-map {
+        width: calc(100% - 0px);
+        height: calc(100% - 96px); }
+      md-content[landing] div[principal] div[mapa] md-toolbar.bottom {
+        bottom: 0;
+        position: absolute; }
+        md-content[landing] div[principal] div[mapa] md-toolbar.bottom button {
+          transition: all 0.3s ease-in-out; }
+          md-content[landing] div[principal] div[mapa] md-toolbar.bottom button:hover {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); }
     md-content[landing] div[principal] div[lista] {
       width: 300px;
       height: 100%;
       float: left;
       border-top: 1px solid silver;
-      border-left: 1px solid silver; }
+      border-right: 1px solid silver; }
       md-content[landing] div[principal] div[lista] div[categoria] {
         width: 148px;
         height: 148px;
@@ -132,28 +217,12 @@ md-content[landing] {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
     width: 400px;
     left: 8%;
-    padding-bottom: 10px;
     border-radius: 3px;
     overflow: hidden;
-    border: 1px solid silver; }
+    border: 1px solid silver;
+    padding: 0px 10px; }
     md-content[landing] div[registro] .md-raised {
       color: white; }
-    md-content[landing] div[registro] div[divider] {
-      margin: 10px 10px;
-      width: calc(100% - 0px);
-      height: 1px;
-      background: silver;
-      margin-left: -2px; }
-    md-content[landing] div[registro] [login] {
-      width: calc(100% - 20px);
-      padding: 10px 10px;
-      margin-left: 7px;
-      color: white;
-      border: none;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-      border-radius: 3px; }
-      md-content[landing] div[registro] [login].google {
-        background: #dd4b39; }
     md-content[landing] div[registro].inicio {
       position: relative;
       margin: 0 auto;

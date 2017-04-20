@@ -1,13 +1,64 @@
 @import "mixins.scss";
 @import "paleta-colores.scss";
-@import "rubro.scss";
+@import "fileInput.scss";
 
 html,body{
   min-height: 100%;
 }
+.leaflet-bottom {
+  display: none;
+}
+md-menu-content{
+  h4{
+    background-color:#303030 !important;
+    padding: 15px;
+    margin: -10px 0px 0px 0px;
+  }
+}
+md-menu-item{
+  padding-left: 15px;
+  &:hover{
+    background-color: silver;
+  }
+}
+md-checkbox{
+  div.md-container{
+    div.md-icon{
+      border-color:#303030 !important;
+    }
+  }
+}
+
+[login]{
+  max-width: 500px;
+  width: 100%;
+  .inicio{
+    background-color: rgba(0,0,0,0.3);
+    width: 100%;
+    max-width: 500px;
+    padding: 10px 10px;
+    color: white;
+    border: none;
+    @include BoxShadowHelper(3);
+    border-radius: 3px;
+    &.google{
+      background:#dd4b39;
+    }
+    &.md-raised{
+      background: $color-primary;
+    }
+  }
+}
+
+div[divider]{
+  margin: 10px 10px;
+  width: calc(100% - 0px);
+  height: 1px;
+  background: silver;
+  margin-left: -2px;
+}
 
 md-content[landing]{
-  background: url('../img/3.jpg') no-repeat;
   background-size: cover;
   .md-primary{
     background: $color-primary;
@@ -24,7 +75,17 @@ md-content[landing]{
     width: 100%;
     height: 60px;
     background-color: transparent;
-    top: 0;
+    margin-top: -10px;
+    i.material-icons{
+      float: right;
+      margin-top: 10px;
+      padding: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      &:hover{
+        background: $color-primary;
+      }
+    }
     div[titulo]{
       font-family: 'Bebas';
       font-size: 40px;
@@ -46,6 +107,7 @@ md-content[landing]{
         border: 1px solid !important;
         box-shadow: none;
         top: -3px;
+        float:right;
         &:hover span{
           color: white;
         }
@@ -101,23 +163,57 @@ md-content[landing]{
           }
         }
       }
-
     }
   }
   div[principal]{
     width: 100%;
-    height: calc(100% - 60px);
-    div.angular-leaflet-map{
-      width: calc(100% - 301px);
-      height: 100%;
+    height: calc(100% - 50px);
+    div[mapa]{
       float: left;
+      height: 100%;
+      width: calc(100% - 301px);
+      position: relative;
+      md-toolbar{
+        min-height: 48px !important;
+        height: 48px !important;
+        div[rubros-tab]{
+          padding: 15px;
+          color: white;
+          font-size: 14px;
+          text-transform: uppercase;
+          transition: border 0.3s;
+          border-bottom: 4px solid;
+          &.active{
+            background-color: rgba(0,0,0,0.2);
+          }
+        }
+
+      }
+
+      div.angular-leaflet-map{
+        width: calc(100% - 0px);
+        height: calc(100% - 96px);
+      }
+
+      md-toolbar.bottom{
+        bottom: 0;
+        position: absolute;
+
+        button{
+          transition: all 0.3s ease-in-out;
+          &:hover{
+            @include BoxShadowHelper(3);
+          }
+        }
+      }
     }
+
     div[lista]{
       width: 300px;
       height: 100%;
       float: left;
       border-top: 1px solid silver;
-      border-left: 1px solid silver;
+      border-right:1px solid silver;
 
       div[categoria]{
         width: 148px;
@@ -159,32 +255,15 @@ md-content[landing]{
     @include BoxShadowHelper(3);
     width: 400px ;
     left: 8%;
-    padding-bottom: 10px;
     border-radius: 3px;
     overflow: hidden;
     border:1px solid silver;
-  .md-raised{
-    color: white;
-  }
-  div[divider]{
-    margin: 10px 10px;
-    width: calc(100% - 0px);
-    height: 1px;
-    background: silver;
-    margin-left: -2px;
-  }
-  [login]{
-    width: calc(100% - 20px);
-    padding: 10px 10px;
-    margin-left: 7px;
-    color: white;
-    border: none;
-    @include BoxShadowHelper(3);
-    border-radius: 3px;
-    &.google{
-      background:#dd4b39;
+    padding: 0px 10px;
+    .md-raised{
+      color: white;
     }
-  }
+
+
   &.inicio{
     position: relative;
     margin: 0 auto;

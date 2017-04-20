@@ -9,10 +9,10 @@ var ruta  = './storage/rubro';
 var Multer = require('multer');
 
 var upload = Multer({storage: Multer.diskStorage({
-    destination: function (req, file, callback) { 
+    destination: function (req, file, callback) {
       callback(null, ruta);
     },
-    filename: function (req, file, callback) { 
+    filename: function (req, file, callback) {
       var datetimestamp = Date.now();
       var nombreArchivo = file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1];
       callback(null, nombreArchivo);}
@@ -38,6 +38,7 @@ module.exports = function(app){
     models.rubro.create({
       nombre: req.body.nombre,
       descripcion: req.body.descripcion,
+      color: req.body.color,
     }).then(function(rubro) {
       models.imagen.create({
         nombre: req.file.filename,

@@ -1,27 +1,6 @@
 <md-content landing>
-  <header>
-    <div titulo>
-      BalaFria
-    </div>
-    <div sociales>
-        <i class="ion-social-instagram ">
-          <div tooltip>
-              Instagram
-          </div>
-        </i>
-        <i class="ion-social-twitter " ui-sref="trabajos">
-          <div tooltip>
-              Twitter
-          </div>
-        </i>
-        <i class="ion-social-facebook ">
-          <div tooltip>
-              Facebook
-          </div>
-        </i>
-        <md-button class="md-raised md-primary" ui-sref="frontPage.inicio">Iniciar Sesion</md-button>
-    </div>
-  </header>
+  <div ui-view="header"></div>
 
   <ui-view></ui-view>
+
 </md-content>

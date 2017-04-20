@@ -19,7 +19,7 @@ function SignUpController($auth, $location,$scope,$sesion) {
     };
 }
 
-function LoginController($auth, $location,$scope,$sesion) {
+function LoginController($auth, $location,$scope,$sesion,$mdDialog) {
     $scope.login = function(){
         $auth.login({
             nombre: $scope.nombre,
@@ -37,4 +37,28 @@ function LoginController($auth, $location,$scope,$sesion) {
     $scope.authenticate = function(provider) {
       $auth.authenticate(provider);
     };
+    $scope.showAdvanced = function(ev) {
+        $mdDialog.show({
+          controller: DialogController,
+          templateUrl: '/views/plantillas/cliente/inicio.tmpl.html',
+          parent: angular.element(document.body),
+          targetEvent: ev,
+          clickOutsideToClose:true,
+          fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+      });
+    };
+
+      function DialogController($scope, $mdDialog) {
+        $scope.hide = function() {
+          $mdDialog.hide();
+        };
+
+        $scope.cancel = function() {
+          $mdDialog.cancel();
+        };
+
+        $scope.answer = function(answer) {
+          $mdDialog.hide(answer);
+        };
+      }
 }
