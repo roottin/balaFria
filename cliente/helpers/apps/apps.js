@@ -74,9 +74,44 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
     //proveedor
     .state('proveedor',{
       url: '/proveedor',
-      templateUrl: '/views/plantillas/proveedor/front.html',
-      controller: 'ctrlProveedor',
+      views:{
+        "@":{
+          templateUrl: '/views/plantillas/proveedor/front.html',
+        },
+        "header@proveedor":{
+          templateUrl:"/views/plantillas/cliente/headerLogOff.html",
+          controller:'ctrlInicio'
+        },
+        "body@proveedor":{
+        templateUrl: '/views/plantillas/proveedor/frontPage.html',
+        controller: 'ctrlProveedor',
+        }
+      }
     })
+      .state('proveedor.registro',{
+        url:"/registro",
+        views:{
+          "body@proveedor":{
+            templateUrl: '/views/plantillas/proveedor/registro.html'
+          }
+        }
+      })
+      .state('proveedor.sucursal',{
+        url:'/sucursal',
+        views:{
+          "body@proveedor":{
+            templateUrl: '/views/plantillas/proveedor/registro.html'
+          }
+        }
+      })
+      .state('proveedor.horario',{
+        url:'/horario',
+        views:{
+          "body@proveedor":{
+            templateUrl: '/views/plantillas/proveedor/registro.html'
+          }
+        }
+      })
     //admin
     .state('admin',{
       url: '/admin',
