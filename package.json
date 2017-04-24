@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ./bin/www",
-    "postinstall":"npm install pg --save"
+    "start": "node ./bin/www"
   },
   "dependencies": {
     "angular": "1.5.10",
