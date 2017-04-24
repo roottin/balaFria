@@ -1,5 +1,5 @@
 //se hace el llamdo a la conexion con la base de datos
-var connection = require('../Core/Core');
+var connection = require('../models/index').sequelize;
 //llamamos a crypto para encriptar la contraseña
 var crypto = require('crypto');
 var servidor = require("../../Servidor/servidor");
