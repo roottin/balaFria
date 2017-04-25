@@ -6,6 +6,7 @@ var channel = new events.EventEmitter();
 
 channel.on('armarSesion', function(perfil){
   servidor.addAdmin(perfil);
+  console.log('----ADMIN CONECTADO----');
 });
 
 module.exports = function(app){
@@ -17,7 +18,16 @@ module.exports = function(app){
       channel.emit('armarSesion',admin);
       return res
           .status(200)
-          .send(admin);
+          .send({
+            user:admin,
+            success:1
+          });
+    }else{
+      return res
+        .status(200)
+        .send({
+          success:0
+        });
     }
   });
 };

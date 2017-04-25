@@ -126,6 +126,15 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
         }
       }
     })
+      .state('admin.landing',{
+        url:'/landing',
+        views:{
+          "body@admin":{
+            templateUrl: '/views/plantillas/admin/landing.html',
+            controller: 'ctrlLandAdmin',
+          }
+        }
+      })
       .state('admin.rubro',{
         url:'/rubros',
         views:{

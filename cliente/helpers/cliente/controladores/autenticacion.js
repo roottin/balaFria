@@ -26,7 +26,7 @@ function LoginController($auth, $location,$scope,$sesion,$mdDialog) {
             clave: $scope.clave
         })
         .then(function(response){
-            $sesion.crear(response.data).conectar();
+            $sesion.crear(response.data,'proveedor').conectar();
             $location.path("/trabajos");
         })
         .catch(function(response){

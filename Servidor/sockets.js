@@ -9,15 +9,17 @@ function init(app) {
 			var error;
 	    servidor.mostrarListaUsuarios();
 			//verificacion usuario o admin
-			if(socket.handshake.query.admin){
-				if(servidor.admin.tokenKey == socket.handshake.query.tokenKey){
-					servidor.admin.agregarConexion(socket);
-					socket.emit('session',{"texto":"recuperada"});
-					return next();
-				}else{
-					error = new Error('Error de Autenticacion: token no valida para usuario');
-					console.error(error);
-					next(error);
+			if(socket.handshake.query.tipo == 'admin'){
+				if(servidor.admin){
+					if(servidor.admin.perfil.token == socket.handshake.query.tokenKey){
+						servidor.admin.agregarConexion(socket);
+						socket.emit('session',{"texto":"recuperada"});
+						return next();
+					}else{
+						error = new Error('Error de Autenticacion: token no valida para usuario');
+						console.error(error);
+						next(error);
+					}
 				}
 			}else{
 				var usuario = servidor.buscarUsuario(socket.handshake.query.id);
@@ -97,7 +99,12 @@ function init(app) {
 	});
 	socket.on('disconnect',function(){
 		var usuario = servidor.buscarUsuario(socket.handshake.query.id);
-	    var plug = usuario.buscarConexion('socket',socket);
+		var plug;
+		if(usuario){
+			plug = usuario.buscarConexion('socket',socket);
+		}else{
+			plug = servidor.admin.conexion;
+		}
 		if(plug){
 			plug.estado='esperando';
 			//funcion settimeout

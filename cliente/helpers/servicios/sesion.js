@@ -4,9 +4,9 @@ angular.module('balafria')
   self.perfil = {};
   self.socket = null;
 
-  self.crear = function(perfil){
+  self.crear = function(perfil,tipo){
     self.perfil = perfil;
-    self.perfil.tipo = 'proveedor';
+    self.perfil.tipo = tipo;
     return self;
   };
   self.conectar = function(){
