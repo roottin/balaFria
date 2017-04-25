@@ -1,7 +1,9 @@
 var consUsuario = require('./usuario');
+var consAdmin = require('./admin');
 var Servidor = {};
 
 Servidor.usuarios=[];
+Servidor.admin=null;
 
 Servidor.buscarUsuario = function(id){
   var resultado = false;
@@ -20,9 +22,9 @@ Servidor.addUsuario = function(perfil,socket){
     console.warn('server.js - linea:22 - usuario ya esta conectado');
     return false;
   }else{
-    var nuevoUsuario = consUsuario.crear();
+    nuevoUsuario = consUsuario.crear();
     nuevoUsuario.crear(perfil).agregarConexion(socket);
-    this.usuarios.push(nuevoUsuario); 
+    this.usuarios.push(nuevoUsuario);
   }
   return nuevoUsuario;
 };
@@ -30,13 +32,23 @@ Servidor.addUsuario = function(perfil,socket){
 Servidor.removeUsuario = function(id){
   var yo = this;
   var usuario =  this.buscarUsuario(id);
-  if(!usuario){    
+  if(!usuario){
     console.warn('server.js - linea:35 - usuario no existe');
   }else{
     usuario.cerrarConexiones()
       .then(function(){
         yo.usuarios.splice(this.usuarios.indexOf(usuario),1);
       });
+  }
+};
+
+Servidor.addAdmin = function(perfil,socket){
+  if(Servidor.admin){
+    console.warn('server.js - linea:46 - administrador ya conectado');
+    return false;
+  }else{
+    Servidor.admin = consAdmin.crear();
+    Servidor.admin.crear(perfil).agregarConexion(socket);
   }
 };
 

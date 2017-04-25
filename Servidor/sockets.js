@@ -6,31 +6,44 @@ var plugAssembler = require('./plug');
 function init(app) {
 	var io = socketio(app);
 	io.use(function(socket, next){
+			var error;
 	    servidor.mostrarListaUsuarios();
-	    var usuario = servidor.buscarUsuario(socket.handshake.query.id);
-	    var error;
-	    if(!usuario){
-	    	error = new Error('Error de Autenticacion: Usuario no existe');
-	    	console.error(error);
-	    	next(error);
-	    }else{
-	    	if(!usuario.tokenKey == socket.handshake.query.tokenKey){
-	    		error = new Error('Error de Autenticacion: token no valida para usuario');
-	    		console.error(error);
-	    		next(error);
-	    	}else{
-	    		console.log("Usuario: "+usuario.perfil.nombre+" "+usuario.perfil.apellido+" autenticado");
-	    		if(!usuario.buscarConexion("ip",socket.conn.remoteAddress)){
-	    			usuario.agregarConexion(socket);
-	    			socket.emit('session',{"texto":"recuperada"});
-	    			return next();
-	    		}else{
-	    			console.log('conexion ya existe');
-	    			socket.emit('session',{"texto":"recuperada"});
-	    			return next();
-	    		}
-	    	}
-	    }
+			//verificacion usuario o admin
+			if(socket.handshake.query.admin){
+				if(servidor.admin.tokenKey == socket.handshake.query.tokenKey){
+					servidor.admin.agregarConexion(socket);
+					socket.emit('session',{"texto":"recuperada"});
+					return next();
+				}else{
+					error = new Error('Error de Autenticacion: token no valida para usuario');
+					console.error(error);
+					next(error);
+				}
+			}else{
+				var usuario = servidor.buscarUsuario(socket.handshake.query.id);
+		    if(!usuario){
+		    	error = new Error('Error de Autenticacion: Usuario no existe');
+		    	console.error(error);
+		    	next(error);
+		    }else{
+		    	if(usuario.tokenKey == socket.handshake.query.tokenKey){
+		    		error = new Error('Error de Autenticacion: token no valida para usuario');
+		    		console.error(error);
+		    		next(error);
+		    	}else{
+		    		console.log("Usuario: "+usuario.perfil.nombre+" "+usuario.perfil.apellido+" autenticado");
+		    		if(!usuario.buscarConexion("ip",socket.conn.remoteAddress)){
+		    			usuario.agregarConexion(socket);
+		    			socket.emit('session',{"texto":"recuperada"});
+		    			return next();
+		    		}else{
+		    			console.log('conexion ya existe');
+		    			socket.emit('session',{"texto":"recuperada"});
+		    			return next();
+		    		}
+		    	}
+		    }
+			}
 	});
 
 	io.sockets.on('connection',function(socket){

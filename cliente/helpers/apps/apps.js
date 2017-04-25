@@ -71,7 +71,7 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
           skipIfLoggedIn: skipIfLoggedIn
         }
       })
-    //proveedor
+    //-----------------------------------------proveedor--------------------------------------------------
     .state('proveedor',{
       url: '/proveedor',
       views:{
@@ -112,16 +112,28 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
           }
         }
       })
-    //admin
+    //-------------------------------------------admin-----------------------------------------------------
     .state('admin',{
       url: '/admin',
-      templateUrl: '/views/plantillas/admin/front.html',
-      controller: 'ctrlAdmin',
+      views:{
+        "@":{
+          templateUrl: '/views/plantillas/admin/front.html',
+          controller: 'ctrlAdmin',
+        },
+        "body@admin":{
+          templateUrl: '/views/plantillas/admin/login.html',
+          controller: 'ctrlAdminLog',
+        }
+      }
     })
       .state('admin.rubro',{
         url:'/rubros',
-        templateUrl: '/views/plantillas/admin/rubro.html',
-        controller: 'ctrlRubro as up',
+        views:{
+          "body@admin":{
+            templateUrl: '/views/plantillas/admin/rubro.html',
+            controller: 'ctrlRubro as up',
+          }
+        }
       });
     //------------------------ Tema -------------------------------------------------------
     $mdThemingProvider.theme('default')
