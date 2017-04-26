@@ -6,7 +6,6 @@ consUsuario.crear = function(){
 };
 var Usuario = function(){
 	var self = this;
-	self.tipo = "usuario";
 	self.conexiones = [];
 
 	self.crear =  function(perfil){

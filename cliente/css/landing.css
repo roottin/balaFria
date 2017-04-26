@@ -68,6 +68,101 @@ div.admin {
         div.admin div.form-log div.content-login section .md-raised:hover {
           background-color: #3f51b5 !important; }
 
+div.dash {
+  background: #505050;
+  min-height: 100%; }
+
+md-content[landing] header.adminPanel {
+  width: calc(100% - 20px);
+  background: white;
+  color: #f44336;
+  margin-top: 0 !important;
+  line-height: 60px;
+  padding-left: 20px;
+  font-size: 20px; }
+  md-content[landing] header.adminPanel div[hora] {
+    float: right;
+    margin-right: 40px;
+    font-size: 10px; }
+
+div.clientes, div.proveedores {
+  float: left;
+  background: #303030;
+  padding-bottom: 20px;
+  margin-left: 10px;
+  margin-top: 10px;
+  border-radius: 3px;
+  overflow: hidden;
+  min-width: calc(30% - 15px); }
+  div.clientes h3, div.proveedores h3 {
+    background: #3F51B5;
+    width: calc(100% - 40px);
+    margin: 0;
+    margin-bottom: 20px;
+    padding: 10px 20px; }
+    div.clientes h3 i, div.proveedores h3 i {
+      font-size: 32px;
+      transform: translateY(3px); }
+    div.clientes h3 div, div.proveedores h3 div {
+      display: inline-block;
+      transform: translateY(-5px); }
+  div.clientes div.display, div.proveedores div.display {
+    width: calc(100% - 10px);
+    height: auto;
+    display: flex;
+    align-content: space-between;
+    flex-wrap: wrap;
+    margin-right: 10px; }
+    div.clientes div.display div.widget, div.proveedores div.display div.widget {
+      width: calc(50% - 20px);
+      height: 100px;
+      border: 1px solid;
+      border-radius: 3px;
+      margin-left: 10px;
+      margin-bottom: 10px;
+      display: inline-block;
+      text-align: center;
+      flex-shrink: 0;
+      flex-grow: 1;
+      min-width: 25%; }
+      div.clientes div.display div.widget div.icon-left, div.proveedores div.display div.widget div.icon-left {
+        width: 40%;
+        height: 100px;
+        float: left;
+        margin: 0;
+        line-height: 140px;
+        border-right: 1px solid;
+        color: white; }
+        div.clientes div.display div.widget div.icon-left i, div.proveedores div.display div.widget div.icon-left i {
+          font-size: 50px; }
+      div.clientes div.display div.widget .conectado, div.proveedores div.display div.widget .conectado {
+        background: #4CAF50; }
+        div.clientes div.display div.widget .conectado + .descripcion, div.proveedores div.display div.widget .conectado + .descripcion {
+          color: #4CAF50; }
+      div.clientes div.display div.widget .registrado, div.proveedores div.display div.widget .registrado {
+        background: #2196F3; }
+        div.clientes div.display div.widget .registrado + .descripcion, div.proveedores div.display div.widget .registrado + .descripcion {
+          color: #2196F3; }
+      div.clientes div.display div.widget .activo, div.proveedores div.display div.widget .activo {
+        background: #FFC107; }
+        div.clientes div.display div.widget .activo + .descripcion, div.proveedores div.display div.widget .activo + .descripcion {
+          color: #FFC107; }
+      div.clientes div.display div.widget .inactivo, div.proveedores div.display div.widget .inactivo {
+        background: #607D8B; }
+        div.clientes div.display div.widget .inactivo + .descripcion, div.proveedores div.display div.widget .inactivo + .descripcion {
+          color: #607D8B; }
+      div.clientes div.display div.widget div.descripcion, div.proveedores div.display div.widget div.descripcion {
+        width: calc(60% - 1px);
+        height: 100px;
+        float: left;
+        margin: 0;
+        background: white;
+        color: grey;
+        font-size: 50px; }
+        div.clientes div.display div.widget div.descripcion h6, div.proveedores div.display div.widget div.descripcion h6 {
+          margin: 10px 0 10px 0;
+          font-size: 16px; }
+
 html, body {
   min-height: 100%; }
 
@@ -121,20 +216,20 @@ md-content[landing] {
     background: #009BDB; }
     md-content[landing] .md-primary.md-raised {
       background-color: #607D8B; }
-  md-content[landing] header {
+  md-content[landing] header.cliente {
     width: 100%;
     height: 60px;
     background-color: transparent;
     margin-top: -10px; }
-    md-content[landing] header i.material-icons {
+    md-content[landing] header.cliente i.material-icons {
       float: right;
       margin-top: 10px;
       padding: 15px;
       cursor: pointer;
       transition: all 0.3s ease-in-out; }
-      md-content[landing] header i.material-icons:hover {
+      md-content[landing] header.cliente i.material-icons:hover {
         background: #009BDB; }
-    md-content[landing] header div[titulo] {
+    md-content[landing] header.cliente div[titulo] {
       font-family: 'Bebas';
       font-size: 40px;
       margin-left: 30px;
@@ -142,22 +237,22 @@ md-content[landing] {
       color: white;
       position: relative;
       float: left; }
-    md-content[landing] header div[sociales] {
+    md-content[landing] header.cliente div[sociales] {
       float: right;
       width: 340px;
       height: 50%;
       position: relative;
       top: 20%; }
-      md-content[landing] header div[sociales] .md-raised {
+      md-content[landing] header.cliente div[sociales] .md-raised {
         background-color: rgba(0, 0, 0, 0.3) !important;
         color: white;
         border: 1px solid !important;
         box-shadow: none;
         top: -3px;
         float: right; }
-        md-content[landing] header div[sociales] .md-raised:hover span {
+        md-content[landing] header.cliente div[sociales] .md-raised:hover span {
           color: white; }
-      md-content[landing] header div[sociales] i {
+      md-content[landing] header.cliente div[sociales] i {
         color: white;
         border: 1px solid;
         width: 40px;
@@ -171,14 +266,14 @@ md-content[landing] {
         background-color: rgba(0, 0, 0, 0.3);
         z-index: 5;
         cursor: pointer; }
-        md-content[landing] header div[sociales] i div[tooltip] {
+        md-content[landing] header.cliente div[sociales] i div[tooltip] {
           margin-top: -15px;
           font-size: 12px;
           transition: all 0.2s ease-in-out;
           color: transparent;
           z-index: 3;
           width: 60px; }
-          md-content[landing] header div[sociales] i div[tooltip]:after {
+          md-content[landing] header.cliente div[sociales] i div[tooltip]:after {
             transition: inherit;
             content: '';
             background-color: transparent;
@@ -190,7 +285,7 @@ md-content[landing] {
             border-left: 10px solid transparent;
             border-top: 10px solid transparent;
             z-index: 3; }
-        md-content[landing] header div[sociales] i:hover div[tooltip] {
+        md-content[landing] header.cliente div[sociales] i:hover div[tooltip] {
           font-size: 12px;
           text-align: center;
           border: 1px solid silver;
@@ -201,7 +296,7 @@ md-content[landing] {
           margin-top: 10px;
           background-color: #009BDB;
           position: absolute; }
-          md-content[landing] header div[sociales] i:hover div[tooltip]:after {
+          md-content[landing] header.cliente div[sociales] i:hover div[tooltip]:after {
             border-bottom: 10px solid #009BDB; }
   md-content[landing] div[principal] {
     width: 100%;

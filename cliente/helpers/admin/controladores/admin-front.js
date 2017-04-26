@@ -18,6 +18,31 @@ angular.module('balafria')
       });
   };
 }])
-.controller('ctrlLandAdmin', ['$scope','$sesion', function ($scope,$sesion) {
+.controller('ctrlHora', ['$scope','$interval',function ($s,$i){
+  $s.fechaHora = new Date();
+}])
+.controller('ctrlLandAdmin', ['$http','$scope','$sesion','$adminPanel',function ($http,$scope,$sesion,$adminPanel) {
   $scope.usuario = $sesion.perfil;
+
+  $adminPanel.getClientes($http,$scope);
+  $adminPanel.getProveedores($http,$scope);
+
+  $sesion.on('notificacion',function(data){
+    switch (data.tipo) {
+      case "clientes":
+        switch (data.motivo) {
+          case 'registrados':
+            $scope.clientes.registrados = data.cantidad;
+            break;
+        }
+        break;
+      case "proveedores":
+        switch (data.motivo) {
+          case 'registrados':
+            $scope.proveedores.registrados = data.cantidad;
+            break;
+        }
+        break;
+    }
+  });
 }]);

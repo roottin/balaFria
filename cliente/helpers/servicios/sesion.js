@@ -1,7 +1,7 @@
 angular.module('balafria')
-.service('$sesion',function(){
+.service('$sesion',function($rootScope){
   var self = this;
-  self.perfil = {};
+  self.perfil = null;
   self.socket = null;
 
   self.crear = function(perfil,tipo){
@@ -28,6 +28,30 @@ angular.module('balafria')
       }
     });
     return self;
+  };
+  //control de socket
+  self.on = function (eventName, callback) {
+    if(self.socket){
+      self.socket.on(eventName, function () {
+        var args = arguments;
+        $rootScope.$apply(function () {
+          callback.apply(self.socket, args);
+        });
+      });
+
+    }
+  };
+  self.emit = function (eventName, data, callback) {
+    if(self.socket){
+      self.socket.emit(eventName, data, function () {
+        var args = arguments;
+        $rootScope.$apply(function () {
+          if (callback) {
+            callback.apply(self.socket, args);
+          }
+        });
+      });
+    }
   };
   self.desconectar = function(){
     self.socket.emit('session',{"texto":'cerrar'});

@@ -1,0 +1,114 @@
+div.dash{
+  background: rgba(80,80,80,1);
+  min-height: 100%;
+}
+md-content[landing] header.adminPanel{
+  width:  calc(100% - 20px);
+  background: white;
+  color: #f44336;
+  margin-top: 0 !important;
+  line-height: 60px;
+  padding-left: 20px;
+  font-size: 20px;
+  div[hora]{
+    float: right;
+    margin-right: 40px;
+    font-size: 10px;
+  }
+}
+div.clientes,div.proveedores{
+  float: left;
+  background: rgba(48,48,48,1);
+  padding-bottom: 20px;
+  margin-left: 10px;
+  margin-top: 10px;
+  border-radius: 3px;
+  overflow: hidden;
+  min-width: calc(30% - 15px);
+  h3{
+    background: #3F51B5;
+    width: calc(100% - 40px);
+    margin: 0;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    i{
+      font-size: 32px;
+      transform: translateY(3px);
+    }
+    div{
+      display: inline-block;
+      transform: translateY(-5px);
+    }
+  }
+  div.display{
+    width: calc(100% - 10px);
+    height: auto;
+    display: flex;
+    align-content: space-between;
+    flex-wrap: wrap;
+    margin-right: 10px;
+    div.widget{
+      width: calc(50% - 20px);
+      height: 100px;
+      border: 1px solid;
+      border-radius: 3px;
+      margin-left: 10px;
+      margin-bottom: 10px;
+      display: inline-block;
+      text-align: center;
+      flex-shrink: 0;
+      flex-grow: 1;
+      min-width: 25%;
+      div.icon-left{
+        width:40%;
+        height: 100px;
+        float: left;
+        margin: 0;
+        line-height: 140px;
+        border-right: 1px solid;
+        color: white;
+        i{
+          font-size: 50px;
+        }
+
+      }
+      .conectado{
+        background: #4CAF50;
+        &+.descripcion{
+          color:#4CAF50;
+        }
+      }
+      .registrado{
+        background: #2196F3;
+        &+.descripcion{
+          color:#2196F3;
+        }
+      }
+      .activo{
+        background: #FFC107;
+        &+.descripcion{
+          color:#FFC107;
+        }
+      }
+      .inactivo{
+        background: #607D8B;
+        &+.descripcion{
+          color:#607D8B;
+        }
+      }
+      div.descripcion{
+        width: calc(60% - 1px);
+        height: 100px;
+        float: left;
+        margin: 0;
+        background: white;
+        color: grey;
+        font-size: 50px;
+        h6{
+          margin: 10px 0 10px 0;
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}

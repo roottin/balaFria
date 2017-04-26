@@ -132,6 +132,10 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
           "body@admin":{
             templateUrl: '/views/plantillas/admin/landing.html',
             controller: 'ctrlLandAdmin',
+          },
+          "header@admin":{
+            templateUrl: '/views/plantillas/admin/headerIn.html',
+            controller: 'ctrlHora',
           }
         }
       })
@@ -141,6 +145,10 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
           "body@admin":{
             templateUrl: '/views/plantillas/admin/rubro.html',
             controller: 'ctrlRubro as up',
+          },
+          "header@admin":{
+            templateUrl: '/views/plantillas/admin/headerIn.html',
+            controller: 'ctrlHora',
           }
         }
       });

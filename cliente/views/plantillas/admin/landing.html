@@ -1,1 +1,66 @@
-<h2>Bienvenido {{usuario.nombre}}</h2>
+<div class="dash">
+  <div class="clientes">
+    <h3><i class="material-icons">account_circle</i> <div>Clientes</div></h3>
+    <div class="display">
+      <div class="widget">
+        <div class="icon-left conectado">
+          <i class="material-icons">cast_connected</i>
+        </div>
+        <div class="descripcion">
+          <h6>Conectados</h6>
+          {{clientes.conectados || 0}}
+        </div>
+      </div>
+      <div class="widget">
+        <div class="icon-left registrado">
+          <i class="material-icons ">group</i>
+        </div>
+        <div class="descripcion">
+          <h6>Registrados</h6>
+          {{clientes.registrados || 0}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="proveedores">
+    <h3><i class="material-icons">account_box</i> <div>Proveedores</div></h3>
+    <div class="display">
+      <div class="widget">
+        <div class="icon-left conectado">
+          <i class="material-icons">cast_connected</i>
+        </div>
+        <div class="descripcion">
+          <h6>Conectados</h6>
+          {{proveedores.conectados || 0}}
+        </div>
+      </div>
+      <div class="widget">
+        <div class="icon-left registrado">
+          <i class="material-icons ">group</i>
+        </div>
+        <div class="descripcion">
+          <h6>Registrados</h6>
+          {{proveedores.registrados || 0}}
+        </div>
+      </div>
+      <div class="widget">
+        <div class="icon-left activo">
+          <i class="material-icons ">brightness_7</i>
+        </div>
+        <div class="descripcion">
+          <h6>Activos</h6>
+          {{proveedores.activos || 0}}
+        </div>
+      </div>
+      <div class="widget">
+        <div class="icon-left inactivo">
+          <i class="material-icons ">brightness_3</i>
+        </div>
+        <div class="descripcion">
+          <h6>Inactivos</h6>
+          {{proveedores.inactivos || 0}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -41,7 +41,6 @@ Servidor.removeUsuario = function(id){
       });
   }
 };
-
 Servidor.addAdmin = function(perfil,socket){
   if(Servidor.admin){
     console.warn('server.js - linea:46 - administrador ya conectado');
@@ -59,5 +58,16 @@ Servidor.mostrarListaUsuarios = function(){
     console.log("conexiones: "+usuario.conexiones.length);
   });
   console.log('------------------------ Usuario Conectados-----------------------');
+};
+Servidor.get = function(tipo){
+  if(tipo == "cliente"||tipo=="proveedor"){
+    var usuarios = [];
+    this.usuarios.forEach(function(each){
+      if(tipo == each.perfil.tipo){
+        usuarios.push(each);
+      }
+    });
+    return usuarios;
+  }
 };
 module.exports=Servidor;

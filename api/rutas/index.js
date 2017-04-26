@@ -8,5 +8,6 @@ module.exports = function(app){
   require('./cliente')(app);
   require('./autenticar')(app);
   require('./autenticarAdmin')(app);
+  require('./adminPanel')(app);
   require('./rubro')(app);
 };

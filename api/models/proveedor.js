@@ -16,6 +16,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: true,
       unique: true
+    },
+    estado: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: "A"
     }
   }, {
     tableName: 'proveedor'
