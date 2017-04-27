@@ -7,7 +7,6 @@ module.exports = function(app){
   //rutas clientes
   require('./cliente')(app);
   require('./autenticar')(app);
-  require('./autenticarAdmin')(app);
   require('./adminPanel')(app);
   require('./rubro')(app);
 };

@@ -10,22 +10,39 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
       clientId: '163659061347-caaqel0ef9nid4nv79kamoofcvkche33.apps.googleusercontent.com'
     });
 
-  var skipIfLoggedIn = ['$q', '$auth', function($q, $auth) {
+  var loginRequired =function(tipo) {
+    if(tipo == "admin"){
+      return AdminLoggedRequired;
+    }else if(tipo == "proveedor"){
+      return ProveedorLoggedRequired;
+    }
+  };
+
+  var AdminLoggedRequired = ['$q', '$location', '$auth', function($q, $location, $auth) {
     var deferred = $q.defer();
-    if ($auth.isAuthenticated()) {
-      deferred.reject();
+    var storage = sessionStorage.getItem('balaFria_token');
+    if (storage !== null) {
+      if(JSON.parse(storage).tipo == "admin"){
+        deferred.resolve();
+      }else{
+        $location.path('/cliente');
+      }
     } else {
-      deferred.resolve();
+      $location.path('/cliente');
     }
     return deferred.promise;
   }];
-
-  var loginRequired = ['$q', '$location', '$auth', function($q, $location, $auth) {
+  var ProveedorLoggedRequired = ['$q', '$location', '$auth', function($q, $location, $auth) {
     var deferred = $q.defer();
-    if ($auth.isAuthenticated()) {
-      deferred.resolve();
+    var storage = sessionStorage.getItem('balaFria_token');
+    if (storage !== null) {
+      if(JSON.parse(storage).tipo == "proveedor"){
+        deferred.resolve();
+      }else{
+        $location.path('/cliente');
+      }
     } else {
-      $location.path('/Autenticar');
+      $location.path('/cliente');
     }
     return deferred.promise;
   }];
@@ -56,19 +73,13 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
         url: '/registro',
         templateUrl: '/views/plantillas/cliente/front-registro.html',
         controller: 'ctrlRegistro',
-        controllerAs: 'registro',
-        resolve: {
-          skipIfLoggedIn: skipIfLoggedIn
-        }
+        controllerAs: 'registro'
       })
       .state('frontPage.inicio', {
         url: '/Autenticar',
         templateUrl: '/views/plantillas/cliente/front-inicio.html',
         controller: 'ctrlInicio',
-        controllerAs: 'inicio',
-        resolve: {
-          skipIfLoggedIn: skipIfLoggedIn
-        }
+        controllerAs: 'inicio'
       })
     //-----------------------------------------proveedor--------------------------------------------------
     .state('proveedor',{
@@ -99,16 +110,22 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
         url:'/sucursal',
         views:{
           "body@proveedor":{
-            templateUrl: '/views/plantillas/proveedor/registro.html'
+            templateUrl: '/views/plantillas/proveedor/sucursal.html'
           }
+        },
+        resolve:{
+          loginRequired: ProveedorLoggedRequired
         }
       })
       .state('proveedor.horario',{
         url:'/horario',
         views:{
           "body@proveedor":{
-            templateUrl: '/views/plantillas/proveedor/registro.html'
+            templateUrl: '/views/plantillas/proveedor/horario.html'
           }
+        },
+        resolve:{
+          loginRequired:ProveedorLoggedRequired
         }
       })
     //-------------------------------------------admin-----------------------------------------------------
@@ -133,9 +150,11 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
             controller: 'ctrlLandAdmin',
           },
           "header@admin":{
-            templateUrl: '/views/plantillas/admin/headerIn.html',
-            controller: 'ctrlHora',
+            templateUrl: '/views/plantillas/admin/headerIn.html'
           }
+        },
+        resolve:{
+          loginRequired: AdminLoggedRequired
         }
       })
       .state('admin.rubro',{
@@ -146,9 +165,11 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
             controller: 'ctrlRubro as up',
           },
           "header@admin":{
-            templateUrl: '/views/plantillas/admin/headerIn.html',
-            controller: 'ctrlHora',
+            templateUrl: '/views/plantillas/admin/headerIn.html'
           }
+        },
+        resolve:{
+          loginRequired: AdminLoggedRequired
         }
       });
     //------------------------ Tema -------------------------------------------------------
@@ -163,7 +184,9 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
         var tokenName = config.tokenPrefix ? config.tokenPrefix + '_' + config.tokenName : config.tokenName;
         return {
           request: function(httpConfig) {
-            var token = localStorage.getItem(tokenName);
+            var token = sessionStorage.getItem(tokenName);
+            token = (token)?JSON.parse(token).token:'';
+            console.log(token);
             if (token && config.httpInterceptor) {
               token = config.authHeader === 'Authorization' ? 'Bearer ' + token : token;
               httpConfig.headers[config.authHeader] = token;

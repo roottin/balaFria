@@ -35,6 +35,7 @@ Servidor.removeUsuario = function(id){
   if(!usuario){
     console.warn('server.js - linea:35 - usuario no existe');
   }else{
+		yo.notificar("desconexion",usuario.perfil);
     usuario.cerrarConexiones()
       .then(function(){
         yo.usuarios.splice(this.usuarios.indexOf(usuario),1);
@@ -69,5 +70,16 @@ Servidor.get = function(tipo){
     });
     return usuarios;
   }
+  //control admin
+  Servidor.notificar = function(motivo,perfil){
+    if(this.admin){
+      if(this.admin.conexion.socket){
+          this.admin.conexion.socket.emit('notificacion',{
+            "motivo":motivo,
+            "tipo":perfil.tipo
+          });
+      }
+    }
+  };
 };
 module.exports=Servidor;

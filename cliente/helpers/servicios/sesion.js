@@ -7,6 +7,14 @@ angular.module('balafria')
   self.crear = function(perfil,tipo){
     self.perfil = perfil;
     self.perfil.tipo = tipo;
+    var storage = {
+      "token": perfil.token,
+      "nombre": perfil.nombre,
+      "tipo": tipo
+    };
+    //NOTE: guardando en el session storage
+    var tokenName = "balaFria_token";
+    sessionStorage.setItem(tokenName,JSON.stringify(storage));
     return self;
   };
   self.conectar = function(){
@@ -54,6 +62,7 @@ angular.module('balafria')
     }
   };
   self.desconectar = function(){
+    sessionStorage.clear();
     self.socket.emit('session',{"texto":'cerrar'});
   };
 });

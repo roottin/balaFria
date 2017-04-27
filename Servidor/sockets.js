@@ -35,6 +35,7 @@ function init(app) {
 		    	}else{
 		    		console.log("Usuario: "+usuario.perfil.nombre+" "+usuario.perfil.apellido+" autenticado");
 		    		if(!usuario.buscarConexion("ip",socket.conn.remoteAddress)){
+							servidor.notificar("conexion",usuario.perfil);
 		    			usuario.agregarConexion(socket);
 		    			socket.emit('session',{"texto":"recuperada"});
 		    			return next();
@@ -54,7 +55,17 @@ function init(app) {
 	    if(data.texto=='cerrar')
 	    {
 	      var Usuario = servidor.buscarUsuario(socket.handshake.query.id);
-	      Usuario.conexiones.splice(Usuario.conexiones.indexOf(Usuario.buscarConexion('socket',socket)),1);
+				if(Usuario){
+					Usuario.conexiones.splice(Usuario.conexiones.indexOf(Usuario.buscarConexion('socket',socket)),1);
+				}else if(servidor.admin){
+					if(servidor.admin.conexion){
+						if(servidor.admin.conexion.socket == socket){
+							//NOTE: desoneccion admin
+						  console.log('----ADMIN DESCONECTADO----');
+							servidor.admin = null;
+						}
+					}
+				}
 	      socket.emit('session',{texto:"cerrada"});
 	      socket.disconnect();
 	      console.log('session de: '+data.nombreusu+" cerrada");
@@ -102,7 +113,7 @@ function init(app) {
 		var plug;
 		if(usuario){
 			plug = usuario.buscarConexion('socket',socket);
-		}else{
+		}else if(servidor.admin){
 			plug = servidor.admin.conexion;
 		}
 		if(plug){

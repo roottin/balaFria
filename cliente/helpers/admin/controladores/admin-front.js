@@ -2,26 +2,24 @@ angular.module('balafria')
 .controller('ctrlAdmin', ['$scope','$state', function ($scope,$state) {
 
 }])
-.controller('ctrlAdminLog', ['$scope','$http','$state','$sesion', function ($scope,$http,$state,$sesion) {
+.controller('ctrlAdminLog', ['$scope','$http','$state','$sesion','$auth', function ($scope,$http,$state,$sesion,$auth) {
   $scope.login = function(){
-    $http.post('/api/autenticarAdmin',{
-      "usuario":$scope.usuario,
-      "clave":$scope.clave
-    })
-      .success(function(data,status){
-        if(data.success){
-          $sesion.crear(data.user,'admin').conectar();
+        $auth.login({
+            "nombre": $scope.usuario,
+            "clave": $scope.clave,
+            "tipo": "admin"
+        })
+        .then(function(response) {
+          $sesion.crear(response.data.user,'admin').conectar();
           $state.go('admin.landing');
-        }else{
-          alert('contraseña erronea');
-        }
-      });
-  };
+        })
+        .catch(function(response) {
+            // Si ha habido errores, llegaremos a esta función
+            console.error(new Error(response));
+        });
+    };
 }])
-.controller('ctrlHora', ['$scope','$interval',function ($s,$i){
-  $s.fechaHora = new Date();
-}])
-.controller('ctrlLandAdmin', ['$http','$scope','$sesion','$adminPanel',function ($http,$scope,$sesion,$adminPanel) {
+.controller('ctrlLandAdmin', ['$http','$scope','$sesion','$adminPanel','$auth','$location',function ($http,$scope,$sesion,$adminPanel,$auth,$location) {
   $scope.usuario = $sesion.perfil;
 
   $adminPanel.getClientes($http,$scope);
@@ -45,4 +43,14 @@ angular.module('balafria')
         break;
     }
   });
+  //cierre de sesion
+  $scope.logOut = function(){
+    console.log("entro");
+    $auth.logout()
+          .then(function() {
+              // Desconectamos al usuario y lo redirijimos
+              $sesion.desconectar();
+              $location.path("/admin");
+          });
+  };
 }]);
