@@ -37,8 +37,7 @@ module.exports = function(app){
   app.post('/api/rubros',upload, function(req, res) {
     models.rubro.create({
       nombre: req.body.nombre,
-      descripcion: req.body.descripcion,
-      color: req.body.color,
+      descripcion: req.body.descripcion
     }).then(function(rubro) {
       models.imagen.create({
         nombre: req.file.filename,

@@ -1,4 +1,5 @@
 <div class="dash">
+  <!--Panel Clientes -->
   <div class="clientes">
     <h3><i class="material-icons">account_circle</i> <div>Clientes</div></h3>
     <div class="display">
@@ -22,6 +23,7 @@
       </div>
     </div>
   </div>
+  <!--Panel Proveedores -->
   <div class="proveedores">
     <h3><i class="material-icons">account_box</i> <div>Proveedores</div></h3>
     <div class="display">
@@ -62,6 +64,17 @@
         </div>
       </div>
     </div>
+  </div>
+  <!-- rubro -->
+  <div lista>
+      <div categoria ng-repeat="rubro in rubros" >
+          <div nombre >{{rubro.nombre}}</div>
+          <img src="{{rubro.imagen_ruta}}" alt="">
+      </div>
+      <div categoria  ng-click='showAdvanced($event)'>
+          <div nombre >Agregar</div>
+
+      </div>
   </div>
   <div class="botonera">
     <md-button class="md-fab md-primary" ng-click="logOut();">

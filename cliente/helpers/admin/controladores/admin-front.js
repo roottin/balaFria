@@ -19,11 +19,27 @@ angular.module('balafria')
         });
     };
 }])
-.controller('ctrlLandAdmin', ['$http','$scope','$sesion','$adminPanel','$auth','$location',function ($http,$scope,$sesion,$adminPanel,$auth,$location) {
+.controller('ctrlLandAdmin', ['$http','$scope','$sesion','$adminPanel','$auth','$location','Rubros','$mdDialog',function ($http,$scope,$sesion,$adminPanel,$auth,$location,Rubros,$mdDialog) {
   $scope.usuario = $sesion.perfil;
 
   $adminPanel.getClientes($http,$scope);
   $adminPanel.getProveedores($http,$scope);
+
+  //Rubros
+  $scope.rubros = Rubros.query(function(){});
+  $scope.showAdvanced = function(ev) {
+      $mdDialog.show({
+        controller: 'ctrlRubro',
+        controllerAs:"up",
+        templateUrl: '/views/plantillas/admin/rubro.tmpl.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true,
+        fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+    }).then(function(){
+      $scope.rubros =  Rubros.query(function(){});
+    });
+  };
 
   $sesion.on('notificacion',function(data){
     switch (data.tipo) {

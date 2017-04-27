@@ -1,5 +1,6 @@
 angular
     .module("balafria")
+    .controller("DialogController", DialogController)
     .controller("ctrlRegistro", SignUpController)
     .controller("ctrlInicio", LoginController);
 
@@ -39,7 +40,7 @@ function LoginController($auth, $location,$scope,$sesion,$mdDialog) {
     };
     $scope.showAdvanced = function(ev) {
         $mdDialog.show({
-          controller: DialogController,
+          controller: 'DialogController',
           templateUrl: '/views/plantillas/cliente/inicio.tmpl.html',
           parent: angular.element(document.body),
           targetEvent: ev,
@@ -47,18 +48,17 @@ function LoginController($auth, $location,$scope,$sesion,$mdDialog) {
           fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
       });
     };
-
-    function DialogController($scope, $mdDialog) {
-      $scope.hide = function() {
+}
+function DialogController($scope, $mdDialog) {
+    $scope.hide = function() {
         $mdDialog.hide();
-      };
+    };
 
-      $scope.cancel = function() {
+    $scope.cancel = function() {
         $mdDialog.cancel();
-      };
+    };
 
-      $scope.answer = function(answer) {
+    $scope.answer = function(answer) {
         $mdDialog.hide(answer);
-      };
-    }
+    };
 }

@@ -1,5 +1,5 @@
 angular.module('balafria')
-.controller('ctrlRubro', ['Upload','$mdToast', function( Upload,$mdToast) {
+.controller('ctrlRubro', ['Upload','$mdToast','$mdDialog', function( Upload,$mdToast,$mdDialog) {
 
  var vm = this;
     vm.submit = function(){ //function to call on form submit
@@ -13,15 +13,10 @@ angular.module('balafria')
             data:{
               file:file,
               nombre:vm.nombre,
-              color:vm.color,
               descripcion:vm.descripcion
             }
         }).then(function (resp) { //upload function returns a promise
-            vm.nombre = "";
-            vm.descripcion = "";
-            vm.file = "";
-            vm.color = "";
-            $mdToast.showSimple('Hello');
+            $mdDialog.hide(resp);
         }, function (resp) { //catch error
             console.log('Error status: ' + resp.status);
             $window.alert('Error status: ' + resp.status);
@@ -31,5 +26,8 @@ angular.module('balafria')
             console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
             vm.progress = 'progress: ' + progressPercentage + '% '; // capture upload progress
         });
+    };
+    vm.hide = function() {
+        $mdDialog.hide();
     };
 }]);

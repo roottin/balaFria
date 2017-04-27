@@ -88,6 +88,48 @@ md-content[landing] header.adminPanel {
     margin-right: 40px;
     font-size: 10px; }
 
+md-dialog[aria-label="rubro"] button.md-raised {
+  width: calc(100% - 20px); }
+md-dialog[aria-label="rubro"] div[input-file] {
+  margin: 10px auto 10px; }
+
+.admin div[lista] {
+  float: left;
+  background: #303030;
+  padding-bottom: 20px;
+  margin-left: 10px;
+  margin-top: 10px;
+  border-radius: 3px;
+  overflow: hidden;
+  min-width: calc(100% - 15px); }
+  .admin div[lista] div[categoria] {
+    width: 148px;
+    height: 148px;
+    float: left;
+    border: 1px solid white;
+    position: relative; }
+    .admin div[lista] div[categoria] div[nombre] {
+      color: white;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+      background-color: rgba(0, 0, 0, 0.6);
+      text-align: center;
+      z-index: 2;
+      font-family: bebas;
+      display: flex;
+      align-content: space-between;
+      justify-content: center;
+      align-items: center;
+      font-size: 31px; }
+    .admin div[lista] div[categoria] img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+      z-index: 1; }
+
 div.clientes, div.proveedores {
   float: left;
   background: #303030;
