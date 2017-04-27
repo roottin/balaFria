@@ -1,7 +1,4 @@
 angular.module('balafria')
-.controller('ctrlFront', ['$scope','$state', function ($scope,$state) {
-  $state.go('frontPage.main');
-}])
 .controller('ctrlMap', ['$scope','Rubros', function ($scope,Rubros) {
   angular.extend($scope, {
         Acarigua: {
@@ -10,7 +7,9 @@ angular.module('balafria')
             zoom: 13
         }
     });
-  $scope.rubros = Rubros.query(function(){});
+  $scope.rubros = Rubros.query(function(){
+    console.log($scope.rubros);
+  });
   $scope.disponibles = [];
   $scope.openMenu = function($mdMenu, ev) {
     originatorEv = ev;

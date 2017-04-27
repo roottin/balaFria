@@ -45,14 +45,13 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
         "header@frontPage":{
           templateUrl:"/views/plantillas/cliente/headerLogOff.html",
           controller:'ctrlInicio'
+        },
+        "body@frontPage":{
+          templateUrl: '/views/plantillas/cliente/front-main.html',
+          controller: 'ctrlMap'
         }
       }
     })
-      .state('frontPage.main', {
-        url: '/main',
-        templateUrl: '/views/plantillas/cliente/front-main.html',
-        controller: 'ctrlMap'
-      })
       .state('frontPage.registro', {
         url: '/registro',
         templateUrl: '/views/plantillas/cliente/front-registro.html',
