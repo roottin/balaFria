@@ -114,7 +114,7 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
           }
         },
         resolve:{
-          loginRequired: ProveedorLoggedRequired
+          //loginRequired: ProveedorLoggedRequired
         }
       })
       .state('proveedor.horario',{
@@ -125,7 +125,7 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
           }
         },
         resolve:{
-          loginRequired:ProveedorLoggedRequired
+          //loginRequired:ProveedorLoggedRequired
         }
       })
     //-------------------------------------------admin-----------------------------------------------------

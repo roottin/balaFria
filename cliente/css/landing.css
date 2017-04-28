@@ -208,6 +208,57 @@ div.clientes, div.proveedores {
           margin: 10px 0 10px 0;
           font-size: 16px; }
 
+md-content[landing] div[registro][proovedor-full].inicio {
+  padding: 0px;
+  top: 20px;
+  width: 90%;
+  margin: 10px auto;
+  height: 600px;
+  background-image: url("/img/registro-prov2.jpg");
+  background-size: cover; }
+  md-content[landing] div[registro][proovedor-full].inicio div[izquierda-form] {
+    max-width: 400px;
+    background-color: #303030;
+    float: right;
+    width: calc(50% - 10px);
+    margin-top: 40px;
+    padding: 30px 10px 0px;
+    margin-right: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); }
+    md-content[landing] div[registro][proovedor-full].inicio div[izquierda-form] div[input-file] {
+      margin: 0px auto 60px; }
+    md-content[landing] div[registro][proovedor-full].inicio div[izquierda-form] button.md-raised {
+      width: calc(100% - 20px); }
+  md-content[landing] div[registro][proovedor-full].inicio div.vertical-divider {
+    float: right;
+    margin-right: 20px;
+    width: 1px;
+    background-color: white;
+    height: calc(100% - 20px);
+    margin-top: 10px;
+    z-index: 3; }
+  md-content[landing] div[registro][proovedor-full].inicio div[derecha-form] {
+    text-shadow: 1px 1px 1px black;
+    width: calc(50% - 1px);
+    height: calc(100% - 20px);
+    float: left;
+    padding: 10px 30px; }
+    md-content[landing] div[registro][proovedor-full].inicio div[derecha-form] h2 {
+      text-align: center;
+      margin-bottom: 40px; }
+    md-content[landing] div[registro][proovedor-full].inicio div[derecha-form] section {
+      margin: 20px 0px;
+      width: 100%; }
+      md-content[landing] div[registro][proovedor-full].inicio div[derecha-form] section div.texto {
+        float: left;
+        width: calc(100% - 80px); }
+      md-content[landing] div[registro][proovedor-full].inicio div[derecha-form] section button {
+        float: left; }
+
+div.clear {
+  width: 100%;
+  clear: both; }
+
 html, body {
   min-height: 100%; }
 

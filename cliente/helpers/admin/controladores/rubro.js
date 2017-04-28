@@ -9,7 +9,7 @@ angular.module('balafria')
     };
     vm.upload = function (file) {
         Upload.upload({
-            url: '/api/rubros', //webAPI exposed to upload the file
+            url: '/api/rubros',
             data:{
               file:file,
               nombre:vm.nombre,
