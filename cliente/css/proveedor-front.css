@@ -56,9 +56,20 @@ a:focus {
   background-size: cover;
   background-position: 50% 50%;
   background-repeat: no-repeat;
-  padding: 200px 0;
   color: #fff;
+
 }
+
+#main-slider .filter{
+  padding: 200px 0;
+  background-color: rgba(0,0,0,0.6);
+}
+
+#main-slider button{
+  border: 1px solid;
+}
+
+
 #main-slider .item {
   -moz-transition: opacity ease-in-out 500ms;
   -o-transition: opacity ease-in-out 500ms;
@@ -354,6 +365,46 @@ a:focus {
   background-color: #52b6ec;
   border-bottom-color: #52b6ec;
   margin: 0;
+}
+
+.servicio-anual .box .row .col-md-4{
+  padding: 0;
+  border-right: 1px solid #52b6ec;
+  border-top: 1px solid #52b6ec;
+}
+
+.servicio-anual .box .row .col-md-4:last-child{
+  border-right: none;
+}
+
+.servicio-anual .box .row .col-md-4 table{
+  width: 60%;
+  margin: 0 auto;
+  margin-top: -10px;
+}
+
+.servicio-anual .box .row .col-md-4 table tr:first-child{
+  color: #52b6ec !important;
+  border-bottom: 1px solid #52b6ec;
+  font-weight: bold;
+}
+.servicio-anual .box .row .col-md-4 table tr td:last-child{
+  border-right: none;
+}
+
+.servicio-anual .box .row .col-md-4 table tr td{
+  padding: 10px 0;
+  border-right: 1px solid #52b6ec;
+  text-align: center;
+  color: grey;
+}
+
+.servicio-anual .box .row h3{
+  text-align: center !important;
+  background: #52b6ec;
+  padding: 5px 0px;
+  margin-top: 0;
+  color: white;
 }
 #services .box {
   padding-bottom: 0;
