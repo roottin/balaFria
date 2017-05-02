@@ -54,7 +54,7 @@ a:focus {
   background-image: url(../img/slider-bg.jpg);
   background-attachment: fixed;
   background-size: cover;
-  background-position: 50% 50%;
+  background-position: 50% -33%;
   background-repeat: no-repeat;
   color: #fff;
 
@@ -393,7 +393,7 @@ a:focus {
 }
 
 .servicio-anual .box .row .col-md-4 table tr td{
-  padding: 10px 0;
+  padding: 20px 0;
   border-right: 1px solid #52b6ec;
   text-align: center;
   color: grey;
@@ -402,7 +402,7 @@ a:focus {
 .servicio-anual .box .row h3{
   text-align: center !important;
   background: #52b6ec;
-  padding: 5px 0px;
+  padding: 20px 0px;
   margin-top: 0;
   color: white;
 }
