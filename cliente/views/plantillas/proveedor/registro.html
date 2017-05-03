@@ -1,11 +1,11 @@
-<div class="inicio" registro proovedor-full   layout-wrap>
+<div class="inicio" registro proovedor-full   layout-wrap controller="ctrlRegistroProv as up">
 
    <div izquierda-form>
       <form name="up.upload_form">
        <file-input ng-model="up.file"></file-input>
        <md-input-container md-no-float class="md-block">
           <label>Nombre</label>
-          <input required name="nombre" minlength="5"  ng-model="up.nombre">
+          <input ng-required="true" name="nombre" minlength="5"  ng-model="up.nombre">
             <!-- mensajes  -->
           <div ng-messages="up.upload_form.nombre.$error" role="alert">
             <div ng-message="required">Este campo es requerido</div>
@@ -13,15 +13,15 @@
           </div>
        </md-input-container>
        <md-input-container md-no-float class="md-block">
-          <label>Descripcion</label>
-          <input required name="descripcion" minlength="5"  ng-model="up.descripcion">
+          <label>Email</label>
+          <input ng-required="true" name="email" type="email" minlength="5"  ng-model="up.email">
             <!-- mensajes  -->
           <div ng-messages="up.upload_form.descripcion.$error" role="alert">
             <div ng-message="required">Este campo es requerido</div>
             <div ng-message="minlength">Debe poseer al menos 10 carateres</div>
           </div>
        </md-input-container>
-           <md-button class="md-raised md-primary" type="submit" ng-click="up.submit()">Enviar</md-button>
+           <md-button ng-disabled="up.upload_form.$invalid" class="md-raised md-primary" type="submit" ng-click="up.submit()">{{up.textoBoton}}</md-button>
           <p>{{up.progress}}</p>
       </form>
    </div>

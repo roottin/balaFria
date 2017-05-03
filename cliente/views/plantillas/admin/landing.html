@@ -8,7 +8,6 @@
           <i class="material-icons">cast_connected</i>
         </div>
         <div class="descripcion">
-          <h6>Conectados</h6>
           {{clientes.conectados || 0}}
         </div>
       </div>
@@ -17,7 +16,6 @@
           <i class="material-icons ">group</i>
         </div>
         <div class="descripcion">
-          <h6>Registrados</h6>
           {{clientes.registrados || 0}}
         </div>
       </div>
@@ -32,7 +30,6 @@
           <i class="material-icons">cast_connected</i>
         </div>
         <div class="descripcion">
-          <h6>Conectados</h6>
           {{proveedores.conectados || 0}}
         </div>
       </div>
@@ -41,7 +38,6 @@
           <i class="material-icons ">group</i>
         </div>
         <div class="descripcion">
-          <h6>Registrados</h6>
           {{proveedores.registrados || 0}}
         </div>
       </div>
@@ -50,7 +46,6 @@
           <i class="material-icons ">brightness_7</i>
         </div>
         <div class="descripcion">
-          <h6>Activos</h6>
           {{proveedores.activos || 0}}
         </div>
       </div>
@@ -59,7 +54,6 @@
           <i class="material-icons ">brightness_3</i>
         </div>
         <div class="descripcion">
-          <h6>Inactivos</h6>
           {{proveedores.inactivos || 0}}
         </div>
       </div>
@@ -75,6 +69,25 @@
           <div nombre >Agregar</div>
 
       </div>
+  </div>
+  <!-- tipo de imagen -->
+  <div class="proveedores listas">
+    <h3>
+      <i class="material-icons">photo</i>
+      <div>Tipos de imagen</div>
+      <i class="material-icons" ng-click='showTipoImagen($event)'>add</i>
+    </h3>
+    <div class="display">
+      <md-list flex>
+        <md-list-item class="md-3-line" ng-repeat="tipoImagen in tipos_imagen" ng-click="null">
+          <i class="md-avatar material-icons">photo</i>
+          <div class="md-list-item-text" layout="column">
+            <h4>{{ tipoImagen.nombre }}</h4>
+            <p>{{ tipoImagen.descripcion }}</p>
+          </div>
+        </md-list-item>
+      </md-list>
+    </div>
   </div>
   <div class="botonera">
     <md-button class="md-fab md-primary" ng-click="logOut();">

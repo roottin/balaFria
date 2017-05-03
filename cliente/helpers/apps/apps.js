@@ -93,8 +93,9 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
           controller:'ctrlInicio'
         },
         "body@proveedor":{
-        templateUrl: '/views/plantillas/proveedor/frontPage.html',
-        controller: 'ctrlProveedor',
+          templateUrl: '/views/plantillas/proveedor/frontPage.html',
+          controller: 'ctrlProveedor',
+          controllerAs: 'up',
         }
       }
     })
@@ -186,7 +187,6 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
           request: function(httpConfig) {
             var token = sessionStorage.getItem(tokenName);
             token = (token)?JSON.parse(token).token:'';
-            console.log(token);
             if (token && config.httpInterceptor) {
               token = config.authHeader === 'Authorization' ? 'Bearer ' + token : token;
               httpConfig.headers[config.authHeader] = token;

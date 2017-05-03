@@ -19,7 +19,8 @@ angular.module('balafria')
         });
     };
 }])
-.controller('ctrlLandAdmin', ['$http','$scope','$sesion','$adminPanel','$auth','$location','Rubros','$mdDialog',function ($http,$scope,$sesion,$adminPanel,$auth,$location,Rubros,$mdDialog) {
+.controller('ctrlLandAdmin', ['$http','$scope','$sesion','$adminPanel','$auth','$location','Rubros','$mdDialog','TipoImagen',
+  function ($http,$scope,$sesion,$adminPanel,$auth,$location,Rubros,$mdDialog,TipoImagen) {
   $scope.usuario = $sesion.perfil;
 
   $adminPanel.getClientes($http,$scope);
@@ -27,6 +28,7 @@ angular.module('balafria')
 
   //Rubros
   $scope.rubros = Rubros.query(function(){});
+  $scope.tipos_imagen = TipoImagen.query(function(){});
   $scope.showAdvanced = function(ev) {
       $mdDialog.show({
         controller: 'ctrlRubro',
@@ -38,6 +40,20 @@ angular.module('balafria')
         fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
     }).then(function(){
       $scope.rubros =  Rubros.query(function(){});
+    });
+  };
+
+  $scope.showTipoImagen = function(ev) {
+      $mdDialog.show({
+        controller: 'ctrlTipoImagen',
+        controllerAs:"up",
+        templateUrl: '/views/plantillas/admin/tipoImagen.tmpl.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true,
+        fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+    }).then(function(){
+      $scope.tipos_imagen =  TipoImagen.query(function(){});
     });
   };
 

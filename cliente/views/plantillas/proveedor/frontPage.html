@@ -219,14 +219,14 @@
     <section>
       <div class="container">
           <div class="box box-registro">
-              <div class="inicio" registro proovedor-full   layout-wrap>
+              <div class="inicio" registro proovedor-full   layout-wrap >
 
                  <div izquierda-form>
                     <form name="up.upload_form">
                      <file-input ng-model="up.file"></file-input>
                      <md-input-container md-no-float class="md-block">
                         <label>Nombre</label>
-                        <input required name="nombre" minlength="5"  ng-model="up.nombre">
+                        <input ng-required="true" name="nombre" minlength="5"  ng-model="up.nombre">
                           <!-- mensajes  -->
                         <div ng-messages="up.upload_form.nombre.$error" role="alert">
                           <div ng-message="required">Este campo es requerido</div>
@@ -234,15 +234,46 @@
                         </div>
                      </md-input-container>
                      <md-input-container md-no-float class="md-block">
-                        <label>Descripcion</label>
-                        <input required name="descripcion" minlength="5"  ng-model="up.descripcion">
+                        <label>Documento (RIF)</label>
+                        <input ng-required="true" name="rif" type="text" minlength="5"  ng-model="up.rif" ng-pattern="/[V,G,J,P,E]{1}[0-9]{8}-[0-9]{1}/">
                           <!-- mensajes  -->
-                        <div ng-messages="up.upload_form.descripcion.$error" role="alert">
+                        <div ng-messages="up.upload_form.rif.$error" role="alert">
+                            <div ng-message="required">Este campo es requerido</div>
+                            <div ng-message="pattern">El campo debe poseer la sigueinte estructura:<br>
+                                                    *primer caracater debe se V,J,G,P,E<br>
+                                                    *los caracteres del 2 al 8 deben ser numericos<br>
+                                                    *seguido de un "-"<br>
+                                                    *ultimo caracter debe ser numerico
+                                                </div>
+                        </div>
+                     </md-input-container>
+                     <md-input-container md-no-float class="md-block">
+                        <label>Email</label>
+                        <input ng-required="true" name="email" type="email" minlength="5"  ng-model="up.email">
+                          <!-- mensajes  -->
+                        <div ng-messages="up.upload_form.email.$error" role="alert">
+                          <div ng-message="required">Este campo es requerido</div>
+                        </div>
+                     </md-input-container>
+                     <md-input-container md-no-float class="md-block">
+                        <label>Clave</label>
+                        <input ng-required="true" name="clave" type="password" minlength="10"  ng-model="up.clave">
+                          <!-- mensajes  -->
+                        <div ng-messages="up.upload_form.clave.$error" role="alert">
                           <div ng-message="required">Este campo es requerido</div>
                           <div ng-message="minlength">Debe poseer al menos 10 carateres</div>
                         </div>
                      </md-input-container>
-                         <md-button class="md-raised md-primary" type="submit" ng-click="up.submit()">Enviar</md-button>
+                     <md-input-container md-no-float class="md-block">
+                        <label>Reingrese Clave</label>
+                        <input ng-required="true" name="clave2" type="password" minlength="10"  ng-model="up.clave2">
+                          <!-- mensajes  -->
+                        <div ng-messages="up.upload_form.clave2.$error" role="alert">
+                          <div ng-message="required">Este campo es requerido</div>
+                          <div ng-message="minlength">Debe poseer al menos 10 carateres</div>
+                        </div>
+                     </md-input-container>
+                         <md-button ng-disabled="up.upload_form.$invalid" class="md-raised md-primary" type="submit" ng-click="up.submit()">{{up.textoBoton}}</md-button>
                         <p>{{up.progress}}</p>
                     </form>
                  </div>

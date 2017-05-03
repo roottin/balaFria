@@ -17,6 +17,15 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true,
       unique: true
     },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      unique: true
+    },
+    clave: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
     estado: {
       type: DataTypes.STRING,
       allowNull: false,

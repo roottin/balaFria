@@ -9,4 +9,5 @@ module.exports = function(app){
   require('./autenticar')(app);
   require('./adminPanel')(app);
   require('./rubro')(app);
+  require('./tipo_imagen')(app);
 };
