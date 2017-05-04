@@ -1,6 +1,6 @@
 angular
     .module("balafria")
-    .controller("DialogController", DialogController)
+    .controller("ctrlLogCliente", ctrlLogCliente)
     .controller("ctrlRegistro", SignUpController)
     .controller("ctrlInicio", LoginController);
 
@@ -40,7 +40,8 @@ function LoginController($auth, $location,$scope,$sesion,$mdDialog) {
     };
     $scope.showAdvanced = function(ev) {
         $mdDialog.show({
-          controller: 'DialogController',
+          controller: 'ctrlLogCliente',
+          controllerAs: 'log',
           templateUrl: '/views/plantillas/cliente/inicio.tmpl.html',
           parent: angular.element(document.body),
           targetEvent: ev,
@@ -49,16 +50,20 @@ function LoginController($auth, $location,$scope,$sesion,$mdDialog) {
       });
     };
 }
-function DialogController($scope, $mdDialog) {
-    $scope.hide = function() {
+function ctrlLogCliente( $mdDialog) {
+    var yo = this;
+    yo.registro = function(){
+        console.log(yo.cliente);
+    };
+    yo.hide = function() {
         $mdDialog.hide();
     };
 
-    $scope.cancel = function() {
+    yo.cancel = function() {
         $mdDialog.cancel();
     };
 
-    $scope.answer = function(answer) {
+    yo.answer = function(answer) {
         $mdDialog.hide(answer);
     };
 }

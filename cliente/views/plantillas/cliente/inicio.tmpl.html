@@ -39,27 +39,29 @@
       </md-tab>
       <md-tab label="Registrate">
          <md-content >
-            <div  registro layout="column" layout-sm="column"  layout-wrap>
+            <div  registro layout-padding layout="column" layout-sm="column"  layout-wrap>
               <md-input-container md-no-float class="md-block">
                 <label>Nombre</label>
-                <input ng-model="nombre">
+                <input ng-model="log.cliente.nombre">
               </md-input-container>
               <md-input-container md-no-float class="md-block">
                 <label>Apellido</label>
-                <input ng-model="apellido">
+                <input ng-model="log.cliente.apellido">
               </md-input-container>
               <md-input-container md-no-float class="md-block">
                 <label>Correo</label>
-                <input ng-model="correo">
+                <input type="email" ng-model="log.cliente.correo">
               </md-input-container>
-              <md-radio-group ng-model="sexo" layout="row">
-
-                  <md-radio-button value="M" >Hombre</md-radio-button>
-                  <md-radio-button value="F">Mujer</md-radio-button>
-
-                </md-radio-group>
+              <md-input-container md-no-float class="md-block">
+                <label>Clave</label>
+                <input type="password" ng-model="log.cliente.clave">
+              </md-input-container>
+              <md-input-container md-no-float class="md-block">
+                <label>Reingrese Clave</label>
+                <input type="password" ng-model="log.clave2">
+              </md-input-container>
               <section layout="row"  layout-align="center" >
-                <md-button class="md-raised md-primary">Enviar</md-button>
+                <md-button class="md-raised md-primary" ng-click="log.registro()">Enviar</md-button>
                 <md-button class="md-raised md-primary" ui-sref="frontPage.main">Volver</md-button>
               </section>
             </div>
