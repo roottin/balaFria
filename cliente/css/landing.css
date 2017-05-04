@@ -12,64 +12,66 @@ div[input-file] {
     height: 140px !important;
     cursor: pointer; }
 
-md-content[landing].admin div.botonera {
-  position: absolute;
-  bottom: 10px;
-  right: 10px; }
-md-content[landing].admin div[ui-view="body"] {
-  height: 100%;
+md-content[landing].admin {
   overflow: auto; }
-md-content[landing].admin div.admin {
-  background-color: #e2e2e2 !important;
-  width: 100%;
-  height: auto;
-  overflow: auto !important; }
-  md-content[landing].admin div.admin div.banner {
+  md-content[landing].admin div.botonera {
+    position: fixed;
+    bottom: 10px;
+    right: 10px; }
+  md-content[landing].admin div[ui-view="body"] {
+    height: 100%;
+    overflow: auto; }
+  md-content[landing].admin div.admin {
+    background-color: #e2e2e2 !important;
     width: 100%;
-    height: 400px;
-    position: relative; }
-    md-content[landing].admin div.admin div.banner img {
+    height: auto;
+    overflow: auto !important; }
+    md-content[landing].admin div.admin div.banner {
       width: 100%;
-      height: 100%; }
-  md-content[landing].admin div.admin div.form-log {
-    width: 600px;
-    height: 500px;
-    background: white;
-    margin: -135px auto 50px;
-    position: relative;
-    border-radius: 4px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
-    md-content[landing].admin div.admin div.form-log div.logo {
-      position: absolute;
-      top: -60px;
-      font-size: 30px;
-      font-weight: bold;
-      text-align: center;
-      width: 100%; }
-    md-content[landing].admin div.admin div.form-log div.content-login {
-      width: 100%;
-      height: auto;
-      padding: 20px 0 !important;
-      color: #056ef9;
-      text-align: center; }
-      md-content[landing].admin div.admin div.form-log div.content-login i {
-        font-size: 150px; }
-      md-content[landing].admin div.admin div.form-log div.content-login h2 {
-        margin: 0; }
-      md-content[landing].admin div.admin div.form-log div.content-login md-input-container {
-        margin: 20px 100px  40px 100px; }
-      md-content[landing].admin div.admin div.form-log div.content-login label {
-        text-align: left;
-        color: grey; }
-      md-content[landing].admin div.admin div.form-log div.content-login input {
-        border-color: grey;
-        color: #056ef9; }
-        md-content[landing].admin div.admin div.form-log div.content-login input:focus {
-          border-color: #056ef9; }
-      md-content[landing].admin div.admin div.form-log div.content-login section .md-raised {
-        background-color: #056ef9 !important; }
-        md-content[landing].admin div.admin div.form-log div.content-login section .md-raised:hover {
-          background-color: #3f51b5 !important; }
+      height: 400px;
+      position: relative; }
+      md-content[landing].admin div.admin div.banner img {
+        width: 100%;
+        height: 100%; }
+    md-content[landing].admin div.admin div.form-log {
+      width: 600px;
+      height: 500px;
+      background: white;
+      margin: -135px auto 50px;
+      position: relative;
+      border-radius: 4px;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
+      md-content[landing].admin div.admin div.form-log div.logo {
+        position: absolute;
+        top: -60px;
+        font-size: 30px;
+        font-weight: bold;
+        text-align: center;
+        width: 100%; }
+      md-content[landing].admin div.admin div.form-log div.content-login {
+        width: 100%;
+        height: auto;
+        padding: 20px 0 !important;
+        color: #056ef9;
+        text-align: center; }
+        md-content[landing].admin div.admin div.form-log div.content-login i {
+          font-size: 150px; }
+        md-content[landing].admin div.admin div.form-log div.content-login h2 {
+          margin: 0; }
+        md-content[landing].admin div.admin div.form-log div.content-login md-input-container {
+          margin: 20px 100px  40px 100px; }
+        md-content[landing].admin div.admin div.form-log div.content-login label {
+          text-align: left;
+          color: grey; }
+        md-content[landing].admin div.admin div.form-log div.content-login input {
+          border-color: grey;
+          color: #056ef9; }
+          md-content[landing].admin div.admin div.form-log div.content-login input:focus {
+            border-color: #056ef9; }
+        md-content[landing].admin div.admin div.form-log div.content-login section .md-raised {
+          background-color: #056ef9 !important; }
+          md-content[landing].admin div.admin div.form-log div.content-login section .md-raised:hover {
+            background-color: #3f51b5 !important; }
 
 div.dash {
   background: #505050;
@@ -82,7 +84,8 @@ md-content[landing] header.adminPanel {
   margin-top: 0 !important;
   line-height: 60px;
   padding-left: 20px;
-  font-size: 20px; }
+  font-size: 20px;
+  overflow: auto; }
   md-content[landing] header.adminPanel div[hora] {
     float: right;
     margin-right: 40px;

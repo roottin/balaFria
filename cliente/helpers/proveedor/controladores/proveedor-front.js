@@ -1,5 +1,5 @@
 angular.module('balafria')
-.controller('ctrlProveedor', ['$scope','$state','$mdDialog','Upload', function ($scope,$state,$mdDialog,Upload){
+.controller('ctrlProveedor', ['$scope','$state','$mdDialog','Upload','$sesion', function ($scope,$state,$mdDialog,Upload,$sesion){
   var yo = this;
   yo.textoBoton = "envialo";
   yo.submit = function(){ //function to call on form submit
@@ -24,20 +24,29 @@ angular.module('balafria')
            clave:yo.clave
          }
      }).then(function (resp) { //upload function returns a promise
-       $mdDialog.show({
-         templateUrl: '/views/plantillas/proveedor/registroExitoso.tmpl.html',
-         parent: angular.element(document.body),
-         clickOutsideToClose:true,
-         fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+       var user = {
+         "nombre":resp.data.nombre,
+         "documento":resp.data.documento,
+         "id":resp.data.id,
+         "email":resp.data.email,
+         "avatar":{
+           "id":resp.data.imagen.id,
+           "ruta":resp.data.imagen.ruta
+         }
+       };
+       $sesion.crear(user,'proveedor').conectar();
+       $state.go('proveedor.verificarCorreo');
      }, function (resp) { //catch error
          console.log('Error status: ' + resp.status);
-         $window.alert('Error status: ' + resp.status);
      }, function (evt) {
          console.log(evt);
          var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
          console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
          yo.progress = 'progress: ' + progressPercentage + '% '; // capture upload progress
      });
-   });
- };
+   };
+}])
+.controller('ctrlCorreo', ['$state','$sesion', function ($state,$sesion){
+  var yo = this;
+  yo.usuario = $sesion.perfil;
 }]);

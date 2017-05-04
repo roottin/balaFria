@@ -114,6 +114,7 @@ function init(app) {
 		if(usuario){
 			plug = usuario.buscarConexion('socket',socket);
 		}else if(servidor.admin){
+			usuario = servidor.admin;
 			plug = servidor.admin.conexion;
 		}
 		if(plug){

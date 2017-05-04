@@ -7,7 +7,9 @@ var env       = process.env.NODE_ENV || 'development';
 var config    = require(__dirname + '/../baseDatos/config.json')[env];
 var db        = {};
 
+var recrearBaseDeDatos;
 if (process.env.DATABASE_URL) {
+  recrearBaseDeDatos = true;
   var match = process.env.DATABASE_URL.match(/postgres:\/\/([^:]+):([^@]+)@([^:]+):(\d+)\/(.+)/);
 
   console.log('----------------------------------------');
@@ -24,6 +26,7 @@ if (process.env.DATABASE_URL) {
     }
   });
 } else {
+  recrearBaseDeDatos = true;
   console.log('----------------------------------------');
   console.log('Base de datos Local');
   console.log('----------------------------------------');
@@ -62,12 +65,12 @@ Object.keys(db).forEach(function(modelName) {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-db.sequelize.sync({force:false})
+db.sequelize.sync({force:recrearBaseDeDatos})
   .then(function(resultado){
     console.log('----------------------------------------');
     console.log('servidor de Base de Datos inicializado');
     console.log('----------------------------------------');
-    
+
   })
   .catch(function(err) {
     console.log('Server failed to start due to error: %s', err);

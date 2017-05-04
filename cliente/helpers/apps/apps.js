@@ -69,11 +69,11 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
         }
       }
     })
-      .state('frontPage.registro', {
-        url: '/registro',
-        templateUrl: '/views/plantillas/cliente/front-registro.html',
-        controller: 'ctrlRegistro',
-        controllerAs: 'registro'
+      .state('frontPage.verificarCorreo', {
+        url: '/correo',
+        templateUrl: '/views/plantillas/cliente/verificarCorreo.html',
+        controller: 'ctrlCorreo',
+        controllerAs: 'correo'
       })
       .state('frontPage.inicio', {
         url: '/Autenticar',
@@ -99,11 +99,11 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
         }
       }
     })
-      .state('proveedor.registro',{
+      .state('proveedor.verificarCorreo',{
         url:"/registro",
         views:{
           "body@proveedor":{
-            templateUrl: '/views/plantillas/proveedor/registro.html'
+            templateUrl: '/views/plantillas/proveedor/verificarCorreo.html'
           }
         }
       })

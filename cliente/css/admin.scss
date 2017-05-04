@@ -1,6 +1,7 @@
 md-content[landing].admin{
+  overflow: auto;
   div.botonera{
-    position: absolute;
+    position: fixed;
     bottom: 10px;
     right: 10px;
   }
