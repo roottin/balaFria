@@ -1,5 +1,5 @@
 angular.module('balafria')
-.controller('ctrlProveedor', ['$scope','$state','$mdDialog', function ($scope,$state,$mdDialog){
+.controller('ctrlProveedor', ['$scope','$state','$mdDialog','Upload', function ($scope,$state,$mdDialog,Upload){
   var yo = this;
   yo.textoBoton = "envialo";
   yo.submit = function(){ //function to call on form submit
@@ -19,7 +19,7 @@ angular.module('balafria')
          data:{
            file:file,
            nombre:yo.nombre,
-           documento:yo.documento,
+           documento:yo.rif,
            email:yo.email,
            clave:yo.clave
          }
@@ -27,7 +27,6 @@ angular.module('balafria')
        $mdDialog.show({
          templateUrl: '/views/plantillas/proveedor/registroExitoso.tmpl.html',
          parent: angular.element(document.body),
-         targetEvent: ev,
          clickOutsideToClose:true,
          fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
      }, function (resp) { //catch error

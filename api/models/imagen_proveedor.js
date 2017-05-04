@@ -14,8 +14,7 @@ module.exports = function(sequelize, DataTypes) {
       references: {
         model: 'tipo_imagen',
         key: 'id_tipo_imagen'
-      },
-      unique: true
+      }
     },
     id_proveedor: {
       type: DataTypes.INTEGER,

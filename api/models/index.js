@@ -24,13 +24,12 @@ if (process.env.DATABASE_URL) {
     }
   });
 } else {
-  var url = 'postgres://aabewftefmafkl:f405f64143e5997d8ed016e55bf6b95be5aece2247e2c2ca37c20fa91c63b89e@ec2-54-221-201-244.compute-1.amazonaws.com:5432/d9930ros0uu0lf';
   console.log('----------------------------------------');
-  console.log(url);
+  console.log('Base de datos Local');
   console.log('----------------------------------------');
-  /*
+
   var sequelize = new Sequelize(config.database, config.username, config.password, config);
-  */
+  /*
   var sequelize = new Sequelize(url, {
     dialect:  'postgres',
     protocol: 'postgres',
@@ -38,6 +37,7 @@ if (process.env.DATABASE_URL) {
         ssl: true
     }
   });
+    */
 
 }
 
@@ -62,9 +62,12 @@ Object.keys(db).forEach(function(modelName) {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-db.sequelize.sync({force:true})
+db.sequelize.sync({force:false})
   .then(function(resultado){
+    console.log('----------------------------------------');
     console.log('servidor de Base de Datos inicializado');
+    console.log('----------------------------------------');
+    
   })
   .catch(function(err) {
     console.log('Server failed to start due to error: %s', err);

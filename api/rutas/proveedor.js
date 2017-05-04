@@ -31,21 +31,22 @@ module.exports = function(app){
   });
   //guardar registro
   app.post('/api/proveedor',upload, function(req, res) {
+    var pass = crypto.createHmac('sha1',req.body.documento).update(req.body.clave).digest('hex');
     models.proveedor.create({
-      nombre: req.body.nombre,
-      email: req.body.email,
-      documento: req.body.documento,
-      descripcion: crypto.createHmac('sha1',req.body.documento).update(req.body.clave).digest('hex')
+      "nombre": req.body.nombre,
+      "email": req.body.email,
+      "documento": req.body.documento,
+      "clave": pass
     }).then(function(proveedor) {
       models.imagen.create({
-        nombre: req.file.filename,
-        ruta: req.file.path,
-        mimetype: req.file.mimetype
+        "nombre": req.file.filename,
+        "ruta": req.file.path,
+        "mimetype": req.file.mimetype
       }).then(function(imagen){
         models.imagen_proveedor.create({
-          id_proveedor:proveedor.id_proveedor,
-          id_imagen:imagen.id_imagen,
-          id_tipo_imagen:1
+          "id_proveedor":proveedor.id_proveedor,
+          "id_imagen":imagen.id_imagen,
+          "id_tipo_imagen":2 //id de avatar
         }).then(function(imagen_proveedor){
           proveedor.dataValues.imagen = imagen;
           res.json(proveedor);
