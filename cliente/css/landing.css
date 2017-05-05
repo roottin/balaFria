@@ -281,6 +281,124 @@ div.clear {
   width: 100%;
   clear: both; }
 
+.verde {
+  color: green !important; }
+
+.rojo {
+  color: red !important; }
+
+md-content[landing] {
+  background-color: #e2e2e2;
+  overflow: auto !important e; }
+
+div.container {
+  max-width: 98% !important; }
+  div.container div.row {
+    background-color: white;
+    text-align: center;
+    border-radius: 0px;
+    margin-bottom: 10px;
+    color: black;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
+    div.container div.row div.col-md-2 {
+      padding: 20px 0; }
+      div.container div.row div.col-md-2 h4 {
+        font-weight: bold;
+        font-size: 25px !important;
+        color: black; }
+      div.container div.row div.col-md-2 div {
+        color: silver; }
+        div.container div.row div.col-md-2 div:first-child {
+          font-size: 14px; }
+          div.container div.row div.col-md-2 div:first-child i {
+            font-size: 14px;
+            transform: translateY(2px); }
+        div.container div.row div.col-md-2 div:last-child {
+          font-size: 11px; }
+    div.container div.row:nth-child(2), div.container div.row:nth-child(4) {
+      background: transparent;
+      box-shadow: none; }
+      div.container div.row:nth-child(2) div.cont-trans, div.container div.row:nth-child(4) div.cont-trans {
+        margin-right: 10px;
+        width: calc((100% - 66%) - 16px);
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+        border-radius: 2px;
+        float: left;
+        background: white; }
+        div.container div.row:nth-child(2) div.cont-trans h4, div.container div.row:nth-child(4) div.cont-trans h4 {
+          background: white;
+          margin: 0;
+          padding: 15px;
+          border-bottom: 1px solid silver;
+          text-align: left;
+          font-size: 14px;
+          font-weight: bold;
+          color: grey; }
+        div.container div.row:nth-child(2) div.cont-trans:last-child, div.container div.row:nth-child(4) div.cont-trans:last-child {
+          margin-right: 0px; }
+        div.container div.row:nth-child(2) div.cont-trans ul, div.container div.row:nth-child(4) div.cont-trans ul {
+          width: 100%;
+          padding: 0;
+          margin: 0;
+          position: relative; }
+          div.container div.row:nth-child(2) div.cont-trans ul .md-button.md-fab, div.container div.row:nth-child(4) div.cont-trans ul .md-button.md-fab {
+            position: absolute;
+            top: -35px;
+            right: 20px;
+            background-color: #2196F3; }
+          div.container div.row:nth-child(2) div.cont-trans ul li, div.container div.row:nth-child(4) div.cont-trans ul li {
+            list-style: none;
+            width: 100%;
+            border-bottom: 1px solid silver;
+            margin: 0;
+            text-align: left;
+            text-indent: 10px;
+            padding: 0 10px 15px 10px;
+            color: grey; }
+            div.container div.row:nth-child(2) div.cont-trans ul li i, div.container div.row:nth-child(4) div.cont-trans ul li i {
+              background: #607D8B;
+              padding: 10px;
+              text-indent: 0;
+              border-radius: 100px;
+              transform: translateY(18px);
+              color: white; }
+            div.container div.row:nth-child(2) div.cont-trans ul li div.precio, div.container div.row:nth-child(4) div.cont-trans ul li div.precio {
+              margin-left: 50px; }
+    div.container div.row:nth-child(3) h4 {
+      text-align: left;
+      padding: 15px;
+      margin: 0;
+      color: grey;
+      font-weight: bold;
+      font-size: 14px; }
+    div.container div.row:nth-child(3) table {
+      width: 100%;
+      margin: 0 auto; }
+      div.container div.row:nth-child(3) table tr {
+        text-align: left;
+        border-bottom: 1px solid silver;
+        text-indent: 10px; }
+        div.container div.row:nth-child(3) table tr td {
+          padding: 10px 0;
+          color: grey; }
+          div.container div.row:nth-child(3) table tr td span {
+            padding: 10px;
+            color: white;
+            border-radius: 5px; }
+            div.container div.row:nth-child(3) table tr td span.progreso {
+              background: #03A9F4 !important; }
+            div.container div.row:nth-child(3) table tr td span.completado {
+              background: #4CAF50 !important; }
+            div.container div.row:nth-child(3) table tr td span.pendiente {
+              background: #FFC107 !important; }
+    div.container div.row:nth-child(3) div.paginacion {
+      width: 100%;
+      padding: 15px 0;
+      text-align: right;
+      color: grey; }
+      div.container div.row:nth-child(3) div.paginacion i {
+        transform: translateY(8px); }
+
 html, body {
   min-height: 100%; }
 
@@ -330,7 +448,6 @@ md-content[landing].cliente div[ui-view="body"] {
 
 md-content[landing] {
   background-size: cover;
-  overflow: hidden;
   width: 100%;
   height: 100%;
   position: relative; }
