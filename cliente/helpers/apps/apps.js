@@ -89,7 +89,7 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
           templateUrl: '/views/plantillas/proveedor/front.html',
         },
         "header@proveedor":{
-          templateUrl:"/views/plantillas/cliente/headerLogOff.html",
+          templateUrl:"/views/plantillas/proveedor/headerLogOff.html",
           controller:'ctrlInicio'
         },
         "body@proveedor":{
@@ -110,6 +110,10 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
       .state('proveedor.sucursal',{
         url:'/sucursal',
         views:{
+          "header@proveedor":{
+            templateUrl:"/views/plantillas/proveedor/headerLogIn.html",
+            controller:'ctrlInicio'
+          },
           "body@proveedor":{
             templateUrl: '/views/plantillas/proveedor/sucursal.html'
           }
