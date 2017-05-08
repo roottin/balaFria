@@ -54,7 +54,7 @@ a:focus {
   background-image: url(../img/slider-bg.jpg);
   background-attachment: fixed;
   background-size: cover;
-  background-position: 50% -33%;
+  background-position: 50% 0%;
   background-repeat: no-repeat;
   color: #fff;
 
