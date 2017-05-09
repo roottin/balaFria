@@ -3,40 +3,7 @@ angular
     .controller("ctrlLogCliente", ctrlLogCliente)
     .controller("ctrlInicio", LoginController);
 
-function SignUpController($auth, $location,$scope,$sesion) {
-    $scope.signup = function() {
-        $auth.signup({
-            nombre: $scope.email,
-            clave: $scope.password
-        })
-        .then(function(response) {
-            $location.path("/trabajos");
-        })
-        .catch(function(response) {
-            // Si ha habido errores, llegaremos a esta función
-            console.error(new Error("error de autenticacion"));
-        });
-    };
-}
-
-function LoginController($auth, $location,$scope,$sesion,$mdDialog) {
-    $scope.login = function(){
-        $auth.login({
-            nombre: $scope.nombre,
-            clave: $scope.clave
-        })
-        .then(function(response){
-            $sesion.crear(response.data,'proveedor').conectar();
-            $location.path("/trabajos");
-        })
-        .catch(function(response){
-            // Si ha habido errores llegamos a esta parte
-            console.error(new Error("error de autenticacion"));
-        });
-    };
-    $scope.authenticate = function(provider) {
-      $auth.authenticate(provider);
-    };
+function LoginController($auth, $state,$scope,$sesion,$mdDialog) {
     $scope.showAdvanced = function(ev) {
         $mdDialog.show({
           controller: 'ctrlLogCliente',
@@ -49,7 +16,7 @@ function LoginController($auth, $location,$scope,$sesion,$mdDialog) {
       });
     };
 }
-function ctrlLogCliente( $mdDialog,$http,$sesion,$state) {
+function ctrlLogCliente( $mdDialog,$http,$sesion,$state,$auth) {
     var yo = this;
     yo.registro = function(){
         $http.post('/api/cliente',yo.cliente)
@@ -64,8 +31,26 @@ function ctrlLogCliente( $mdDialog,$http,$sesion,$state) {
               "token":resp.data.token,
             };
             $sesion.crear(user,'cliente').conectar();
+            yo.hide();
             $state.go('frontPage.iniciado');
           });
+    };
+    yo.login = function(){
+        $auth.login({
+          field: yo.field,
+          clave: yo.clave
+        })
+        .then(function(response){
+            $sesion.crear(response.data,'cliente').conectar();
+            $state.go("frontPage.iniciado");
+        })
+        .catch(function(response){
+            // Si ha habido errores llegamos a esta parte
+            console.error(new Error("error de autenticacion"));
+        });
+    };
+    yo.authenticate = function(provider) {
+      $auth.authenticate(provider);
     };
     yo.hide = function() {
         $mdDialog.hide();

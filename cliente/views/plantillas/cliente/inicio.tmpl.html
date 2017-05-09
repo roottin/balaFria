@@ -11,10 +11,10 @@
    <md-tabs md-dynamic-height md-border-bottom>
       <md-tab label="Iniciar Sesion">
           <div class="inicio" layout-padding registro  layout="column" layout-sm="column"  layout-wrap>
-           <form name="formInicio" ng-submit="login()" method="post">
+           <form name="formInicio" method="post">
              <md-input-container md-no-float class="md-block">
                <label>Nombre o Email</label>
-               <input required name="nombre" minlength="5"  ng-model="nombre">
+               <input required name="nombre" minlength="5"  ng-model="log.field">
                  <!-- mensajes  -->
                <div ng-messages="formInicio.nombre.$error" role="alert">
                  <div ng-message="required">Este campo es requerido</div>
@@ -23,15 +23,15 @@
              </md-input-container>
              <md-input-container md-no-float class="md-block" name="clave">
                <label>Clave</label>
-               <input required type="password" ng-model="clave">
+               <input required type="password" ng-model="log.clave">
                <div ng-messages="formInicio.clave.$error" role="alert">
                  <div ng-message="required">Este campo es requerido</div>
                </div>
              </md-input-container>
              <section   layout-align="center" >
-               <button class="md-raised md-primary inicio" type="submit">Iniciar sesion</button>
+               <button class="md-raised md-primary inicio" ng-click="log.login()">Iniciar sesion</button>
                <div divider></div>
-               <button class="google inicio" type="button" ng-click="authenticate('google')"><i class="ion-social-google"></i> Sign in with Google</button>
+               <button class="google inicio" type="button" ng-click="log.authenticate('google')"><i class="ion-social-google"></i> Sign in with Google</button>
 
              </section>
            </form>
