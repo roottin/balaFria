@@ -59,7 +59,7 @@ angular.module('balafria')
           .then(function() {
               // Desconectamos al usuario y lo redirijimos
               $sesion.desconectar();
-              $location.path("/cliente");
+              $state.go("frontPage");
           });
   };
 }]);

@@ -50,7 +50,7 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
   //------------------------ Rutas ---------------------------------------------------
   $urlRouterProvider.otherwise('/cliente');
 
-  //cliente
+  //-----------------------------------------cliente
   $stateProvider
     .state('frontPage', {
       url: '/cliente',
@@ -69,17 +69,15 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
         }
       }
     })
-      .state('frontPage.verificarCorreo', {
-        url: '/correo',
-        templateUrl: '/views/plantillas/cliente/verificarCorreo.html',
-        controller: 'ctrlCorreo',
-        controllerAs: 'correo'
-      })
-      .state('frontPage.inicio', {
-        url: '/Autenticar',
-        templateUrl: '/views/plantillas/cliente/front-inicio.html',
-        controller: 'ctrlInicio',
-        controllerAs: 'inicio'
+      .state('frontPage.iniciado', {
+        url: '/usuario',
+        views:{
+          "header@frontPage":{
+            templateUrl:"/views/plantillas/cliente/headerLogIn.html",
+            controller:'ctrlHeaderCli',
+            controllerAs:'header'
+          }
+        }
       })
     //-----------------------------------------proveedor--------------------------------------------------
     .state('proveedor',{

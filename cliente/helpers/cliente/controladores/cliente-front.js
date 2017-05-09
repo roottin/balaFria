@@ -23,4 +23,16 @@ angular.module('balafria')
       $scope.disponibles.splice($scope.disponibles.indexOf($scope.rubros[$index]),1);
     }
   };
+}])
+.controller('ctrlHeaderCli', ['$state','$sesion','$auth', function ($state,$sesion,$auth){
+  var yo = this;
+  yo.usuario = $sesion.perfil;
+  yo.logOut = function(){
+    $auth.logout()
+          .then(function() {
+              // Desconectamos al usuario y lo redirijimos
+              $sesion.desconectar();
+              $state.go("frontPage");
+          });
+  };
 }]);

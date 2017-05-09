@@ -183,6 +183,7 @@ md-content[landing]{
       height: 100%;
       width: calc(100% - 301px);
       position: relative;
+      z-index: 1;
       md-toolbar{
         min-height: 48px !important;
         height: 48px !important;

@@ -1,7 +1,6 @@
 angular
     .module("balafria")
     .controller("ctrlLogCliente", ctrlLogCliente)
-    .controller("ctrlRegistro", SignUpController)
     .controller("ctrlInicio", LoginController);
 
 function SignUpController($auth, $location,$scope,$sesion) {
@@ -50,19 +49,30 @@ function LoginController($auth, $location,$scope,$sesion,$mdDialog) {
       });
     };
 }
-function ctrlLogCliente( $mdDialog) {
+function ctrlLogCliente( $mdDialog,$http,$sesion,$state) {
     var yo = this;
     yo.registro = function(){
-        console.log(yo.cliente);
+        $http.post('/api/cliente',yo.cliente)
+          .then(function(resp){
+            yo.hide();
+            var user = {
+              "nombre":resp.data.nombre,
+              "apellido":resp.data.apellido,
+              "documento":resp.data.documento,
+              "id":resp.data.id_cliente,
+              "email":resp.data.email,
+              "token":resp.data.token,
+            };
+            $sesion.crear(user,'cliente').conectar();
+            $state.go('frontPage.iniciado');
+          });
     };
     yo.hide = function() {
         $mdDialog.hide();
     };
-
     yo.cancel = function() {
         $mdDialog.cancel();
     };
-
     yo.answer = function(answer) {
         $mdDialog.hide(answer);
     };

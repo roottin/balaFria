@@ -449,7 +449,7 @@ header div[sociales] div[avatar] {
   header div[sociales] div[avatar]:hover div {
     transition: opacity 0.3s ease-in, box-shadow 0.7s ease-out, z-index 0.3s ease-out;
     box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
-    z-index: 1;
+    z-index: 2;
     opacity: 1; }
 
 div.contVerificacion {
@@ -468,7 +468,7 @@ div.contVerificacion {
     background: #3F51B5;
     color: white; }
   div.contVerificacion div.avatar {
-    width: 160px;
+    width: 200px;
     background-color: #303030;
     color: white;
     padding: 10px;
@@ -479,7 +479,12 @@ div.contVerificacion {
     div.contVerificacion div.avatar img {
       width: 140px;
       border-radius: 100px;
-      border: 2px solid; }
+      border: 2px solid;
+      margin-left: 20px; }
+    div.contVerificacion div.avatar h4 {
+      width: 100%;
+      margin: 15px 0px 0px;
+      text-align: center; }
   div.contVerificacion h4 {
     float: left;
     width: calc(50% - 20px);
@@ -630,7 +635,8 @@ md-content[landing] {
       float: left;
       height: 100%;
       width: calc(100% - 301px);
-      position: relative; }
+      position: relative;
+      z-index: 1; }
       md-content[landing] div[principal] div[mapa] md-toolbar {
         min-height: 48px !important;
         height: 48px !important; }

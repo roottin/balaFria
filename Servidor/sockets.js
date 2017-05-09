@@ -35,7 +35,6 @@ function init(app) {
 		    	}else{
 		    		console.log("Usuario: "+usuario.perfil.nombre+" "+usuario.perfil.apellido+" autenticado");
 		    		if(!usuario.buscarConexion("ip",socket.conn.remoteAddress)){
-							servidor.notificar("conexion",usuario.perfil);
 		    			usuario.agregarConexion(socket);
 		    			socket.emit('session',{"texto":"recuperada"});
 		    			return next();
