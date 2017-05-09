@@ -4,7 +4,7 @@ var fs = require('fs');
 var crypto = require('crypto');
 
 var servidor = require('../../Servidor/servidor');
-
+var service = require('../tokenAut');
 //-----------------------configuracion subida de archivos---------------
 //ruta por defecto para proveedor
 var ruta  = './storage/proveedor';
@@ -52,7 +52,19 @@ module.exports = function(app){
         }).then(function(imagen_proveedor){
           proveedor.dataValues.imagen = imagen;
           //creo la sesion del recien registrado
-          servidor.addUsuario(perfil);
+          var usuario = {
+            "nombre":proveedor.dataValues.nombre,
+            "documento":proveedor.dataValues.documento,
+            "id":proveedor.dataValues.id,
+            "email":proveedor.dataValues.email,
+            "avatar":{
+              "id":proveedor.dataValues.imagen.id,
+              "ruta":proveedor.dataValues.imagen.ruta
+            }
+          };
+          usuario.token = service.createToken(usuario);
+          proveedor.dataValues.token = usuario.token;
+          servidor.addUsuario(usuario);
           servidor.mostrarListaUsuarios();
           //mando la respuesta
           res.json(proveedor);

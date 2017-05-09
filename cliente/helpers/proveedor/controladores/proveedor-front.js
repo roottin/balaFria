@@ -29,6 +29,7 @@ angular.module('balafria')
          "documento":resp.data.documento,
          "id":resp.data.id,
          "email":resp.data.email,
+         "token":resp.data.token,
          "avatar":{
            "id":resp.data.imagen.id,
            "ruta":resp.data.imagen.ruta
