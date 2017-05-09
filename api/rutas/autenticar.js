@@ -1,13 +1,11 @@
 var service = require('../tokenAut');
+var models = require('../models/index');
 var servidor = require('../../Servidor/servidor');
 //uso de hilos de ejecucion
 var events  = require('events');
 var channel = new events.EventEmitter();
 
-channel.on('armarSesion', function(perfil){
-  servidor.addUsuario(perfil);
-  servidor.mostrarListaUsuarios();
-});
+
 channel.on('armarSesionAdmin', function(perfil){
   servidor.addAdmin(perfil);
   console.log('----ADMIN CONECTADO----');
@@ -17,35 +15,57 @@ module.exports = function(app){
   //guardar registro
   app.post('/api/autenticar/', function(req, res) {
     var admin = {"nombre":"admin","clave":"1234"};
-    var users = [{"id":1,"nombre":"matthew","clave":"1234"}];
     var usuario;
     if(req.body.tipo == "admin"){
       usuario = admin;
-    }else{
-      users.forEach(function(each){
-        if(each.nombre === req.body.nombre){
-          usuario = each;
-        }
-      });
-    }
-    if(usuario.clave === req.body.clave){
-      usuario.token = service.createToken(usuario);
-      if(req.body.tipo == "admin"){
+      if(usuario.clave === req.body.clave){
+        usuario.token = service.createToken(usuario);
         channel.emit('armarSesionAdmin',usuario);
+        return res
+            .status(200)
+            .send({
+              user:admin,
+              success:1
+            });
       }else{
-        channel.emit('armarSesion',usuario);
-      }
-      return res
+        return res
           .status(200)
           .send({
-            user:admin,
-            success:1
+            success:0
           });
+      }
     }else{
-      return res
-        .status(200)
-        .send({
-          success:0
+      models.cliente.findOne({
+        where:{
+          $or:[
+            {email:req.body.field},
+            {documento:req.body.field}
+          ]
+        }
+      })
+        .then(function(usuario){
+          if(usuario.clave === req.body.clave){
+            var usuario = {
+              "nombre":cliente.dataValues.nombre,
+              "documento":cliente.dataValues.documento,
+              "id":cliente.dataValues.id,
+              "email":cliente.dataValues.email
+            };
+            usuario.token = service.createToken(usuario);
+            cliente.dataValues.token = usuario.token;
+            return res
+                .status(200)
+                .send({
+                  user:usuario,
+                  success:1
+                });
+          }else{
+            return res
+              .status(200)
+              .send({
+                success:0
+              });
+          }
         });
     }
   });

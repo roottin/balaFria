@@ -67,7 +67,7 @@ function init(app) {
 				}
 	      socket.emit('session',{texto:"cerrada"});
 	      socket.disconnect();
-	      console.log('session de: '+data.nombreusu+" cerrada");
+	      console.log('session de: '+Usuario.perfil.nombre+" cerrada");
 	    }
 	    else if(data.texto=="recuperar")
 	    {
