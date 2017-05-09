@@ -102,8 +102,15 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
       .state('proveedor.verificarCorreo',{
         url:"/registro",
         views:{
+          "header@proveedor":{
+            templateUrl:"/views/plantillas/proveedor/headerLogIn.html",
+            controller:'ctrlHeaderPro',
+            controllerAs:'header'
+          },
           "body@proveedor":{
-            templateUrl: '/views/plantillas/proveedor/verificarCorreo.html'
+            templateUrl: '/views/plantillas/proveedor/verificarCorreo.html',
+            controller: 'ctrlCorreo',
+            controllerAs: 'correo'
           }
         }
       })
@@ -112,7 +119,8 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
         views:{
           "header@proveedor":{
             templateUrl:"/views/plantillas/proveedor/headerLogIn.html",
-            controller:'ctrlInicio'
+            controller:'ctrlHeaderPro',
+            controllerAs:'header'
           },
           "body@proveedor":{
             templateUrl: '/views/plantillas/proveedor/sucursal.html'

@@ -2,8 +2,10 @@ var models = require('../models/index');
 var fs = require('fs');
 //llamamos a crypto para encriptar la contraseña
 var crypto = require('crypto');
-//configuracion subida de archivos
 
+var servidor = require('../../Servidor/servidor');
+
+//-----------------------configuracion subida de archivos---------------
 //ruta por defecto para proveedor
 var ruta  = './storage/proveedor';
 
@@ -20,7 +22,7 @@ var upload = Multer({storage: Multer.diskStorage({
       callback(null, nombreArchivo);}
     })
 }).single('file');
-
+//------------------------configuracion subida de archivos ------------------
 var models = require('../models/index');
 module.exports = function(app){
   //obtener proveedores
@@ -49,6 +51,10 @@ module.exports = function(app){
           "id_tipo_imagen":2 //id de avatar
         }).then(function(imagen_proveedor){
           proveedor.dataValues.imagen = imagen;
+          //creo la sesion del recien registrado
+          servidor.addUsuario(perfil);
+          servidor.mostrarListaUsuarios();
+          //mando la respuesta
           res.json(proveedor);
         });
       });

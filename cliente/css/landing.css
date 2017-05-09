@@ -1,6 +1,6 @@
 div[input-file] {
   border: 1px solid silver;
-  width: 140px;
+  width: 160px;
   padding: 10px;
   margin-bottom: 10px; }
   div[input-file] input[type="file"] {
@@ -149,7 +149,7 @@ div.clientes, div.proveedores {
   width: calc((100% / 3) - 20px); }
   div.clientes h3, div.proveedores h3 {
     background: #3F51B5;
-    width: calc(100% - 40px);
+    width: calc(100%);
     margin: 0;
     margin-bottom: 20px;
     padding: 10px 20px; }
@@ -452,6 +452,39 @@ header div[sociales] div[avatar] {
     z-index: 1;
     opacity: 1; }
 
+div.contVerificacion {
+  width: 600px;
+  margin: 10px auto;
+  background-color: white;
+  padding: 0px 0px 20px;
+  color: #303030;
+  border-radius: 3px;
+  overflow: hidden; }
+  div.contVerificacion h1 {
+    margin: 0px auto;
+    width: 100%;
+    padding: 20px 0px;
+    text-align: center;
+    background: #3F51B5;
+    color: white; }
+  div.contVerificacion div.avatar {
+    width: 160px;
+    background-color: #303030;
+    color: white;
+    padding: 10px;
+    border-radius: 3px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    float: left;
+    margin: 10px calc(10%); }
+    div.contVerificacion div.avatar img {
+      width: 140px;
+      border-radius: 100px;
+      border: 2px solid; }
+  div.contVerificacion h4 {
+    float: left;
+    width: calc(50% - 20px);
+    margin-top: 30px; }
+
 html, body {
   min-height: 100%; }
 
@@ -486,7 +519,7 @@ md-checkbox div.md-container div.md-icon {
     [login] .inicio.google {
       background: #dd4b39; }
     [login] .inicio.md-raised {
-      background: #009BDB; }
+      background: #3F51B5; }
 
 div[divider] {
   margin: 10px 10px;
@@ -505,7 +538,7 @@ md-content[landing] {
   height: 100%;
   position: relative; }
   md-content[landing] .md-primary {
-    background: #009BDB; }
+    background: #3F51B5; }
     md-content[landing] .md-primary.md-raised {
       background-color: #607D8B; }
   md-content[landing] header.cliente {
@@ -520,7 +553,7 @@ md-content[landing] {
       cursor: pointer;
       transition: all 0.3s ease-in-out; }
       md-content[landing] header.cliente i.material-icons:hover {
-        background: #009BDB; }
+        background: #3F51B5; }
     md-content[landing] header.cliente div[titulo] {
       font-family: 'Bebas';
       font-size: 40px;
@@ -586,10 +619,10 @@ md-content[landing] {
           padding: 6px;
           border-radius: 3px;
           margin-top: 10px;
-          background-color: #009BDB;
+          background-color: #3F51B5;
           position: absolute; }
           md-content[landing] header.cliente div[sociales] i:hover div[tooltip]:after {
-            border-bottom: 10px solid #009BDB; }
+            border-bottom: 10px solid #3F51B5; }
   md-content[landing] div[principal] {
     width: 100%;
     height: calc(100% - 50px); }

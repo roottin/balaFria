@@ -49,4 +49,8 @@ angular.module('balafria')
 .controller('ctrlCorreo', ['$state','$sesion', function ($state,$sesion){
   var yo = this;
   yo.usuario = $sesion.perfil;
+}])
+.controller('ctrlHeaderPro', ['$state','$sesion', function ($state,$sesion){
+  var yo = this;
+  yo.usuario = $sesion.perfil;
 }]);
