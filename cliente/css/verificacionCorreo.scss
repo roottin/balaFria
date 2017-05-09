@@ -15,7 +15,7 @@ div.contVerificacion{
     color: white;
   }
   div.avatar{
-    width: 160px;
+    width: 200px;
     background-color: #303030;
     color: white;
     padding: 10px;
@@ -27,6 +27,12 @@ div.contVerificacion{
       width: 140px;
       border-radius: 100px;
       border: 2px solid;
+      margin-left: 20px;
+    }
+    h4{
+      width: 100%;
+      margin: 15px 0px 0px;
+      text-align: center;
     }
   }
   h4{

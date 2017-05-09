@@ -51,7 +51,15 @@ angular.module('balafria')
   var yo = this;
   yo.usuario = $sesion.perfil;
 }])
-.controller('ctrlHeaderPro', ['$state','$sesion', function ($state,$sesion){
+.controller('ctrlHeaderPro', ['$state','$sesion','$auth', function ($state,$sesion,$auth){
   var yo = this;
   yo.usuario = $sesion.perfil;
+  yo.logOut = function(){
+    $auth.logout()
+          .then(function() {
+              // Desconectamos al usuario y lo redirijimos
+              $sesion.desconectar();
+              $location.path("/cliente");
+          });
+  };
 }]);

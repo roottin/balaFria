@@ -77,12 +77,11 @@ angular.module('balafria')
   });
   //cierre de sesion
   $scope.logOut = function(){
-    console.log("entro");
     $auth.logout()
           .then(function() {
               // Desconectamos al usuario y lo redirijimos
               $sesion.desconectar();
-              $location.path("/admin");
+              $location.path("/cliente");
           });
   };
 }]);
