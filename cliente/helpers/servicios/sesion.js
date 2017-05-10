@@ -18,7 +18,7 @@ angular.module('balafria')
     return self;
   };
   self.conectar = function(){
-    self.socket = io.connect('http://localhost:3000',{
+    self.socket = io.connect('',{
       'transports': ['websocket', 'polling'],
       "query":"id="+self.perfil.id+
               "&tipo="+self.perfil.tipo+
