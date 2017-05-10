@@ -68,7 +68,7 @@ module.exports = function(app){
   });
   //guardar registro
   app.post('/api/proveedor',upload, function(req, res) {
-    var pass = crypto.createHmac('sha1',req.body.documento).update(req.body.clave).digest('hex');
+    var pass = crypto.createHmac('sha1',req.body.email).update(req.body.clave).digest('hex');
     models.proveedor.create({
       "nombre": req.body.nombre,
       "email": req.body.email,
@@ -145,5 +145,32 @@ module.exports = function(app){
     }).then(function(proveedor) {
       res.json(proveedor);
     });
+  });
+  app.get('/api/cliente/verificar',function(req,res){
+    models.cliente.findOne({
+      'where':{
+        'email':req.query.user
+      }
+    })
+      .then(function(cliente){
+        if (cliente == null) {
+          res.redirect('http://www.socaportuguesa.com');
+        }
+        let pass = crypto.createHmac('sha1',cliente.email).update(cliente.nombre).digest('hex');
+        if(pass == req.query.id){
+          models.cliente.update({
+            email_v: true
+          },{
+            where:{ id_cliente:cliente.dataValues.id_cliente},
+            returning:true,
+            plain:true
+          })
+            .then(function(result){
+              res.redirect('http://'+req.get('host')+'/#/proveedor/dashboard');
+            });
+        }else{
+          res.redirect('http://'+req.get('host')+'/errorVerificacion');
+        }
+      });
   });
 };

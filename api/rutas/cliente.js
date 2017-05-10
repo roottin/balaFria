@@ -21,7 +21,7 @@ channel.on('enviarEmail', function(data){
   let host = data.host;
   let perfil = data.perfil;
   let rand = crypto.createHmac('sha1',perfil.email).update(perfil.nombre).digest('hex');
-  let link = 'http://'+host+"/api/cliente/vericar?id="+rand+"&user="+perfil.email;
+  let link = 'http://'+host+"/api/cliente/verificar?user="+perfil.email+"&id="+rand;
   // setup email data with unicode symbols
   let mailOptions = {
       from: 'roottinca@gmail.com', // sender address
@@ -29,8 +29,8 @@ channel.on('enviarEmail', function(data){
       subject: 'Verificacion de Correo', // Subject line
       text: 'Hola '+perfil.nombre+' '+perfil.nombre+'te damos la bienvenida a la familia de Balafria. '+
             'presiona este link para verificar tu correo electronico', // plain text body
-      html: '<h2>Hola '+perfil.nombre+' '+perfil.nombre+'</h2><br><p>te damos la bienvenida a la familia de Balafria.</p><br> '+
-            'presiona este <a src="'+link+'">link</a> para verificar tu correo electronico<br>'+ // html body
+      html: '<h2>Hola '+perfil.nombre+' '+perfil.apellido+'</h2><br><p>te damos la bienvenida a la familia de Balafria.</p><br> '+
+            'presiona este <a src="'+link+'">enlace</a> para verificar tu correo electronico<br>'+ // html body
             'o copie este link en su omnibar: '+link // html body
   };
 
@@ -74,8 +74,30 @@ module.exports = function(app){
     });
   });
   app.get('/api/cliente/verificar',function(req,res){
-    //buscar usuario
-
-    //verificar si id es el mismo
+    models.cliente.findOne({
+      'where':{
+        'email':req.query.user
+      }
+    })
+      .then(function(cliente){
+        if (cliente == null) {
+          res.redirect('http://www.socaportuguesa.com');
+        }
+        let pass = crypto.createHmac('sha1',cliente.email).update(cliente.nombre).digest('hex');
+        if(pass == req.query.id){
+          models.cliente.update({
+            email_v: true
+          },{
+            where:{ id_cliente:cliente.dataValues.id_cliente},
+            returning:true,
+            plain:true
+          })
+            .then(function(result){
+              res.redirect('http://'+req.get('host')+'/#/cliente/usuario');
+            });
+        }else{
+          res.redirect('http://'+req.get('host')+'/errorVerificacion');
+        }
+      });
   });
 };

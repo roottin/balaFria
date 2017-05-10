@@ -62,6 +62,7 @@ function init(app) {
 							//NOTE: desoneccion admin
 						  console.log('----ADMIN DESCONECTADO----');
 							servidor.admin = null;
+							Usuario = {perfil:{nombre:"admin"}};
 						}
 					}
 				}

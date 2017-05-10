@@ -62,4 +62,21 @@ angular.module('balafria')
               $state.go("frontPage");
           });
   };
+}])
+.controller('ctrlLogPro', ['$scope','$http','$state','$sesion','$auth', function ($scope,$http,$state,$sesion,$auth) {
+  $scope.login = function(){
+        $auth.login({
+            "field": $scope.field,
+            "clave": $scope.clave,
+            "tipo": "proveedor"
+        })
+        .then(function(response) {
+          $sesion.crear(response.data.user,'proveedor').conectar();
+          $state.go('proveedor.dashboard');
+        })
+        .catch(function(response) {
+            // Si ha habido errores, llegaremos a esta función
+            console.error(new Error(response));
+        });
+    };
 }]);

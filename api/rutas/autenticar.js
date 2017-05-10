@@ -1,6 +1,7 @@
 var service = require('../tokenAut');
 var models = require('../models/index');
 var servidor = require('../../Servidor/servidor');
+var crypto = require('crypto');
 //uso de hilos de ejecucion
 var events  = require('events');
 var channel = new events.EventEmitter();
@@ -35,7 +36,7 @@ module.exports = function(app){
           });
       }
     }else{
-      models.cliente.findOne({
+      models[req.body.tipo].findOne({
         where:{
           $or:[
             {email:req.body.field},
@@ -43,16 +44,16 @@ module.exports = function(app){
           ]
         }
       })
-        .then(function(usuario){
-          if(usuario.clave === req.body.clave){
+        .then(function(registro){
+          var pass = crypto.createHmac('sha1',registro.dataValues.email).update(req.body.clave).digest('hex');
+          if(registro.dataValues.clave === pass){
             var usuario = {
-              "nombre":cliente.dataValues.nombre,
-              "documento":cliente.dataValues.documento,
-              "id":cliente.dataValues.id,
-              "email":cliente.dataValues.email
+              "nombre":registro.dataValues.nombre,
+              "documento":registro.dataValues.documento,
+              "id":registro.dataValues['id_'+req.body.tipo],
+              "email":registro.dataValues.email
             };
             usuario.token = service.createToken(usuario);
-            cliente.dataValues.token = usuario.token;
             return res
                 .status(200)
                 .send({

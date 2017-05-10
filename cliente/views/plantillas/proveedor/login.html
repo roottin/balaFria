@@ -1,0 +1,26 @@
+<div class="proveedor">
+  <div class="banner">
+    <img src="/img/banner.jpg">
+  </div>
+  <div class="form-log">
+    <div class="logo">
+      Panel de Control
+    </div>
+    <div class="content-login">
+      <i class="material-icons">account_circle</i>
+      <h2>Acceso</h2>
+
+      <md-input-container md-no-float class="md-block">
+        <label>Correo</label>
+        <input ng-model="field">
+      </md-input-container>
+      <md-input-container md-no-float class="md-block">
+        <label>Clave</label>
+        <input ng-model="clave" type="password">
+      </md-input-container>
+      <section layout="row"  layout-align="center" >
+        <md-button class="md-raised md-primary" ng-click="login();">Login</md-button>
+      </section>
+    </div>
+  </div>
+</div>

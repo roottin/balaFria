@@ -10,14 +10,6 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
       clientId: '163659061347-caaqel0ef9nid4nv79kamoofcvkche33.apps.googleusercontent.com'
     });
 
-  var loginRequired =function(tipo) {
-    if(tipo == "admin"){
-      return AdminLoggedRequired;
-    }else if(tipo == "proveedor"){
-      return ProveedorLoggedRequired;
-    }
-  };
-
   var AdminLoggedRequired = ['$q', '$location', '$auth', function($q, $location, $auth) {
     var deferred = $q.defer();
     var storage = sessionStorage.getItem('balaFria_token');
@@ -37,6 +29,20 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
     var storage = sessionStorage.getItem('balaFria_token');
     if (storage !== null) {
       if(JSON.parse(storage).tipo == "proveedor"){
+        deferred.resolve();
+      }else{
+        $location.path('/cliente');
+      }
+    } else {
+      $location.path('/cliente');
+    }
+    return deferred.promise;
+  }];
+  var clienteLoggedRequired = ['$q', '$location', '$auth', function($q, $location, $auth) {
+    var deferred = $q.defer();
+    var storage = sessionStorage.getItem('balaFria_token');
+    if (storage !== null) {
+      if(JSON.parse(storage).tipo == "cliente"){
         deferred.resolve();
       }else{
         $location.path('/cliente');
@@ -77,6 +83,9 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
             controller:'ctrlHeaderCli',
             controllerAs:'header'
           }
+        },
+        resolve:{
+          loginRequired: clienteLoggedRequired
         }
       })
     //-----------------------------------------proveedor--------------------------------------------------
@@ -98,7 +107,7 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
       }
     })
       .state('proveedor.verificarCorreo',{
-        url:"/registro",
+        url:"/correo",
         views:{
           "header@proveedor":{
             templateUrl:"/views/plantillas/proveedor/headerLogIn.html",
@@ -112,8 +121,17 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
           }
         }
       })
-      .state('proveedor.sucursal',{
-        url:'/sucursal',
+      .state('proveedor.logIn',{
+        url:"/login",
+        views:{
+          "body@proveedor":{
+            templateUrl: '/views/plantillas/proveedor/login.html',
+            controller: 'ctrlLogPro'
+          }
+        }
+      })
+      .state('proveedor.dashboard',{
+        url:'/dashboard',
         views:{
           "header@proveedor":{
             templateUrl:"/views/plantillas/proveedor/headerLogIn.html",
@@ -121,22 +139,11 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
             controllerAs:'header'
           },
           "body@proveedor":{
-            templateUrl: '/views/plantillas/proveedor/sucursal.html'
+            templateUrl: '/views/plantillas/proveedor/dashboard.html'
           }
         },
         resolve:{
-          //loginRequired: ProveedorLoggedRequired
-        }
-      })
-      .state('proveedor.horario',{
-        url:'/horario',
-        views:{
-          "body@proveedor":{
-            templateUrl: '/views/plantillas/proveedor/horario.html'
-          }
-        },
-        resolve:{
-          //loginRequired:ProveedorLoggedRequired
+          loginRequired: ProveedorLoggedRequired
         }
       })
     //-------------------------------------------admin-----------------------------------------------------

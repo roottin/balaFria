@@ -38,7 +38,8 @@ function ctrlLogCliente( $mdDialog,$http,$sesion,$state,$auth) {
     yo.login = function(){
         $auth.login({
           field: yo.field,
-          clave: yo.clave
+          clave: yo.clave,
+          tipo: "cliente"
         })
         .then(function(response){
             $sesion.crear(response.data,'cliente').conectar();

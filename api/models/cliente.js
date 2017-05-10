@@ -38,6 +38,11 @@ module.exports = function(sequelize, DataTypes) {
     clave: {
       type: DataTypes.STRING,
       allowNull: true
+    },
+    email_v: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
     }
   }, {
     tableName: 'cliente'
