@@ -42,6 +42,7 @@ function ctrlLogCliente( $mdDialog,$http,$sesion,$state,$auth) {
         })
         .then(function(response){
             $sesion.crear(response.data,'cliente').conectar();
+            yo.hide();
             $state.go("frontPage.iniciado");
         })
         .catch(function(response){

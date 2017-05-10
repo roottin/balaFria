@@ -5,6 +5,41 @@ var crypto = require('crypto');
 
 var servidor = require('../../Servidor/servidor');
 var service = require('../tokenAut');
+//----------------------------envio de correos------------------------------
+const nodemailer = require('nodemailer');
+//uso de hilos de ejecucion
+var events  = require('events');
+var channel = new events.EventEmitter();
+// create reusable transporter object using the default SMTP transport
+let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'roottinca@gmail.com',
+        pass: 'Nextbalafria'
+    }
+});
+
+channel.on('enviarEmail', function(perfil){
+  // setup email data with unicode symbols
+  let mailOptions = {
+      from: 'roottinca@gmail.com', // sender address
+      to: perfil.email, // list of receivers
+      subject: 'Verificacion de Correo', // Subject line
+      text: 'Hola '+perfil.nombre+' '+perfil.nombre+'te damos la bienvenida a la familia de Balafria. '+
+            'presiona este link para verificar tu correo electronico', // plain text body
+      html: '<h2>Hola '+perfil.nombre+' '+perfil.nombre+'</h2><br><p>te damos la bienvenida a la familia de Balafria.</p><br> '+
+            'presiona este link para verificar tu correo electronico' // html body
+  };
+
+  // send mail with defined transport object
+  transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+          return console.log(error);
+      }
+      console.log('Message %s sent: %s', info.messageId, info.response);
+  });
+});
+//----------------------------envio de correos------------------------------
 //-----------------------configuracion subida de archivos---------------
 //ruta por defecto para proveedor
 var ruta  = './storage/proveedor';
@@ -66,6 +101,7 @@ module.exports = function(app){
           proveedor.dataValues.token = usuario.token;
           servidor.addUsuario(usuario);
           servidor.mostrarListaUsuarios();
+          channel.emit('enviarEmail',usuario);
           //mando la respuesta
           res.json(proveedor);
         });

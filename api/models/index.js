@@ -26,7 +26,7 @@ if (process.env.DATABASE_URL) {
     }
   });
 } else {
-  recrearBaseDeDatos = false;
+  recrearBaseDeDatos = true;
   console.log('----------------------------------------');
   console.log('Base de datos Local');
   console.log('----------------------------------------');
