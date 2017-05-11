@@ -7,7 +7,6 @@ function init(app) {
 	var io = socketio(app);
 	io.use(function(socket, next){
 			var error;
-	    servidor.mostrarListaUsuarios();
 			//verificacion usuario o admin
 			if(socket.handshake.query.tipo == 'admin'){
 				if(servidor.admin){
@@ -37,6 +36,8 @@ function init(app) {
 		    		if(!usuario.buscarConexion("ip",socket.conn.remoteAddress)){
 		    			usuario.agregarConexion(socket);
 		    			socket.emit('session',{"texto":"recuperada"});
+							servidor.notificar("conexion",usuario.perfil);
+					    servidor.mostrarListaUsuarios();
 		    			return next();
 		    		}else{
 		    			console.log('conexion ya existe');
@@ -71,6 +72,7 @@ function init(app) {
 				}
 	      socket.emit('session',{texto:"cerrada"});
 	      socket.disconnect();
+				servidor.notificar("desconexion",Usuario.perfil);
 	      console.log('session de: '+Usuario.perfil.nombre+" cerrada");
 	    }
 	    else if(data.texto=="recuperar")

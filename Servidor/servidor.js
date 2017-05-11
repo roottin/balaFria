@@ -28,7 +28,18 @@ Servidor.addUsuario = function(perfil,socket){
   }
   return nuevoUsuario;
 };
-
+//control admin
+Servidor.notificar = function(motivo,perfil){
+  console.log('Disparo notificacion');
+  if(this.admin){
+    if(this.admin.conexion.socket){
+        this.admin.conexion.socket.emit('notificacion',{
+          "motivo":motivo,
+          "tipo":perfil.tipo
+        });
+    }
+  }
+};
 Servidor.removeUsuario = function(id){
   var yo = this;
   var usuario =  this.buscarUsuario(id);
@@ -71,16 +82,5 @@ Servidor.get = function(tipo){
     });
     return usuarios;
   }
-  //control admin
-  Servidor.notifica = function(motivo,perfil){
-    if(this.admin){
-      if(this.admin.conexion.socket){
-          this.admin.conexion.socket.emit('notificacion',{
-            "motivo":motivo,
-            "tipo":perfil.tipo
-          });
-      }
-    }
-  };
 };
 module.exports=Servidor;
