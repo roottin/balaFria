@@ -5,11 +5,11 @@ var Servidor = {};
 Servidor.usuarios=[];
 Servidor.admin=null;
 
-Servidor.buscarUsuario = function(id){
+Servidor.buscarUsuario = function(id,tipo){
   var resultado = false;
   if(this.usuarios.length){
     this.usuarios.forEach(function(usuario){
-      if(usuario.perfil.id == id){
+      if((usuario.perfil.id == id)&&(usuario.perfil.tipo == tipo)){
         resultado = usuario;
       }
     });

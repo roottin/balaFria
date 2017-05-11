@@ -22,7 +22,7 @@ function init(app) {
 					}
 				}
 			}else{
-				var usuario = servidor.buscarUsuario(socket.handshake.query.id);
+				var usuario = servidor.buscarUsuario(socket.handshake.query.id,socket.handshake.query.tipo);
 		    if(!usuario){
 		    	error = new Error('Error de Autenticacion: Usuario no existe');
 		    	console.error(error);
@@ -53,9 +53,12 @@ function init(app) {
 	  socket.on('session',function(data){
 	    if(data.texto=='cerrar')
 	    {
-	      var Usuario = servidor.buscarUsuario(socket.handshake.query.id);
+	      var Usuario = servidor.buscarUsuario(socket.handshake.query.id,socket.handshake.query.tipo);
 				if(Usuario){
 					Usuario.conexiones.splice(Usuario.conexiones.indexOf(Usuario.buscarConexion('socket',socket)),1);
+					if(!Usuario.conexiones){
+						servidor.removeUsuario(Usuario.perfil.id);
+					}
 				}else if(servidor.admin){
 					if(servidor.admin.conexion){
 						if(servidor.admin.conexion.socket == socket){
@@ -72,7 +75,7 @@ function init(app) {
 	    }
 	    else if(data.texto=="recuperar")
 	    {
-	      var usuario = servidor.buscarUsuario(socket.handshake.query.id);
+	      var usuario = servidor.buscarUsuario(socket.handshake.query.id,socket.handshake.query.tipo);
 	      var plug = usuario.buscarConexion('ip',socket.client.conn.remoteAddress);
 	      if(plug)
 	      {
@@ -109,7 +112,7 @@ function init(app) {
 		console.log('Connection Failed');
 	});
 	socket.on('disconnect',function(){
-		var usuario = servidor.buscarUsuario(socket.handshake.query.id);
+		var usuario = servidor.buscarUsuario(socket.handshake.query.id,socket.handshake.query.tipo);
 		var plug;
 		if(usuario){
 			plug = usuario.buscarConexion('socket',socket);

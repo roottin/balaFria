@@ -2,9 +2,8 @@
   <div lista>
       <div categoria ng-repeat="rubro in rubros" >
           <div nombre >{{rubro.nombre}}</div>
-          <img src="{{rubro.imagen_ruta}}" alt="">
+          <img ng-src="{{rubro.imagen_ruta || '#'}}" alt="">
       </div>
-
   </div>
   <div mapa >
     <md-toolbar class="md-hue-2">

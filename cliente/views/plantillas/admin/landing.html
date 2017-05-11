@@ -63,7 +63,7 @@
   <div lista>
       <div categoria ng-repeat="rubro in rubros" >
           <div nombre >{{rubro.nombre}}</div>
-          <img src="{{rubro.imagen_ruta}}" alt="">
+          <img ng-src="{{rubro.imagen_ruta}}" alt="">
       </div>
       <div categoria  ng-click='showAdvanced($event)'>
           <div nombre >Agregar</div>

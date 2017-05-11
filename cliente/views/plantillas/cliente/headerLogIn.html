@@ -4,7 +4,10 @@
   </div>
   <div sociales>
     <div avatar>
-      <img src="{{header.usuario.avatar.ruta || '/img/thumbnails/thumbnail.png'}}" alt="">
+      <img
+        src="{{header.usuario.avatar.ruta || '/img/thumbnails/thumbnail.png'}}" alt=""
+        ng-click="header.cambiarImagen($event)"
+      >
       <div opciones>
         <ul>
           <li>{{header.usuario.nombre}}</li>

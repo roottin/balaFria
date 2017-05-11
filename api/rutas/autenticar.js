@@ -36,30 +36,46 @@ module.exports = function(app){
           });
       }
     }else{
-      models[req.body.tipo].findOne({
-        where:{
-          $or:[
-            {email:req.body.field},
-            {documento:req.body.field}
-          ]
-        }
-      })
+      models.sequelize.query('SELECT r.*,i.id_imagen,i.ruta as imagen_ruta FROM '+req.body.tipo+' r '+
+                      ' left join imagen_'+req.body.tipo+' ir on r.id_'+req.body.tipo+' = ir.id_'+req.body.tipo+' AND ir.estado = '+"'A'"+
+                      ' left join imagen i on ir.id_imagen = i.id_imagen  '+
+                      " where r.documento ='"+req.body.field+"' or r.email ='"+req.body.field+"'",
+        { model:models[req.body.tipo]}
+      )
         .then(function(registro){
-          var pass = crypto.createHmac('sha1',registro.dataValues.email).update(req.body.clave).digest('hex');
-          if(registro.dataValues.clave === pass){
-            var usuario = {
-              "nombre":registro.dataValues.nombre,
-              "documento":registro.dataValues.documento,
-              "id":registro.dataValues['id_'+req.body.tipo],
-              "email":registro.dataValues.email
-            };
-            usuario.token = service.createToken(usuario);
-            return res
+          if(registro){
+            registro = registro[0];
+            var pass = crypto.createHmac('sha1',registro.dataValues.email).update(req.body.clave).digest('hex');
+            if(registro.dataValues.clave === pass){
+              var usuario = {
+                "nombre":registro.dataValues.nombre,
+                "documento":registro.dataValues.documento,
+                "id":registro.dataValues['id_'+req.body.tipo],
+                "email":registro.dataValues.email,
+                "tipo":req.body.tipo
+              };
+              if(registro.dataValues.id_imagen){
+                usuario.avatar={
+                  "id":registro.dataValues.id_imagen,
+                  "ruta":registro.dataValues.imagen_ruta
+                }
+              }
+              usuario.token = service.createToken(usuario);
+              servidor.addUsuario(usuario);
+              servidor.mostrarListaUsuarios();
+              return res
+                  .status(200)
+                  .send({
+                    user:usuario,
+                    success:1
+                  });
+            }else{
+              return res
                 .status(200)
                 .send({
-                  user:usuario,
-                  success:1
+                  success:0
                 });
+            }
           }else{
             return res
               .status(200)

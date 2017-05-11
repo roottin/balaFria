@@ -450,6 +450,17 @@ div.container {
       div.container div.row:nth-child(3) div.paginacion i {
         transform: translateY(8px); }
 
+md-dialog[avatar-upload] div[input-file] {
+  width: 140px;
+  height: 140px;
+  padding: 0px;
+  border-radius: 100px;
+  margin: 20px auto;
+  overflow: hidden;
+  border: 2px solid; }
+md-dialog[avatar-upload] button {
+  width: calc(100% - 16px); }
+
 header div[sociales] div[avatar] {
   width: 50px;
   height: 50px;

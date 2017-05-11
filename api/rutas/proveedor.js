@@ -5,11 +5,25 @@ var crypto = require('crypto');
 
 var servidor = require('../../Servidor/servidor');
 var service = require('../tokenAut');
-//----------------------------envio de correos------------------------------
-const nodemailer = require('nodemailer');
+
 //uso de hilos de ejecucion
 var events  = require('events');
 var channel = new events.EventEmitter();
+channel.on('inactivarImagenes',function(cambios){
+  models.sequelize.query("update imagen_proveedor set estado = 'I'"+
+                          " where id <> '"+cambios.registro.dataValues.id+"'")
+    .then(function(resultado){
+      console.log('inactivar imaneges');
+      console.log(resultado);
+      console.log('##########################################');
+    }).catch(function(err){
+      console.log('inactivar imaneges');
+      console.log(err);
+      console.log('##########################################');
+    });
+});
+//----------------------------envio de correos------------------------------
+const nodemailer = require('nodemailer');
 // create reusable transporter object using the default SMTP transport
 let transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -19,7 +33,11 @@ let transporter = nodemailer.createTransport({
     }
 });
 
-channel.on('enviarEmail', function(perfil){
+channel.on('enviarEmail', function(data){
+  let host = data.host;
+  let perfil = data.perfil;
+  let rand = crypto.createHmac('sha1',perfil.email).update(perfil.nombre).digest('hex');
+  let link = 'http://'+host+"/api/cliente/verificar?user="+perfil.email+"&id="+rand;
   // setup email data with unicode symbols
   let mailOptions = {
       from: 'roottinca@gmail.com', // sender address
@@ -92,6 +110,7 @@ module.exports = function(app){
             "documento":proveedor.dataValues.documento,
             "id":proveedor.dataValues.id,
             "email":proveedor.dataValues.email,
+            "tipo":"proveedor",
             "avatar":{
               "id":proveedor.dataValues.imagen.id,
               "ruta":proveedor.dataValues.imagen.ruta
@@ -101,7 +120,10 @@ module.exports = function(app){
           proveedor.dataValues.token = usuario.token;
           servidor.addUsuario(usuario);
           servidor.mostrarListaUsuarios();
-          channel.emit('enviarEmail',usuario);
+          channel.emit('enviarEmail',{
+            perfil:usuario,
+            host:req.get('host')
+          });
           //mando la respuesta
           res.json(proveedor);
         });
@@ -154,7 +176,7 @@ module.exports = function(app){
     })
       .then(function(cliente){
         if (cliente == null) {
-          res.redirect('http://www.socaportuguesa.com');
+          res.redirect('http://'+req.get('host')+'/errorVerificacion');
         }
         let pass = crypto.createHmac('sha1',cliente.email).update(cliente.nombre).digest('hex');
         if(pass == req.query.id){

@@ -17,7 +17,19 @@ angular.module('balafria')
     sessionStorage.setItem(tokenName,JSON.stringify(storage));
     return self;
   };
+  self.actualizarDatos = function($http){
+    return new Promise(function(completada,rechazada){
+      $http.get('/api/'+self.perfil.tipo+'/'+self.usuario.id)
+        .then(function(resultado){
+          console.log(resultado);
+        })
+        .catch(function(err){
+          console.error(new Error(err));
+        })
+    });
+  }
   self.conectar = function(){
+    console.log(self.perfil);
     self.socket = io.connect('',{
       'transports': ['websocket', 'polling'],
       "query":"id="+self.perfil.id+

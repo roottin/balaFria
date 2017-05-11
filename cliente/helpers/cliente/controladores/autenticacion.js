@@ -42,7 +42,7 @@ function ctrlLogCliente( $mdDialog,$http,$sesion,$state,$auth) {
           tipo: "cliente"
         })
         .then(function(response){
-            $sesion.crear(response.data,'cliente').conectar();
+            $sesion.crear(response.data.user,'cliente').conectar();
             yo.hide();
             $state.go("frontPage.iniciado");
         })
@@ -51,6 +51,10 @@ function ctrlLogCliente( $mdDialog,$http,$sesion,$state,$auth) {
             console.error(new Error("error de autenticacion"));
         });
     };
+    yo.redirect = function(){
+      $state.go('proveedor');
+      yo.hide();
+    }
     yo.authenticate = function(provider) {
       $auth.authenticate(provider);
     };
