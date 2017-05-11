@@ -18,7 +18,8 @@ module.exports = function(app){
         .status(200)
         .send({
           "clientes":{
-            "conectados":conectados.length
+            "conectados":conectados.length,
+            "usuarios":conectados
           },
           success:1
         });
@@ -37,7 +38,8 @@ module.exports = function(app){
         .status(200)
         .send({
           "proveedores":{
-            "conectados":conectados.length
+            "conectados":conectados.length,
+            "usuarios":conectados
           },
           success:1
         });

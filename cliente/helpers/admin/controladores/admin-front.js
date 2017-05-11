@@ -22,7 +22,8 @@ angular.module('balafria')
 .controller('ctrlLandAdmin', ['$http','$scope','$sesion','$adminPanel','$auth','$location','Rubros','$mdDialog','TipoImagen',
   function ($http,$scope,$sesion,$adminPanel,$auth,$location,Rubros,$mdDialog,TipoImagen) {
   $scope.usuario = $sesion.perfil;
-
+  $scope.clientes.usuarios = [];
+  $scope.proveedores.usuarios = [];
   $adminPanel.getClientes($http,$scope);
   $adminPanel.getProveedores($http,$scope);
 
@@ -59,17 +60,29 @@ angular.module('balafria')
 
   $sesion.on('notificacion',function(data){
     switch (data.tipo) {
-      case "clientes":
+      case "cliente":
         switch (data.motivo) {
           case 'registrados':
             $scope.clientes.registrados = data.cantidad;
             break;
+          case 'conexion':
+            $scope.clientes.usuarios.push(data.perfil);
+            break;
+          case 'desconexion':
+            $scope.clientes.usuarios.splice($scope.clientes.usuarios.indexOf(data.perfil),1);
+            break;
         }
         break;
-      case "proveedores":
+      case "proveedor":
         switch (data.motivo) {
           case 'registrados':
             $scope.proveedores.registrados = data.cantidad;
+            break;
+          case 'conexion':
+            $scope.proveedores.usuarios.push(data.perfil);
+            break;
+          case 'desconexion':
+            $scope.proveedores.usuarios.splice($scope.proveedores.usuarios.indexOf(data.perfil),1);
             break;
         }
         break;

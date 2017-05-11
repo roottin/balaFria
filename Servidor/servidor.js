@@ -35,7 +35,8 @@ Servidor.notificar = function(motivo,perfil){
     if(this.admin.conexion.socket){
         this.admin.conexion.socket.emit('notificacion',{
           "motivo":motivo,
-          "tipo":perfil.tipo
+          "tipo":perfil.tipo,
+          "perfil":perfil
         });
     }
   }
@@ -77,7 +78,7 @@ Servidor.get = function(tipo){
     var usuarios = [];
     this.usuarios.forEach(function(each){
       if(tipo == each.perfil.tipo){
-        usuarios.push(each);
+        usuarios.push(each.perfil);
       }
     });
     return usuarios;
