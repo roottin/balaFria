@@ -1,6 +1,7 @@
 div.dash{
   background: rgba(80,80,80,1);
   min-height: 100%;
+  padding-bottom: 50px;
 }
 md-content[landing] header.adminPanel{
   width:  calc(100% - 20px);
@@ -80,13 +81,13 @@ div.clientes,div.proveedores{
   margin-top: 10px;
   border-radius: 3px;
   overflow: hidden;
-  min-width: calc(30% - 15px);
-  width: calc((100% / 3) - 20px);
+  min-width: calc(50% - 15px);
+  width: calc((100% / 2) - 20px);
   h3{
     background: #3F51B5;
     width: calc(100%);
     margin: 0;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     padding: 10px 20px;
     i{
       font-size: 32px;
@@ -101,8 +102,13 @@ div.clientes,div.proveedores{
       cursor:pointer;
     }
   }
+  div.list{
+    width: calc(50% - 10px);
+    float: left;
+    border-right: 1px solid silver;
+  }
   div.display{
-    width: calc(100% - 10px);
+    width: calc(50% - 10px);
     height: auto;
     display: flex;
     align-content: space-between;

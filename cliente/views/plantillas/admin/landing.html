@@ -2,6 +2,16 @@
   <!--Panel Clientes -->
   <div class="clientes">
     <h3><i class="material-icons">account_circle</i> <div>Clientes</div></h3>
+    <div class="list">
+      <md-list flex>
+        <md-list-item class="md-3-line" ng-repeat="cliente in clientes.usuarios" ng-click="null">
+          <img src="{{cliente.imagen.ruta}}" alt="">
+          <div class="md-list-item-text" layout="column">
+            <h4>{{ cliente.nombre}}</h4>
+          </div>
+        </md-list-item>
+      </md-list>
+    </div>
     <div class="display">
       <div class="widget">
         <div class="icon-left conectado">
@@ -24,6 +34,16 @@
   <!--Panel Proveedores -->
   <div class="proveedores">
     <h3><i class="material-icons">account_box</i> <div>Proveedores</div></h3>
+    <div class="list">
+      <md-list flex>
+        <md-list-item class="md-3-line" ng-repeat="proveedor in proveedores.usuarios" ng-click="null">
+          <img src="{{proveedor.imagen.ruta}}" alt="">
+          <div class="md-list-item-text" layout="column">
+            <h4>{{ proveedor.nombre}}</h4>
+          </div>
+        </md-list-item>
+      </md-list>
+    </div>
     <div class="display">
       <div class="widget">
         <div class="icon-left conectado">
@@ -89,6 +109,7 @@
       </md-list>
     </div>
   </div>
+  <div class="clear"></div>
   <div class="botonera">
     <md-button class="md-fab md-primary" ng-click="logOut();">
       <md-icon class="material-icons">power_settings_new</md-icon>

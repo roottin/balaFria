@@ -19,7 +19,8 @@ md-content[landing].admin {
     bottom: 10px;
     right: 10px; }
   md-content[landing].admin div[ui-view="body"] {
-    height: 100%;
+    min-height: auto;
+    min-height: 100%;
     overflow: auto; }
   md-content[landing].admin div.admin {
     background-color: #e2e2e2 !important;
@@ -75,7 +76,8 @@ md-content[landing].admin {
 
 div.dash {
   background: #505050;
-  min-height: 100%; }
+  min-height: 100%;
+  padding-bottom: 50px; }
 
 md-content[landing] header.adminPanel {
   width: calc(100% - 20px);
@@ -145,13 +147,13 @@ div.clientes, div.proveedores {
   margin-top: 10px;
   border-radius: 3px;
   overflow: hidden;
-  min-width: calc(30% - 15px);
-  width: calc((100% / 3) - 20px); }
+  min-width: calc(50% - 15px);
+  width: calc((100% / 2) - 20px); }
   div.clientes h3, div.proveedores h3 {
     background: #3F51B5;
     width: calc(100%);
     margin: 0;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     padding: 10px 20px; }
     div.clientes h3 i, div.proveedores h3 i {
       font-size: 32px;
@@ -162,8 +164,12 @@ div.clientes, div.proveedores {
     div.clientes h3 div + i, div.proveedores h3 div + i {
       float: right;
       cursor: pointer; }
+  div.clientes div.list, div.proveedores div.list {
+    width: calc(50% - 10px);
+    float: left;
+    border-right: 1px solid silver; }
   div.clientes div.display, div.proveedores div.display {
-    width: calc(100% - 10px);
+    width: calc(50% - 10px);
     height: auto;
     display: flex;
     align-content: space-between;

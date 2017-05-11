@@ -6,8 +6,9 @@ md-content[landing].admin{
     right: 10px;
   }
   div[ui-view="body"]{
-      height: 100%;
-      overflow: auto;
+    min-height: auto;
+    min-height: 100%;
+    overflow: auto;
   }
   div.admin{
     background-color: #e2e2e2 !important;
