@@ -16,7 +16,7 @@ function LoginController($auth, $state,$scope,$sesion,$mdDialog) {
       });
     };
 }
-function ctrlLogCliente( $mdDialog,$http,$sesion,$state,$auth) {
+function ctrlLogCliente( $mdDialog,$http,$sesion,$state,$auth,$mdToast) {
     var yo = this;
     yo.registro = function(){
         $http.post('/api/cliente',yo.cliente)
@@ -47,7 +47,11 @@ function ctrlLogCliente( $mdDialog,$http,$sesion,$state,$auth) {
             $state.go("frontPage.iniciado");
         })
         .catch(function(response){
-            // Si ha habido errores llegamos a esta parte
+          console.log(response);
+          $mdToast.simple()
+            .textContent("error de autenticacion")
+            .position('top right' )
+            .hideDelay(3000);
             console.error(new Error("error de autenticacion"));
         });
     };
