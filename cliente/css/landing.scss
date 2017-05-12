@@ -15,6 +15,10 @@ html,body{
 .leaflet-bottom {
   display: none;
 }
+div.md-toast-content{
+  background: white !important;
+  color:$color-primary !important;
+}
 md-menu-content{
   h4{
     background-color:#303030 !important;

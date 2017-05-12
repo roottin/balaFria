@@ -565,6 +565,10 @@ html, body {
 .leaflet-bottom {
   display: none; }
 
+div.md-toast-content {
+  background: white !important;
+  color: #3F51B5 !important; }
+
 md-menu-content h4 {
   background-color: #303030 !important;
   padding: 15px;

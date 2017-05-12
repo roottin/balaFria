@@ -42,17 +42,21 @@ function ctrlLogCliente( $mdDialog,$http,$sesion,$state,$auth,$mdToast) {
           tipo: "cliente"
         })
         .then(function(response){
-            $sesion.crear(response.data.user,'cliente').conectar();
-            yo.hide();
-            $state.go("frontPage.iniciado");
+            if(response.data.success){
+              $sesion.crear(response.data.user,'cliente').conectar();
+              yo.hide();
+              $state.go("frontPage.iniciado");
+            }else{
+              $mdToast.show(
+                $mdToast.simple()
+                  .textContent("Error de Autenticacion")
+                  .position('top right' )
+                  .hideDelay(3000)
+              );
+            }
         })
         .catch(function(response){
-          console.log(response);
-          $mdToast.simple()
-            .textContent("error de autenticacion")
-            .position('top right' )
-            .hideDelay(3000);
-            console.error(new Error("error de autenticacion"));
+          console.error(new Error(response));
         });
     };
     yo.redirect = function(){
