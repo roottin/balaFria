@@ -50,7 +50,7 @@ function ctrlLogCliente( $mdDialog,$http,$sesion,$state,$auth,$mdToast) {
               $mdToast.show(
                 $mdToast.simple()
                   .textContent("Error de Autenticacion")
-                  .position('top right' )
+                  .position('top right')
                   .hideDelay(3000)
               );
             }

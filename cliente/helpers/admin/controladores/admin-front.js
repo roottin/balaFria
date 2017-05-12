@@ -65,9 +65,11 @@ angular.module('balafria')
             break;
           case 'conexion':
             $scope.clientes.usuarios.push(data.perfil);
+            $scope.clientes.conectados++;
             break;
           case 'desconexion':
             $scope.clientes.usuarios.splice($scope.clientes.usuarios.indexOf(data.perfil),1);
+            $scope.clientes.conectados--;
             break;
         }
         break;
@@ -78,9 +80,11 @@ angular.module('balafria')
             break;
           case 'conexion':
             $scope.proveedores.usuarios.push(data.perfil);
+            $scope.proveedores.conectados++;
             break;
           case 'desconexion':
             $scope.proveedores.usuarios.splice($scope.proveedores.usuarios.indexOf(data.perfil),1);
+            $scope.proveedores.conectados--;
             break;
         }
         break;
