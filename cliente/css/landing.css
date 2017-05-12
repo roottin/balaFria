@@ -80,7 +80,7 @@ div.dash {
   padding-bottom: 50px; }
 
 md-content[landing] header.adminPanel {
-  width: calc(100% - 20px);
+  width: calc(100%);
   background: white;
   color: #f44336;
   margin-top: 0 !important;
@@ -136,8 +136,14 @@ md-dialog[aria-label="rubro"] div[input-file] {
       cursor: pointer;
       z-index: 1; }
 
-div.proveedores.listas h3 {
-  margin-bottom: 0px; }
+div.proveedores.listas {
+  width: calc((100% / 3) - 20px);
+  min-width: 200px; }
+  div.proveedores.listas div.display {
+    width: 100%;
+    border: none; }
+  div.proveedores.listas h3 {
+    margin-bottom: 0px; }
 
 div.clientes, div.proveedores {
   float: left;
@@ -166,15 +172,21 @@ div.clientes, div.proveedores {
       cursor: pointer; }
   div.clientes div.list, div.proveedores div.list {
     width: calc(50% - 10px);
-    float: left;
-    border-right: 1px solid silver; }
+    float: left; }
+  div.clientes md-list-item.list-mini, div.proveedores md-list-item.list-mini {
+    height: 50px;
+    min-height: 50px; }
+    div.clientes md-list-item.list-mini div.md-no-style, div.proveedores md-list-item.list-mini div.md-no-style {
+      height: 50px;
+      min-height: 50px; }
   div.clientes div.display, div.proveedores div.display {
     width: calc(50% - 10px);
     height: auto;
     display: flex;
     align-content: space-between;
     flex-wrap: wrap;
-    margin-right: 10px; }
+    margin-right: 10px;
+    border-left: 1px solid silver; }
     div.clientes div.display div.widget, div.proveedores div.display div.widget {
       width: calc(50% - 20px);
       height: 60px;
@@ -186,7 +198,8 @@ div.clientes, div.proveedores {
       text-align: center;
       flex-shrink: 0;
       flex-grow: 1;
-      min-width: 25%; }
+      min-width: 25%;
+      overflow: hidden; }
       div.clientes div.display div.widget div.icon-left, div.proveedores div.display div.widget div.icon-left {
         width: 40%;
         height: 60px;
@@ -214,7 +227,7 @@ div.clientes, div.proveedores {
         div.clientes div.display div.widget .inactivo + .descripcion, div.proveedores div.display div.widget .inactivo + .descripcion {
           color: #607D8B; }
       div.clientes div.display div.widget div.descripcion, div.proveedores div.display div.widget div.descripcion {
-        width: calc(60% - 1px);
+        width: calc(60%);
         height: 60px;
         float: left;
         margin: 0;
@@ -629,6 +642,7 @@ md-content[landing] {
       float: right;
       margin-top: 10px;
       padding: 15px;
+      font-size: 30px;
       cursor: pointer;
       transition: all 0.3s ease-in-out; }
       md-content[landing] header.cliente i.material-icons:hover {

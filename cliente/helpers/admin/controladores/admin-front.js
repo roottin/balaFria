@@ -57,6 +57,7 @@ angular.module('balafria')
   };
 
   $sesion.on('notificacion',function(data){
+    console.log("informacion recivida via socket:",data);
     switch (data.tipo) {
       case "cliente":
         switch (data.motivo) {

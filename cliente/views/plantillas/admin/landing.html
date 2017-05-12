@@ -36,8 +36,8 @@
     <h3><i class="material-icons">account_box</i> <div>Proveedores</div></h3>
     <div class="list">
       <md-list flex>
-        <md-list-item class="md-3-line" ng-repeat="proveedor in proveedores.usuarios" ng-click="null">
-          <img src="{{proveedor.imagen.ruta}}" alt="">
+        <md-list-item class="md-3-line list-mini" ng-repeat="proveedor in proveedores.usuarios" ng-click="null">
+          <img src="{{proveedor.avatar.ruta}}" class="md-avatar" alt="">
           <div class="md-list-item-text" layout="column">
             <h4>{{ proveedor.nombre}}</h4>
           </div>
@@ -99,7 +99,7 @@
     </h3>
     <div class="display">
       <md-list flex>
-        <md-list-item class="md-3-line" ng-repeat="tipoImagen in tipos_imagen" ng-click="null">
+        <md-list-item class="md-3-line list-mini" ng-repeat="tipoImagen in tipos_imagen" ng-click="null">
           <i class="md-avatar material-icons">photo</i>
           <div class="md-list-item-text" layout="column">
             <h4>{{ tipoImagen.nombre }}</h4>

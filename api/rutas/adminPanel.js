@@ -10,7 +10,7 @@ module.exports = function(app){
       .then(function(resultado){
         servidor.admin.conexion.socket.emit('notificacion',{
           motivo:"registrados",
-          tipo:"clientes",
+          tipo:"cliente",
           cantidad:resultado.length
         });
       });
@@ -30,7 +30,7 @@ module.exports = function(app){
       .then(function(resultado){
         servidor.admin.conexion.socket.emit('notificacion',{
           motivo:"registrados",
-          tipo:"proveedores",
+          tipo:"proveedor",
           cantidad:resultado.length
         });
       });

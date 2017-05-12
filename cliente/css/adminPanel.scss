@@ -4,7 +4,7 @@ div.dash{
   padding-bottom: 50px;
 }
 md-content[landing] header.adminPanel{
-  width:  calc(100% - 20px);
+  width:  calc(100%);
   background: white;
   color: #f44336;
   margin-top: 0 !important;
@@ -69,6 +69,12 @@ md-dialog[aria-label="rubro"]{
   }
 }
 div.proveedores.listas{
+  width: calc((100% / 3) - 20px);
+  min-width: 200px;
+  div.display{
+    width: 100%;
+    border:none;
+  }
   h3{
     margin-bottom: 0px;
   }
@@ -105,8 +111,14 @@ div.clientes,div.proveedores{
   div.list{
     width: calc(50% - 10px);
     float: left;
-    border-right: 1px solid silver;
-    
+  }
+  md-list-item.list-mini{
+    height: 50px;
+    min-height: 50px;
+    div.md-no-style{
+      height: 50px;
+      min-height: 50px;
+    }
   }
   div.display{
     width: calc(50% - 10px);
@@ -115,6 +127,7 @@ div.clientes,div.proveedores{
     align-content: space-between;
     flex-wrap: wrap;
     margin-right: 10px;
+    border-left: 1px solid silver;
     div.widget{
       width: calc(50% - 20px);
       height: 60px;
@@ -127,6 +140,7 @@ div.clientes,div.proveedores{
       flex-shrink: 0;
       flex-grow: 1;
       min-width: 25%;
+      overflow: hidden;
       div.icon-left{
         width:40%;
         height: 60px;
@@ -165,7 +179,7 @@ div.clientes,div.proveedores{
         }
       }
       div.descripcion{
-        width: calc(60% - 1px);
+        width: calc(60%);
         height: 60px;
         float: left;
         margin: 0;
