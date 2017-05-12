@@ -8,7 +8,7 @@ angular.module('balafria')
         }
     });
   $scope.rubros = Rubros.query(function(){
-    console.log($scope.rubros);
+    
   });
   $scope.disponibles = [];
   $scope.openMenu = function($mdMenu, ev) {

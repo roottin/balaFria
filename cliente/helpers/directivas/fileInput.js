@@ -1,5 +1,5 @@
 angular.module('balafria')
-.directive('fileInput', function() {
+.directive('fileInput', ['$timeout',function($timeout) {
   return {
       restrict: 'AE',
       replace: 'true',
@@ -12,18 +12,21 @@ angular.module('balafria')
         '<label>{{nombre || "Seleccione Imagen"}}</label>'+
       '</div>',
       link: function(scope, elem, attrs) {
-      elem.bind('click', function() {
-        var hijo = elem.find('input')[0];
-        scope.$apply(function(){
-          hijo.click();
+        elem.bind('click', function() {
+          var hijo = elem.find('input')[0];
+          $timeout(function(){
+            scope.$apply(function(){
+              hijo.click();
+            });
+          });
         });
-      });
-      elem.find('input')[0].onchange= function() {
-        scope.$apply(function(){
-          scope.nombre = elem.find('input')[0].files[0].name;
-        });
-      };
+        elem.find('input')[0].onchange= function() {
+          $timeout(function(){
+            scope.$apply(function(){
+              scope.nombre = elem.find('input')[0].files[0].name;
+            });
+          });
+        };
     }
   };
-
-});
+}]);

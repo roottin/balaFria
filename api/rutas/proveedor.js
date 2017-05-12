@@ -108,7 +108,7 @@ module.exports = function(app){
           var usuario = {
             "nombre":proveedor.dataValues.nombre,
             "documento":proveedor.dataValues.documento,
-            "id":proveedor.dataValues.id,
+            "id":proveedor.dataValues.id_proveedor,
             "email":proveedor.dataValues.email,
             "tipo":"proveedor",
             "avatar":{

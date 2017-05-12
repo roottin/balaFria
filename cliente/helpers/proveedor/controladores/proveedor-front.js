@@ -63,7 +63,7 @@ angular.module('balafria')
           });
   };
 }])
-.controller('ctrlLogPro', ['$scope','$http','$state','$sesion','$auth','$mdToast' function ($scope,$http,$state,$sesion,$auth,$mdToast) {
+.controller('ctrlLogPro', ['$scope','$http','$state','$sesion','$auth','$mdToast', function ($scope,$http,$state,$sesion,$auth,$mdToast) {
   $scope.login = function(){
         $auth.login({
             "field": $scope.field,

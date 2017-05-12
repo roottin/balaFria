@@ -5,7 +5,7 @@
     <div class="list">
       <md-list flex>
         <md-list-item class="md-3-line" ng-repeat="cliente in clientes.usuarios" ng-click="null">
-          <img src="{{cliente.imagen.ruta}}" alt="">
+          <img ng-src="{{cliente.imagen.ruta}}" alt="">
           <div class="md-list-item-text" layout="column">
             <h4>{{ cliente.nombre}}</h4>
           </div>
@@ -37,7 +37,7 @@
     <div class="list">
       <md-list flex>
         <md-list-item class="md-3-line list-mini" ng-repeat="proveedor in proveedores.usuarios" ng-click="null">
-          <img src="{{proveedor.avatar.ruta}}" class="md-avatar" alt="">
+          <img ng-src="{{proveedor.avatar.ruta}}" class="md-avatar" alt="">
           <div class="md-list-item-text" layout="column">
             <h4>{{ proveedor.nombre}}</h4>
           </div>
