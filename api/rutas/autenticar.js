@@ -43,8 +43,8 @@ module.exports = function(app){
         { model:models[req.body.tipo]}
       )
         .then(function(registro){
+          registro = registro[0];
           if(registro){
-            registro = registro[0];
             var pass = crypto.createHmac('sha1',registro.dataValues.email).update(req.body.clave).digest('hex');
             if(registro.dataValues.clave === pass){
               var usuario = {
