@@ -60,9 +60,10 @@ module.exports = function(app){
                   "ruta":registro.dataValues.imagen_ruta
                 }
               }
-              usuario.token = service.createToken(usuario);
-              servidor.addUsuario(usuario);
+              var token = service.createToken(usuario);
+              servidor.addUsuario(usuario,null,token);
               servidor.mostrarListaUsuarios();
+              usuario.token = token;
               return res
                   .status(200)
                   .send({
@@ -84,6 +85,38 @@ module.exports = function(app){
               });
           }
         });
+    }
+  });
+  app.post('/api/recuperar',function(req,res){
+    var datos = req.body;
+    console.log(datos);
+    var usuario = servidor.buscarUsuario(datos.id,datos.tipo);
+    if(!usuario){
+      console.log('SESION: error de recuperacion');
+      return res
+              .status(200)
+              .send({
+                success:0
+              });
+    }else{
+      conexion = usuario.buscarConexion('token',datos.token);
+      if(!conexion){
+        console.log('SESION: error de recuperacion token errado');
+        return res
+              .status(200)
+              .send({
+                success:0
+              });
+      }else{
+        var user = usuario.perfil;
+        user.token = datos.token;
+        return res
+                .status(200)
+                .send({
+                  user:usuario.perfil,
+                  success:1
+                });
+      }
     }
   });
 };

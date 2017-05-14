@@ -6,9 +6,13 @@ var plugAssembler = require('./plug');
 function init(app) {
 	var io = socketio(app);
 	io.use(function(socket, next){
+			console.log('SESION: conexion socket establecida');
+			console.log('Autenticando:',socket.handshake.query);
 			var error;
 			//verificacion usuario o admin
 			if(socket.handshake.query.tipo == 'admin'){
+				console.log('Autenticacion: ADMIN autenticado');
+				console.log('-----------------------------');
 				if(servidor.admin){
 					if(servidor.admin.perfil.token == socket.handshake.query.tokenKey){
 						servidor.admin.agregarConexion(socket);
@@ -21,31 +25,38 @@ function init(app) {
 					}
 				}
 			}else{
+				console.log('Autenticacion: conexion de usuario');
 				var usuario = servidor.buscarUsuario(socket.handshake.query.id,socket.handshake.query.tipo);
-		    if(!usuario){
-		    	error = new Error('Error de Autenticacion: Usuario no existe');
-		    	console.error(error);
-		    	next(error);
-		    }else{
-		    	if(usuario.tokenKey == socket.handshake.query.tokenKey){
-		    		error = new Error('Error de Autenticacion: token no valida para usuario');
-		    		console.error(error);
-		    		next(error);
-		    	}else{
-		    		console.log("Usuario: "+usuario.perfil.nombre+" "+usuario.perfil.apellido+" autenticado");
-		    		if(!usuario.buscarConexion("ip",socket.conn.remoteAddress)){
-		    			usuario.agregarConexion(socket);
-		    			socket.emit('session',{"texto":"recuperada"});
+			    if(!usuario){
+			    	error = new Error('Error de Autenticacion: Usuario no existe');
+			    	console.error(error);
+			    	next(error);
+			    }else{
+			    	if(usuario.tokenKey == socket.handshake.query.tokenKey){
+			    		error = new Error('Error de Autenticacion: token no valida para usuario');
+			    		console.error(error);
+			    		next(error);
+			    	}else{
+			    		console.log("Usuario: "+usuario.perfil.nombre+" "+usuario.perfil.apellido+" autenticado");
+			    		var conexion = usuario.buscarConexion("ip",socket.conn.remoteAddress);
+			    		if(!conexion){
+			    			usuario.agregarConexion(socket,socket.handshake.query.tokenKey);
+			    			socket.emit('session',{"texto":"recuperada"});
 							servidor.notificar("conexion",usuario.perfil);
-					    servidor.mostrarListaUsuarios();
-		    			return next();
-		    		}else{
-		    			console.log('conexion ya existe');
-		    			socket.emit('session',{"texto":"recuperada"});
-		    			return next();
-		    		}
-		    	}
-		    }
+						    servidor.mostrarListaUsuarios();
+			    			return next();
+			    		}else{
+			    			console.log('SESION: conexion recuperda');
+			    			conexion.estado = "recuperda";
+			    			conexion.socket = socket;
+			    			socket.emit('session',{
+			    				"texto":"recuperada",
+			    				"usuario":usuario.perfil
+			    			});
+			    			return next();
+			    		}
+			    	}
+			    }
 			}
 	});
 
@@ -72,7 +83,7 @@ function init(app) {
 				}
 	      socket.emit('session',{texto:"cerrada"});
 	      socket.disconnect();
-				servidor.notificar("desconexion",Usuario.perfil);
+		  servidor.notificar("desconexion",Usuario.perfil);
 	      console.log('session de: '+Usuario.perfil.nombre+" cerrada");
 	    }
 	    else if(data.texto=="recuperar")
@@ -115,24 +126,30 @@ function init(app) {
 	});
 	socket.on('disconnect',function(){
 		var usuario = servidor.buscarUsuario(socket.handshake.query.id,socket.handshake.query.tipo);
+		console.log(socket.handshake.query);
 		var plug;
 		if(usuario){
-			plug = usuario.buscarConexion('socket',socket);
+			plug = usuario.buscarConexion("ip",socket.conn.remoteAddress);
 		}else if(servidor.admin){
 			usuario = servidor.admin;
 			plug = servidor.admin.conexion;
 		}
 		if(plug){
+			console.log("SESION: plug colocado en espera");
+			console.log('-----------------------------');
 			plug.estado='esperando';
 			//funcion settimeout
 			plug.idIntSes=setTimeout(
 				(function(plug){
 					return function(){
 					if(plug.estado=='esperando'){
+						console.log("SESION: plug desconectado");
+						console.log('-----------------------------');
+
 						usuario.cerrarConexion(plug);
 					}
 				};
-			})(plug), 120000);
+			})(plug), 20000);
 		}
 	  });
 	});

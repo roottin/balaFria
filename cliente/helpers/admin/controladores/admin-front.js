@@ -21,7 +21,7 @@ angular.module('balafria')
 }])
 .controller('ctrlLandAdmin', ['$http','$scope','$sesion','$adminPanel','$auth','$location','Rubros','$mdDialog','TipoImagen',
   function ($http,$scope,$sesion,$adminPanel,$auth,$location,Rubros,$mdDialog,TipoImagen) {
-  $scope.usuario = $sesion.perfil;
+  $scope.usuario = $sesion.obtenerPerfil();
   $adminPanel.getClientes($http,$scope);
   $adminPanel.getProveedores($http,$scope);
 

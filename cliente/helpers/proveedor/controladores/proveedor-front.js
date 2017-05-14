@@ -49,11 +49,11 @@ angular.module('balafria')
 }])
 .controller('ctrlCorreo', ['$state','$sesion', function ($state,$sesion){
   var yo = this;
-  yo.usuario = $sesion.perfil;
+  yo.usuario = $sesion.obtenerPerfil();
 }])
 .controller('ctrlHeaderPro', ['$state','$sesion','$auth', function ($state,$sesion,$auth){
   var yo = this;
-  yo.usuario = $sesion.perfil;
+  yo.usuario = $sesion.obtenerPerfil();
   yo.logOut = function(){
     $auth.logout()
           .then(function() {

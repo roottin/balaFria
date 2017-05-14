@@ -14,9 +14,10 @@ var Usuario = function(){
 		return this;
 	};
 
-	self.agregarConexion = function(socket){
+	self.agregarConexion = function(socket,token){
 		if(socket){
-			this.conexiones.push(plugAssembler.configure(socket,this.perfil.tipo));
+			var plug = plugAssembler.configure(socket,this.perfil.tipo,token);
+			this.conexiones.push(plug);
 		}
 		return this;
 	};

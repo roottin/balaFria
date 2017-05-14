@@ -118,7 +118,7 @@ module.exports = function(app){
           };
           usuario.token = service.createToken(usuario);
           proveedor.dataValues.token = usuario.token;
-          servidor.addUsuario(usuario);
+          servidor.addUsuario(usuario,null,usuario.token);
           servidor.mostrarListaUsuarios();
           channel.emit('enviarEmail',{
             perfil:usuario,

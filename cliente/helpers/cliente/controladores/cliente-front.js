@@ -26,7 +26,7 @@ angular.module('balafria')
 }])
 .controller('ctrlHeaderCli', ['$state','$sesion','$auth','$mdDialog','$http', function ($state,$sesion,$auth,$mdDialog,$http){
   var yo = this;
-  yo.usuario = $sesion.perfil;
+  yo.usuario = $sesion.obtenerPerfil();
   yo.logOut = function(){
     $auth.logout()
           .then(function() {
@@ -52,7 +52,7 @@ angular.module('balafria')
 }])
 .controller('ctrlCambiarImg', ['$http','$state','$sesion','$auth','$mdDialog','Upload', function($http,$state,$sesion,$auth,$mdDialog,Upload) {
   var yo = this;
-  yo.usuario=$sesion.perfil;
+  yo.usuario=$sesion.obtenerPerfil();
      yo.submit = function(){ //function to call on form submit
          if (yo.upload_form.file.$valid && yo.file) { //check if from is valid
              yo.upload(yo.file); //call upload function

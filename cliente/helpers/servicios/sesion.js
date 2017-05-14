@@ -1,16 +1,50 @@
 angular.module('balafria')
-.service('$sesion',function($rootScope){
+.service('$sesion',['$rootScope','$state','$http',function($rootScope,$state,$http){
   var self = this;
   self.perfil = null;
   self.socket = null;
+  self.estado = "desconectado";
 
+  self.obtenerPerfil = function(){
+    if(self.estado == "desconectado"){
+      var datosSesion = sessionStorage.getItem('balaFria_token');
+      if(!datosSesion){
+        $state.go('frontPage');
+      }else{        
+        datosSesion = JSON.parse(datosSesion);
+        return new Promise(function(completado,rechazado){
+          $http.post('/api/recuperar',datosSesion)
+            .then(function(resultado){
+              if(!resultado.data.success){
+                $state.go('frontPage');
+              }else{
+                self.perfil = resultado.data.user;
+                self.tipo = self.perfil.tipo;
+                self.conectar();
+                if(self.tipo == "cliente"){
+                  $state.go('frontPage.iniciado');
+                }else{
+                  $state.go('proveedor.dashboard');
+                }
+              }
+            })
+            .catch(function(err){
+              console.error(new Error(err));
+            });
+        });
+      }
+    }else{
+      return self.perfil;
+    }
+  }
   self.crear = function(perfil,tipo){
     self.perfil = perfil;
     self.perfil.tipo = tipo;
     var storage = {
       "token": perfil.token,
       "nombre": perfil.nombre,
-      "tipo": tipo
+      "tipo": tipo,
+      "id": perfil.id
     };
     //NOTE: guardando en el session storage
     var tokenName = "balaFria_token";
@@ -29,7 +63,7 @@ angular.module('balafria')
     });
   }
   self.conectar = function(){
-    console.log(self.perfil);
+    self.estado = "conectado";
     self.socket = io.connect('',{
       'transports': ['websocket', 'polling'],
       "query":"id="+self.perfil.id+
@@ -77,4 +111,4 @@ angular.module('balafria')
     sessionStorage.clear();
     self.socket.emit('session',{"texto":'cerrar'});
   };
-});
+}]);

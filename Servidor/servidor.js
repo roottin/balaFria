@@ -16,14 +16,14 @@ Servidor.buscarUsuario = function(id,tipo){
     return resultado;
   }
 };
-Servidor.addUsuario = function(perfil,socket){
+Servidor.addUsuario = function(perfil,socket,token){
   var nuevoUsuario = this.buscarUsuario(perfil.id);
   if(nuevoUsuario){
     console.warn('server.js - linea:22 - usuario ya esta conectado');
     return false;
   }else{
     nuevoUsuario = consUsuario.crear();
-    nuevoUsuario.crear(perfil).agregarConexion(socket);
+    nuevoUsuario.crear(perfil).agregarConexion(socket,token);
     this.usuarios.push(nuevoUsuario);
   }
   return nuevoUsuario;
@@ -66,12 +66,13 @@ Servidor.addAdmin = function(perfil,socket){
 };
 
 Servidor.mostrarListaUsuarios = function(){
-  console.log('------------------------ Usuario Conectados-----------------------');
+  /*console.log('------------------------ Usuario Conectados-----------------------');
   this.usuarios.forEach(function(usuario){
     console.log("nombre: "+usuario.perfil.nombre+" "+usuario.perfil.apellido);
     console.log("conexiones: "+usuario.conexiones.length);
   });
   console.log('------------------------ Usuario Conectados-----------------------');
+  */
 };
 Servidor.get = function(tipo){
   if(tipo == "cliente"||tipo=="proveedor"){
@@ -84,4 +85,21 @@ Servidor.get = function(tipo){
     return usuarios;
   }
 };
+Servidor.buscarConexionPorIp = function(ip){
+  var resultado = false;
+  this.usuarios.forEach(function(usuario){
+    usuario.conexiones.forEach(function(conexion){
+      if(ip == this.parseAddress(conexion.ip)){
+        resultado = conexion;
+      }
+    });
+  });
+  return resultado;
+}
+Servidor.parseAddress = function(address){
+  var idx = address.lastIndexOf(':');
+      if (~idx && ~address.indexOf('.'))
+        address = address.slice(idx + 1);
+      return address;
+}
 module.exports=Servidor;
