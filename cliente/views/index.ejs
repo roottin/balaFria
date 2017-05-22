@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html ng-app="balafria">
+<head>
+<link rel="stylesheet" href="/node_modules/angular-material/angular-material.css">
+<link href="../css/material-icons.css" rel="stylesheet">
+<link href="../css/ionicons.css" rel="stylesheet">
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/node_modules/leaflet/dist/leaflet.css" />
+<link rel="stylesheet" type="text/css" href="/css/landing.css">
+
+</head>
+<body>
+
+<ui-view></ui-view>
+
+<script src="/node_modules/angular/angular.js"></script>
+<script src="/node_modules/angular-aria/angular-aria.js"></script>
+<script src="/node_modules/angular-animate/angular-animate.js"></script>
+<script src="/node_modules/angular-material/angular-material.js"></script>
+<script src="/node_modules/angular-route/angular-route.min.js"></script>
+<script src="/node_modules/angular-resource/angular-resource.min.js"></script>
+<script src="/node_modules/leaflet/dist/leaflet.js"></script>
+<script src="/node_modules/angular-leaflet-directive/dist/angular-leaflet-directive.min.js"></script>
+<script src="/node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="/node_modules/angular-messages/angular-messages.min.js"></script>
+<script src="/node_modules/satellizer/dist/satellizer.min.js"></script>
+<script src="/node_modules/ng-file-upload/dist/ng-file-upload.js"></script>
+<script src="/node_modules/socket.io-client/dist/socket.io.js"></script>
+
+
+<script src="/helpers/apps/apps.js"></script>
+<!-- Servicios -->
+<script src="/helpers/servicios/rubro.js"></script>
+<script src="/helpers/servicios/tipoImagen.js"></script>
+<script src="/helpers/servicios/adminPanel.js"></script>
+<script src="/helpers/servicios/sesion.js"></script>
+<!-- Directivas -->
+<script src="/helpers/directivas/fileInput.js"></script>
+<script src="/helpers/directivas/reloj.js"></script>
+<!-- Controladores -->
+
+	<!-- admin -->
+	<script src="/helpers/admin/controladores/rubro.js"></script>
+	<script src="/helpers/admin/controladores/tipoImagen.js"></script>
+	<script src="/helpers/admin/controladores/admin-front.js"></script>
+
+	<!-- cliente -->
+	<script src="/helpers/cliente/controladores/cliente-front.js"></script>
+	<script src="/helpers/cliente/controladores/autenticacion.js"></script>
+
+	<!-- proveedor -->
+	<script src="/helpers/proveedor/controladores/proveedor-front.js"></script>
+
+
+</body>
+</html>

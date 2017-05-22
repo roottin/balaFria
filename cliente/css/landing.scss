@@ -1,0 +1,309 @@
+@import "mixins.scss";
+@import "paleta-colores.scss";
+@import "fileInput.scss";
+@import "admin.scss";
+@import "adminPanel.scss";
+@import "proveedor.scss";
+@import "dash_proveedor.scss";
+@import "cliente.scss";
+@import "menu.scss";
+@import "verificacionCorreo.scss";
+
+html,body{
+  min-height: 100%;
+}
+.leaflet-bottom {
+  display: none;
+}
+div.md-toast-content{
+  background: white !important;
+  color:$color-primary !important;
+}
+md-menu-content{
+  h4{
+    background-color:#303030 !important;
+    padding: 15px;
+    margin: -10px 0px 0px 0px;
+    color:white;
+  }
+}
+md-menu-item{
+  padding-left: 15px;
+  &:hover{
+    background-color: silver;
+  }
+}
+md-checkbox{
+  div.md-container{
+    div.md-icon{
+      border-color:#303030 !important;
+    }
+  }
+}
+
+[login]{
+  max-width: 500px;
+  width: 100%;
+  .inicio{
+    background-color: rgba(0,0,0,0.3);
+    width: 100%;
+    max-width: 500px;
+    padding: 10px 10px;
+    color: white;
+    border: none;
+    @include BoxShadowHelper(3);
+    border-radius: 3px;
+    &.google{
+      background:#dd4b39;
+    }
+    &.md-raised{
+      background: $color-primary;
+    }
+  }
+}
+
+div[divider]{
+  margin: 10px 10px;
+  width: calc(100% - 0px);
+  height: 1px;
+  background: silver;
+  margin-left: -2px;
+}
+md-content[landing].cliente{
+  div[ui-view="body"]{
+    width: 100%;
+    height: calc(100% - 60px);
+  }
+}
+md-content[landing]{
+  background-size: cover;
+  .md-primary{
+    background: $color-primary;
+    &.md-raised{
+      background-color: $color-acent;
+    }
+  }
+  //overflow: hidden;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  header.cliente{
+    width: 100%;
+    height: 70px;
+    background-color: transparent;
+    margin-top: -10px;
+    i.material-icons{
+      float: right;
+      margin-top: 10px;
+      padding: 15px;
+      font-size: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      &:hover{
+        background: $color-primary;
+      }
+    }
+    div[titulo]{
+      font-family: 'Bebas';
+      font-size: 40px;
+      margin-left: 30px;
+      top: 20%;
+      color: white;
+      position: relative;
+      float: left;
+    }
+    div[sociales]{
+      float: right;
+      width: 340px;
+      height: 50%;
+      position: relative;
+      top: 30%;
+      .md-raised{
+        background-color: rgba(0,0,0,0.3) !important;
+        color: white;
+        border: 1px solid !important;
+        box-shadow: none;
+        top: -3px;
+        float:right;
+        &:hover span{
+          color: white;
+        }
+      }
+      i{
+        color: white;
+        border: 1px solid;
+        width: 40px; height: 35px;
+        border-radius: 100px;
+        text-align: center;
+        padding-top: 5px;
+        font-size: 30px;
+        float: right;
+        margin-right: 20px;
+        background-color: rgba(0,0,0,0.3);
+        z-index: 5;
+        cursor: pointer;
+        div[tooltip]{
+          margin-top: -15px;
+          font-size: 12px;
+          transition: all 0.2s ease-in-out;
+          color: transparent;
+          z-index: 3;
+          width: 60px;
+          &:after{
+            transition:inherit;
+            content: '';
+            background-color: transparent;
+            position: absolute;
+            margin-top: -22px;
+            margin-left: -42px;
+            border-bottom: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-left: 10px solid transparent;
+            border-top: 10px solid transparent;
+            z-index: 3;
+          }
+        }
+
+        &:hover div[tooltip]{
+          font-size: 12px;
+          text-align: center;
+          border: 1px solid silver;
+          margin-left: -10px;
+          color: white;
+          padding: 6px;
+          border-radius: 3px;
+          margin-top: 10px;
+          background-color: $color-primary;
+          position: absolute;
+          &:after{
+            border-bottom: 10px solid $color-primary;
+          }
+        }
+      }
+    }
+  }
+  div[principal]{
+    width: 100%;
+    height: calc(100%);
+    div[mapa]{
+      float: left;
+      height: 100%;
+      width: calc(100% - 301px);
+      position: relative;
+      z-index: 1;
+      md-toolbar{
+        min-height: 48px !important;
+        height: 48px !important;
+        div[rubros-tab]{
+          padding: 15px;
+          color: white;
+          font-size: 14px;
+          text-transform: uppercase;
+          transition: border 0.3s;
+          border-bottom: 4px solid;
+          &.active{
+            background-color: rgba(0,0,0,0.2);
+          }
+        }
+
+      }
+
+      div.angular-leaflet-map{
+        width: calc(100% - 0px);
+        height: calc(100% - 96px);
+      }
+
+      md-toolbar.bottom{
+        bottom: 0;
+        position: absolute;
+
+        button{
+          transition: all 0.3s ease-in-out;
+          &:hover{
+            @include BoxShadowHelper(3);
+          }
+        }
+      }
+    }
+
+    div[lista]{
+      width: 300px;
+      height: 100%;
+      float: left;
+      border-top: 1px solid silver;
+      border-right:1px solid silver;
+
+      div[categoria]{
+        width: 148px;
+        height: 148px;
+        float: left;
+        border: 1px solid white;
+        position: relative;
+
+        div[nombre]{
+          color: white;
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          cursor: pointer;
+          background-color: rgba(0, 0, 0, 0.6);
+          text-align: center;
+          z-index: 2;
+          font-family: bebas;
+          display: flex;
+          align-content: space-between;
+          justify-content: center;
+          align-items: center;
+          font-size: 31px;
+        }
+        img{
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          cursor: pointer;
+          z-index: 1;
+        }
+      }
+    }
+  }
+  div[registro]{
+    background-color: rgba(0,0,0,0.6);
+    position: absolute;
+    top: 100px;
+    @include BoxShadowHelper(3);
+    width: 400px ;
+    left: 8%;
+    border-radius: 3px;
+    overflow: hidden;
+    border:1px solid silver;
+    padding: 0px 10px;
+    .md-raised{
+      color: white;
+    }
+
+
+  &.inicio{
+    position: relative;
+    margin: 0 auto;
+    left: 0px;
+    top: 150px;
+    div[cabecera]{
+      margin-bottom: 33px;
+      padding-top: 50px;
+      height: 60px;
+      font-size: 30px;
+      text-transform: uppercase;
+      border-bottom: 1px solid silver;
+    }
+  }
+    div[cabecera]{
+      background-color: rgba(0,155,219,0.6);
+      text-align: center;
+      width: 100%;
+      padding: 20px 0px 20px 18px;
+      color: white;
+      font-size: 20px;
+      margin: -10px 0px 20px -10px;
+    }
+  }
+}

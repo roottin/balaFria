@@ -3,7 +3,7 @@ var consUsuario = {};
 
 consUsuario.crear = function(){
 	return new Usuario();
-}
+};
 var Usuario = function(){
 	var self = this;
 	self.conexiones = [];
@@ -12,14 +12,15 @@ var Usuario = function(){
 		this.perfil = perfil;
 		//permite combinar lineas
 		return this;
-	}
+	};
 
-	self.agregarConexion = function(socket){
+	self.agregarConexion = function(socket,token){
 		if(socket){
-			this.conexiones.push(plugAssembler.configure(socket,this.perfil.tipo));
+			var plug = plugAssembler.configure(socket,this.perfil.tipo,token);
+			this.conexiones.push(plug);
 		}
 		return this;
-	}
+	};
 
 	self.buscarConexion = function(llave,valor){
 		var resultado = false;
@@ -27,13 +28,13 @@ var Usuario = function(){
 			if(conexion.hasOwnProperty(llave)){
 				if(conexion[llave] == valor){
 					resultado = conexion;
-				}	
+				}
 			}else{
 				console.error("conexion no posee la propiedad "+llave);
 			}
 		});
 		return resultado;
-	}
+	};
 	self.cerrarConexiones = function(){
 		var yo = this;
 		return Promise.all(
@@ -41,13 +42,13 @@ var Usuario = function(){
 				return yo.cerrarConexion(conexion);
 			})
 		);
-	}
+	};
 	self.cerrarConexion = function(conexion){
 		return new Promise(function(resolve,reject){
 			conexion.socket.emit('desconectado',{text:"session desconectada"});
 			conexion.socket.disconnect();
 		});
-	}
-}
+	};
+};
 module.exports = consUsuario;
 //TODO: notificaciones de usuario

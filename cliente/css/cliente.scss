@@ -1,0 +1,14 @@
+md-dialog[avatar-upload]{
+  div[input-file]{
+    width: 140px;
+    height: 140px;
+    padding: 0px;
+    border-radius:100px;
+    margin: 20px auto;
+    overflow: hidden;
+    border: 2px solid;
+  }
+  button{
+    width: calc(100% - 16px);
+  }
+}

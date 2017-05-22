@@ -1,0 +1,145 @@
+.verde{color:green !important;}
+.rojo{color:red !important;}
+md-content[landing]{
+  overflow: auto !importante;
+}
+div.container{
+  max-width: 98% !important;
+  div.row{
+    background-color: white;
+    text-align: center;
+    border-radius: 0px;
+    margin-bottom: 10px;
+    color: black;
+    @include BoxShadowHelper(1);
+    div.col-md-2{
+      padding: 20px 0;
+      h4{
+        font-weight: bold;
+        font-size: 25px !important;
+        color: black;
+      }
+      div{
+        color: silver;
+        &:first-child{
+          font-size: 14px;
+          i{
+            font-size: 14px;
+            transform: translateY(2px);
+          }
+        }
+        &:last-child{
+          font-size: 11px;
+        }
+      }
+    }
+
+    &:nth-child(2), &:nth-child(4){
+      background: transparent;
+      box-shadow: none;
+      div.cont-trans{
+        margin-right: 10px;
+        width: calc((100% - 66%) - 16px);
+        box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
+        border-radius: 2px;
+        float: left;
+        background: white;
+        h4{
+          background: white;
+          margin: 0;
+          padding: 15px ;
+          border-bottom: 1px solid silver;
+          text-align: left;
+          font-size: 14px;
+          font-weight: bold;
+          color: grey;
+        }
+        &:last-child{
+          margin-right: 0px;
+        }
+
+        ul{
+          width: 100%;
+          padding: 0;
+          margin: 0;
+          position: relative;
+          .md-button.md-fab{
+            position: absolute;
+            top: -27px;
+            right: 20px;
+            background-color: #2196F3;
+            z-index: 1;
+          }
+          li{
+            list-style: none;
+            width: 100%;
+            border-bottom: 1px solid silver;
+            margin: 0;
+            text-align: left;
+            text-indent: 10px;
+            padding: 0 10px 15px 10px;
+            color: grey;
+            i{
+              background: #607D8B;
+              padding: 10px;
+              text-indent: 0;
+              border-radius: 100px;
+              transform: translateY(18px);
+              color: white;
+            }
+            div.precio{
+              margin-left: 50px;
+            }
+          }
+        }
+      }
+    }
+
+    &:nth-child(3){
+      h4{
+        text-align: left;
+        padding: 15px;
+        margin: 0;
+        color: grey;
+        font-weight: bold;
+        font-size: 14px;
+      }
+      table{
+        width: 100%;
+        margin: 0 auto;
+        tr{
+          text-align: left;
+          border-bottom: 1px solid silver;
+          text-indent: 10px;
+          td{
+            padding: 10px 0;
+            color: grey;
+            span{
+              padding: 10px;
+              color: white;
+              border-radius: 5px;
+              &.progreso{
+                background: #03A9F4 !important;
+              }
+              &.completado{
+                background: #4CAF50 !important;
+              }
+              &.pendiente{
+                background: #FFC107 !important;
+              }
+            }
+          }
+        }
+      }
+      div.paginacion{
+        width: 100%;
+        padding: 15px 0;
+        text-align: right;
+        color: grey;
+        i{
+          transform: translateY(8px);
+        }
+      }
+    }
+  }
+}

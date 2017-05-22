@@ -1,0 +1,118 @@
+<div class="dash">
+  <!--Panel Clientes -->
+  <div class="clientes">
+    <h3><i class="material-icons">account_circle</i> <div>Clientes</div></h3>
+    <div class="list">
+      <md-list flex>
+        <md-list-item class="md-3-line" ng-repeat="cliente in clientes.usuarios" ng-click="null">
+          <img ng-src="{{cliente.imagen.ruta}}" alt="">
+          <div class="md-list-item-text" layout="column">
+            <h4>{{ cliente.nombre}}</h4>
+          </div>
+        </md-list-item>
+      </md-list>
+    </div>
+    <div class="display">
+      <div class="widget">
+        <div class="icon-left conectado">
+          <i class="material-icons">cast_connected</i>
+        </div>
+        <div class="descripcion">
+          {{clientes.conectados || 0}}
+        </div>
+      </div>
+      <div class="widget">
+        <div class="icon-left registrado">
+          <i class="material-icons ">group</i>
+        </div>
+        <div class="descripcion">
+          {{clientes.registrados || 0}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Panel Proveedores -->
+  <div class="proveedores">
+    <h3><i class="material-icons">account_box</i> <div>Proveedores</div></h3>
+    <div class="list">
+      <md-list flex>
+        <md-list-item class="md-3-line list-mini" ng-repeat="proveedor in proveedores.usuarios" ng-click="null">
+          <img ng-src="{{proveedor.avatar.ruta}}" class="md-avatar" alt="">
+          <div class="md-list-item-text" layout="column">
+            <h4>{{ proveedor.nombre}}</h4>
+          </div>
+        </md-list-item>
+      </md-list>
+    </div>
+    <div class="display">
+      <div class="widget">
+        <div class="icon-left conectado">
+          <i class="material-icons">cast_connected</i>
+        </div>
+        <div class="descripcion">
+          {{proveedores.conectados || 0}}
+        </div>
+      </div>
+      <div class="widget">
+        <div class="icon-left registrado">
+          <i class="material-icons ">group</i>
+        </div>
+        <div class="descripcion">
+          {{proveedores.registrados || 0}}
+        </div>
+      </div>
+      <div class="widget">
+        <div class="icon-left activo">
+          <i class="material-icons ">brightness_7</i>
+        </div>
+        <div class="descripcion">
+          {{proveedores.activos || 0}}
+        </div>
+      </div>
+      <div class="widget">
+        <div class="icon-left inactivo">
+          <i class="material-icons ">brightness_3</i>
+        </div>
+        <div class="descripcion">
+          {{proveedores.inactivos || 0}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- rubro -->
+  <div lista>
+      <div categoria ng-repeat="rubro in rubros" >
+          <div nombre >{{rubro.nombre}}</div>
+          <img ng-src="{{rubro.imagen_ruta}}" alt="">
+      </div>
+      <div categoria  ng-click='showAdvanced($event)'>
+          <div nombre >Agregar</div>
+
+      </div>
+  </div>
+  <!-- tipo de imagen -->
+  <div class="proveedores listas">
+    <h3>
+      <i class="material-icons">photo</i>
+      <div>Tipos de imagen</div>
+      <i class="material-icons" ng-click='showTipoImagen($event)'>add</i>
+    </h3>
+    <div class="display">
+      <md-list flex>
+        <md-list-item class="md-3-line list-mini" ng-repeat="tipoImagen in tipos_imagen" ng-click="null">
+          <i class="md-avatar material-icons">photo</i>
+          <div class="md-list-item-text" layout="column">
+            <h4>{{ tipoImagen.nombre }}</h4>
+            <p>{{ tipoImagen.descripcion }}</p>
+          </div>
+        </md-list-item>
+      </md-list>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="botonera">
+    <md-button class="md-fab md-primary" ng-click="logOut();">
+      <md-icon class="material-icons">power_settings_new</md-icon>
+    </md-button>
+  </div>
+</div>

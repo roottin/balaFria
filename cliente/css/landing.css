@@ -1,0 +1,839 @@
+div[input-file] {
+  border: 1px solid silver;
+  width: 160px;
+  padding: 10px;
+  margin-bottom: 10px; }
+  div[input-file] input[type="file"] {
+    display: none; }
+  div[input-file] label {
+    color: grey; }
+  div[input-file] img[ngf-thumbnail] {
+    width: 140px !important;
+    height: 140px !important;
+    cursor: pointer; }
+
+md-content[landing].admin {
+  overflow: auto; }
+  md-content[landing].admin div.botonera {
+    position: fixed;
+    bottom: 10px;
+    right: 10px; }
+  md-content[landing].admin div[ui-view="body"] {
+    min-height: auto;
+    min-height: 100%;
+    overflow: auto; }
+  md-content[landing].admin div.admin {
+    background-color: #e2e2e2 !important;
+    width: 100%;
+    height: auto;
+    overflow: auto !important; }
+    md-content[landing].admin div.admin div.banner {
+      width: 100%;
+      height: 400px;
+      position: relative; }
+      md-content[landing].admin div.admin div.banner img {
+        width: 100%;
+        height: 100%; }
+    md-content[landing].admin div.admin div.form-log {
+      width: 600px;
+      height: 500px;
+      background: white;
+      margin: -135px auto 50px;
+      position: relative;
+      border-radius: 4px;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
+      md-content[landing].admin div.admin div.form-log div.logo {
+        position: absolute;
+        top: -60px;
+        font-size: 30px;
+        font-weight: bold;
+        text-align: center;
+        width: 100%; }
+      md-content[landing].admin div.admin div.form-log div.content-login {
+        width: 100%;
+        height: auto;
+        padding: 20px 0 !important;
+        color: #056ef9;
+        text-align: center; }
+        md-content[landing].admin div.admin div.form-log div.content-login i {
+          font-size: 150px; }
+        md-content[landing].admin div.admin div.form-log div.content-login h2 {
+          margin: 0; }
+        md-content[landing].admin div.admin div.form-log div.content-login md-input-container {
+          margin: 20px 100px  40px 100px; }
+        md-content[landing].admin div.admin div.form-log div.content-login label {
+          text-align: left;
+          color: grey; }
+        md-content[landing].admin div.admin div.form-log div.content-login input {
+          border-color: grey;
+          color: #056ef9; }
+          md-content[landing].admin div.admin div.form-log div.content-login input:focus {
+            border-color: #056ef9; }
+        md-content[landing].admin div.admin div.form-log div.content-login section .md-raised {
+          background-color: #056ef9 !important; }
+          md-content[landing].admin div.admin div.form-log div.content-login section .md-raised:hover {
+            background-color: #3f51b5 !important; }
+
+div.dash {
+  background: #505050;
+  min-height: 100%;
+  padding-bottom: 50px; }
+
+md-content[landing] header.adminPanel {
+  width: calc(100%);
+  background: white;
+  color: #f44336;
+  margin-top: 0 !important;
+  line-height: 60px;
+  padding-left: 20px;
+  font-size: 20px;
+  overflow: auto; }
+  md-content[landing] header.adminPanel div[hora] {
+    float: right;
+    margin-right: 40px;
+    font-size: 10px; }
+
+md-dialog[aria-label="rubro"] button.md-raised {
+  width: calc(100% - 20px); }
+md-dialog[aria-label="rubro"] div[input-file] {
+  margin: 10px auto 10px; }
+
+.admin div[lista] {
+  float: left;
+  background: #303030;
+  padding-bottom: 20px;
+  margin-left: 10px;
+  margin-top: 10px;
+  border-radius: 3px;
+  overflow: hidden;
+  min-width: calc(100% - 15px);
+  padding-bottom: 0px; }
+  .admin div[lista] div[categoria] {
+    width: 148px;
+    height: 148px;
+    float: left;
+    border: 1px solid white;
+    position: relative; }
+    .admin div[lista] div[categoria] div[nombre] {
+      color: white;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+      background-color: rgba(0, 0, 0, 0.6);
+      text-align: center;
+      z-index: 2;
+      font-family: bebas;
+      display: flex;
+      align-content: space-between;
+      justify-content: center;
+      align-items: center;
+      font-size: 31px; }
+    .admin div[lista] div[categoria] img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+      z-index: 1; }
+
+div.proveedores.listas {
+  width: calc((100% / 3) - 20px);
+  min-width: 200px; }
+  div.proveedores.listas div.display {
+    width: 100%;
+    border: none; }
+  div.proveedores.listas h3 {
+    margin-bottom: 0px; }
+
+div.clientes, div.proveedores {
+  float: left;
+  background: #303030;
+  padding-bottom: 20px;
+  margin-left: 10px;
+  margin-top: 10px;
+  border-radius: 3px;
+  overflow: hidden;
+  min-width: calc(50% - 15px);
+  width: calc((100% / 2) - 20px); }
+  div.clientes h3, div.proveedores h3 {
+    background: #3F51B5;
+    width: calc(100%);
+    margin: 0;
+    margin-bottom: 10px;
+    padding: 10px 20px; }
+    div.clientes h3 i, div.proveedores h3 i {
+      font-size: 32px;
+      transform: translateY(3px); }
+    div.clientes h3 div, div.proveedores h3 div {
+      display: inline-block;
+      transform: translateY(-5px); }
+    div.clientes h3 div + i, div.proveedores h3 div + i {
+      float: right;
+      cursor: pointer; }
+  div.clientes div.list, div.proveedores div.list {
+    width: calc(50% - 10px);
+    float: left; }
+  div.clientes md-list-item.list-mini, div.proveedores md-list-item.list-mini {
+    height: 50px;
+    min-height: 50px; }
+    div.clientes md-list-item.list-mini div.md-no-style, div.proveedores md-list-item.list-mini div.md-no-style {
+      height: 50px;
+      min-height: 50px; }
+  div.clientes div.display, div.proveedores div.display {
+    width: calc(50% - 10px);
+    height: auto;
+    display: flex;
+    align-content: space-between;
+    flex-wrap: wrap;
+    margin-right: 10px;
+    border-left: 1px solid silver; }
+    div.clientes div.display div.widget, div.proveedores div.display div.widget {
+      width: calc(50% - 20px);
+      height: 60px;
+      border: 1px solid;
+      border-radius: 3px;
+      margin-left: 10px;
+      margin-bottom: 10px;
+      display: inline-block;
+      text-align: center;
+      flex-shrink: 0;
+      flex-grow: 1;
+      min-width: 25%;
+      overflow: hidden; }
+      div.clientes div.display div.widget div.icon-left, div.proveedores div.display div.widget div.icon-left {
+        width: 40%;
+        height: 60px;
+        float: left;
+        margin: 0;
+        line-height: 100px;
+        border-right: 1px solid;
+        color: white; }
+        div.clientes div.display div.widget div.icon-left i, div.proveedores div.display div.widget div.icon-left i {
+          font-size: 50px; }
+      div.clientes div.display div.widget .conectado, div.proveedores div.display div.widget .conectado {
+        background: #4CAF50; }
+        div.clientes div.display div.widget .conectado + .descripcion, div.proveedores div.display div.widget .conectado + .descripcion {
+          color: #4CAF50; }
+      div.clientes div.display div.widget .registrado, div.proveedores div.display div.widget .registrado {
+        background: #2196F3; }
+        div.clientes div.display div.widget .registrado + .descripcion, div.proveedores div.display div.widget .registrado + .descripcion {
+          color: #2196F3; }
+      div.clientes div.display div.widget .activo, div.proveedores div.display div.widget .activo {
+        background: #FFC107; }
+        div.clientes div.display div.widget .activo + .descripcion, div.proveedores div.display div.widget .activo + .descripcion {
+          color: #FFC107; }
+      div.clientes div.display div.widget .inactivo, div.proveedores div.display div.widget .inactivo {
+        background: #607D8B; }
+        div.clientes div.display div.widget .inactivo + .descripcion, div.proveedores div.display div.widget .inactivo + .descripcion {
+          color: #607D8B; }
+      div.clientes div.display div.widget div.descripcion, div.proveedores div.display div.widget div.descripcion {
+        width: calc(60%);
+        height: 60px;
+        float: left;
+        margin: 0;
+        background: white;
+        color: grey;
+        font-size: 50px; }
+        div.clientes div.display div.widget div.descripcion h6, div.proveedores div.display div.widget div.descripcion h6 {
+          margin: 10px 0 10px 0;
+          font-size: 16px; }
+
+.box-registro {
+  padding: 0 !important;
+  margin: 0 !important; }
+
+section {
+  color: black; }
+
+md-content[landing] div[registro][proovedor-full].inicio {
+  padding: 0px;
+  top: 0px;
+  width: 100%;
+  height: 700px;
+  background-image: url("/img/registro-prov2.jpg");
+  background-size: cover;
+  border-radius: 0px; }
+  md-content[landing] div[registro][proovedor-full].inicio div[izquierda-form] {
+    max-width: 400px;
+    background-color: #303030;
+    float: right;
+    width: calc(50% - 10px);
+    margin-top: 13px;
+    padding: 30px 10px 0px;
+    margin-right: 20px; }
+    md-content[landing] div[registro][proovedor-full].inicio div[izquierda-form] div[input-file] {
+      margin: 0px auto 20px;
+      width: 162px; }
+    md-content[landing] div[registro][proovedor-full].inicio div[izquierda-form] button.md-raised {
+      width: calc(100% - 20px); }
+  md-content[landing] div[registro][proovedor-full].inicio div.vertical-divider {
+    float: right;
+    margin-right: 20px;
+    width: 1px;
+    background-color: white;
+    height: calc(100% - 20px);
+    margin-top: 10px;
+    z-index: 3; }
+  md-content[landing] div[registro][proovedor-full].inicio div[derecha-form] {
+    text-shadow: 1px 1px 1px black;
+    width: calc(50% - 1px);
+    height: calc(100% - 20px);
+    float: left;
+    padding: 10px 30px; }
+    md-content[landing] div[registro][proovedor-full].inicio div[derecha-form] h2 {
+      text-align: center;
+      margin-bottom: 40px;
+      color: white;
+      font-size: 32px;
+      width: 100%; }
+    md-content[landing] div[registro][proovedor-full].inicio div[derecha-form] section {
+      margin: 20px 0px;
+      width: 100%;
+      color: white; }
+      md-content[landing] div[registro][proovedor-full].inicio div[derecha-form] section div.texto {
+        float: left;
+        width: calc(100% - 80px); }
+      md-content[landing] div[registro][proovedor-full].inicio div[derecha-form] section button {
+        float: left; }
+
+div.clear {
+  width: 100%;
+  clear: both; }
+
+div.proveedor {
+  background-color: #e2e2e2 !important;
+  width: 100%;
+  height: auto;
+  overflow: auto !important; }
+  div.proveedor div.banner {
+    width: 100%;
+    height: calc(100% - 60px);
+    position: absolute; }
+    div.proveedor div.banner img {
+      width: 100%;
+      height: 100%; }
+  div.proveedor div.form-log {
+    width: 400px;
+    height: 500px;
+    background: white;
+    margin: 130px auto 0px;
+    position: relative;
+    border-radius: 4px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); }
+    div.proveedor div.form-log div.logo {
+      position: absolute;
+      top: -60px;
+      font-size: 30px;
+      font-weight: bold;
+      text-align: center;
+      width: 100%; }
+    div.proveedor div.form-log div.content-login {
+      width: 100%;
+      height: auto;
+      padding: 20px 0 !important;
+      color: #056ef9;
+      text-align: center; }
+      div.proveedor div.form-log div.content-login i {
+        font-size: 150px; }
+      div.proveedor div.form-log div.content-login h2 {
+        margin: 0; }
+      div.proveedor div.form-log div.content-login md-input-container {
+        margin: 20px 100px  40px 100px; }
+      div.proveedor div.form-log div.content-login label {
+        text-align: left;
+        color: grey; }
+      div.proveedor div.form-log div.content-login input {
+        border-color: grey;
+        color: #056ef9; }
+        div.proveedor div.form-log div.content-login input:focus {
+          border-color: #056ef9; }
+      div.proveedor div.form-log div.content-login section .md-raised {
+        background-color: #056ef9 !important; }
+        div.proveedor div.form-log div.content-login section .md-raised:hover {
+          background-color: #3f51b5 !important; }
+
+.verde {
+  color: green !important; }
+
+.rojo {
+  color: red !important; }
+
+md-content[landing] {
+  overflow: auto !important e; }
+
+div.container {
+  max-width: 98% !important; }
+  div.container div.row {
+    background-color: white;
+    text-align: center;
+    border-radius: 0px;
+    margin-bottom: 10px;
+    color: black;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
+    div.container div.row div.col-md-2 {
+      padding: 20px 0; }
+      div.container div.row div.col-md-2 h4 {
+        font-weight: bold;
+        font-size: 25px !important;
+        color: black; }
+      div.container div.row div.col-md-2 div {
+        color: silver; }
+        div.container div.row div.col-md-2 div:first-child {
+          font-size: 14px; }
+          div.container div.row div.col-md-2 div:first-child i {
+            font-size: 14px;
+            transform: translateY(2px); }
+        div.container div.row div.col-md-2 div:last-child {
+          font-size: 11px; }
+    div.container div.row:nth-child(2), div.container div.row:nth-child(4) {
+      background: transparent;
+      box-shadow: none; }
+      div.container div.row:nth-child(2) div.cont-trans, div.container div.row:nth-child(4) div.cont-trans {
+        margin-right: 10px;
+        width: calc((100% - 66%) - 16px);
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+        border-radius: 2px;
+        float: left;
+        background: white; }
+        div.container div.row:nth-child(2) div.cont-trans h4, div.container div.row:nth-child(4) div.cont-trans h4 {
+          background: white;
+          margin: 0;
+          padding: 15px;
+          border-bottom: 1px solid silver;
+          text-align: left;
+          font-size: 14px;
+          font-weight: bold;
+          color: grey; }
+        div.container div.row:nth-child(2) div.cont-trans:last-child, div.container div.row:nth-child(4) div.cont-trans:last-child {
+          margin-right: 0px; }
+        div.container div.row:nth-child(2) div.cont-trans ul, div.container div.row:nth-child(4) div.cont-trans ul {
+          width: 100%;
+          padding: 0;
+          margin: 0;
+          position: relative; }
+          div.container div.row:nth-child(2) div.cont-trans ul .md-button.md-fab, div.container div.row:nth-child(4) div.cont-trans ul .md-button.md-fab {
+            position: absolute;
+            top: -27px;
+            right: 20px;
+            background-color: #2196F3;
+            z-index: 1; }
+          div.container div.row:nth-child(2) div.cont-trans ul li, div.container div.row:nth-child(4) div.cont-trans ul li {
+            list-style: none;
+            width: 100%;
+            border-bottom: 1px solid silver;
+            margin: 0;
+            text-align: left;
+            text-indent: 10px;
+            padding: 0 10px 15px 10px;
+            color: grey; }
+            div.container div.row:nth-child(2) div.cont-trans ul li i, div.container div.row:nth-child(4) div.cont-trans ul li i {
+              background: #607D8B;
+              padding: 10px;
+              text-indent: 0;
+              border-radius: 100px;
+              transform: translateY(18px);
+              color: white; }
+            div.container div.row:nth-child(2) div.cont-trans ul li div.precio, div.container div.row:nth-child(4) div.cont-trans ul li div.precio {
+              margin-left: 50px; }
+    div.container div.row:nth-child(3) h4 {
+      text-align: left;
+      padding: 15px;
+      margin: 0;
+      color: grey;
+      font-weight: bold;
+      font-size: 14px; }
+    div.container div.row:nth-child(3) table {
+      width: 100%;
+      margin: 0 auto; }
+      div.container div.row:nth-child(3) table tr {
+        text-align: left;
+        border-bottom: 1px solid silver;
+        text-indent: 10px; }
+        div.container div.row:nth-child(3) table tr td {
+          padding: 10px 0;
+          color: grey; }
+          div.container div.row:nth-child(3) table tr td span {
+            padding: 10px;
+            color: white;
+            border-radius: 5px; }
+            div.container div.row:nth-child(3) table tr td span.progreso {
+              background: #03A9F4 !important; }
+            div.container div.row:nth-child(3) table tr td span.completado {
+              background: #4CAF50 !important; }
+            div.container div.row:nth-child(3) table tr td span.pendiente {
+              background: #FFC107 !important; }
+    div.container div.row:nth-child(3) div.paginacion {
+      width: 100%;
+      padding: 15px 0;
+      text-align: right;
+      color: grey; }
+      div.container div.row:nth-child(3) div.paginacion i {
+        transform: translateY(8px); }
+
+md-dialog[avatar-upload] div[input-file] {
+  width: 140px;
+  height: 140px;
+  padding: 0px;
+  border-radius: 100px;
+  margin: 20px auto;
+  overflow: hidden;
+  border: 2px solid; }
+md-dialog[avatar-upload] button {
+  width: calc(100% - 16px); }
+
+header div[sociales] {
+  z-index: 10; }
+  header div[sociales] div[notificaciones] {
+    width: 50px;
+    height: 50px;
+    border-radius: 100px;
+    float: right;
+    margin: -7px 20px 0 0;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+    position: relative;
+    color: #303030;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center; }
+    header div[sociales] div[notificaciones] i {
+      border: none !important;
+      background: none !important;
+      padding: 0px !important;
+      margin: 0px !important; }
+  header div[sociales] div[avatar] {
+    width: 50px;
+    height: 50px;
+    border-radius: 100px;
+    float: right;
+    margin: -7px 60px 0 0;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+    position: relative;
+    border: 2px solid white;
+    color: #303030; }
+    header div[sociales] div[avatar] img {
+      width: 100%;
+      height: 100%;
+      z-index: 11;
+      border-radius: 100px;
+      position: absolute; }
+    header div[sociales] div[avatar] div[opciones] {
+      width: 150px;
+      height: auto;
+      position: absolute;
+      margin-left: -50px;
+      margin-top: 2px;
+      transition: opacity 0.7s ease-out, box-shadow 0.3s ease-in, z-index 0.1s ease-out;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+      opacity: 0;
+      z-index: -1; }
+      header div[sociales] div[avatar] div[opciones] ul {
+        background: white;
+        margin-top: -5px;
+        margin-bottom: 0;
+        list-style: none;
+        padding: 0;
+        padding-top: 55px;
+        border-radius: 3px;
+        font-size: 12px; }
+        header div[sociales] div[avatar] div[opciones] ul li {
+          padding: 10px;
+          transition: all 0.3s ease-in-out;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.5); }
+          header div[sociales] div[avatar] div[opciones] ul li:hover {
+            background: rgba(0, 0, 0, 0.2); }
+          header div[sociales] div[avatar] div[opciones] ul li:last-child {
+            border-bottom: none; }
+          header div[sociales] div[avatar] div[opciones] ul li span {
+            transform: translateY(5px);
+            margin-right: 5px;
+            margin-top: -10px; }
+    header div[sociales] div[avatar]:hover div {
+      transition: opacity 0.3s ease-in, box-shadow 0.7s ease-out, z-index 0.3s ease-out;
+      box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+      z-index: 9;
+      opacity: 1; }
+
+div.contVerificacion {
+  width: 600px;
+  margin: 10px auto;
+  background-color: white;
+  padding: 0px 0px 20px;
+  color: #303030;
+  border-radius: 3px;
+  overflow: hidden; }
+  div.contVerificacion h1 {
+    margin: 0px auto;
+    width: 100%;
+    padding: 20px 0px;
+    text-align: center;
+    background: #3F51B5;
+    color: white; }
+  div.contVerificacion div.avatar {
+    width: 200px;
+    background-color: #303030;
+    color: white;
+    padding: 10px;
+    border-radius: 3px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    float: left;
+    margin: 10px calc(10%); }
+    div.contVerificacion div.avatar img {
+      width: 140px;
+      border-radius: 100px;
+      border: 2px solid;
+      margin-left: 20px; }
+    div.contVerificacion div.avatar h4 {
+      width: 100%;
+      margin: 15px 0px 0px;
+      text-align: center; }
+  div.contVerificacion h4 {
+    float: left;
+    width: calc(50% - 20px);
+    margin-top: 30px; }
+
+html, body {
+  min-height: 100%; }
+
+.leaflet-bottom {
+  display: none; }
+
+div.md-toast-content {
+  background: white !important;
+  color: #3F51B5 !important; }
+
+md-menu-content h4 {
+  background-color: #303030 !important;
+  padding: 15px;
+  margin: -10px 0px 0px 0px;
+  color: white; }
+
+md-menu-item {
+  padding-left: 15px; }
+  md-menu-item:hover {
+    background-color: silver; }
+
+md-checkbox div.md-container div.md-icon {
+  border-color: #303030 !important; }
+
+[login] {
+  max-width: 500px;
+  width: 100%; }
+  [login] .inicio {
+    background-color: rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 500px;
+    padding: 10px 10px;
+    color: white;
+    border: none;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    border-radius: 3px; }
+    [login] .inicio.google {
+      background: #dd4b39; }
+    [login] .inicio.md-raised {
+      background: #3F51B5; }
+
+div[divider] {
+  margin: 10px 10px;
+  width: calc(100% - 0px);
+  height: 1px;
+  background: silver;
+  margin-left: -2px; }
+
+md-content[landing].cliente div[ui-view="body"] {
+  width: 100%;
+  height: calc(100% - 60px); }
+
+md-content[landing] {
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  position: relative; }
+  md-content[landing] .md-primary {
+    background: #3F51B5; }
+    md-content[landing] .md-primary.md-raised {
+      background-color: #607D8B; }
+  md-content[landing] header.cliente {
+    width: 100%;
+    height: 70px;
+    background-color: transparent;
+    margin-top: -10px; }
+    md-content[landing] header.cliente i.material-icons {
+      float: right;
+      margin-top: 10px;
+      padding: 15px;
+      font-size: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out; }
+      md-content[landing] header.cliente i.material-icons:hover {
+        background: #3F51B5; }
+    md-content[landing] header.cliente div[titulo] {
+      font-family: 'Bebas';
+      font-size: 40px;
+      margin-left: 30px;
+      top: 20%;
+      color: white;
+      position: relative;
+      float: left; }
+    md-content[landing] header.cliente div[sociales] {
+      float: right;
+      width: 340px;
+      height: 50%;
+      position: relative;
+      top: 30%; }
+      md-content[landing] header.cliente div[sociales] .md-raised {
+        background-color: rgba(0, 0, 0, 0.3) !important;
+        color: white;
+        border: 1px solid !important;
+        box-shadow: none;
+        top: -3px;
+        float: right; }
+        md-content[landing] header.cliente div[sociales] .md-raised:hover span {
+          color: white; }
+      md-content[landing] header.cliente div[sociales] i {
+        color: white;
+        border: 1px solid;
+        width: 40px;
+        height: 35px;
+        border-radius: 100px;
+        text-align: center;
+        padding-top: 5px;
+        font-size: 30px;
+        float: right;
+        margin-right: 20px;
+        background-color: rgba(0, 0, 0, 0.3);
+        z-index: 5;
+        cursor: pointer; }
+        md-content[landing] header.cliente div[sociales] i div[tooltip] {
+          margin-top: -15px;
+          font-size: 12px;
+          transition: all 0.2s ease-in-out;
+          color: transparent;
+          z-index: 3;
+          width: 60px; }
+          md-content[landing] header.cliente div[sociales] i div[tooltip]:after {
+            transition: inherit;
+            content: '';
+            background-color: transparent;
+            position: absolute;
+            margin-top: -22px;
+            margin-left: -42px;
+            border-bottom: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-left: 10px solid transparent;
+            border-top: 10px solid transparent;
+            z-index: 3; }
+        md-content[landing] header.cliente div[sociales] i:hover div[tooltip] {
+          font-size: 12px;
+          text-align: center;
+          border: 1px solid silver;
+          margin-left: -10px;
+          color: white;
+          padding: 6px;
+          border-radius: 3px;
+          margin-top: 10px;
+          background-color: #3F51B5;
+          position: absolute; }
+          md-content[landing] header.cliente div[sociales] i:hover div[tooltip]:after {
+            border-bottom: 10px solid #3F51B5; }
+  md-content[landing] div[principal] {
+    width: 100%;
+    height: calc(100%); }
+    md-content[landing] div[principal] div[mapa] {
+      float: left;
+      height: 100%;
+      width: calc(100% - 301px);
+      position: relative;
+      z-index: 1; }
+      md-content[landing] div[principal] div[mapa] md-toolbar {
+        min-height: 48px !important;
+        height: 48px !important; }
+        md-content[landing] div[principal] div[mapa] md-toolbar div[rubros-tab] {
+          padding: 15px;
+          color: white;
+          font-size: 14px;
+          text-transform: uppercase;
+          transition: border 0.3s;
+          border-bottom: 4px solid; }
+          md-content[landing] div[principal] div[mapa] md-toolbar div[rubros-tab].active {
+            background-color: rgba(0, 0, 0, 0.2); }
+      md-content[landing] div[principal] div[mapa] div.angular-leaflet-map {
+        width: calc(100% - 0px);
+        height: calc(100% - 96px); }
+      md-content[landing] div[principal] div[mapa] md-toolbar.bottom {
+        bottom: 0;
+        position: absolute; }
+        md-content[landing] div[principal] div[mapa] md-toolbar.bottom button {
+          transition: all 0.3s ease-in-out; }
+          md-content[landing] div[principal] div[mapa] md-toolbar.bottom button:hover {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); }
+    md-content[landing] div[principal] div[lista] {
+      width: 300px;
+      height: 100%;
+      float: left;
+      border-top: 1px solid silver;
+      border-right: 1px solid silver; }
+      md-content[landing] div[principal] div[lista] div[categoria] {
+        width: 148px;
+        height: 148px;
+        float: left;
+        border: 1px solid white;
+        position: relative; }
+        md-content[landing] div[principal] div[lista] div[categoria] div[nombre] {
+          color: white;
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          cursor: pointer;
+          background-color: rgba(0, 0, 0, 0.6);
+          text-align: center;
+          z-index: 2;
+          font-family: bebas;
+          display: flex;
+          align-content: space-between;
+          justify-content: center;
+          align-items: center;
+          font-size: 31px; }
+        md-content[landing] div[principal] div[lista] div[categoria] img {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          cursor: pointer;
+          z-index: 1; }
+  md-content[landing] div[registro] {
+    background-color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    top: 100px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    width: 400px;
+    left: 8%;
+    border-radius: 3px;
+    overflow: hidden;
+    border: 1px solid silver;
+    padding: 0px 10px; }
+    md-content[landing] div[registro] .md-raised {
+      color: white; }
+    md-content[landing] div[registro].inicio {
+      position: relative;
+      margin: 0 auto;
+      left: 0px;
+      top: 150px; }
+      md-content[landing] div[registro].inicio div[cabecera] {
+        margin-bottom: 33px;
+        padding-top: 50px;
+        height: 60px;
+        font-size: 30px;
+        text-transform: uppercase;
+        border-bottom: 1px solid silver; }
+    md-content[landing] div[registro] div[cabecera] {
+      background-color: rgba(0, 155, 219, 0.6);
+      text-align: center;
+      width: 100%;
+      padding: 20px 0px 20px 18px;
+      color: white;
+      font-size: 20px;
+      margin: -10px 0px 20px -10px; }
+
+/*# sourceMappingURL=landing.css.map */

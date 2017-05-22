@@ -1,0 +1,49 @@
+<div principal>
+  <div lista>
+      <div categoria ng-repeat="rubro in rubros" >
+          <div nombre >{{rubro.nombre}}</div>
+          <img ng-src="{{rubro.imagen_ruta || '#'}}" alt="">
+      </div>
+  </div>
+  <div mapa >
+    <md-toolbar class="md-hue-2">
+      <div class="md-toolbar-tools">
+        <div rubros-tab class="active">Todos</div>
+        <div rubros-tab ng-repeat="disp in disponibles" style="border-color:{{disp.color}}">{{disp.nombre}}</div>
+        <md-menu>
+          <md-button class="md-icon-button" aria-label="More" ng-click="openMenu($mdMenu, $event)">
+            <i class="material-icons">more_vert</i>
+          </md-button>
+          <md-menu-content width="4" md-theme="default">
+            <h4>Categorias Rapida</h4>
+            <md-menu-item ng-repeat="rubro in rubros">
+                <md-checkbox ng-click="toggleRubro($index)" aria-label="Checkbox {{$index}}" ng-true-value="'si'" ng-false-value="'no'" class="md-warn" flex>
+                {{rubro.nombre | uppercase}}
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+      </div>
+    </md-toolbar>
+    <leaflet lf-center="Acarigua"></leaflet>
+    <md-toolbar class="md-hue-2 bottom">
+      <div class="md-toolbar-tools" layout="row" layout-align="space-around center">
+        <md-button class="md-icon-button" aria-label="Favorite"  >
+          <i class="material-icons">payment</i>
+        </md-button>
+
+        <md-button class="md-icon-button" aria-label="More" >
+          <i class="material-icons">history</i>
+        </md-button>
+
+        <md-button class="md-icon-button" aria-label="More" >
+          <i class="material-icons">favorite</i>
+        </md-button>
+
+        <md-button class="md-icon-button" aria-label="More" >
+          <i class="material-icons">security</i>
+        </md-button>
+      </div>
+    </md-toolbar>
+  </div>
+
+</div>

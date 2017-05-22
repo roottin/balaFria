@@ -1,0 +1,43 @@
+div.contVerificacion{
+  width: 600px;
+  margin: 10px auto;
+  background-color: white;
+  padding: 0px 0px 20px;
+  color: #303030;
+  border-radius: 3px;
+  overflow: hidden;
+  h1{
+    margin: 0px auto;
+    width: 100%;
+    padding: 20px 0px;
+    text-align: center;
+    background: $color-primary;
+    color: white;
+  }
+  div.avatar{
+    width: 200px;
+    background-color: #303030;
+    color: white;
+    padding: 10px;
+    border-radius: 3px;
+    @include BoxShadowHelper(3);
+    float: left;
+    margin: 10px calc(10%);
+    img{
+      width: 140px;
+      border-radius: 100px;
+      border: 2px solid;
+      margin-left: 20px;
+    }
+    h4{
+      width: 100%;
+      margin: 15px 0px 0px;
+      text-align: center;
+    }
+  }
+  h4{
+    float: left;
+    width: calc(50% - 20px);
+    margin-top: 30px;
+  }
+}

@@ -1,0 +1,21 @@
+<header class="cliente">
+  <div titulo>
+    Panel de Control
+  </div>
+  <div sociales>
+    <div avatar>
+      <img
+        src="{{header.usuario.avatar.ruta || '/img/thumbnails/thumbnail.png'}}" alt=""
+        ng-click="header.cambiarImagen($event)"
+      >
+      <div opciones>
+        <ul>
+          <li style="color:#303030">{{header.usuario.nombre}}</li>
+          <li><span class="material-icons">settings</span>Ajustes</li>
+          <li><span class="material-icons">security</span>Datos seguridad</li>
+          <li ng-click="header.logOut()"><span class="material-icons">power_settings_new</span>Cerrar Sesion</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
