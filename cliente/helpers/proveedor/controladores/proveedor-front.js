@@ -51,7 +51,7 @@ angular.module('balafria')
   var yo = this;
   yo.usuario = $sesion.obtenerPerfil();
 }])
-.controller('ctrlHeaderPro', ['$state','$sesion','$auth', function ($state,$sesion,$auth){
+.controller('ctrlHeaderPro', ['$state','$sesion','$auth','$mdSidenav', function ($state,$sesion,$auth, $mdSidenav){
   var yo = this;
   yo.usuario = $sesion.obtenerPerfil();
   yo.logOut = function(){
@@ -62,6 +62,9 @@ angular.module('balafria')
               $state.go("frontPage");
           });
   };
+  yo.openLeftMenu = function() {
+   $mdSidenav('right').toggle();
+ };
 }])
 .controller('ctrlLogPro', ['$scope','$http','$state','$sesion','$auth','$mdToast', function ($scope,$http,$state,$sesion,$auth,$mdToast) {
   $scope.login = function(){

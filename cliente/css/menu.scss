@@ -1,6 +1,27 @@
 header{
   div[sociales]{
-
+    z-index: 10;
+    div[notificaciones]{
+      width: 50px;
+      height: 50px;
+      border-radius: 100px;
+      float: right;
+      margin: -7px 20px 0 0;
+      cursor: pointer;
+      transition: all 0.5s ease-in-out;
+      position: relative;
+      color:#303030;
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-around;
+      align-items: center;
+      i{
+        border: none !important;
+        background: none !important;
+        padding: 0px !important;
+        margin: 0px !important;
+      }
+    }
     div[avatar]{
       width: 50px;
       height: 50px;
@@ -15,7 +36,7 @@ header{
       img{
         width: 100%;
         height: 100%;
-        z-index: 10;
+        z-index: 11;
         border-radius: 100px;
         position: absolute;
       }
@@ -64,7 +85,7 @@ header{
                     box-shadow 0.7s ease-out,
                     z-index 0.3s ease-out;
         @include BoxShadowHelper(5);
-        z-index: 2;
+        z-index: 9;
         opacity: 1;
       }
     }

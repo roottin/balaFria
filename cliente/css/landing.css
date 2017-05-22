@@ -415,7 +415,8 @@ div.container {
             position: absolute;
             top: -27px;
             right: 20px;
-            background-color: #2196F3; }
+            background-color: #2196F3;
+            z-index: 1; }
           div.container div.row:nth-child(2) div.cont-trans ul li, div.container div.row:nth-child(4) div.cont-trans ul li {
             list-style: none;
             width: 100%;
@@ -480,59 +481,80 @@ md-dialog[avatar-upload] div[input-file] {
 md-dialog[avatar-upload] button {
   width: calc(100% - 16px); }
 
-header div[sociales] div[avatar] {
-  width: 50px;
-  height: 50px;
-  border-radius: 100px;
-  float: right;
-  margin: -7px 60px 0 0;
-  cursor: pointer;
-  transition: all 0.5s ease-in-out;
-  position: relative;
-  border: 2px solid white;
-  color: #303030; }
-  header div[sociales] div[avatar] img {
-    width: 100%;
-    height: 100%;
-    z-index: 10;
+header div[sociales] {
+  z-index: 10; }
+  header div[sociales] div[notificaciones] {
+    width: 50px;
+    height: 50px;
     border-radius: 100px;
-    position: absolute; }
-  header div[sociales] div[avatar] div[opciones] {
-    width: 150px;
-    height: auto;
-    position: absolute;
-    margin-left: -50px;
-    margin-top: 2px;
-    transition: opacity 0.7s ease-out, box-shadow 0.3s ease-in, z-index 0.1s ease-out;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    opacity: 0;
-    z-index: -1; }
-    header div[sociales] div[avatar] div[opciones] ul {
-      background: white;
-      margin-top: -5px;
-      margin-bottom: 0;
-      list-style: none;
-      padding: 0;
-      padding-top: 55px;
-      border-radius: 3px;
-      font-size: 12px; }
-      header div[sociales] div[avatar] div[opciones] ul li {
-        padding: 10px;
-        transition: all 0.3s ease-in-out;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.5); }
-        header div[sociales] div[avatar] div[opciones] ul li:hover {
-          background: rgba(0, 0, 0, 0.2); }
-        header div[sociales] div[avatar] div[opciones] ul li:last-child {
-          border-bottom: none; }
-        header div[sociales] div[avatar] div[opciones] ul li span {
-          transform: translateY(5px);
-          margin-right: 5px;
-          margin-top: -10px; }
-  header div[sociales] div[avatar]:hover div {
-    transition: opacity 0.3s ease-in, box-shadow 0.7s ease-out, z-index 0.3s ease-out;
-    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
-    z-index: 2;
-    opacity: 1; }
+    float: right;
+    margin: -7px 20px 0 0;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+    position: relative;
+    color: #303030;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center; }
+    header div[sociales] div[notificaciones] i {
+      border: none !important;
+      background: none !important;
+      padding: 0px !important;
+      margin: 0px !important; }
+  header div[sociales] div[avatar] {
+    width: 50px;
+    height: 50px;
+    border-radius: 100px;
+    float: right;
+    margin: -7px 60px 0 0;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+    position: relative;
+    border: 2px solid white;
+    color: #303030; }
+    header div[sociales] div[avatar] img {
+      width: 100%;
+      height: 100%;
+      z-index: 11;
+      border-radius: 100px;
+      position: absolute; }
+    header div[sociales] div[avatar] div[opciones] {
+      width: 150px;
+      height: auto;
+      position: absolute;
+      margin-left: -50px;
+      margin-top: 2px;
+      transition: opacity 0.7s ease-out, box-shadow 0.3s ease-in, z-index 0.1s ease-out;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+      opacity: 0;
+      z-index: -1; }
+      header div[sociales] div[avatar] div[opciones] ul {
+        background: white;
+        margin-top: -5px;
+        margin-bottom: 0;
+        list-style: none;
+        padding: 0;
+        padding-top: 55px;
+        border-radius: 3px;
+        font-size: 12px; }
+        header div[sociales] div[avatar] div[opciones] ul li {
+          padding: 10px;
+          transition: all 0.3s ease-in-out;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.5); }
+          header div[sociales] div[avatar] div[opciones] ul li:hover {
+            background: rgba(0, 0, 0, 0.2); }
+          header div[sociales] div[avatar] div[opciones] ul li:last-child {
+            border-bottom: none; }
+          header div[sociales] div[avatar] div[opciones] ul li span {
+            transform: translateY(5px);
+            margin-right: 5px;
+            margin-top: -10px; }
+    header div[sociales] div[avatar]:hover div {
+      transition: opacity 0.3s ease-in, box-shadow 0.7s ease-out, z-index 0.3s ease-out;
+      box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+      z-index: 9;
+      opacity: 1; }
 
 div.contVerificacion {
   width: 600px;
