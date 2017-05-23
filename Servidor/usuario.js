@@ -49,6 +49,12 @@ var Usuario = function(){
 			conexion.socket.disconnect();
 		});
 	};
+	//emito un mensaje por todas las conexiones
+	self.emit = function(evento,data){
+			self.conexiones.forEach(function(conexion){
+				conexion.socekt.emit(evento,data);
+			});
+	}
 };
 module.exports = consUsuario;
 //TODO: notificaciones de usuario

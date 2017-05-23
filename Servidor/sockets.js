@@ -145,7 +145,6 @@ function init(app) {
 					if(plug.estado=='esperando'){
 						console.log("SESION: plug desconectado");
 						console.log('-----------------------------');
-
 						usuario.cerrarConexion(plug);
 					}
 				};

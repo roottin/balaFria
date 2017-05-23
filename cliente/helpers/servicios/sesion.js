@@ -4,13 +4,14 @@ angular.module('balafria')
   self.perfil = null;
   self.socket = null;
   self.estado = "desconectado";
+  self.notificaciones = [];
 
   self.obtenerPerfil = function(){
     if(self.estado == "desconectado"){
       var datosSesion = sessionStorage.getItem('balaFria_token');
       if(!datosSesion){
         $state.go('frontPage');
-      }else{        
+      }else{
         datosSesion = JSON.parse(datosSesion);
         return new Promise(function(completado,rechazado){
           $http.post('/api/recuperar',datosSesion)
@@ -37,6 +38,7 @@ angular.module('balafria')
       return self.perfil;
     }
   }
+
   self.crear = function(perfil,tipo){
     self.perfil = perfil;
     self.perfil.tipo = tipo;
@@ -83,6 +85,28 @@ angular.module('balafria')
     });
     return self;
   };
+  self.buscarNotificaciones = function(){
+    if(self.perfil){
+      $http.get('api/notificacion/'+perfil.tipo+'/'+perfil.id)
+        .then(function(resultado){
+          self.notificaciones = resultado.data.notificaciones;
+          //inicializo el modulo
+          self.on('modNot',function(data){
+            console.log(data);
+            //muestro contenido de la notificacion segun el tipo
+              //trivial: toast
+              //accion-corta: toast
+              //accion-larga: modal
+              //urgente: modal
+          });
+        })
+        .catch(function(err){
+          console.error(new Error(err));
+        });
+    }else{
+      console.error('Perfil no se encuentra inicializado para buscar notificaciones');
+    }
+  }
   //control de socket
   self.on = function (eventName, callback) {
     if(self.socket){
@@ -92,7 +116,6 @@ angular.module('balafria')
           callback.apply(self.socket, args);
         });
       });
-
     }
   };
   self.emit = function (eventName, data, callback) {
