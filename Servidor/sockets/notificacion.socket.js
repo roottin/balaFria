@@ -9,24 +9,25 @@ function inicializarNotificaciones(usuario,conexion){
       //accion-corta
       //accion-larga
       //urgente
-    if(data.entidad == 'proveedor'){
-      db.notificacion.create({
-        "titulo":data.titulo,
-        "cuerpo":data.cuerpo,
-        "id_tipo_notificacion":data.id_tipo_notificacion
+    db.notificacion.create({
+      "titulo":data.titulo,
+      "cuerpo":data.cuerpo,
+      "id_tipo_notificacion":data.id_tipo_notificacion
+    })
+      .then(function(notificacion){
+        var relacion_notificacion = {};
+        relacion_notificacion["id_"+data.entidad] = data["id_"+data.entidad];
+        relacion_notificacion["id_notificacion"] = data.id_notificacion;
+        db["notificacion_"+data.entidad].create(relacion_notificacion)
       })
         .then(function(notificacion){
-          db.notificacion_proveedor.create({
-            "id_proveedor":data.id_proveedor,
-            "id_notificacion":data.id_notificacion
-          })
+          var usuario = servidor.buscarUsuario(data["id_"+data.entidad],data.entidad);
+          if(usuario){
+            usuario.emit.('modNot',data);
+          }
         })
-          .then(function(notificacion_proveedor){
-            var usuario = servidor.buscarUsuario(data.id_proveedor,'proveedor');
-            if(usuario){
-              usuario.emit.('modNot',data);
-            }
-          });
-    }
+        .catch(function(err){
+          console.error(err);
+        });
   });
 }
