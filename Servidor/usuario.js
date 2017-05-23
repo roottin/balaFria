@@ -1,4 +1,5 @@
 var plugAssembler = require('./plug');
+var moduloNotificaciones = require('sockets/notificacion.socket');
 var consUsuario = {};
 
 consUsuario.crear = function(){
@@ -18,6 +19,7 @@ var Usuario = function(){
 		if(socket){
 			var plug = plugAssembler.configure(socket,this.perfil.tipo,token);
 			this.conexiones.push(plug);
+			moduloNotificaciones(self,plug);
 		}
 		return this;
 	};

@@ -1,7 +1,7 @@
 var db = require('../../api/models/index');
 var servidor = require('../servidor');
 
-function inicializarNotificaciones(usuario,conexion){
+function init(usuario,conexion){
   conexion.socket.on('modNot',function(data){
     console.log('notificacion recibida: ',data);
     //tipos
@@ -21,8 +21,8 @@ function inicializarNotificaciones(usuario,conexion){
         db["notificacion_"+data.entidad].create(relacion_notificacion)
       })
         .then(function(notificacion){
-          var usuario = servidor.buscarUsuario(data["id_"+data.entidad],data.entidad);
-          if(usuario){
+          var user = servidor.buscarUsuario(data["id_"+data.entidad],data.entidad);
+          if(user){
             usuario.emit.('modNot',data);
           }
         })
