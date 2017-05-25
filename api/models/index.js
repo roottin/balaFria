@@ -26,7 +26,7 @@ if (process.env.DATABASE_URL) {
     }
   });
 } else {
-  recrearBaseDeDatos = true ;
+  recrearBaseDeDatos = false ;
   console.log('----------------------------------------');
   console.log('Base de datos Local');
   console.log('----------------------------------------');
@@ -70,7 +70,6 @@ db.sequelize.sync({force:recrearBaseDeDatos})
     console.log('----------------------------------------');
     console.log('servidor de Base de Datos inicializado');
     console.log('----------------------------------------');
-
   })
   .catch(function(err) {
     console.log('Server failed to start due to error: %s', err);

@@ -4,20 +4,23 @@
     "password": null,
     "database": "balafria",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "seederStorage": "sequelize"
   },
   "test": {
     "username": "aabewftefmafkl",
     "password": "f405f64143e5997d8ed016e55bf6b95be5aece2247e2c2ca37c20fa91c63b89e",
     "database": "d9930ros0uu0lf",
     "host": "ec2-54-221-201-244.compute-1.amazonaws.com",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "seederStorage": "sequelize"
   },
   "production": {
     "username": "aabewftefmafkl",
     "password": "f405f64143e5997d8ed016e55bf6b95be5aece2247e2c2ca37c20fa91c63b89e",
     "database": "d9930ros0uu0lf",
     "host": "ec2-54-221-201-244.compute-1.amazonaws.com",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "seederStorage": "sequelize"
   }
 }
