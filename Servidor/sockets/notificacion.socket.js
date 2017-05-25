@@ -23,7 +23,7 @@ function init(usuario,conexion){
         .then(function(notificacion){
           var user = servidor.buscarUsuario(data["id_"+data.entidad],data.entidad);
           if(user){
-            usuario.emit.('modNot',data);
+            usuario.emit('modNot',data);
           }
         })
         .catch(function(err){

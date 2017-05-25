@@ -63,8 +63,11 @@ angular.module('balafria')
           });
   };
   yo.openLeftMenu = function() {
-   $mdSidenav('right').toggle();
- };
+    $mdSidenav('left').toggle();
+  };
+  yo.openRightMenu = function() {
+    $mdSidenav('right').toggle();
+  };
 }])
 .controller('ctrlLogPro', ['$scope','$http','$state','$sesion','$auth','$mdToast', function ($scope,$http,$state,$sesion,$auth,$mdToast) {
   $scope.login = function(){

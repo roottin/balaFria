@@ -1,4 +1,5 @@
 <header class="cliente">
+  <i class="material-icons left-menu" ng-click="header.openLeftMenu()">menu</i>
   <div titulo>
     Panel de Control
   </div>
@@ -15,13 +16,18 @@
         </ul>
       </div>
     </div>
-    <div notificaciones ng-click="header.openLeftMenu()">
+    <div notificaciones ng-click="header.openRightMenu()">
         <i class="material-icons">notifications_none</i>
     </div>
   </div>
 </header>
 <!-- SIDENAV -->
-<md-sidenav md-component-id="right" class="md-sidenav-right" md-disabled-backdrop="true">
-  Left Nav!
-</md-sidenav>
+  <!-- LEFT -->
+  <md-sidenav md-component-id="left" class="md-sidenav-left" md-disabled-backdrop="true">
+    <h3>Sucursales <i class="material-icons">plus</i></h3>
+  </md-sidenav>
+  <!-- RIGHT -->
+  <md-sidenav md-component-id="right" class="md-sidenav-right" md-disabled-backdrop="true">
+    right Nav!
+  </md-sidenav>
 <!-- SIDENAV -->

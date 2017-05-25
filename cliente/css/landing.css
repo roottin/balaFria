@@ -481,6 +481,8 @@ md-dialog[avatar-upload] div[input-file] {
 md-dialog[avatar-upload] button {
   width: calc(100% - 16px); }
 
+header i.left-menu {
+  float: left; }
 header div[sociales] {
   z-index: 10; }
   header div[sociales] div[notificaciones] {
