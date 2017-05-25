@@ -31,3 +31,4 @@ function init(usuario,conexion){
         });
   });
 }
+module.exports = init;

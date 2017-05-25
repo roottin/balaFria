@@ -245,6 +245,14 @@ div.clientes, div.proveedores {
 section {
   color: black; }
 
+md-sidenav section[cabecera] {
+  height: 60px;
+  border-bottom: 1px solid white;
+  color: white;
+  font-size: 20px;
+  padding-top: 15px;
+  padding-left: 10px; }
+
 md-content[landing] div[registro][proovedor-full].inicio {
   padding: 0px;
   top: 0px;
@@ -482,15 +490,15 @@ md-dialog[avatar-upload] button {
   width: calc(100% - 16px); }
 
 header i.left-menu {
-  float: left; }
+  float: left !important; }
 header div[sociales] {
-  z-index: 10; }
+  z-index: 90; }
   header div[sociales] div[notificaciones] {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 100px;
     float: right;
-    margin: -7px 20px 0 0;
+    margin: 0px 20px 0 0;
     cursor: pointer;
     transition: all 0.5s ease-in-out;
     position: relative;
@@ -499,6 +507,10 @@ header div[sociales] {
     flex-flow: row wrap;
     justify-content: space-around;
     align-items: center; }
+    header div[sociales] div[notificaciones]:hover {
+      background-color: white; }
+      header div[sociales] div[notificaciones]:hover i {
+        color: #303030 !important; }
     header div[sociales] div[notificaciones] i {
       border: none !important;
       background: none !important;

@@ -5,6 +5,16 @@
 section{
     color: black;
 }
+md-sidenav{
+  section[cabecera]{
+    height: 60px;
+    border-bottom: 1px solid white;
+    color: white;
+    font-size: 20px;
+    padding-top: 15px;
+    padding-left: 10px;
+  }
+}
 md-content[landing] div[registro][proovedor-full].inicio{
     padding: 0px;
     top: 0px;
