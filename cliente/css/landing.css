@@ -245,13 +245,45 @@ div.clientes, div.proveedores {
 section {
   color: black; }
 
+div.titulo {
+  width: 60%;
+  min-width: 400px;
+  color: white;
+  font-size: 50px;
+  margin: 50px auto 0px;
+  text-align: center; }
+  div.titulo i {
+    font-size: 50px;
+    transform: translateY(9px);
+    color: #607D8B; }
+
+div[form-central] {
+  width: 60%;
+  min-width: 600px;
+  margin: 10px auto;
+  background-color: white;
+  color: #303030;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  padding: 80px 80px 40px; }
+  div[form-central] button.central {
+    width: calc(100%); }
+
 md-sidenav section[cabecera] {
   height: 60px;
   border-bottom: 1px solid white;
-  color: white;
+  color: #303030;
+  background-color: white;
   font-size: 20px;
   padding-top: 15px;
   padding-left: 10px; }
+  md-sidenav section[cabecera] i {
+    margin-right: 10px;
+    margin-top: 3px;
+    cursor: pointer; }
+    md-sidenav section[cabecera] i.left {
+      float: left; }
+    md-sidenav section[cabecera] i.right {
+      float: right; }
 md-sidenav h5 {
   padding: 10px;
   margin: 0px;
@@ -504,7 +536,7 @@ md-dialog[avatar-upload] button {
 header i.left-menu {
   float: left !important; }
 header div[sociales] {
-  z-index: 90; }
+  z-index: 20; }
   header div[sociales] div[notificaciones] {
     width: 40px;
     height: 40px;

@@ -146,6 +146,22 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
           loginRequired: ProveedorLoggedRequired
         }
       })
+      .state('proveedor.nuevaSucursal',{
+        url:'/sucursal',
+        views:{
+          "header@proveedor":{
+            templateUrl:"/views/plantillas/proveedor/headerLogIn.html",
+            controller:'ctrlHeaderPro',
+            controllerAs:'header'
+          },
+          "body@proveedor":{
+            templateUrl: '/views/plantillas/proveedor/nuevaSucursal.html'
+          }
+        },
+        resolve:{
+          loginRequired: ProveedorLoggedRequired
+        }
+      })
     //-------------------------------------------admin-----------------------------------------------------
     .state('admin',{
       url: '/admin',
@@ -195,6 +211,10 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
           .primaryPalette('indigo')
           .accentPalette('blue-grey')
           .dark();
+    $mdThemingProvider.theme('light')
+          .primaryPalette('indigo')
+          .accentPalette('blue-grey');
+
 }])
 //--------------------------------------- Manejo de Token en localStorage ----------------------------------
 .config(['$httpProvider', '$authProvider', function($httpProvider, config) {

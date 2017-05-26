@@ -5,14 +5,51 @@
 section{
     color: black;
 }
+div.titulo{
+  width: 60%;
+  min-width: 400px;
+  color: white;
+  font-size: 50px;
+  margin: 50px auto 0px;
+  text-align: center;
+  i{
+    font-size: 50px;
+    transform: translateY(9px);
+    color:$color-acent;
+  }
+}
+div[form-central]{
+  width: 60%;
+  min-width: 600px;
+  margin: 10px auto;
+  background-color: white;
+  color: #303030;
+  @include BoxShadowHelper(3);
+  padding: 80px 80px 40px;
+  button.central{
+    width: calc(100%);
+  }
+}
 md-sidenav{
   section[cabecera]{
     height: 60px;
     border-bottom: 1px solid white;
-    color: white;
+    color: #303030;
+    background-color: white;
     font-size: 20px;
     padding-top: 15px;
     padding-left: 10px;
+    i{
+      margin-right: 10px;
+      margin-top: 3px;
+      cursor: pointer;
+      &.left{
+        float: left;
+      }
+      &.right{
+        float:right;
+      }
+    }
   }
   h5{
     padding: 10px;

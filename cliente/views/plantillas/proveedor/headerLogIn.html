@@ -5,7 +5,7 @@
   </div>
   <div sociales>
     <div avatar>
-      <img src="{{header.usuario.avatar.ruta}}" alt="">
+      <img src="{{header.usuario.avatar.ruta }}" alt="">
       <div opciones>
         <ul>
           <li>{{header.usuario.nombre}}</li>
@@ -24,12 +24,12 @@
 <!-- SIDENAV -->
   <!-- LEFT -->
   <md-sidenav md-component-id="left" class="md-sidenav-left" md-disabled-backdrop="true">
-    <section cabecera>Sucursales</section>
-    <h5>AGREGAR <i class="material-icons">add</i></h5>
+    <section cabecera>Sucursales <i class="material-icons left">store</i></section>
+    <h5 ng-click="header.agregarSucursal();">AGREGAR <i class="material-icons">add</i></h5>
     <div class="clear"></div>
   </md-sidenav>
   <!-- RIGHT -->
   <md-sidenav md-component-id="right" class="md-sidenav-right" md-disabled-backdrop="true">
-    <section cabecera> Notificaciones</section>
+    <section cabecera> Notificaciones <i class="material-icons right">notifications_none</i></section>
   </md-sidenav>
 <!-- SIDENAV -->

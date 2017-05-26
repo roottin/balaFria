@@ -68,6 +68,10 @@ angular.module('balafria')
   yo.openRightMenu = function() {
     $mdSidenav('right').toggle();
   };
+  yo.agregarSucursal = function(){
+    console.log('sucursal');
+    $state.go('proveedor.nuevaSucursal');
+  }
 }])
 .controller('ctrlLogPro', ['$scope','$http','$state','$sesion','$auth','$mdToast', function ($scope,$http,$state,$sesion,$auth,$mdToast) {
   $scope.login = function(){
