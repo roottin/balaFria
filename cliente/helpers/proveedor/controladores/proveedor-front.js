@@ -140,5 +140,8 @@ angular.module('balafria')
 }])
 .controller('ctrlSucursal', ['$state','Sucursales', function ($state,Sucursales){
   var yo = this;
-  yo.entidad = Sucursales.get({id:$state.params.sucursal});
+  if(!$state.params.sucursal){
+    $state.go('proveedor.dashboard');
+  }
+  yo.datos = Sucursales.get({id:$state.params.sucursal});
 }]);

@@ -1,2 +1,29 @@
-<h2>{{sucursal.entidad.nombre}}</h2>
-<h4>{{sucursal.entidad.tipo}}</h4>
+<div class="sucursal" md-theme="light">
+	<div banner>
+		<img src="{{sucursal.datos.banner.ruta}}">
+		<div titulo>
+			{{sucursal.datos.nombre}}
+			<i class="material-icons">edit</i>
+		</div>
+	</div>
+	<md-tabs md-dynamic-height md-border-bottom md-center-tabs="true">
+		<md-tab>
+			<md-tab-label><i class="material-icons">star</i></md-tab-label>
+	        <md-tab-body>
+	          <h2>Puntuacion</h2>
+	        </md-tab-body>
+	    </md-tab>
+		<md-tab>
+	        <md-tab-label><i class="material-icons">home</i></md-tab-label>
+	        <md-tab-body>
+	          <h2>Inicio</h2>
+	        </md-tab-body>
+        </md-tab>
+        <md-tab>
+	        <md-tab-label><i class="material-icons">shopping_basket</i></md-tab-label>
+	        <md-tab-body>
+	          <h2>Menu</h2>
+	        </md-tab-body>
+        </md-tab>
+	</md-tabs>
+</div>
