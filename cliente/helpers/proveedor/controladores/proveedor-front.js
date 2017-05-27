@@ -51,9 +51,45 @@ angular.module('balafria')
   var yo = this;
   yo.usuario = $sesion.obtenerPerfil();
 }])
-.controller('ctrlHeaderPro', ['$state','$sesion','$auth','$mdSidenav', function ($state,$sesion,$auth, $mdSidenav){
+.controller('ctrlNuevaSucursal', ['$state','Rubros','$http','$sesion', function ($state,Rubros,$http,$sesion){
   var yo = this;
   yo.usuario = $sesion.obtenerPerfil();
+  yo.rubros = Rubros.query(function(){});
+  yo.data = {
+    "rubros":[]
+  };
+  yo.toggleRubro = function(indice){
+    var rubro = yo.rubros[indice];
+    if(yo.data.rubros.indexOf(rubro) == -1){
+      yo.data.rubros.push(rubro);      
+      rubro.clase = "activo";
+    }else{
+      yo.data.rubros.splice(yo.data.rubros.indexOf(rubro),1);
+      rubro.clase = "";
+    }
+  };
+  yo.submit = function(){
+    yo.data.tipo = yo.radio;
+    yo.data.nombre = yo.nombre;
+    yo.data.id_proveedor = yo.usuario.id;
+    if(yo.data.rubros.length){
+      if(yo.data.tipo){
+        $http.post('/api/sucursal',yo.data)
+          .then(function(respuesta){
+            $state.go('proveedor.sucursal',{"sucursal":respuesta.data.id_sucursal});
+          });
+      }
+    }
+  }
+}])
+.controller('ctrlHeaderPro', ['$state','$sesion','$auth','$mdSidenav','Sucursales', function ($state,$sesion,$auth, $mdSidenav,Sucursales){
+  var yo = this;
+  $sesion.obtenerPerfil()
+    .then(function(perfil){
+      yo.usuario = perfil;
+      yo.sucursales = [Sucursales.consulta({id:yo.usuario.id})];
+    });
+ 
   yo.logOut = function(){
     $auth.logout()
           .then(function() {
@@ -71,6 +107,9 @@ angular.module('balafria')
   yo.agregarSucursal = function(){
     console.log('sucursal');
     $state.go('proveedor.nuevaSucursal');
+  }
+  yo.irASucursal = function(id){
+    $state.go('proveedor.sucursal',{"sucursal":id});
   }
 }])
 .controller('ctrlLogPro', ['$scope','$http','$state','$sesion','$auth','$mdToast', function ($scope,$http,$state,$sesion,$auth,$mdToast) {
@@ -98,4 +137,8 @@ angular.module('balafria')
             console.error(new Error(response));
         });
     };
+}])
+.controller('ctrlSucursal', ['$state','Sucursales', function ($state,Sucursales){
+  var yo = this;
+  yo.entidad = Sucursales.get({id:$state.params.sucursal});
 }]);

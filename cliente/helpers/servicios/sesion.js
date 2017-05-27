@@ -25,7 +25,7 @@ angular.module('balafria')
                 if(self.tipo == "cliente"){
                   $state.go('frontPage.iniciado');
                 }else{
-                  $state.go('proveedor.dashboard');
+                  completado(self.perfil);
                 }
               }
             })
@@ -35,7 +35,7 @@ angular.module('balafria')
         });
       }
     }else{
-      return self.perfil;
+      return Promise.resolve(self.perfil);
     }
   }
 

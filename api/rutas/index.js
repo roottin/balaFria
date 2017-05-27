@@ -11,4 +11,5 @@ module.exports = function(app){
   require('./adminPanel')(app);
   require('./rubro')(app);
   require('./tipo_imagen')(app);
+  require('./sucursal')(app);
 };

@@ -77,12 +77,12 @@ md-content[landing].cliente{
 }
 md-content[landing]{
   background-size: cover;
-  .md-primary{
+  /*.md-primary{
     background: $color-primary;
     &.md-raised{
       background-color: $color-acent;
     }
-  }
+  }*/
   //overflow: hidden;
   width: 100%;
   height: 100%;

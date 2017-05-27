@@ -1,25 +1,5 @@
 var models = require('../models/index');
-var fs = require('fs');
-//llamamos a crypto para encriptar la contraseña
-var crypto = require('crypto');
-//configuracion subida de archivos
 
-//ruta por defecto para tipo_imagen
-var ruta  = './storage/tipo_imagen';
-
-//multer
-var Multer = require('multer');
-
-var upload = Multer({storage: Multer.diskStorage({
-    destination: function (req, file, callback) {
-      callback(null, ruta);
-    },
-    filename: function (req, file, callback) {
-      var datetimestamp = Date.now();
-      var nombreArchivo = file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1];
-      callback(null, nombreArchivo);}
-    })
-}).single('file');
 
 var models = require('../models/index');
 module.exports = function(app){
@@ -30,7 +10,7 @@ module.exports = function(app){
     });
   });
   //guardar registro
-  app.post('/api/tipoImagenes',upload, function(req, res) {
+  app.post('/api/tipoImagenes', function(req, res) {
     console.log(req.body);
     models.tipo_imagen.create({
       nombre: req.body.nombre,

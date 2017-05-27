@@ -25,6 +25,10 @@
   <!-- LEFT -->
   <md-sidenav md-component-id="left" class="md-sidenav-left" md-disabled-backdrop="true">
     <section cabecera>Sucursales <i class="material-icons left">store</i></section>
+    <h5 ng-click="header.irASucursal(sucursal.id_sucursal)" ng-repeat="sucursal in header.sucursales">
+      {{sucursal.nombre}}
+      <i class="material-icons left">store</i>
+    </h5>
     <h5 ng-click="header.agregarSucursal();">AGREGAR <i class="material-icons">add</i></h5>
     <div class="clear"></div>
   </md-sidenav>

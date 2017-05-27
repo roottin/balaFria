@@ -147,7 +147,7 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
         }
       })
       .state('proveedor.nuevaSucursal',{
-        url:'/sucursal',
+        url:'/nuevaSucursal',
         views:{
           "header@proveedor":{
             templateUrl:"/views/plantillas/proveedor/headerLogIn.html",
@@ -155,7 +155,30 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
             controllerAs:'header'
           },
           "body@proveedor":{
-            templateUrl: '/views/plantillas/proveedor/nuevaSucursal.html'
+            templateUrl: '/views/plantillas/proveedor/nuevaSucursal.html',            
+            controller:'ctrlNuevaSucursal',
+            controllerAs:'sucursal'
+          }
+        },
+        resolve:{
+          loginRequired: ProveedorLoggedRequired
+        }
+      })
+      .state('proveedor.sucursal',{
+        url:'/sucursal',
+        params:{
+          sucursal: null
+        },
+        views:{
+          "header@proveedor":{
+            templateUrl:"/views/plantillas/proveedor/headerLogIn.html",
+            controller:'ctrlHeaderPro',
+            controllerAs:'header'
+          },
+          "body@proveedor":{
+            templateUrl: '/views/plantillas/proveedor/sucursal.html',            
+            controller:'ctrlSucursal',
+            controllerAs:'sucursal'
           }
         },
         resolve:{

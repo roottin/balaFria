@@ -19,15 +19,67 @@ div.titulo{
   }
 }
 div[form-central]{
-  width: 60%;
+  width: 50%;
   min-width: 600px;
   margin: 10px auto;
   background-color: white;
   color: #303030;
   @include BoxShadowHelper(3);
-  padding: 80px 80px 40px;
+  padding: 40px 40px 40px;
   button.central{
     width: calc(100%);
+  }
+  div[lista]{
+    float: left;
+    background: transparent;
+    padding-bottom: 20px;
+    min-width: 300px;
+    width: 100%;
+    border-radius: 3px;
+    overflow: hidden;
+    padding-bottom: 0px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap:wrap;
+    margin-left:10px;
+    div[categoria]{
+      width: 148px;
+      height: 148px;
+      float: left;
+      border: 2px solid $color-acent;
+      position: relative;
+
+      &.activo{        
+        border: 1px solid rgba(48,48,48,1);
+        div[nombre]{
+         color:white;
+        }
+      }
+
+      div[nombre]{
+        color: $color-acent;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        background-color: rgba(0, 0, 0, 0.6);
+        text-align: center;
+        z-index: 2;
+        font-family: bebas;
+        display: flex;
+        align-content: space-between;
+        justify-content: center;
+        align-items: center;
+        font-size: 31px;
+      }
+      img{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        z-index: 1;
+      }
+    }
   }
 }
 md-sidenav{

@@ -258,15 +258,59 @@ div.titulo {
     color: #607D8B; }
 
 div[form-central] {
-  width: 60%;
+  width: 50%;
   min-width: 600px;
   margin: 10px auto;
   background-color: white;
   color: #303030;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-  padding: 80px 80px 40px; }
+  padding: 40px 40px 40px; }
   div[form-central] button.central {
     width: calc(100%); }
+  div[form-central] div[lista] {
+    float: left;
+    background: transparent;
+    padding-bottom: 20px;
+    min-width: 300px;
+    width: 100%;
+    border-radius: 3px;
+    overflow: hidden;
+    padding-bottom: 0px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-left: 10px; }
+    div[form-central] div[lista] div[categoria] {
+      width: 148px;
+      height: 148px;
+      float: left;
+      border: 2px solid #607D8B;
+      position: relative; }
+      div[form-central] div[lista] div[categoria].activo {
+        border: 1px solid #303030; }
+        div[form-central] div[lista] div[categoria].activo div[nombre] {
+          color: white; }
+      div[form-central] div[lista] div[categoria] div[nombre] {
+        color: #607D8B;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        background-color: rgba(0, 0, 0, 0.6);
+        text-align: center;
+        z-index: 2;
+        font-family: bebas;
+        display: flex;
+        align-content: space-between;
+        justify-content: center;
+        align-items: center;
+        font-size: 31px; }
+      div[form-central] div[lista] div[categoria] img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        z-index: 1; }
 
 md-sidenav section[cabecera] {
   height: 60px;
@@ -706,13 +750,15 @@ md-content[landing].cliente div[ui-view="body"] {
 
 md-content[landing] {
   background-size: cover;
+  /*.md-primary{
+    background: $color-primary;
+    &.md-raised{
+      background-color: $color-acent;
+    }
+  }*/
   width: 100%;
   height: 100%;
   position: relative; }
-  md-content[landing] .md-primary {
-    background: #3F51B5; }
-    md-content[landing] .md-primary.md-raised {
-      background-color: #607D8B; }
   md-content[landing] header.cliente {
     width: 100%;
     height: 70px;

@@ -2,26 +2,37 @@
   <i class="material-icons ">store</i> Sucursal
 </div>
 <div form-central md-theme="light">
-   <form name="up.sucursal">
-     <br>
+   <form name="sucursal.form" ng-model="sucursal.form">
     <md-input-container md-no-float class="md-block">
        <label>Nombre</label>
-       <input ng-required="true" name="nombre" minlength="5"  ng-model="up.nombre">
+       <input ng-required="true" name="nombre" minlength="5"  ng-model="sucursal.nombre">
          <!-- mensajes  -->
-       <div ng-messages="up.upload_form.nombre.$error" role="alert">
+       <div ng-messages="sucursal.nombre.$error" role="alert">
          <div ng-message="required">Este campo es requerido</div>
          <div ng-message="minlength">Debe poseer al menos 5 carateres</div>
        </div>
     </md-input-container>
-    <md-input-container md-no-float class="md-block">
-       <label>Tipo</label>
-       <input ng-required="true" name="tipo" type="text" minlength="5"  ng-model="up.text">
-         <!-- mensajes  -->
-       <div ng-messages="up.upload_form.text.$error" role="alert">
-         <div ng-message="required">Este campo es requerido</div>
-         <div ng-message="minlength">Debe poseer al menos 10 carateres</div>
-       </div>
-    </md-input-container>
-        <md-button ng-disabled="up.upload_form.$invalid" class="md-raised md-primary central" type="submit" ng-click="up.submit()">Guardar</md-button>
+    <h4 class="md-primary">Tipo de Sucursal</h4>
+    <md-divider></md-divider>
+    <br>
+    <md-radio-group  ng-model="sucursal.radio" layout="row">
+
+      <md-radio-button value="F" class="md-primary">Fisica</md-radio-button>
+      <md-radio-button value="V" class="md-primary">Virtual </md-radio-button>
+
+    </md-radio-group>
+    <br>
+    <h4 class="md-primary">¿Que rubro vendera esta sucursal?</h4>
+    <md-divider></md-divider>
+    <br>
+    <div lista>
+      <div categoria class="{{rubro.clase}}" ng-click="sucursal.toggleRubro($index)" ng-repeat="rubro in sucursal.rubros" >
+          <div nombre >{{rubro.nombre}}</div>
+          <img ng-src="{{rubro.imagen_ruta}}" alt="">
+      </div>
+    </div>
+    <br>
+    <br>
+        <md-button ng-disabled="sucursal.form.$invalid" class="md-raised md-primary central" type="submit" ng-click="sucursal.submit()">Guardar</md-button>
    </form>
 </div>
