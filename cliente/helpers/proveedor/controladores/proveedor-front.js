@@ -138,11 +138,12 @@ angular.module('balafria')
         });
     };
 }])
-.controller('ctrlSucursal', ['$state','Sucursales','$scope', function ($state,Sucursales,$scope){
+.controller('ctrlSucursal', ['$state','Sucursales','$scope','$timeout', function ($state,Sucursales,$scope,$timeout){
   var yo = this;
   yo.temp = {
     "banner":{
-      "ruta":null
+      "ruta":null,
+      "cambio":false
     }
   };
   if(!$state.params.sucursal){
@@ -161,5 +162,9 @@ angular.module('balafria')
       ruta:(window.URL || window.webkitURL).createObjectURL( files[0] )
     }
     document.querySelector('#banner').setAttribute('src',yo.temp.banner.ruta);
+    $timeout(function(){
+      yo.temp.banner.cambio = true;
+      console.log(yo.temp.banner);
+    });
   }
 }]);

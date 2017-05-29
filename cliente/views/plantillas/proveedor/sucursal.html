@@ -2,12 +2,18 @@
 	<div banner>
 		<img id="banner" ng-src="{{sucursal.temp.banner.ruta}}">
 		<div class="edit" ng-click="sucursal.cambioBanner()">
-			<i class="material-icons">edit</i>
+			<i class="material-icons">photo</i>
 		</div>
 		<div titulo>
-			{{sucursal.datos.nombre}}
+			{{sucursal.datos.nombre }}
 			<i class="material-icons">edit</i>
 		</div>
+	</div>
+	<div class="cambios" ng-show="sucursal.temp.banner.cambio">
+		¿Desea guardar los cambios?
+		<md-button class="md-raised">Guardar</md-button>
+		<md-button class="md-raised">Cancelar</md-button>
+		<div class="clear"></div>
 	</div>
 	<md-tabs md-dynamic-height md-border-bottom md-center-tabs="true">
 		<md-tab>
