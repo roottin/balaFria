@@ -1,5 +1,6 @@
 angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','ui.router',"satellizer",'leaflet-directive','ngFileUpload'])
-.config(['$stateProvider','$urlRouterProvider','$mdThemingProvider','$authProvider', function ($stateProvider,$urlRouterProvider,$mdThemingProvider,$authProvider) {
+.config(['$stateProvider','$urlRouterProvider','$mdThemingProvider','$authProvider','$compileProvider', function ($stateProvider,$urlRouterProvider,$mdThemingProvider,$authProvider,$compileProvider) {
+  $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|tel|file|blob):/);
   //-------------------------------- Autenticacion ----------------------------------------
   $authProvider.loginUrl = "/api/autenticar";
   $authProvider.signupUrl = "/api/registrar";
@@ -155,7 +156,7 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
             controllerAs:'header'
           },
           "body@proveedor":{
-            templateUrl: '/views/plantillas/proveedor/nuevaSucursal.html',            
+            templateUrl: '/views/plantillas/proveedor/nuevaSucursal.html',
             controller:'ctrlNuevaSucursal',
             controllerAs:'sucursal'
           }
@@ -176,7 +177,7 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
             controllerAs:'header'
           },
           "body@proveedor":{
-            templateUrl: '/views/plantillas/proveedor/sucursal.html',            
+            templateUrl: '/views/plantillas/proveedor/sucursal.html',
             controller:'ctrlSucursal',
             controllerAs:'sucursal'
           }

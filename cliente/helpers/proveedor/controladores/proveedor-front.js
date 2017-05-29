@@ -61,7 +61,7 @@ angular.module('balafria')
   yo.toggleRubro = function(indice){
     var rubro = yo.rubros[indice];
     if(yo.data.rubros.indexOf(rubro) == -1){
-      yo.data.rubros.push(rubro);      
+      yo.data.rubros.push(rubro);
       rubro.clase = "activo";
     }else{
       yo.data.rubros.splice(yo.data.rubros.indexOf(rubro),1);
@@ -89,7 +89,7 @@ angular.module('balafria')
       yo.usuario = perfil;
       yo.sucursales = [Sucursales.consulta({id:yo.usuario.id})];
     });
- 
+
   yo.logOut = function(){
     $auth.logout()
           .then(function() {
@@ -138,10 +138,28 @@ angular.module('balafria')
         });
     };
 }])
-.controller('ctrlSucursal', ['$state','Sucursales', function ($state,Sucursales){
+.controller('ctrlSucursal', ['$state','Sucursales','$scope', function ($state,Sucursales,$scope){
   var yo = this;
+  yo.temp = {
+    "banner":{
+      "ruta":null
+    }
+  };
   if(!$state.params.sucursal){
     $state.go('proveedor.dashboard');
   }
-  yo.datos = Sucursales.get({id:$state.params.sucursal});
+  yo.datos = Sucursales.get({id:$state.params.sucursal},function(){
+    if(yo.datos.banner){
+      yo.temp.banner = yo.datos.banner;
+    }
+  });
+  yo.cambioBanner = function(){
+    document.querySelector('input[type="file"]').click();
+  }
+  $scope.cambio = function(files){
+    yo.temp.banner = {
+      ruta:(window.URL || window.webkitURL).createObjectURL( files[0] )
+    }
+    document.querySelector('#banner').setAttribute('src',yo.temp.banner.ruta);
+  }
 }]);

@@ -4,8 +4,30 @@
 	background-color: white;
 	div[banner]{
 		width: 100%;
-		height: 400px;
+		height: initial;
+		min-height: 400px;
 		position: relative;
+		img{
+			width: 100%;
+		}
+		div.edit{
+			font-size: 10px;
+    font-weight: bold;
+    color: #303030;
+    bottom: 50px;
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    height: 32px;
+    background: white;
+    margin-left: 10px;
+    margin-top: 10px;
+    border-radius: 100px;
+    width: 32px;
+			i{
+				transform: translateY(4px) translateX(5px);
+			}
+		}
 		div[titulo]{
 			background-color: rgba(0, 0, 0, 0.4);
 		    color: white;
@@ -24,5 +46,8 @@
 	}
 	h2{
 		color:#303030;
+	}
+	md-tab-item{
+		width: calc(100% / 3);
 	}
 }

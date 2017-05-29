@@ -1,6 +1,9 @@
 <div class="sucursal" md-theme="light">
 	<div banner>
-		<img src="{{sucursal.datos.banner.ruta}}">
+		<img id="banner" ng-src="{{sucursal.temp.banner.ruta}}">
+		<div class="edit" ng-click="sucursal.cambioBanner()">
+			<i class="material-icons">edit</i>
+		</div>
 		<div titulo>
 			{{sucursal.datos.nombre}}
 			<i class="material-icons">edit</i>
@@ -26,4 +29,7 @@
 	        </md-tab-body>
         </md-tab>
 	</md-tabs>
+	<div ng-show="false">
+		 <input type="file" ng-model="sucursal.bannerFile" name="bannerFile" onchange="angular.element(this).scope().cambio(this.files)" />
+	</div>
 </div>
