@@ -708,13 +708,18 @@ div.contVerificacion {
     background-color: #42A5F5; }
     .sucursal div.cambios button {
       float: right; }
+    .sucursal div.cambios div[texto] {
+      padding: 10px;
+      float: left;
+      font-size: 20px; }
   .sucursal div[banner] {
     width: 100%;
     height: calc(100vh - 108px);
     position: relative;
     overflow: hidden; }
     .sucursal div[banner] img {
-      width: 100%; }
+      width: 100%;
+      min-height: 100%; }
     .sucursal div[banner] div.edit {
       font-size: 10px;
       font-weight: bold;
@@ -743,6 +748,15 @@ div.contVerificacion {
       position: absolute;
       padding-left: 20px;
       padding-top: 8px; }
+      .sucursal div[banner] div[titulo] div[ng-show] {
+        float: left; }
+      .sucursal div[banner] div[titulo] input {
+        float: left;
+        border: none;
+        background-color: transparent;
+        width: auto;
+        height: 100%;
+        color: white; }
       .sucursal div[banner] div[titulo] i {
         float: right;
         transform: translateX(-10px); }

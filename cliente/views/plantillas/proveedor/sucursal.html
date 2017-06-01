@@ -5,21 +5,22 @@
 			<i class="material-icons">photo</i>
 		</div>
 		<div titulo>
-			{{sucursal.datos.nombre }}
-			<i class="material-icons">edit</i>
+			<div ng-show="!sucursal.edit">{{sucursal.temp.nombre }}</div>
+			<input id="nombre" ng-show="sucursal.edit" type="text"  value="{{sucursal.temp.nombre }}">
+			<i class="material-icons" ng-click="sucursal.editar();">{{sucursal.icono}}</i>
 		</div>
 	</div>
-	<div class="cambios" ng-show="sucursal.temp.banner.cambio">
-		¿Desea guardar los cambios?
-		<md-button class="md-raised">Guardar</md-button>
-		<md-button class="md-raised">Cancelar</md-button>
+	<div class="cambios" ng-show="sucursal.temp.cambio">
+		<div texto>¿Desea guardar los cambios?</div>
+		<md-button class="md-raised" style="color:#4CAF50" ng-click="sucursal.guardarCambios()">Guardar</md-button>
+		<md-button class="md-raised" style="color:#f44336" ng-click="sucursal.revertirCambios()">Cancelar</md-button>
 		<div class="clear"></div>
 	</div>
 	<md-tabs md-dynamic-height md-border-bottom md-center-tabs="true">
 		<md-tab>
 			<md-tab-label><i class="material-icons">star</i></md-tab-label>
 	        <md-tab-body>
-	          <h2>Puntuacion</h2>
+	        	<h2>Puntuacion</h2>
 	        </md-tab-body>
 	    </md-tab>
 		<md-tab>
@@ -36,6 +37,8 @@
         </md-tab>
 	</md-tabs>
 	<div ng-show="false">
-		 <input type="file" ng-model="sucursal.bannerFile" name="bannerFile" onchange="angular.element(this).scope().cambio(this.files)" />
+		<form  name="sucursal.tempForm">
+			<input type="file" ngf-select name="sucursa.banner" ngf-pattern="\'image/*\'" accept="image/*" ngf-max-size="20MB" ng-model="sucursal.bannerFile" name="bannerFile" onchange="angular.element(this).scope().cambio(this.files)" />
+		</form>
 	</div>
 </div>
