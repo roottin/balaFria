@@ -26,10 +26,21 @@
 		<md-tab>
 	        <md-tab-label><i class="material-icons">home</i></md-tab-label>
 	        <md-tab-body>
-	          <h2>Inicio</h2>
+	          <div class="descripcion">
+							<textarea id="descripcion" ng-show="sucursal.edit" >{{sucursal.temp.descripcion }}</textarea>
+							<div ng-show="!sucursal.edit">
+								{{sucursal.temp.descripcion}}
+							</div>
+	          </div>
 	        </md-tab-body>
         </md-tab>
         <md-tab>
+	        <md-tab-label><i class="material-icons">gps_fixed</i></md-tab-label>
+	        <md-tab-body>
+	          <h2>Datos de compras</h2>
+	        </md-tab-body>
+        </md-tab>
+				<md-tab>
 	        <md-tab-label><i class="material-icons">shopping_basket</i></md-tab-label>
 	        <md-tab-body>
 	          <h2>Menu</h2>

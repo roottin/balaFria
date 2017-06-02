@@ -5,7 +5,8 @@ angular.module('balafria')
     'consulta':{
     	method:'GET',
     	url:'/api/sucursales/:id',
-    	params:{id: '@id'}
+    	params:{id: '@id'},
+      isArray:true
     }
   });
 }]);

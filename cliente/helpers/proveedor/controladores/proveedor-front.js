@@ -82,12 +82,15 @@ angular.module('balafria')
     }
   }
 }])
-.controller('ctrlHeaderPro', ['$state','$sesion','$auth','$mdSidenav','Sucursales', function ($state,$sesion,$auth, $mdSidenav,Sucursales){
+.controller('ctrlHeaderPro', ['$state','$sesion','$auth','$mdSidenav','Sucursales','$timeout', function ($state,$sesion,$auth, $mdSidenav,Sucursales,$timeout){
   var yo = this;
   $sesion.obtenerPerfil()
     .then(function(perfil){
       yo.usuario = perfil;
-      yo.sucursales = [Sucursales.consulta({id:yo.usuario.id})];
+      Sucursales.consulta({id:yo.usuario.id})
+        .$promise.then(function(data){
+          yo.sucursales = data;
+        });
     });
 
   yo.logOut = function(){

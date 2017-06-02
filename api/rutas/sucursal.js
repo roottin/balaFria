@@ -3,7 +3,7 @@ var models = require('../models/index');
 module.exports = function(app){
   //obtener sucursales
   app.get('/api/sucursales/:id', function(req, res) {
-    models.sucursal.find({
+    models.sucursal.findAll({
        where: {
         id_proveedor: req.params.id
       }
