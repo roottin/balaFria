@@ -4,8 +4,36 @@
 		<div class="edit" ng-click="sucursal.cambioBanner()">
 			<i class="material-icons">photo</i>
 		</div>
+		<div class="puntuacion material-icons">
+			star star star star star
+		</div>
 		<div titulo>
+			<img ng-src="{{sucursal.usuario.avatar.ruta}}" alt="">
 			<div ng-show="!sucursal.edit">{{sucursal.temp.nombre }}</div>
+			<div class="informacion-sucursal">
+				<ul>
+					<li>
+						35<br>
+						<label>Pedidos</label>
+					</li>
+					<li>
+						200<br>
+						<label>visitas</label>
+					</li>
+					<li>
+						4<br>
+						<label>visitas hoy</label>
+					</li>
+					<li>
+						3<br>
+						<label>favoritos</label>
+					</li>
+					<li>
+						20<br>
+						<label>promociones</label>
+					</li>
+				</ul>
+			</div>
 			<input id="nombre" ng-show="sucursal.edit" type="text"  value="{{sucursal.temp.nombre }}">
 			<i class="material-icons" ng-click="sucursal.editar();">{{sucursal.icono}}</i>
 		</div>

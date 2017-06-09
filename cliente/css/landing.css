@@ -724,7 +724,7 @@ div.contVerificacion {
       font-size: 10px;
       font-weight: bold;
       color: #303030;
-      bottom: 90px;
+      bottom: 100px;
       position: absolute;
       right: 10px;
       cursor: pointer;
@@ -738,18 +738,47 @@ div.contVerificacion {
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); }
       .sucursal div[banner] div.edit i {
         transform: translateY(2px) translateX(2px); }
+    .sucursal div[banner] div.puntuacion {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      font-size: 25px;
+      text-shadow: 1px 3px 3px black; }
     .sucursal div[banner] div[titulo] {
       background-color: rgba(0, 0, 0, 0.4);
       color: white;
       width: 100%;
-      height: 80px;
-      font-size: 40px;
+      height: 90px;
+      font-size: 20px;
       bottom: 1px;
       position: absolute;
       padding-left: 20px;
       padding-top: 8px; }
       .sucursal div[banner] div[titulo] div[ng-show] {
-        float: left; }
+        float: left;
+        margin-top: -10px;
+        text-indent: 150px; }
+      .sucursal div[banner] div[titulo] div.informacion-sucursal {
+        margin-top: 25px;
+        margin-left: 110px; }
+        .sucursal div[banner] div[titulo] div.informacion-sucursal ul {
+          list-style: none;
+          border-top: 1px solid rgba(255, 255, 255, 0.4);
+          width: 600px;
+          font-size: 25px;
+          margin-left: 40px;
+          padding-left: 0px; }
+          .sucursal div[banner] div[titulo] div.informacion-sucursal ul li {
+            float: left;
+            text-align: center;
+            padding: 0px 45px 0px 8px;
+            font-size: 22px;
+            color: rgba(255, 255, 255, 0.6); }
+            .sucursal div[banner] div[titulo] div.informacion-sucursal ul li label {
+              font-size: 14px;
+              font-weight: normal;
+              padding: 0px;
+              transform: translateY(-15px); }
       .sucursal div[banner] div[titulo] input {
         float: left;
         border: none;
@@ -759,7 +788,15 @@ div.contVerificacion {
         color: white; }
       .sucursal div[banner] div[titulo] i {
         float: right;
-        transform: translateX(-10px); }
+        transform: translate(-10px, -40px); }
+      .sucursal div[banner] div[titulo] img {
+        width: 120px;
+        height: 120px;
+        border-radius: 100px;
+        border: 2px solid white;
+        position: absolute;
+        top: -50px;
+        left: 35px; }
   .sucursal h2 {
     color: #303030; }
   .sucursal md-tab-item {

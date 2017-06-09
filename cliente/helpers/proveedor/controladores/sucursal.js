@@ -1,8 +1,9 @@
-angular.module('balafria').controller('ctrlSucursal', ['$state','Sucursales','$scope','$timeout', function ($state,Sucursales,$scope,$timeout){
+angular.module('balafria').controller('ctrlSucursal', ['$state','Sucursales','$scope','$timeout','$sesion', function ($state,Sucursales,$scope,$timeout,$sesion){
   var yo = this;
   yo.edit=false;
   yo.datos=null;
   yo.temp=null;
+  yo.usuario = null;
   yo.icono = "edit";
 
   if(!$state.params.sucursal){
@@ -17,6 +18,10 @@ angular.module('balafria').controller('ctrlSucursal', ['$state','Sucursales','$s
         yo.temp.banner = {};
       }
     });
+    $sesion.obtenerPerfil()
+      .then(function(result){
+        yo.usuario = result;
+      });
   });
   yo.cambioBanner = function(){
     document.querySelector('input[type="file"]').click();
