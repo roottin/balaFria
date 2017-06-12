@@ -60,12 +60,36 @@
 								{{sucursal.temp.descripcion}}
 							</div>
 	          </div>
+						<div class="contactos">
+							<section class="telefono">
+								02512338978
+							</section>
+							<section class="web">
+								www.pizzaElAguila.com
+							</section>
+						</div>
 	        </md-tab-body>
         </md-tab>
         <md-tab>
 	        <md-tab-label><i class="material-icons">gps_fixed</i></md-tab-label>
 	        <md-tab-body>
-	          <h2>Datos de compras</h2>
+	          <h2>Datos Geograficos</h2>
+						<div class="ubicacion">
+							<div class="leyenda" ng-show="sucursal.edit">
+								<ul>
+									<li>
+										<div class="text" ng-click="sucursal.agregarUbicacion()">Ubicacion <i  class="material-icons">edit</i></div>
+									</li>
+									<li>
+										<div class="text">Zonas de atencion</div>
+										<ul>
+											<li ><div ng-click="sucursal.agregarZona()" class="text">agregar <i class="material-icons">add</i></div></li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+							<leaflet lf-center="Acarigua" markers="sucursal.markers" paths="sucursal.paths"></leaflet>
+						</div>
 	        </md-tab-body>
         </md-tab>
 				<md-tab>

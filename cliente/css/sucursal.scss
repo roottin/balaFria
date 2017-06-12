@@ -125,7 +125,10 @@
 	div[md-tabs-template]{
 		background-color: #E0E0E0;
 
-		div.descripcion{
+		H2{
+			padding-left: 30px;
+		}
+		div.descripcion,div.contactos,div.ubicacion{
 			margin-bottom: 20px;
 	    color: #303030;
 	    padding: 20px;
@@ -135,6 +138,49 @@
 			textarea{
 				border: none;
     		width: 100%;
+			}
+		}
+		div.ubicacion{
+			width: 100%;
+			height: 400px;
+			background-color: white;
+			padding: 0px;
+			position: relative;
+
+			div.angular-leaflet-map{
+				height: inherit;
+				width: 100%;
+			}
+			div.leyenda{
+				position: absolute;
+				right: 3px;
+				top: 3px;
+				z-index: 1000000;
+
+				ul{
+					list-style: none;
+					padding-left: 0px;
+
+					li{
+						width: 100%;
+						color:white;
+						ul{
+							padding-left: 10px !important;
+						}
+						div.text{
+							border-bottom: 1px solid rgba(255,255,255,0.4);
+							padding: 5px;
+							width: calc(100%);
+							background-color: #303030;
+							i{
+								transform: translate(-5px,5px);
+								float: right;
+								font-size: 14px;
+								cursor: pointer;
+							}
+						}
+					}
+				}
 			}
 		}
 	}

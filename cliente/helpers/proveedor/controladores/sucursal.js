@@ -5,7 +5,16 @@ angular.module('balafria').controller('ctrlSucursal', ['$state','Sucursales','$s
   yo.temp=null;
   yo.usuario = null;
   yo.icono = "edit";
-
+  angular.extend($scope, {
+        Acarigua: {
+            lat: 9.55972,
+            lng: -69.20194,
+            zoom: 13
+        }
+    });
+  yo.markers = [];
+  yo.paths = {};
+  yo.coordenadas = [];
   if(!$state.params.sucursal){
     $state.go('proveedor.dashboard');
   }
@@ -64,4 +73,45 @@ angular.module('balafria').controller('ctrlSucursal', ['$state','Sucursales','$s
       yo.temp.cambio = cambio;
     });
   }
+  //------------------------------Mapa------------------------------------------
+  yo.agregarZona = function(){
+    if(!yo.mapa.edit){
+      yo.mapa.edit = true;
+      $scope.$on('leafletDirectiveMap.click', function(event, args) {
+        var leafEvent = args.leafletEvent;
+          yo.coordenadas.push({lat:leafEvent.latlng.lat,lng:leafEvent.latlng.lng});
+            yo.markers = [];
+            yo.paths.p1 = {
+              type:"polygon",
+              color: '#303030',
+              weight: 2,
+              latlngs: yo.coordenadas,
+              message: "<h3>Route from London to Rome</h3><p>Distance: 1862km</p>"
+            }
+       });
+    }
+    else{
+      yo.mapa.edit = false;
+       $scope.$on('leafletDirectiveMap.click', function(event, args) {});
+    }
+  }
+  yo.agregarUbicacion = function(){
+    if(!yo.mapa.edit){
+      yo.mapa.edit = true;
+      $scope.$on('leafletDirectiveMap.click', function(event, args) {
+        var leafEvent = args.leafletEvent;
+        yo.markers=[];
+        yo.markers.push({
+          lat: leafEvent.latlng.lat,
+          lng: leafEvent.latlng.lng,
+          message: "Estas Aqui"
+        });
+      });
+    }
+    else{
+      yo.mapa.edit = false;
+       $scope.$on('leafletDirectiveMap.click', function(event, args) {});
+    }
+  }
+
 }]);
