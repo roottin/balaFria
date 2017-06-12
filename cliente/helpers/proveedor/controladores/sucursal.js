@@ -74,10 +74,18 @@ angular.module('balafria').controller('ctrlSucursal', ['$state','Sucursales','$s
     });
   }
   //------------------------------Mapa------------------------------------------
+  yo.mapa = {
+    ubicacion:{
+      edit:false,
+      icono:'edit'
+    },
+    offClick : null,
+    zonasAtencion:[]
+  };
   yo.agregarZona = function(){
     if(!yo.mapa.edit){
       yo.mapa.edit = true;
-      $scope.$on('leafletDirectiveMap.click', function(event, args) {
+      yo.mapa.offClick = $scope.$on('leafletDirectiveMap.click', function(event, args) {
         var leafEvent = args.leafletEvent;
           yo.coordenadas.push({lat:leafEvent.latlng.lat,lng:leafEvent.latlng.lng});
             yo.markers = [];
@@ -92,13 +100,14 @@ angular.module('balafria').controller('ctrlSucursal', ['$state','Sucursales','$s
     }
     else{
       yo.mapa.edit = false;
-       $scope.$on('leafletDirectiveMap.click', function(event, args) {});
+      yo.mapa.offClick();
     }
   }
   yo.agregarUbicacion = function(){
-    if(!yo.mapa.edit){
-      yo.mapa.edit = true;
-      $scope.$on('leafletDirectiveMap.click', function(event, args) {
+    if(!yo.mapa.ubicacion.edit){
+      yo.mapa.ubicacion.edit = true;
+      yo.mapa.ubicacion.icono = 'save';
+      yo.mapa.offClick = $scope.$on('leafletDirectiveMap.click', function(event, args) {
         var leafEvent = args.leafletEvent;
         yo.markers=[];
         yo.markers.push({
@@ -109,8 +118,9 @@ angular.module('balafria').controller('ctrlSucursal', ['$state','Sucursales','$s
       });
     }
     else{
-      yo.mapa.edit = false;
-       $scope.$on('leafletDirectiveMap.click', function(event, args) {});
+      yo.mapa.ubicacion.edit = false;
+      yo.mapa.ubicacion.icono = 'edit';
+      yo.mapa.offClick();
     }
   }
 
