@@ -1,37 +1,50 @@
-angular.module('balafria').controller('ctrlSucursal', ['$state','Sucursales','$scope','$timeout','$sesion', function ($state,Sucursales,$scope,$timeout,$sesion){
+angular.module('balafria')
+.controller('ctrlSucursal', ['$state','Sucursales','$scope','$timeout','$sesion','$mdDialog', function ($state,Sucursales,$scope,$timeout,$sesion,$mdDialog){
   var yo = this;
-  yo.edit=false;
-  yo.datos=null;
-  yo.temp=null;
-  yo.usuario = null;
-  yo.icono = "edit";
-  angular.extend($scope, {
-        Acarigua: {
-            lat: 9.55972,
-            lng: -69.20194,
-            zoom: 13
-        }
-    });
-  yo.markers = [];
-  yo.paths = {};
-  yo.coordenadas = [];
+
   if(!$state.params.sucursal){
     $state.go('proveedor.dashboard');
   }
+  //variables principales
+  yo.SUID = 0; //Secuencia UID de objetos creados temporalmente
+  yo.edit=false;
+  yo.datos = null;
+  yo.temp = {};
+  yo.usuario = null;
+  yo.icono = "edit";
+  yo.paths = [];
   Sucursales.get({id:$state.params.sucursal},function(result){
     $timeout(function(){
       yo.datos = angular.copy(result);
-      yo.temp = angular.copy(result);
-      if(!result.banner){
-        yo.datos.banner = {};
-        yo.temp.banner = {};
-      }
+      yo.temp = completarTemp(result);
+      yo.inicializarTemp();
     });
     $sesion.obtenerPerfil()
       .then(function(result){
         yo.usuario = result;
       });
   });
+  yo.inicializarTemp = function(){
+    var temp = yo.temp;
+    //cambio
+    temp.cambio = false;
+    //luego paths
+    temp.zonasAtencion.forEach(function(zona){
+      zona.icono = "edit";
+      var path = crearPath(zona);
+      yo.paths.push(path);
+    });
+    //ubicacion
+    temp.ubicacion.edit = false;
+    temp.ubicacion.icono = 'edit';
+    if(temp.ubicacion.lat){
+      temp.markers.push({
+        lat: temp.ubicacion.lat,
+        lng: temp.ubicacion.lng,
+        message: "Estas Aqui"
+      });
+    }
+  }
   yo.cambioBanner = function(){
     document.querySelector('input[type="file"]').click();
   }
@@ -50,11 +63,16 @@ angular.module('balafria').controller('ctrlSucursal', ['$state','Sucursales','$s
   yo.revertirCambios = function(){
     if(yo.temp.banner){
         window.URL.revokeObjectURL(document.querySelector('#banner').getAttribute('src'));
-        document.querySelector('#banner').setAttribute('src',(yo.datos.banner.ruta || ""));
+        var ruta = "";
+        if(yo.datos.banner){
+          ruta = yo.datos.banner.ruta;
+        }
+        document.querySelector('#banner').setAttribute('src',ruta);
     }
     $timeout(function(){
       yo.temp = angular.copy(yo.datos);
       yo.temp.cambio = false;
+      yo.paths = [];
     });
   }
   yo.editar = function(){
@@ -74,43 +92,66 @@ angular.module('balafria').controller('ctrlSucursal', ['$state','Sucursales','$s
     });
   }
   //------------------------------Mapa------------------------------------------
+  angular.extend($scope, {
+        Acarigua: {
+            lat: 9.55972,
+            lng: -69.20194,
+            zoom: 13
+        }
+    });
   yo.mapa = {
-    ubicacion:{
-      edit:false,
-      icono:'edit'
-    },
-    offClick : null,
-    zonasAtencion:[]
+    coordenadas: [],
+    offClick : null
   };
-  yo.agregarZona = function(){
-    if(!yo.mapa.edit){
-      yo.mapa.edit = true;
+  yo.buscarPath = function(zona){
+    var resultado = false;
+    yo.paths.forEach(function(path){
+      if(path.id===zona.id){
+        resultado = path;
+      }
+    });
+    return resultado;
+  };
+  yo.modificarZona = function(zona){
+    if(zona.icono === "edit"){
+      var path = yo.buscarPath(zona);
+      zona.icono = "save";
       yo.mapa.offClick = $scope.$on('leafletDirectiveMap.click', function(event, args) {
         var leafEvent = args.leafletEvent;
-          yo.coordenadas.push({lat:leafEvent.latlng.lat,lng:leafEvent.latlng.lng});
-            yo.markers = [];
-            yo.paths.p1 = {
-              type:"polygon",
-              color: '#303030',
-              weight: 2,
-              latlngs: yo.coordenadas,
-              message: "<h3>Route from London to Rome</h3><p>Distance: 1862km</p>"
-            }
+          yo.mapa.coordenadas.push({lat:leafEvent.latlng.lat,lng:leafEvent.latlng.lng});
+          path.latlngs = [];
+          path.latlngs=yo.mapa.coordenadas;
        });
-    }
-    else{
-      yo.mapa.edit = false;
+    }else{
+      zona.icono = "edit";
       yo.mapa.offClick();
+      yo.mapa.coordenadas = [];
     }
   }
+  yo.agregarZona = function(ev){
+    $mdDialog.show({
+      controller: 'ctrlZona',
+      controllerAs: 'form',
+      templateUrl: '/views/plantillas/proveedor/agregarZona.tmpl.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose:true
+    }).then(function(datos){
+      datos.id = "new"+yo.SUID++;
+      var path = crearPath(datos);
+      datos.icono = "edit";
+      yo.paths.push(path);
+      yo.temp.zonasAtencion.push(datos);
+    });
+  }
   yo.agregarUbicacion = function(){
-    if(!yo.mapa.ubicacion.edit){
-      yo.mapa.ubicacion.edit = true;
-      yo.mapa.ubicacion.icono = 'save';
+    if(!yo.temp.ubicacion.edit){
+      yo.temp.ubicacion.edit = true;
+      yo.temp.ubicacion.icono = 'save';
       yo.mapa.offClick = $scope.$on('leafletDirectiveMap.click', function(event, args) {
         var leafEvent = args.leafletEvent;
-        yo.markers=[];
-        yo.markers.push({
+        yo.temp.markers=[];
+        yo.temp.markers.push({
           lat: leafEvent.latlng.lat,
           lng: leafEvent.latlng.lng,
           message: "Estas Aqui"
@@ -118,10 +159,41 @@ angular.module('balafria').controller('ctrlSucursal', ['$state','Sucursales','$s
       });
     }
     else{
-      yo.mapa.ubicacion.edit = false;
-      yo.mapa.ubicacion.icono = 'edit';
+      yo.temp.ubicacion.edit = false;
+      yo.temp.ubicacion.icono = 'edit';
       yo.mapa.offClick();
     }
   }
-
 }]);
+function completarTemp(datos){
+  var temp = angular.copy(datos);
+  //inicializacion de propiedades faltantes
+  var propiedades = [
+    {"nombre":"banner","tipo":"objeto"},
+    {"nombre":"zonasAtencion","tipo":"arreglo"},
+    {"nombre":"paths","tipo":"arreglo"},
+    {"nombre":"markers","tipo":"arreglo"},
+    {"nombre":"ubicacion","tipo":"objeto"}
+  ];
+  propiedades.forEach(function(propiedad){
+    if(!temp.hasOwnProperty(propiedad.nombre)){
+      if(propiedad.tipo === "arreglo"){
+        temp[propiedad.nombre] = [];
+      }else if(propiedad.tipo === "objeto"){
+        temp[propiedad.nombre] = {};
+      }
+    }
+  });
+  return temp;
+}
+function crearPath(datos){
+  var path = {
+    id:datos.id,
+    type:"polygon",
+    color: '#303030',
+    weight: 2,
+    latlngs:[],
+    message: "<h3>"+datos.nombre+"</h3><p>"+datos.descripcion+"</p>"
+  }
+  return path;
+}

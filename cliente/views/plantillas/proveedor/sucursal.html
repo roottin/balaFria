@@ -78,17 +78,23 @@
 							<div class="leyenda" ng-show="sucursal.edit">
 								<ul>
 									<li>
-										<div class="text" ng-click="sucursal.agregarUbicacion()">Ubicacion <i  class="material-icons">{{sucursal.mapa.ubicacion.icono}}</i></div>
+										<div class="text" ng-click="sucursal.agregarUbicacion()">Ubicacion <i  class="material-icons">{{sucursal.temp.ubicacion.icono}}</i></div>
 									</li>
 									<li>
 										<div class="text">Zonas de atencion</div>
 										<ul>
-											<li ><div ng-click="sucursal.agregarZona()" class="text">agregar <i class="material-icons">add</i></div></li>
+											<li ng-repeat="zona in sucursal.temp.zonasAtencion">
+												<div ng-click="sucursal.modificarZona(zona)" class="text">
+													{{zona.nombre}}
+													<i class="material-icons">{{zona.icono}}</i>
+												</div>
+											</li>
+											<li ><div ng-click="sucursal.agregarZona($event)" class="text">agregar <i class="material-icons">add</i></div></li>
 										</ul>
 									</li>
 								</ul>
 							</div>
-							<leaflet lf-center="Acarigua" markers="sucursal.markers" paths="sucursal.paths"></leaflet>
+							<leaflet lf-center="Acarigua" markers="sucursal.temp.markers" paths="sucursal.paths"></leaflet>
 						</div>
 	        </md-tab-body>
         </md-tab>
