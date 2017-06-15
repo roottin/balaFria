@@ -24,6 +24,7 @@ angular.module('balafria')
         yo.usuario = result;
       });
   });
+  //fin declaracion de variables
   yo.inicializarTemp = function(){
     var temp = yo.temp;
     //cambio
@@ -70,7 +71,8 @@ angular.module('balafria')
         document.querySelector('#banner').setAttribute('src',ruta);
     }
     $timeout(function(){
-      yo.temp = angular.copy(yo.datos);
+      yo.temp = completarTemp(yo.datos);
+      yo.inicializarTemp();
       yo.temp.cambio = false;
       yo.paths = [];
     });
@@ -116,6 +118,7 @@ angular.module('balafria')
     if(zona.icono === "edit"){
       var path = yo.buscarPath(zona);
       zona.icono = "save";
+      zona.clase = "pulse";
       yo.mapa.offClick = $scope.$on('leafletDirectiveMap.click', function(event, args) {
         var leafEvent = args.leafletEvent;
           yo.mapa.coordenadas.push({lat:leafEvent.latlng.lat,lng:leafEvent.latlng.lng});
@@ -124,6 +127,7 @@ angular.module('balafria')
        });
     }else{
       zona.icono = "edit";
+      zona.clase = "";
       yo.mapa.offClick();
       yo.mapa.coordenadas = [];
     }
@@ -148,6 +152,7 @@ angular.module('balafria')
     if(!yo.temp.ubicacion.edit){
       yo.temp.ubicacion.edit = true;
       yo.temp.ubicacion.icono = 'save';
+      yo.temp.ubicacion.clase = 'pulse';
       yo.mapa.offClick = $scope.$on('leafletDirectiveMap.click', function(event, args) {
         var leafEvent = args.leafletEvent;
         yo.temp.markers=[];
@@ -161,6 +166,7 @@ angular.module('balafria')
     else{
       yo.temp.ubicacion.edit = false;
       yo.temp.ubicacion.icono = 'edit';
+      yo.temp.ubicacion.clase = '';
       yo.mapa.offClick();
     }
   }

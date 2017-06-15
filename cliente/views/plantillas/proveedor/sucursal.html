@@ -40,8 +40,8 @@
 	</div>
 	<div class="cambios" ng-show="sucursal.temp.cambio">
 		<div texto>¿Desea guardar los cambios?</div>
-		<md-button class="md-raised" style="color:#4CAF50" ng-click="sucursal.guardarCambios()">Guardar</md-button>
-		<md-button class="md-raised" style="color:#f44336" ng-click="sucursal.revertirCambios()">Cancelar</md-button>
+		<button class="md-raised material-icons" style="background-color:#4CAF50" ng-click="sucursal.guardarCambios()">save</button>
+		<button class="md-raised material-icons" style="background-color:#f44336" ng-click="sucursal.revertirCambios()">close</button>
 		<div class="clear"></div>
 	</div>
 	<md-tabs md-dynamic-height md-border-bottom md-center-tabs="true">
@@ -55,17 +55,43 @@
 	        <md-tab-label><i class="material-icons">home</i></md-tab-label>
 	        <md-tab-body>
 	          <div class="descripcion">
+							<h3>Conocenos</h3>
 							<textarea id="descripcion" ng-show="sucursal.edit" >{{sucursal.temp.descripcion }}</textarea>
 							<div ng-show="!sucursal.edit">
 								{{sucursal.temp.descripcion}}
 							</div>
 	          </div>
 						<div class="contactos">
-							<section class="telefono">
+							<h3>Ubicanos</h3>
+							<section>
+								<div class="phone">
+									<i class="material-icons " >phone</i>
+								</div>
 								02512338978
 							</section>
-							<section class="web">
+							<section>
+								<div class="web">
+									<i class="material-icons ">http</i>
+								</div>
 								www.pizzaElAguila.com
+							</section>
+							<section>
+								<div class="insta">
+									<i class="ion-social-instagram "></i>
+								</div>
+								@pizzaAguila
+							</section>
+							<section>
+								<div class="tweet">
+									<i class="ion-social-twitter"></i>
+								</div>
+								@pizzaAguila
+							</section>
+							<section>
+								<div class="face">
+									<i class="ion-social-facebook"></i>
+								</div>
+								@pizzaAguila
 							</section>
 						</div>
 	        </md-tab-body>
@@ -78,15 +104,15 @@
 							<div class="leyenda" ng-show="sucursal.edit">
 								<ul>
 									<li>
-										<div class="text" ng-click="sucursal.agregarUbicacion()">Ubicacion <i  class="material-icons">{{sucursal.temp.ubicacion.icono}}</i></div>
+										<div class="text" ng-click="sucursal.agregarUbicacion()">Ubicacion <i  class="material-icons {{sucursal.temp.ubicacion.clase || ''}}">{{sucursal.temp.ubicacion.icono}}</i></div>
 									</li>
 									<li>
-										<div class="text">Zonas de atencion</div>
+										<div class="text disabled">Zonas de atencion</div>
 										<ul>
 											<li ng-repeat="zona in sucursal.temp.zonasAtencion">
 												<div ng-click="sucursal.modificarZona(zona)" class="text">
 													{{zona.nombre}}
-													<i class="material-icons">{{zona.icono}}</i>
+													<i class="material-icons {{zona.clase || ''}}">{{zona.icono}}</i>
 												</div>
 											</li>
 											<li ><div ng-click="sucursal.agregarZona($event)" class="text">agregar <i class="material-icons">add</i></div></li>
