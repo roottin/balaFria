@@ -18,12 +18,26 @@ div.foot{
       font-size: 12px;
     }
     div.form{
-      border-right:1px solid rgba(255, 255, 255, 0.25);
+      border-right:2px dashed rgba(255, 255, 255, 0.25);
       margin: 10px 0px;
       p{
         font-size: 12px;
       }
     }
+    div.nav{
+      div{
+        height: 130px;
+        margin-top: 10px;
+        &:not(:last-child){
+          border-right:2px dashed rgba(255, 255, 255, 0.25);
+        }
+      }
+    }
+  }
+  div.power{
+    padding: 10px;
+    color: white;
+    font-size: 24px;
   }
   ul{
     text-align: left;
