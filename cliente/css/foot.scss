@@ -1,0 +1,50 @@
+div.foot{
+  h1{
+    font-size: 24px;
+    margin: 5px 0 10px;
+  }
+  text-align: center;
+  div.box{
+    padding: 0px 5px;
+    margin-top: 20px;
+    border: none;
+    @include BoxShadowHelper(1);
+    margin-bottom: 10px;
+    textarea#message{
+      height: 100px;
+    }
+    button{
+      padding: 5px;
+      font-size: 12px;
+    }
+    div.form{
+      border-right:1px solid rgba(255, 255, 255, 0.25);
+      margin: 10px 0px;
+      p{
+        font-size: 12px;
+      }
+    }
+  }
+  ul{
+    text-align: left;
+    &.nav{
+      list-style: none;
+      li{
+        padding-left: 40px;
+      }
+    }
+    &.social{
+      display: flex;
+      justify-content: space-around;
+      height: 45px;
+      li{
+        a{
+          font-size: 14px !important;
+          i{
+            font-size: 24px !important;
+          }
+        }
+      }
+    }
+  }
+}

@@ -128,6 +128,9 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
           "body@proveedor":{
             templateUrl: '/views/plantillas/proveedor/login.html',
             controller: 'ctrlLogPro'
+          },
+          "foot@proveedor":{
+            templateUrl: '/views/plantillas/proveedor/foot.html'
           }
         }
       })
@@ -141,6 +144,9 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
           },
           "body@proveedor":{
             templateUrl: '/views/plantillas/proveedor/dashboard.html'
+          },
+          "foot@proveedor":{
+            templateUrl: '/views/plantillas/proveedor/foot.html'
           }
         },
         resolve:{
@@ -159,6 +165,9 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
             templateUrl: '/views/plantillas/proveedor/nuevaSucursal.html',
             controller:'ctrlNuevaSucursal',
             controllerAs:'sucursal'
+          },
+          "foot@proveedor":{
+            templateUrl: '/views/plantillas/proveedor/foot.html'
           }
         },
         resolve:{

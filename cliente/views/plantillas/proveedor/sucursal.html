@@ -54,7 +54,30 @@
 		<md-tab>
 	        <md-tab-label><i class="material-icons">home</i></md-tab-label>
 	        <md-tab-body>
-	          <div class="descripcion">
+						<div class="ubicacion">
+							<h3>Datos Geograficos</h3>
+							<div class="leyenda" ng-show="sucursal.edit">
+								<ul>
+									<li>
+										<div class="text" ng-click="sucursal.agregarUbicacion()">Ubicacion <i  class="material-icons {{sucursal.temp.ubicacion.clase || ''}}">{{sucursal.temp.ubicacion.icono}}</i></div>
+									</li>
+									<li>
+										<div class="text disabled">Zonas de atencion</div>
+										<ul>
+											<li ng-repeat="zona in sucursal.temp.zonasAtencion">
+												<div ng-click="sucursal.modificarZona(zona)" class="text">
+													{{zona.nombre}}
+													<i class="material-icons {{zona.clase || ''}}">{{zona.icono}}</i>
+												</div>
+											</li>
+											<li ><div ng-click="sucursal.agregarZona($event)" class="text">agregar <i class="material-icons">add</i></div></li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+							<leaflet lf-center="Acarigua" markers="sucursal.temp.markers" paths="sucursal.paths"></leaflet>
+						</div>
+						<div class="descripcion">
 							<h3>Conocenos</h3>
 							<textarea id="descripcion" ng-show="sucursal.edit" >{{sucursal.temp.descripcion }}</textarea>
 							<div ng-show="!sucursal.edit">
@@ -94,34 +117,7 @@
 								@pizzaAguila
 							</section>
 						</div>
-	        </md-tab-body>
-        </md-tab>
-        <md-tab>
-	        <md-tab-label><i class="material-icons">gps_fixed</i></md-tab-label>
-	        <md-tab-body>
-	          <h2>Datos Geograficos</h2>
-						<div class="ubicacion">
-							<div class="leyenda" ng-show="sucursal.edit">
-								<ul>
-									<li>
-										<div class="text" ng-click="sucursal.agregarUbicacion()">Ubicacion <i  class="material-icons {{sucursal.temp.ubicacion.clase || ''}}">{{sucursal.temp.ubicacion.icono}}</i></div>
-									</li>
-									<li>
-										<div class="text disabled">Zonas de atencion</div>
-										<ul>
-											<li ng-repeat="zona in sucursal.temp.zonasAtencion">
-												<div ng-click="sucursal.modificarZona(zona)" class="text">
-													{{zona.nombre}}
-													<i class="material-icons {{zona.clase || ''}}">{{zona.icono}}</i>
-												</div>
-											</li>
-											<li ><div ng-click="sucursal.agregarZona($event)" class="text">agregar <i class="material-icons">add</i></div></li>
-										</ul>
-									</li>
-								</ul>
-							</div>
-							<leaflet lf-center="Acarigua" markers="sucursal.temp.markers" paths="sucursal.paths"></leaflet>
-						</div>
+						<div class="clear"></div>
 	        </md-tab-body>
         </md-tab>
 				<md-tab>

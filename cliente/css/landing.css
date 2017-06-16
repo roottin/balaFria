@@ -812,7 +812,7 @@ div.contVerificacion {
   .sucursal h2 {
     color: #303030; }
   .sucursal md-tab-item {
-    width: calc(100% / 4); }
+    width: calc(100% / 3); }
   .sucursal div[md-tabs-template] {
     background-color: #E0E0E0; }
     .sucursal div[md-tabs-template] H2 {
@@ -859,13 +859,19 @@ div.contVerificacion {
         .sucursal div[md-tabs-template] div.contactos section div.insta {
           background-color: #e4405f; }
     .sucursal div[md-tabs-template] div.ubicacion {
-      width: 100%;
+      width: calc(100% - 10px);
       height: 400px;
       background-color: white;
       padding: 0px;
-      position: relative; }
+      position: relative;
+      margin-left: 5px;
+      margin-bottom: 10px;
+      margin-top: 10px; }
+      .sucursal div[md-tabs-template] div.ubicacion h3 {
+        padding: 30px 20px 10px;
+        margin: 0px; }
       .sucursal div[md-tabs-template] div.ubicacion div.angular-leaflet-map {
-        height: inherit;
+        height: calc(100% - 66px);
         width: 100%; }
       .sucursal div[md-tabs-template] div.ubicacion div.leyenda {
         position: absolute;
@@ -921,6 +927,42 @@ div.contVerificacion {
   100% {
     -moz-box-shadow: 0 0 0 0 rgba(33, 150, 243, 0);
     box-shadow: 0 0 0 0 rgba(33, 150, 243, 0); } }
+div.foot {
+  text-align: center; }
+  div.foot h1 {
+    font-size: 24px;
+    margin: 5px 0 10px; }
+  div.foot div.box {
+    padding: 0px 5px;
+    margin-top: 20px;
+    border: none;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    margin-bottom: 10px; }
+    div.foot div.box textarea#message {
+      height: 100px; }
+    div.foot div.box button {
+      padding: 5px;
+      font-size: 12px; }
+    div.foot div.box div.form {
+      border-right: 1px solid rgba(255, 255, 255, 0.25);
+      margin: 10px 0px; }
+      div.foot div.box div.form p {
+        font-size: 12px; }
+  div.foot ul {
+    text-align: left; }
+    div.foot ul.nav {
+      list-style: none; }
+      div.foot ul.nav li {
+        padding-left: 40px; }
+    div.foot ul.social {
+      display: flex;
+      justify-content: space-around;
+      height: 45px; }
+      div.foot ul.social li a {
+        font-size: 14px !important; }
+        div.foot ul.social li a i {
+          font-size: 24px !important; }
+
 html, body {
   min-height: 100%; }
 
