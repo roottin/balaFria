@@ -1,5 +1,5 @@
 angular.module('balafria')
-.controller('ctrlSucursal', ['$state','Sucursales','$scope','$timeout','$sesion','$mdDialog', function ($state,Sucursales,$scope,$timeout,$sesion,$mdDialog){
+.controller('ctrlSucursal', ['$mdToast','$state','Sucursales','$scope','$timeout','$sesion','$mdDialog', function ($mdToast,$state,Sucursales,$scope,$timeout,$sesion,$mdDialog){
   var yo = this;
 
   if(!$state.params.sucursal){
@@ -103,7 +103,8 @@ angular.module('balafria')
     });
   yo.mapa = {
     coordenadas: [],
-    offClick : null
+    offClick : null,
+    editando: null
   };
   yo.buscarPath = function(zona){
     var resultado = false;
@@ -115,22 +116,34 @@ angular.module('balafria')
     return resultado;
   };
   yo.modificarZona = function(zona){
-    if(zona.icono === "edit"){
-      var path = yo.buscarPath(zona);
-      zona.icono = "save";
-      zona.clase = "pulse";
-      yo.mapa.offClick = $scope.$on('leafletDirectiveMap.click', function(event, args) {
-        var leafEvent = args.leafletEvent;
-          yo.mapa.coordenadas.push({lat:leafEvent.latlng.lat,lng:leafEvent.latlng.lng});
-          path.latlngs = [];
-          path.latlngs=yo.mapa.coordenadas;
-       });
-    }else{
-      zona.icono = "edit";
-      zona.clase = "";
-      yo.mapa.offClick();
-      yo.mapa.coordenadas = [];
-    }
+      if(zona.icono === "edit"){
+        if(!yo.mapa.editando){
+          yo.mapa.editando = zona.id;
+          var path = yo.buscarPath(zona);
+          zona.icono = "save";
+          zona.clase = "pulse";
+          yo.mapa.offClick = $scope.$on('leafletDirectiveMap.click', function(event, args) {
+            var leafEvent = args.leafletEvent;
+              yo.mapa.coordenadas.push({lat:leafEvent.latlng.lat,lng:leafEvent.latlng.lng});
+              path.latlngs = [];
+              path.latlngs=yo.mapa.coordenadas;
+           });
+        }else{
+          $mdToast.show(
+                $mdToast.simple()
+                  .textContent("Debe culminar de editar un elemento antes de pasar al siguiente")
+                  .position('top right')
+                  .hideDelay(3000)
+              );
+        }
+      }else{
+        zona.icono = "edit";
+        zona.clase = "";
+        yo.mapa.offClick();
+        yo.mapa.editando = null;
+        zona.coordenadas = yo.mapa.coordenadas;
+        yo.mapa.coordenadas = [];
+      }
   }
   yo.agregarZona = function(ev){
     $mdDialog.show({
@@ -150,24 +163,35 @@ angular.module('balafria')
   }
   yo.agregarUbicacion = function(){
     if(!yo.temp.ubicacion.edit){
-      yo.temp.ubicacion.edit = true;
-      yo.temp.ubicacion.icono = 'save';
-      yo.temp.ubicacion.clase = 'pulse';
-      yo.mapa.offClick = $scope.$on('leafletDirectiveMap.click', function(event, args) {
-        var leafEvent = args.leafletEvent;
-        yo.temp.markers=[];
-        yo.temp.markers.push({
-          lat: leafEvent.latlng.lat,
-          lng: leafEvent.latlng.lng,
-          message: "Estas Aqui"
+      if(!yo.mapa.editando){
+        yo.mapa.editando ="ubicacion;"
+        yo.temp.ubicacion.edit = true;
+        yo.temp.ubicacion.icono = 'save';
+        yo.temp.ubicacion.clase = 'pulse';
+        yo.mapa.offClick = $scope.$on('leafletDirectiveMap.click', function(event, args) {
+          var leafEvent = args.leafletEvent;
+          yo.temp.markers=[];
+          yo.temp.markers.push({
+            lat: leafEvent.latlng.lat,
+            lng: leafEvent.latlng.lng,
+            message: "Estas Aqui"
+          });
         });
-      });
+      }else{
+          $mdToast.show(
+                    $mdToast.simple()
+                      .textContent("Debe culminar de editar un elemento antes de pasar al siguiente")
+                      .position('top right')
+                      .hideDelay(3000)
+                  );
+        }
     }
     else{
       yo.temp.ubicacion.edit = false;
       yo.temp.ubicacion.icono = 'edit';
       yo.temp.ubicacion.clase = '';
       yo.mapa.offClick();
+      yo.mapa.editando = null;
     }
   }
 }]);

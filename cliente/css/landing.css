@@ -18,6 +18,8 @@ md-content[landing].admin {
     position: fixed;
     bottom: 10px;
     right: 10px; }
+  md-content[landing].admin h1, md-content[landing].admin h2, md-content[landing].admin h3 {
+    color: white; }
   md-content[landing].admin div[ui-view="body"] {
     min-height: auto;
     min-height: 100%;
@@ -312,6 +314,9 @@ div[form-central] {
         cursor: pointer;
         z-index: 1; }
 
+md-backdrop {
+  position: fixed; }
+
 md-sidenav section[cabecera] {
   height: 60px;
   border-bottom: 1px solid white;
@@ -331,7 +336,8 @@ md-sidenav section[cabecera] {
 md-sidenav h5 {
   padding: 10px;
   margin: 0px;
-  transition: all 0.3s ease-in-out; }
+  transition: all 0.3s ease-in-out;
+  color: white; }
   md-sidenav h5 i {
     float: left;
     margin-right: 10px;
@@ -340,6 +346,59 @@ md-sidenav h5 {
   md-sidenav h5:hover {
     background-color: white;
     color: black; }
+md-sidenav section.perfil {
+  width: 100%;
+  color: #303030;
+  background-color: white;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  margin-top: -10px;
+  padding-top: 10px; }
+  md-sidenav section.perfil div[avatar] {
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+    margin: 10px auto;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+    position: relative;
+    border: 2px solid #303030;
+    color: #303030; }
+    md-sidenav section.perfil div[avatar] img {
+      width: 100%;
+      height: 100%;
+      z-index: 11;
+      border-radius: 100px;
+      position: absolute; }
+  md-sidenav section.perfil div[opciones] {
+    width: 100%;
+    height: auto; }
+    md-sidenav section.perfil div[opciones] ul {
+      background: white;
+      margin-bottom: 0;
+      margin-top: -12px;
+      text-transform: capitalize;
+      list-style: none;
+      padding: 0;
+      font-size: 14px; }
+      md-sidenav section.perfil div[opciones] ul li {
+        padding: 10px;
+        transition: all 0.3s ease-in-out;
+        border-bottom: 1px dashed rgba(255, 255, 255, 0.4);
+        color: white;
+        background-color: #424242; }
+        md-sidenav section.perfil div[opciones] ul li:hover {
+          background: rgba(0, 0, 0, 0.2); }
+        md-sidenav section.perfil div[opciones] ul li:last-child {
+          border-bottom: none; }
+        md-sidenav section.perfil div[opciones] ul li:first-child {
+          text-align: center;
+          font-size: 14px;
+          background-color: white;
+          color: #303030; }
+        md-sidenav section.perfil div[opciones] ul li span {
+          transform: translateY(7px);
+          margin-right: 5px;
+          margin-top: -10px; }
 
 md-content[landing] div[registro][proovedor-full].inicio {
   padding: 0px;
@@ -621,42 +680,6 @@ header div[sociales] {
       z-index: 11;
       border-radius: 100px;
       position: absolute; }
-    header div[sociales] div[avatar] div[opciones] {
-      width: 150px;
-      height: auto;
-      position: absolute;
-      margin-left: -50px;
-      margin-top: 2px;
-      transition: opacity 0.7s ease-out, box-shadow 0.3s ease-in, z-index 0.1s ease-out;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-      opacity: 0;
-      z-index: -1; }
-      header div[sociales] div[avatar] div[opciones] ul {
-        background: white;
-        margin-top: -5px;
-        margin-bottom: 0;
-        list-style: none;
-        padding: 0;
-        padding-top: 55px;
-        border-radius: 3px;
-        font-size: 12px; }
-        header div[sociales] div[avatar] div[opciones] ul li {
-          padding: 10px;
-          transition: all 0.3s ease-in-out;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.5); }
-          header div[sociales] div[avatar] div[opciones] ul li:hover {
-            background: rgba(0, 0, 0, 0.2); }
-          header div[sociales] div[avatar] div[opciones] ul li:last-child {
-            border-bottom: none; }
-          header div[sociales] div[avatar] div[opciones] ul li span {
-            transform: translateY(5px);
-            margin-right: 5px;
-            margin-top: -10px; }
-    header div[sociales] div[avatar]:hover div {
-      transition: opacity 0.3s ease-in, box-shadow 0.7s ease-out, z-index 0.3s ease-out;
-      box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
-      z-index: 9;
-      opacity: 1; }
 
 div.contVerificacion {
   width: 600px;
@@ -795,9 +818,10 @@ div.contVerificacion {
         float: left;
         border: none;
         background-color: transparent;
-        width: auto;
-        height: 100%;
-        color: white; }
+        width: calc(100% - 250px);
+        color: white;
+        margin-left: 150px;
+        margin-top: -10px; }
       .sucursal div[banner] div[titulo] i {
         float: right;
         transform: translate(-10px, -40px); }
@@ -825,7 +849,8 @@ div.contVerificacion {
       background-color: white; }
       .sucursal div[md-tabs-template] div.descripcion textarea, .sucursal div[md-tabs-template] div.contactos textarea, .sucursal div[md-tabs-template] div.ubicacion textarea {
         border: none;
-        width: 100%; }
+        width: 100%;
+        border: 1px dashed rgba(0, 0, 0, 0.4); }
     .sucursal div[md-tabs-template] div.descripcion, .sucursal div[md-tabs-template] div.contactos {
       width: calc(50% - 8px);
       margin-left: 5px;
@@ -858,9 +883,11 @@ div.contVerificacion {
           background-color: #55acee; }
         .sucursal div[md-tabs-template] div.contactos section div.insta {
           background-color: #e4405f; }
+        .sucursal div[md-tabs-template] div.contactos section div.add {
+          background-color: #009688; }
     .sucursal div[md-tabs-template] div.ubicacion {
       width: calc(100% - 10px);
-      height: 400px;
+      height: 500px;
       background-color: white;
       padding: 0px;
       position: relative;
@@ -953,6 +980,11 @@ div.foot {
       margin-top: 10px; }
       div.foot div.box div.nav div:not(:last-child) {
         border-right: 2px dashed rgba(255, 255, 255, 0.25); }
+    div.foot div.box div.promo div.borde {
+      margin: 10px 0px 10px 10px;
+      width: 100%;
+      height: 1px;
+      border-top: 2px dashed rgba(255, 255, 255, 0.25); }
   div.foot div.power {
     padding: 10px;
     color: white;
@@ -981,6 +1013,9 @@ html, body {
 div.md-toast-content {
   background: white !important;
   color: #3F51B5 !important; }
+
+div.md-toolbar-tools h2 {
+  color: white; }
 
 md-menu-content h4 {
   background-color: #303030 !important;

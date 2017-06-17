@@ -10,6 +10,7 @@
 		<div titulo>
 			<img ng-src="{{sucursal.usuario.avatar.ruta}}" alt="">
 			<div ng-show="!sucursal.edit">{{sucursal.temp.nombre }}</div>
+			<input id="nombre" ng-show="sucursal.edit" type="text"  value="{{sucursal.temp.nombre }}">
 			<div class="informacion-sucursal">
 				<ul>
 					<li>
@@ -34,7 +35,6 @@
 					</li>
 				</ul>
 			</div>
-			<input id="nombre" ng-show="sucursal.edit" type="text"  value="{{sucursal.temp.nombre }}">
 			<i class="material-icons" ng-click="sucursal.editar();">{{sucursal.icono}}</i>
 		</div>
 	</div>
@@ -79,11 +79,11 @@
 						</div>
 						<div class="descripcion">
 							<h3>Conocenos</h3>
-							<textarea id="descripcion" ng-show="sucursal.edit" >{{sucursal.temp.descripcion }}</textarea>
+							<textarea id="descripcion" ng-show="sucursal.edit" ng-model="sucursal.temp.descripcion"></textarea>
 							<div ng-show="!sucursal.edit">
 								{{sucursal.temp.descripcion}}
 							</div>
-	          </div>
+	          			</div>
 						<div class="contactos">
 							<h3>Ubicanos</h3>
 							<section>
@@ -115,6 +115,12 @@
 									<i class="ion-social-facebook"></i>
 								</div>
 								@pizzaAguila
+							</section>
+							<section class="agregar" ng-show="sucursal.edit">
+								<div class="add">
+									<i class="material-icons">add</i>
+								</div>
+								Agregar
 							</section>
 						</div>
 						<div class="clear"></div>
