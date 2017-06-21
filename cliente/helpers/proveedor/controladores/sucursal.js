@@ -147,7 +147,7 @@ angular.module('balafria')
   }
   yo.agregarZona = function(ev){
     $mdDialog.show({
-      controller: 'ctrlZona',
+      controller: 'ctrlAdd',
       controllerAs: 'form',
       templateUrl: '/views/plantillas/proveedor/agregarZona.tmpl.html',
       parent: angular.element(document.body),
@@ -179,11 +179,11 @@ angular.module('balafria')
         });
       }else{
           $mdToast.show(
-                    $mdToast.simple()
-                      .textContent("Debe culminar de editar un elemento antes de pasar al siguiente")
-                      .position('top right')
-                      .hideDelay(3000)
-                  );
+            $mdToast.simple()
+              .textContent("Debe culminar de editar un elemento antes de pasar al siguiente")
+              .position('top right')
+              .hideDelay(3000)
+          );
         }
     }
     else{
@@ -194,6 +194,21 @@ angular.module('balafria')
       yo.mapa.editando = null;
     }
   }
+  //contactos
+  yo.agregarContacto = function(ev){
+    $mdDialog.show({
+      controller: 'ctrlAdd',
+      controllerAs: 'contact',
+      templateUrl: '/views/plantillas/proveedor/agregarContacto.tmpl.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose:true
+    }).then(function(datos){
+      datos.id = "new"+yo.SUID++;
+      console.log(datos);
+      yo.temp.contactos.push(datos);
+    });
+  }
 }]);
 function completarTemp(datos){
   var temp = angular.copy(datos);
@@ -201,6 +216,7 @@ function completarTemp(datos){
   var propiedades = [
     {"nombre":"banner","tipo":"objeto"},
     {"nombre":"zonasAtencion","tipo":"arreglo"},
+    {"nombre":"contactos","tipo":"arreglo"},
     {"nombre":"paths","tipo":"arreglo"},
     {"nombre":"markers","tipo":"arreglo"},
     {"nombre":"ubicacion","tipo":"objeto"}

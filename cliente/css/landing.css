@@ -722,6 +722,68 @@ div.contVerificacion {
     width: calc(50% - 20px);
     margin-top: 30px; }
 
+md-dialog div.barra {
+  width: 100%;
+  margin-bottom: 40px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  border-radius: 4px;
+  overflow: hidden; }
+  md-dialog div.barra input[type="checkbox"] {
+    display: none; }
+  md-dialog div.barra label {
+    color: white;
+    width: calc((100% / 5));
+    padding: 10px 0px;
+    text-align: center;
+    margin: 0px -3px 0px 0px; }
+    md-dialog div.barra label.web {
+      background-color: #3F51B5; }
+    md-dialog div.barra label.phone {
+      background-color: #009688; }
+    md-dialog div.barra label.face {
+      background-color: #3b5999; }
+    md-dialog div.barra label.tweet {
+      background-color: #55acee; }
+    md-dialog div.barra label.insta {
+      background-color: #e4405f; }
+md-dialog section.preview {
+  width: calc(100%);
+  float: left;
+  margin-top: 10px;
+  border-radius: 3px;
+  color: white;
+  padding: 15px;
+  height: 50px;
+  margin-right: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
+  md-dialog section.preview.web {
+    background-color: #3F51B5; }
+  md-dialog section.preview.phone {
+    background-color: #009688; }
+  md-dialog section.preview.face {
+    background-color: #3b5999; }
+  md-dialog section.preview.tweet {
+    background-color: #55acee; }
+  md-dialog section.preview.insta {
+    background-color: #e4405f; }
+  md-dialog section.preview.agregar {
+    background-color: #009688;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); }
+  md-dialog section.preview div {
+    float: left;
+    width: 36px;
+    height: 36px;
+    border-radius: 100px;
+    color: white;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    transform: translate(0, -7px); }
+    md-dialog section.preview div i {
+      font-size: 24px !important; }
+
 .sucursal {
   width: 100%;
   min-height: 100%;

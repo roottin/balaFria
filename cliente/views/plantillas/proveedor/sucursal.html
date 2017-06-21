@@ -86,37 +86,13 @@
 	          			</div>
 						<div class="contactos">
 							<h3>Ubicanos</h3>
-							<section class="phone">
+							<section ng-repeat="contacto in sucursal.temp.contactos" class="{{contacto.clase}}">
 								<div >
-									<i class="material-icons " >phone</i>
+									<i class="{{contacto.icono}}"></i>
 								</div>
-								02512338978
+								{{contacto.contenido}}
 							</section>
-							<section  class="web">
-								<div>
-									<i class="material-icons ">http</i>
-								</div>
-								www.pizzaElAguila.com
-							</section>
-							<section class="insta">
-								<div >
-									<i class="ion-social-instagram "></i>
-								</div>
-								@pizzaAguila
-							</section>
-							<section class="tweet">
-								<div >
-									<i class="ion-social-twitter"></i>
-								</div>
-								@pizzaAguila
-							</section>
-							<section class="face">
-								<div >
-									<i class="ion-social-facebook"></i>
-								</div>
-								@pizzaAguila
-							</section>
-							<section class="agregar" ng-show="sucursal.edit">
+							<section class="agregar" ng-show="sucursal.edit" ng-click="sucursal.agregarContacto($event)">
 								<div class="add">
 									<i class="material-icons">add</i>
 								</div>
