@@ -22,6 +22,9 @@ div.md-toast-content{
   background: white !important;
   color:$color-primary !important;
 }
+md-sidenav{
+  background-color: white;
+}
 div.md-toolbar-tools{
   h2{
     color:white;
@@ -52,6 +55,19 @@ md-checkbox{
 [login]{
   max-width: 500px;
   width: 100%;
+  md-tabs-canvas{
+    width: 100%;
+    md-pagination-wrapper{
+      width: 100%;
+      md-tab-item{
+        width: 50%;
+        &.md-tab.md-active{
+          background-color: $color-primary;
+          color: $color-acent;
+        }
+      }
+    }
+  }
   .inicio{
     background-color: rgba(0,0,0,0.3);
     width: 100%;
@@ -85,20 +101,13 @@ md-content[landing].cliente{
 }
 md-content[landing]{
   background-size: cover;
-  /*.md-primary{
-    background: $color-primary;
-    &.md-raised{
-      background-color: $color-acent;
-    }
-  }*/
-  //overflow: hidden;
   width: 100%;
   height: 100%;
   position: relative;
   header.cliente{
     width: 100%;
     height: 70px;
-    background-color: transparent;
+    background-color: $color-primary;
     margin-top: -10px;
     i.material-icons{
       float: right;
