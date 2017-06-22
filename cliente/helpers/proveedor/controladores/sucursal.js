@@ -1,5 +1,5 @@
 angular.module('balafria')
-.controller('ctrlSucursal', ['$mdToast','$state','Sucursales','$scope','$timeout','$sesion','$mdDialog', function ($mdToast,$state,Sucursales,$scope,$timeout,$sesion,$mdDialog){
+.controller('ctrlSucursal', ['Upload','$mdToast','$state','Sucursales','$scope','$timeout','$sesion','$mdDialog','$http', function (Upload,$mdToast,$state,Sucursales,$scope,$timeout,$sesion,$mdDialog,$http){
   var yo = this;
 
   if(!$state.params.sucursal){
@@ -51,7 +51,9 @@ angular.module('balafria')
   }
   $scope.cambio = function(files){
     yo.temp.banner = {
-      ruta:(window.URL || window.webkitURL).createObjectURL( files[0] )
+      ruta:(window.URL || window.webkitURL).createObjectURL( files[0] ),
+      file:files[0],
+      cambio:true
     }
     document.querySelector('#banner').setAttribute('src',yo.temp.banner.ruta);
     $timeout(function(){
@@ -60,6 +62,25 @@ angular.module('balafria')
   }
   yo.guardarCambios = function(){
     console.log(yo.temp);
+    if(yo.temp.banner.cambio){
+      Upload.upload({
+          url: '/api/sucursal/banner/'+yo.temp.id_sucursal,
+          data:{
+            file:yo.temp.banner.file,
+            id_sucursal: yo.temp.id_sucursal
+          }
+      })
+        .then(function(resp){
+          console.log('resp banner',resp);
+        })
+    }
+    $http.put('/api/sucursal/'+yo.temp.id_sucursal,yo.temp)
+      .then(function(resp){
+        console.log('resp el resto',resp);
+        yo.datos = angular.copy(resp.data);
+        yo.temp = completarTemp(resp.data);
+        yo.inicializarTemp();
+      });
   }
   yo.revertirCambios = function(){
     if(yo.temp.banner){
@@ -147,7 +168,7 @@ angular.module('balafria')
   }
   yo.agregarZona = function(ev){
     $mdDialog.show({
-      controller: 'ctrlAdd',
+      controller: 'ctrlZona',
       controllerAs: 'form',
       templateUrl: '/views/plantillas/proveedor/agregarZona.tmpl.html',
       parent: angular.element(document.body),
@@ -176,6 +197,7 @@ angular.module('balafria')
             lng: leafEvent.latlng.lng,
             message: "Estas Aqui"
           });
+          yo.temp.ubicacion.latlng = leafEvent.latlng;
         });
       }else{
           $mdToast.show(
@@ -205,7 +227,6 @@ angular.module('balafria')
       clickOutsideToClose:true
     }).then(function(datos){
       datos.id = "new"+yo.SUID++;
-      console.log(datos);
       yo.temp.contactos.push(datos);
     });
   }
