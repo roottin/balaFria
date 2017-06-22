@@ -52,9 +52,9 @@ module.exports = function(app){
   //buscar uno solo
   app.get('/api/sucursal/:id', function(req, res) {
     models.sequelize.query("SELECT s.*,i.ruta as imagen_ruta FROM sucursal s" +
-            " join imagen_sucursal isu on s.id_sucursal = isu.id_sucursal"+
+            " left join imagen_sucursal isu on s.id_sucursal = isu.id_sucursal"+
             " AND isu.estado = 'A' AND isu.id_tipo_imagen = 1"+
-            " join imagen i on isu.id_imagen = i.id_imagen" +
+            " left join imagen i on isu.id_imagen = i.id_imagen" +
             " where s.id_sucursal = "+req.params.id ,
       { model: models.sucursal}
     )
