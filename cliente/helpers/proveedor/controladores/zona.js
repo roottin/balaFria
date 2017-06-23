@@ -20,7 +20,9 @@ angular.module('balafria')
   };
   //fin contacto
   yo.submit = function(){
-    $mdDialog.hide(yo.contacto);
+    if((yo.contacto.contenido != "")&&(yo.contacto.contenido != "ejemplo")){
+      $mdDialog.hide(yo.contacto);
+    }
   };
   yo.cancel = function() {
       $mdDialog.hide();

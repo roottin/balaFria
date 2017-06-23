@@ -61,7 +61,6 @@ angular.module('balafria')
     });
   }
   yo.guardarCambios = function(){
-    console.log(yo.temp);
     if(yo.temp.banner.cambio){
       Upload.upload({
           url: '/api/sucursal/banner/'+yo.temp.id_sucursal,
@@ -71,12 +70,11 @@ angular.module('balafria')
           }
       })
         .then(function(resp){
-          console.log('resp banner',resp);
+          yo.datos.banner = resp.data.banner;
         })
     }
     $http.put('/api/sucursal/'+yo.temp.id_sucursal,yo.temp)
       .then(function(resp){
-        console.log('resp el resto',resp);
         yo.datos = angular.copy(resp.data);
         yo.temp = completarTemp(resp.data);
         yo.inicializarTemp();
@@ -101,9 +99,7 @@ angular.module('balafria')
   yo.editar = function(){
     var cambio = yo.temp.cambio;
     yo.temp.nombre = document.querySelector('#nombre').value;
-    if(yo.datos.nombre != yo.temp.nombre){
-      cambio = true;
-    }
+    cambio = evaluarCambios(yo.datos,yo.temp);
     $timeout(function(){
       yo.edit = !yo.edit;
       if(!yo.edit){
@@ -263,4 +259,61 @@ function crearPath(datos){
     message: "<h3>"+datos.nombre+"</h3><p>"+datos.descripcion+"</p>"
   }
   return path;
+}
+function evaluarCambios(datos,temp){
+  //descripcion y nombre
+  var cambio = false;
+  console.log(temp.ubicacion,datos.ubicacion);
+  if(temp.nombre !== datos.nombre){
+    return true;
+  }
+  if(temp.descripcion !== datos.descripcion){
+    return true;
+  }
+  //contactos
+  if(datos.hasOwnProperty('contactos')){
+    if(datos.contactos.length !== temp.contactos.length){
+      return true;
+    }
+    var vuelta = 0;
+    datos.contactos.forEach(function(contacto){
+      if(temp.contactos[vuelta]!=contacto){
+        cambio = true;
+      }
+    });
+    if(cambio){return cambio;}
+  }else{
+    if (temp.contactos.length) {
+      return true;
+    }
+  }
+  //ubicacion
+  if(datos.hasOwnProperty('ubicacion')){
+    if(datos.ubicacion.latlng !== temp.ubicacion.latlng){
+      return true;
+    }
+  }else{
+    if(temp.ubicacion.latlng){
+      return true;
+    }
+  }
+  //zonas atencion
+  if(datos.hasOwnProperty('zonasAtencion')){
+    if(datos.zonasAtencion.length !== temp.zonasAtencion.length){
+      return true;
+    }
+    var vuelta = 0;
+    datos.zonasAtencion.forEach(function(zona){
+      if(temp.zonasAtencion[vuelta]!=zona){
+        cambio = true;
+      }
+    });
+    if(cambio){return cambio;}
+  }else{
+    if(temp.zonasAtencion.length){
+      return true;
+    }
+  }
+  //sin cambios
+  return false;
 }

@@ -1,6 +1,5 @@
 var models = require('../models/index');
 
-
 var models = require('../models/index');
 module.exports = function(app){
   //obtener tipo_imagenes

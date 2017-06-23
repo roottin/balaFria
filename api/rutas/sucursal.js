@@ -105,21 +105,23 @@ module.exports = function(app){
   });
   //modificar
   app.put('/api/sucursal/:id', function(req, res) {
-    console.log('PUT',req.body);
     models.sucursal.find({
       where: {
         id_sucursal: req.params.id
       }
     }).then(function(sucursal) {
       if(sucursal){
+
         sucursal.updateAttributes({
           id_sucursal: req.body.id_sucursal,
           nombre: req.body.nombre,
           descripcion: req.body.descripcion,
         }).then(function(sucursal) {
-          //Promise.all([])
-          //.then(function(result){
-            //console.log(result);
+          Promise.all([
+
+          ])
+          .then(function(result){
+            console.log(result);
             res.json(sucursal);
           //})
         });
