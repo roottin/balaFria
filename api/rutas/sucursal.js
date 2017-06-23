@@ -1,23 +1,68 @@
 var models = require('../models/index');
-//configuracion subida de archivos
+//uso de hilos de ejecucion
+var events  = require('events');
+var channel = new events.EventEmitter();
 
-//ruta por defecto para sucursal
-var ruta  = './storage/sucursal';
-
-//multer
-var Multer = require('multer');
-
-var upload = Multer({storage: Multer.diskStorage({
-    destination: function (req, file, callback) {
-      callback(null, ruta);
-    },
-    filename: function (req, file, callback) {
-      var datetimestamp = Date.now();
-      console.log(req.body);
-      var nombreArchivo = 'S_ID'+req.body.id_sucursal + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1];
-      callback(null, nombreArchivo);}
+channel.on('modificarUbicacion', function(sucursal,latlng){
+  var cambio = false;
+  if(!sucursal.id_coordenada){
+    cambio = true;
+  }else{
+    models.coordenada.find({
+      id_coordenada:sucursal.id_coordenada
     })
-}).single('file');
+      .then(function(coordenada){
+        if((coordenada.latitud !== latlng.latitud)&&(coordenada.longitud !== latlng.longitud)){
+          cambio = true;
+        }
+      });
+  }
+  if(cambio){
+    models.coordenada.create({
+      latitud:latlng.lat,
+      longitud:latlng.lng
+    })
+      .then(function(coordenada){
+        sucursal.updateAttributes({
+          id_coordenada:coordenada.id_coordenada
+        });
+      });
+  }
+});
+channel.on('modificarZonas',function(sucursal,zonas){
+  models.zona_envio.findAll({
+    where:{id_sucursal:sucursal.id_sucursal}
+  })
+    .then(function(zonasAtencion){
+      if(zonasAtencion){
+        zonasAAgregar = zonasAtencion.map(function(zonaAtencion){
+          var zona = null;
+          zonas.forEach(function(zona){
+            //comparo latitud y longitud para ver si es nuevo lo guardo en la db
+          })
+        });
+      }
+    });
+});
+//----------------------configuracion subida de archivos---------------------
+  //ruta por defecto para sucursal
+  var ruta  = './storage/sucursal';
+
+  //multer
+  var Multer = require('multer');
+
+  var upload = Multer({storage: Multer.diskStorage({
+      destination: function (req, file, callback) {
+        callback(null, ruta);
+      },
+      filename: function (req, file, callback) {
+        var datetimestamp = Date.now();
+        console.log(req.body);
+        var nombreArchivo = 'S_ID'+req.body.id_sucursal + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1];
+        callback(null, nombreArchivo);}
+      })
+  }).single('file');
+//----------------------configuracion subida de archivos---------------------
 
 module.exports = function(app){
   //obtener sucursales
@@ -111,19 +156,15 @@ module.exports = function(app){
       }
     }).then(function(sucursal) {
       if(sucursal){
-
         sucursal.updateAttributes({
           id_sucursal: req.body.id_sucursal,
           nombre: req.body.nombre,
           descripcion: req.body.descripcion,
         }).then(function(sucursal) {
-          Promise.all([
-
-          ])
-          .then(function(result){
-            console.log(result);
-            res.json(sucursal);
-          })
+          channel.emit('modificarUbicacion',sucursal,req.body.ubicacion.latlng);
+          channel.emit('modificarZonas',sucursal,req.body.zonasAtencion);
+          console.log(result);
+          res.json(sucursal);
         });
       }
     });
