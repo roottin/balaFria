@@ -6,7 +6,9 @@ var channel = new events.EventEmitter();
 channel.on('modificarUbicacion', function(sucursal,latlng){
   var cambio = false;
   if(!sucursal.id_coordenada){
-    cambio = true;
+    if(latlng){
+      cambio = true;
+    }
   }else{
     models.coordenada.find({
       id_coordenada:sucursal.id_coordenada
@@ -23,7 +25,8 @@ channel.on('modificarUbicacion', function(sucursal,latlng){
       longitud:latlng.lng
     })
       .then(function(coordenada){
-        sucursal.updateAttributes({
+        console.log(sucursal);
+        sucursal.update({
           id_coordenada:coordenada.id_coordenada
         });
       });
@@ -31,17 +34,57 @@ channel.on('modificarUbicacion', function(sucursal,latlng){
 });
 channel.on('modificarZonas',function(sucursal,zonas){
   models.zona_envio.findAll({
-    where:{id_sucursal:sucursal.id_sucursal}
+    where:{"id_sucursal":sucursal.id_sucursal}
   })
-    .then(function(zonasAtencion){
-      if(zonasAtencion){
-        zonasAAgregar = zonasAtencion.map(function(zonaAtencion){
-          var zona = null;
-          zonas.forEach(function(zona){
-            //comparo latitud y longitud para ver si es nuevo lo guardo en la db
-          })
-        });
+    .then(function(zonasEnvio){
+      var zonasNuevas = [];
+      var zonasAModificar = [];
+      var zonasABorrar = [];
+      var asignada = false;
+      for (var i = 0; i < zonas.length; i++) {
+        asignada = false;
+        for (var x = 0; x < zonasEnvio.length; x++) {
+          if(zonasEnvio[x].id_zona_envio === zonas[i].id_zona_envio){
+            zonasAModificar.push(zonas[i]);
+            zonasEnvio.splice(x,1);
+            asignada = true;
+            break;
+          }
+        }
+        if(!asignada){
+          zonasNuevas.push(zonas[i]);
+        }
+        //aquellas zonas que no se van a modificar dentro de zona envio son para borrar
+        zonasABorrar = zonasEnvio;
       }
+      //borro todas las zonas a borrar
+      zonasABorrar.forEach(zona => {
+        zona.destroy();
+      });
+      //inserto todas las zonas
+      Promise.all(zonasNuevas.map(zona => models.zona_envio.create({
+        "nombre":zona.nombre,
+        "descripcion":zona.descripcion,
+        "id_sucursal":sucursal.id_sucursal
+      })
+        //inserto todas las coordenadas
+        .then(zonaDB => {
+          Promise.all(zona.coordenadas.map(cdn => models.coordenada.create({
+            "latitud":cdn.latlng.lat,
+            "longitud":cdn.latlng.lng,
+          })
+            //armo el detalle de la zona
+            .then(cdnDb => {
+              models.detalle_zona_envio.create({
+                "id_zona_envio":zonaDB.id_zona_envio,
+                "id_coordenada":cdnDb.id_coordenada,
+                "secuencia":cdn.secuencia
+              });
+            })
+          ))
+        })
+      ));
+      //me voy contra las zonas a modificar
     });
 });
 //----------------------configuracion subida de archivos---------------------
@@ -57,7 +100,6 @@ channel.on('modificarZonas',function(sucursal,zonas){
       },
       filename: function (req, file, callback) {
         var datetimestamp = Date.now();
-        console.log(req.body);
         var nombreArchivo = 'S_ID'+req.body.id_sucursal + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1];
         callback(null, nombreArchivo);}
       })
@@ -96,6 +138,8 @@ module.exports = function(app){
   });
   //buscar uno solo
   app.get('/api/sucursal/:id', function(req, res) {
+    var zonasAtencion = [];
+    //busco la sucursal con su banner
     models.sequelize.query("SELECT s.*,i.ruta as imagen_ruta FROM sucursal s" +
             " left join imagen_sucursal isu on s.id_sucursal = isu.id_sucursal"+
             " AND isu.estado = 'A' AND isu.id_tipo_imagen = 1"+
@@ -105,10 +149,39 @@ module.exports = function(app){
     )
       .then(function(sucursal) {
         sucursal = sucursal[0];
+        //agrego el banner a la sucursal
         sucursal.dataValues.banner = {
           ruta: sucursal.dataValues.imagen_ruta
         }
-        res.json(sucursal);
+        //busco las zonas de envio de la sucursal
+        models.zona_envio.findAll({where:{"id_sucursal":req.params.id}})
+          .then(zonas => {
+            sucursal.dataValues.zonasAtencion = [];
+            Promise.all(zonas.map(zona => {
+              //zona por zona busco sus coordenadas
+              return models.sequelize.query("SELECT c.latitud,c.longitud,dze.secuencia,c.id_coordenada,dze.id as id_detalle from coordenada c "+
+                                              "join detalle_zona_envio dze on dze.id_coordenada = c.id_coordenada "+
+                                              "where dze.id_zona_envio = "+zona.dataValues.id_zona_envio+
+                                              " order by secuencia")
+              .then(coordenadas => {
+                //armo el objeto coordenadas
+                zona.dataValues.coordenadas = coordenadas[0].map(coordenada => {
+                  return {
+                    "latlang":{"lat":coordenada.latitud,"lng":coordenada.longitud},
+                    "secuencia": coordenada.secuencia,
+                    "id_coordenada": coordenada.id_coordenada
+                  }
+                })
+                //retorna la zona
+                zonasAtencion.push(zona.dataValues);
+              })
+            }))
+              .then(result => {
+                sucursal.dataValues.zonasAtencion = zonasAtencion;
+                //envio sucursal
+                res.json(sucursal);
+              });
+          });
       });
   });
 
@@ -163,7 +236,6 @@ module.exports = function(app){
         }).then(function(sucursal) {
           channel.emit('modificarUbicacion',sucursal,req.body.ubicacion.latlng);
           channel.emit('modificarZonas',sucursal,req.body.zonasAtencion);
-          console.log(result);
           res.json(sucursal);
         });
       }

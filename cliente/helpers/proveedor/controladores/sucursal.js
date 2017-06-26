@@ -141,9 +141,12 @@ angular.module('balafria')
           zona.clase = "pulse";
           yo.mapa.offClick = $scope.$on('leafletDirectiveMap.click', function(event, args) {
             var leafEvent = args.leafletEvent;
-              yo.mapa.coordenadas.push({lat:leafEvent.latlng.lat,lng:leafEvent.latlng.lng});
+              yo.mapa.coordenadas.push({
+                latlng:{lat:leafEvent.latlng.lat,lng:leafEvent.latlng.lng},
+                secuencia:yo.mapa.coordenadas.length
+              });
               path.latlngs = [];
-              path.latlngs=yo.mapa.coordenadas;
+              path.latlngs=yo.mapa.coordenadas.map(coordenada => {return coordenada.latlng});
            });
         }else{
           $mdToast.show(
