@@ -25,9 +25,8 @@ channel.on('modificarUbicacion', function(sucursal,latlng){
       longitud:latlng.lng
     })
       .then(function(coordenada){
-        console.log(sucursal);
         sucursal.update({
-          id_coordenada:coordenada.id_coordenada
+          id_coordenada:coordenada.dataValues.id_coordenada
         });
       });
   }
@@ -167,7 +166,7 @@ module.exports = function(app){
                 //armo el objeto coordenadas
                 zona.dataValues.coordenadas = coordenadas[0].map(coordenada => {
                   return {
-                    "latlang":{"lat":coordenada.latitud,"lng":coordenada.longitud},
+                    "latlng":{"lat":coordenada.latitud,"lng":coordenada.longitud},
                     "secuencia": coordenada.secuencia,
                     "id_coordenada": coordenada.id_coordenada
                   }

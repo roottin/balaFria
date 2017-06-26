@@ -253,6 +253,7 @@ function completarTemp(datos){
   return temp;
 }
 function crearPath(datos){
+
   var path = {
     id:datos.id,
     type:"polygon",
@@ -260,6 +261,9 @@ function crearPath(datos){
     weight: 2,
     latlngs:[],
     message: "<h3>"+datos.nombre+"</h3><p>"+datos.descripcion+"</p>"
+  }
+  if(datos.coordenadas){
+    path.latlngs =datos.coordenadas.map(coordenada => {return coordenada.latlng});
   }
   return path;
 }
