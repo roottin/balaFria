@@ -11,52 +11,8 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
       clientId: '163659061347-caaqel0ef9nid4nv79kamoofcvkche33.apps.googleusercontent.com'
     });
 
-  var AdminLoggedRequired = ['$q', '$location', '$auth', function($q, $location, $auth) {
-    var deferred = $q.defer();
-    var storage = sessionStorage.getItem('balaFria_token');
-    if (storage !== null) {
-      if(JSON.parse(storage).tipo == "admin"){
-        deferred.resolve();
-      }else{
-        $location.path('/cliente');
-      }
-    } else {
-      $location.path('/cliente');
-    }
-    return deferred.promise;
-  }];
-  var ProveedorLoggedRequired = ['$q', '$location', '$auth', function($q, $location, $auth) {
-    var deferred = $q.defer();
-    var storage = sessionStorage.getItem('balaFria_token');
-    if (storage !== null) {
-      if(JSON.parse(storage).tipo == "proveedor"){
-        deferred.resolve();
-      }else{
-        $location.path('/cliente');
-      }
-    } else {
-      $location.path('/cliente');
-    }
-    return deferred.promise;
-  }];
-  var clienteLoggedRequired = ['$q', '$location', '$auth', function($q, $location, $auth) {
-    var deferred = $q.defer();
-    var storage = sessionStorage.getItem('balaFria_token');
-    if (storage !== null) {
-      if(JSON.parse(storage).tipo == "cliente"){
-        deferred.resolve();
-      }else{
-        $location.path('/cliente');
-      }
-    } else {
-      $location.path('/cliente');
-    }
-    return deferred.promise;
-  }];
-
   //------------------------ Rutas ---------------------------------------------------
   $urlRouterProvider.otherwise('/cliente');
-
   //-----------------------------------------cliente
   $stateProvider
     .state('frontPage', {
@@ -248,6 +204,49 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
           .primaryPalette('indigo')
           .accentPalette('blue-grey');
 
+    /////////////////////////////////////////////////////////////////////////
+    function AdminLoggedRequired($q, $location, $auth) {
+      var deferred = $q.defer();
+      var storage = sessionStorage.getItem('balaFria_token');
+      if (storage !== null) {
+        if(JSON.parse(storage).tipo == "admin"){
+          deferred.resolve();
+        }else{
+          $location.path('/cliente');
+        }
+      } else {
+        $location.path('/cliente');
+      }
+      return deferred.promise;
+    };
+    function ProveedorLoggedRequired($q, $location, $auth) {
+      var deferred = $q.defer();
+      var storage = sessionStorage.getItem('balaFria_token');
+      if (storage !== null) {
+        if(JSON.parse(storage).tipo == "proveedor"){
+          deferred.resolve();
+        }else{
+          $location.path('/cliente');
+        }
+      } else {
+        $location.path('/cliente');
+      }
+      return deferred.promise;
+    };
+    function clienteLoggedRequired($q, $location, $auth) {
+      var deferred = $q.defer();
+      var storage = sessionStorage.getItem('balaFria_token');
+      if (storage !== null) {
+        if(JSON.parse(storage).tipo == "cliente"){
+          deferred.resolve();
+        }else{
+          $location.path('/cliente');
+        }
+      } else {
+        $location.path('/cliente');
+      }
+      return deferred.promise;
+    };
 }])
 //--------------------------------------- Manejo de Token en localStorage ----------------------------------
 .config(['$httpProvider', '$authProvider', function($httpProvider, config) {

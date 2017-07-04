@@ -16,12 +16,12 @@ module.exports = function(sequelize, DataTypes) {
         key: 'id_cliente'
       }
     },
-    id_direccion: {
+    id_coordenada: {
       type: DataTypes.INTEGER,
       allowNull: true,
       references: {
-        model: 'direccion',
-        key: 'id_direccion'
+        model: 'coordenada',
+        key: 'id_coordenada'
       }
     }
   }, {
