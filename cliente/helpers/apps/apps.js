@@ -145,6 +145,9 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
             templateUrl: '/views/plantillas/proveedor/sucursal.html',
             controller:'ctrlSucursal',
             controllerAs:'sucursal'
+          },
+          "foot@proveedor":{
+            templateUrl: '/views/plantillas/proveedor/foot.html'
           }
         },
         resolve:{

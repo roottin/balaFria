@@ -45,7 +45,23 @@ angular.module('balafria')
         message: "Estas Aqui"
       });
     }
-  }
+    if(temp.contactos.length){
+      var tipos={
+        "insta":{"icono":"ion-social-instagram"},
+        "phone":{"icono":"ion-android-call"},
+        "web":{"icono":"ion-android-globe"},
+        "face":{"icono":"ion-social-facebook"},
+        "tweet":{"icono":"ion-social-twitter"}
+      };
+      temp.contactos = temp.contactos.map(contacto => {
+        return {
+          contenido: contacto.valor,
+          icono: tipos[contacto.tipo].icono,
+          clase: contacto.tipo
+        }
+      });
+    }
+  };
   yo.cambioBanner = function(){
     document.querySelector('input[type="file"]').click();
   }
