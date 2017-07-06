@@ -163,10 +163,22 @@ module.exports = function(app){
           nombre: req.body.nombre,
           descripcion: req.body.descripcion,
         }).then(function(sucursal) {
-          channel.emit('modificarUbicacion',sucursal,req.body.ubicacion.latlng);
-          channel.emit('modificarZonas',sucursal,req.body.zonasAtencion);
-          channel.emit('modificarContactos',sucursal,req.body.contactos)
-          res.json(sucursal);
+          Promise.all([
+            modificarUbicacion(sucursal,req.body.ubicacion.latlng),
+            modificarZonas(sucursal,req.body.zonasAtencion),
+            modificarContactos(sucursal,req.body.contactos)
+          ])
+            .then(result =>{
+              sucursal.dataValues.ubicacion = {
+                "lat":result[0].dataValues.latitud,
+                "lng":result[0].dataValues.longitud,
+              };
+              sucursal.dataValues.zonasAtencion = result[1];
+              sucursal.dataValues.contactos = result[2].map(contacto => {
+                return contacto.dataValues;
+              });
+              res.json(sucursal);
+            })
         });
       }
     });
@@ -183,14 +195,15 @@ module.exports = function(app){
   });
 };
 //////////////////////////////////////////////////////////////////////////////
-channel.on('modificarContactos',function(sucursal,contactos){
-  models.sucursal_contacto.findAll({where:{"id_sucursal":sucursal.id_sucursal}})
+//NOTE: modificar contactos
+function modificarContactos(sucursal,contactos){
+  return  models.sucursal_contacto.findAll({where:{"id_sucursal":sucursal.id_sucursal}})
     .then(contactosBD => {
-      Promise.all(contactosBD.map(contactosBD =>{
+      return Promise.all(contactosBD.map(contactosBD =>{
         return contactosBD.destroy();
       }))
         .then(result => {
-          Promise.all(contactos.map(contacto => {
+          return Promise.all(contactos.map(contacto => {
             return models.sucursal_contacto.create({
               "tipo":contacto.clase,
               "valor":contacto.contenido,
@@ -198,9 +211,10 @@ channel.on('modificarContactos',function(sucursal,contactos){
             });
           }))
         })
-    })
-});
-channel.on('modificarUbicacion', function(sucursal,latlng){
+    });
+};
+//NOTE: modificar Ubicacion
+function modificarUbicacion(sucursal,latlng){
   var cambio = false;
   if(!sucursal.id_coordenada){
     if(latlng){
@@ -217,21 +231,24 @@ channel.on('modificarUbicacion', function(sucursal,latlng){
       });
   }
   if(cambio){
-    models.coordenada.create({
+    return models.coordenada.create({
       latitud:latlng.lat,
       longitud:latlng.lng
     })
       .then(function(coordenada){
-        sucursal.updateAttributes({
+        return sucursal.updateAttributes({
           id_coordenada:coordenada.dataValues.id_coordenada
         }).then(result => {
-
-        });
+          return coordenada;
+        })
       });
+  }else{
+    return models.coordenada.find({where:{"id_coordenada":sucursal.id_coordenada}});
   }
-});
-channel.on('modificarZonas',function(sucursal,zonas){
-  models.zona_envio.findAll({
+};
+//NOTE: modificar Zonas
+function modificarZonas(sucursal,zonas){
+  return models.zona_envio.findAll({
     where:{"id_sucursal":sucursal.id_sucursal}
   })
     .then(function(zonasEnvio){
@@ -255,49 +272,16 @@ channel.on('modificarZonas',function(sucursal,zonas){
         //aquellas zonas que no se van a modificar dentro de zona envio son para borrar
         zonasABorrar = zonasEnvio;
       }
-      //borro todas las zonas a borrar
-      zonasABorrar.forEach(zona => {
-        zona.destroy();
-      });
-      //inserto todas las zonas
-      Promise.all(zonasNuevas.map(zona => models.zona_envio.create({
-        "nombre":zona.nombre,
-        "descripcion":zona.descripcion,
-        "id_sucursal":sucursal.id_sucursal
-      })
-        //inserto todas las coordenadas
-        .then(zonaDB => {
-          Promise.all(zona.coordenadas.map(cdn => models.coordenada.create({
-            "latitud":cdn.latlng.lat,
-            "longitud":cdn.latlng.lng,
+      return Promise.all(
+        [
+          ////inserto todas las zonas
+          Promise.all(zonasNuevas.map(zona => models.zona_envio.create({
+            "nombre":zona.nombre,
+            "descripcion":zona.descripcion,
+            "id_sucursal":sucursal.id_sucursal
           })
-            //armo el detalle de la zona
-            .then(cdnDb => {
-              models.detalle_zona_envio.create({
-                "id_zona_envio":zonaDB.id_zona_envio,
-                "id_coordenada":cdnDb.id_coordenada,
-                "secuencia":cdn.secuencia
-              });
-            })
-          ))
-        })
-      ));
-      //me voy contra las zonas a modificar
-      Promise.all(zonasAModificar.map(zona => {
-        //busco todas las zona_envio de esa zona para borrarlas
-        return models.detalle_zona_envio.findAll({where:{"id_zona_envio":zona.id_zona_envio}})
-          .then(resultado => {
-            Promise.all(resultado.map(zona_envio => {
-              //borro todas las coordenas del detall
-              return models.coordenada.destroy({where:{"id_coordenada":zonasEnvio.dataValues.id_coordenada}})
-                .then(result => {
-                  //borro la zona de envio
-                  return zona_envio.destroy();
-                });
-            }))
-            //luego de esto paso a registrar las nuevas coordenadas
-            .then(r => {
-              //las registro
+            //inserto todas las coordenadas
+            .then(zonaDB => {
               Promise.all(zona.coordenadas.map(cdn => models.coordenada.create({
                 "latitud":cdn.latlng.lat,
                 "longitud":cdn.latlng.lng,
@@ -312,7 +296,49 @@ channel.on('modificarZonas',function(sucursal,zonas){
                 })
               ))
             })
-          })
-      }));
-    });
-});
+          )),
+          //borro todas las zonas a borrar
+          zonasABorrar.forEach(zona => {
+            zona.destroy();
+          }),
+          //me voy contra las zonas a modificar
+          Promise.all(zonasAModificar.map(zona => {
+            //busco todas las zona_envio de esa zona para borrarlas
+            return models.detalle_zona_envio.findAll({where:{"id_zona_envio":zona.id_zona_envio}})
+              .then(resultado => {
+                //borro todas las coordenadass del detalle
+                return Promise.all(resultado.map(detalle_zona_envio => {
+                  detalle_zona_envio.destroy()
+                  return models.coordenada.find({where:{"id_coordenada":detalle_zona_envio.id_coordenada}})
+                    .then(coordenada => {
+                      return coordenada.destroy();
+                    })
+                }))
+                //luego de esto paso a registrar las nuevas coordenadas
+                .then(r => {
+                  //las registro
+                  return Promise.all(zona.coordenadas.map(cdn => {
+                      return models.coordenada.create({
+                      "latitud":cdn.latlng.lat,
+                      "longitud":cdn.latlng.lng
+                      })
+                      //armo el detalle de la zona
+                      .then(cdnDb => {
+                        models.detalle_zona_envio.create({
+                          "id_zona_envio":zona.id_zona_envio,
+                          "id_coordenada":cdnDb.id_coordenada,
+                          "secuencia":cdn.secuencia
+                        });
+                      })
+                    })
+                  )
+                })
+              })
+          }))
+        ]
+      );
+    })
+      .then(result => {
+        return Promise.resolve(zonas);
+      });
+};
