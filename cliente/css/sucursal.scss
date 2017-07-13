@@ -1,8 +1,8 @@
 md-dialog{
 	div.barra{
 		width: 100%;
-		margin-bottom: 40px; 
-		@include BoxShadowHelper(2);
+		margin-bottom: 40px;
+		@include BoxShadowHelper(1);
 		border-radius: 4px;
 		overflow: hidden;
 		input[type="checkbox"]{
@@ -217,7 +217,6 @@ md-dialog{
 	}
 	div[md-tabs-template]{
 		background-color: #E0E0E0;
-
 		H2{
 			padding-left: 30px;
 		}
@@ -225,7 +224,7 @@ md-dialog{
 			margin-bottom: 20px;
 		    color: #303030;
 		    padding: 20px;
-			@include BoxShadowHelper(3);
+			@include BoxShadowHelper(1);
 			background-color: white;
 
 			textarea{
@@ -346,6 +345,49 @@ md-dialog{
 								color: rgba(255,255,255,0.8);
 							}
 						}
+					}
+				}
+			}
+		}
+		div.categoria{
+			width: calc(100% - 20px);
+			margin-left: 10px;
+			div.texto-categoria{
+				color:#949494;
+				background-color: white;
+				@include BoxShadowHelper(1);
+				border-radius: 3px;
+				height: 150px;
+				text-align: center;
+				font-size: 35px;
+				padding: 50px;
+				position: relative;
+				overflow: hidden;
+				img{
+					width: calc(100%);
+			    left: 0px;
+			    margin-top: -50px;
+			    /* height: 100%; */
+			    position: absolute;
+			    z-index: 0;
+				}
+			}
+			div.cont-productos{
+				display: flex;
+				align-items: space-between;
+				justify-content: space-between;
+				padding: 10px;
+				div.producto{
+					@include BoxShadowHelper(1);
+					border-radius: 3px;
+					background-color: white;
+					width: 250px;
+					height: 250px;
+					div.texto-producto{
+						color:#949494;
+						text-align: center;
+						font-size: 35px;
+						padding: 50px;
 					}
 				}
 			}

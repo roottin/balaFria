@@ -63,7 +63,7 @@ angular.module('balafria')
     }
   };
   yo.cambioBanner = function(){
-    document.querySelector('input[type="file"]').click();
+    document.querySelector('#bannerFile').click();
   }
   $scope.cambio = function(files){
     yo.temp.banner = {
@@ -245,7 +245,26 @@ angular.module('balafria')
       yo.temp.contactos.push(datos);
     });
   }
+  /////////////////////////////////////////////////////////////////////////////
+  yo.menu = {
+    "categorias": []
+  }
+  yo.agregarCategoria = function(){
+    document.querySelector('#categoriaImg').click();
+  }
+  $scope.cambioCategoria = function(files){
+    var newCat = {
+      ruta:(window.URL || window.webkitURL).createObjectURL( files[0] ),
+      file:files[0],
+      cambio:true
+    };
+    yo.menu.categorias.push(newCat);
+    document.querySelector('#categoria').setAttribute('src',newCat.ruta);
+  }
 }]);
+///////////////////////////////////////////////////////////////////////////////
+//////////////////////// Externas /////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 function completarTemp(datos){
   var temp = angular.copy(datos);
   //inicializacion de propiedades faltantes

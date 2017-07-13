@@ -725,7 +725,7 @@ div.contVerificacion {
 md-dialog div.barra {
   width: 100%;
   margin-bottom: 40px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   border-radius: 4px;
   overflow: hidden; }
   md-dialog div.barra input[type="checkbox"] {
@@ -910,7 +910,7 @@ md-dialog section.preview {
       margin-bottom: 20px;
       color: #303030;
       padding: 20px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
       background-color: white; }
       .sucursal div[md-tabs-template] div.descripcion textarea, .sucursal div[md-tabs-template] div.contactos textarea, .sucursal div[md-tabs-template] div.ubicacion textarea {
         border: none;
@@ -1006,6 +1006,43 @@ md-dialog section.preview {
               .sucursal div[md-tabs-template] div.ubicacion div.leyenda ul li div.text.disabled {
                 cursor: default;
                 color: rgba(255, 255, 255, 0.8); }
+    .sucursal div[md-tabs-template] div.categoria {
+      width: calc(100% - 20px);
+      margin-left: 10px; }
+      .sucursal div[md-tabs-template] div.categoria div.texto-categoria {
+        color: #949494;
+        background-color: white;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+        border-radius: 3px;
+        height: 150px;
+        text-align: center;
+        font-size: 35px;
+        padding: 50px;
+        position: relative;
+        overflow: hidden; }
+        .sucursal div[md-tabs-template] div.categoria div.texto-categoria img {
+          width: calc(100%);
+          left: 0px;
+          margin-top: -50px;
+          /* height: 100%; */
+          position: absolute;
+          z-index: 0; }
+      .sucursal div[md-tabs-template] div.categoria div.cont-productos {
+        display: flex;
+        align-items: space-between;
+        justify-content: space-between;
+        padding: 10px; }
+        .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto {
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+          border-radius: 3px;
+          background-color: white;
+          width: 250px;
+          height: 250px; }
+          .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.texto-producto {
+            color: #949494;
+            text-align: center;
+            font-size: 35px;
+            padding: 50px; }
 
 .pulse {
   display: block;

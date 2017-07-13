@@ -106,12 +106,24 @@
 	        <md-tab-label><i class="material-icons">shopping_basket</i></md-tab-label>
 	        <md-tab-body>
 	          <h2>Menu</h2>
+						<div class="categoria" >
+							<div class="texto-categoria" ng-click="sucursal.agregarCategoria()">
+								<img id="categoria">
+								Agrege Una Categoria
+							</div>
+							<div class="cont-productos">
+								<div class="producto">
+									<div class="texto-producto">Agrege un Producto</div>
+								</div>
+							</div>
+						</div>
 	        </md-tab-body>
         </md-tab>
 	</md-tabs>
 	<div ng-show="false">
 		<form  name="sucursal.tempForm">
-			<input type="file" ngf-select name="sucursa.banner" ngf-pattern="\'image/*\'" accept="image/*" ngf-max-size="20MB" ng-model="sucursal.bannerFile" name="bannerFile" onchange="angular.element(this).scope().cambio(this.files)" />
+			<input type="file" ngf-select name="sucursa.banner" id="bannerFile" ngf-pattern="\'image/*\'" accept="image/*" ngf-max-size="20MB" ng-model="sucursal.bannerFile" name="bannerFile" onchange="angular.element(this).scope().cambio(this.files)" />
+			<input type="file" ngf-select name="sucursa.categoria" id="categoriaImg" ngf-pattern="\'image/*\'" accept="image/*" ngf-max-size="20MB" ng-model="sucursal.categoriaImg" name="categoriaImg" onchange="angular.element(this).scope().cambioCategoria(this.files)" />
 		</form>
 	</div>
 </div>
