@@ -1036,13 +1036,75 @@ md-dialog section.preview {
           box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
           border-radius: 3px;
           background-color: white;
-          width: 250px;
-          height: 250px; }
+          width: calc(100% / 2); }
+          .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto:hover div.img img {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+            transform: scale(1.05); }
+          .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto:hover button.shop-btn1, .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto:hover button.shop-btn2 {
+            transform: scale(1); }
+          .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto:nth-child(odd) {
+            margin-right: 5px; }
+          .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto:nth-child(even) {
+            margin-left: 5px; }
           .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.texto-producto {
             color: #949494;
             text-align: center;
             font-size: 35px;
             padding: 50px; }
+          .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img {
+            padding-top: 15px;
+            padding-bottom: 15px; }
+            .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img img {
+              transition: all 0.3s ease-in-out;
+              width: 100%;
+              height: 100%; }
+          .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.descrip {
+            color: grey;
+            padding-top: 15px;
+            padding-bottom: 15px;
+            height: 100%; }
+            .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.descrip h4 {
+              color: #303030; }
+            .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.descrip div.precio {
+              position: absolute;
+              right: 20px;
+              bottom: 10px;
+              font-size: 25px;
+              color: #303030; }
+            .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.descrip div.arriba {
+              right: 20px;
+              top: 10px;
+              font-size: 20px; }
+            .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.descrip button {
+              transform: scale(0); }
+            .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.descrip button.shop-btn1 {
+              transition: all 0.3s ease-in-out;
+              color: white;
+              background-color: #0D47A1;
+              border: none;
+              padding: 7px;
+              border-radius: 100px;
+              box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+              right: 20px;
+              bottom: 20px;
+              position: absolute; }
+              .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.descrip button.shop-btn1:hover {
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+                transform: scale(1.05); }
+            .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.descrip button.shop-btn2 {
+              transition: all 0.3s ease-in-out;
+              color: white;
+              background-color: #0D47A1;
+              border: none;
+              padding: 7px;
+              border-radius: 100px;
+              box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+              left: 20px;
+              bottom: 15px;
+              position: absolute; }
+              .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.descrip button.shop-btn2:hover {
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+                transform: scale(1.05); }
 
 .pulse {
   display: block;

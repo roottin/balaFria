@@ -245,7 +245,7 @@ angular.module('balafria')
       yo.temp.contactos.push(datos);
     });
   }
-  /////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////  MENU//////////////////////////////////////
   yo.menu = {
     "categorias": []
   }
@@ -254,9 +254,9 @@ angular.module('balafria')
   }
   $scope.cambioCategoria = function(files){
     var newCat = {
+      id:"new"+yo.SUID++,
       ruta:(window.URL || window.webkitURL).createObjectURL( files[0] ),
-      file:files[0],
-      cambio:true
+      file:files[0]
     };
     yo.menu.categorias.push(newCat);
     document.querySelector('#categoria').setAttribute('src',newCat.ruta);
