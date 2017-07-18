@@ -45,13 +45,47 @@
 		<div class="clear"></div>
 	</div>
 	<md-tabs md-dynamic-height md-border-bottom md-center-tabs="true">
+		<!-- MENU -->
 		<md-tab>
-			<md-tab-label><i class="material-icons">star</i></md-tab-label>
-	        <md-tab-body>
-	        	<h2>Puntuacion</h2>
-	        </md-tab-body>
-	    </md-tab>
-		<md-tab>
+				<md-tab-label><i class="material-icons">shopping_basket</i></md-tab-label>
+				<md-tab-body>
+					<h2>Menu</h2>
+					<div class="categoria" >
+						<div class="texto-categoria" ng-click="sucursal.agregarCategoria()">
+							<img id="categoria">
+							Agrege Una Categoria
+						</div>
+						<div class="cont-productos">
+							<div class="producto">
+								<div class="col-lg-6 img">
+									<img src="img/menu/m1.jpg" alt="">
+								</div>
+								<div class="col-lg-6 descrip">
+									<h4>Pizza Margarita</h4>
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim venia.</p>
+									<div class="precio">25.000</div>
+									<button class="material-icons shop-btn2">add_shopping_cart</button>
+								</div>
+								<!-- <div class="texto-producto">Agrege un Producto</div> -->
+							</div>
+							<div class="producto">
+								<div class="col-lg-6 img">
+									<img src="img/menu/m1.jpg" alt="">
+								</div>
+								<div class="col-lg-6 descrip">
+									<h4>Margarita</h4>
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim venia.</p>
+									<div class="precio arriba">25.000</div>
+									<button class="material-icons shop-btn1">add_shopping_cart</button>
+								</div>
+								<!-- <div class="texto-producto">Agrege un Producto</div> -->
+							</div>
+						</div>
+					</div>
+				</md-tab-body>
+			</md-tab>
+			<!-- HOME -->
+			<md-tab>
 	        <md-tab-label><i class="material-icons">home</i></md-tab-label>
 	        <md-tab-body>
 						<div class="ubicacion">
@@ -102,45 +136,13 @@
 						<div class="clear"></div>
 	        </md-tab-body>
         </md-tab>
+				<!-- PUNTUACION -->
 				<md-tab>
-	        <md-tab-label><i class="material-icons">shopping_basket</i></md-tab-label>
-	        <md-tab-body>
-	          <h2>Menu</h2>
-						<div class="categoria" >
-							<div class="texto-categoria" ng-click="sucursal.agregarCategoria()">
-								<img id="categoria">
-								Agrege Una Categoria
-							</div>
-							<div class="cont-productos">
-								<div class="producto">
-									<div class="col-lg-6 img">
-										<img src="img/menu/m1.jpg" alt="">
-									</div>
-									<div class="col-lg-6 descrip">
-										<h4>Pizza Margarita</h4>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim venia.</p>
-										<div class="precio">25.000</div>
-										<button class="material-icons shop-btn2">add_shopping_cart</button>
-									</div>
-									<!-- <div class="texto-producto">Agrege un Producto</div> -->
-								</div>
-
-								<div class="producto">
-									<div class="col-lg-6 img">
-										<img src="img/menu/m1.jpg" alt="">
-									</div>
-									<div class="col-lg-6 descrip">
-										<h4>Margarita</h4>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim venia.</p>
-										<div class="precio arriba">25.000</div>
-										<button class="material-icons shop-btn1">add_shopping_cart</button>
-									</div>
-									<!-- <div class="texto-producto">Agrege un Producto</div> -->
-								</div>
-							</div>
-						</div>
-	        </md-tab-body>
-        </md-tab>
+					<md-tab-label><i class="material-icons">star</i></md-tab-label>
+		        <md-tab-body>
+		        	<h2>Puntuacion</h2>
+		        </md-tab-body>
+		    </md-tab>
 	</md-tabs>
 	<div ng-show="false">
 		<form  name="sucursal.tempForm">
