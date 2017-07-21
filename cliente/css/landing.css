@@ -905,7 +905,16 @@ md-dialog section.preview {
   .sucursal div[md-tabs-template] {
     background-color: #E0E0E0; }
     .sucursal div[md-tabs-template] H2 {
-      padding-left: 30px; }
+      padding-left: 30px;
+      position: relative;
+      margin-bottom: 17px; }
+      .sucursal div[md-tabs-template] H2 .menu {
+        position: absolute;
+        top: -21px;
+        right: 0;
+        width: 100%; }
+        .sucursal div[md-tabs-template] H2 .menu [texto] {
+          float: left; }
     .sucursal div[md-tabs-template] div.descripcion, .sucursal div[md-tabs-template] div.contactos, .sucursal div[md-tabs-template] div.ubicacion {
       margin-bottom: 20px;
       color: #303030;

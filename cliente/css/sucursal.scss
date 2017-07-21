@@ -219,6 +219,18 @@ md-dialog{
 		background-color: #E0E0E0;
 		H2{
 			padding-left: 30px;
+			position: relative;
+			margin-bottom: 17px;
+			.menu{
+				position: absolute;
+			    top: -21px;
+			    right: 0;
+			    width: 100%;
+			    [texto]{
+			    	float: left;
+			    	
+			    }
+			}
 		}
 		div.descripcion,div.contactos,div.ubicacion{
 			margin-bottom: 20px;

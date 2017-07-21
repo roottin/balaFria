@@ -47,10 +47,30 @@
 	<md-tabs md-dynamic-height md-border-bottom md-center-tabs="true">
 		<!-- MENU -->
 		<md-tab>
-				<md-tab-label><i class="material-icons">shopping_basket</i></md-tab-label>
-				<md-tab-body>
-					<h2>Menu</h2>
-					<div class="categoria" >
+			<md-tab-label><i class="material-icons">shopping_basket</i></md-tab-label>
+			<md-tab-body>
+				<h2>
+					Menu
+					<md-fab-toolbar class="menu" md-open="open" count="0" md-direction="left">
+					    <md-fab-trigger class="align-with-text">
+					      <md-button aria-label="menu" class="md-fab md-primary">
+					        <md-icon class="material-icons">menu</md-icon>
+					      </md-button>
+					    </md-fab-trigger>
+					    <md-toolbar>
+					      <md-fab-actions class="md-toolbar-tools">
+					        <md-button aria-label="comment" class="md-icon-button">
+					          <md-icon class="material-icons" onclick="sucursal.agregarMenu()">add</md-icon>
+					        </md-button>
+					        <md-button aria-label="label" class="md-icon-button">
+					          <md-icon class="material-icons" onclick="sucursal.cambiarMenu()">sync</md-icon>
+					        </md-button>
+					    	<div texto>Operaciones disponibles</div>
+					      </md-fab-actions>
+					    </md-toolbar>
+				  	</md-fab-toolbar>
+				</h2>
+				<div class="categoria" >
 						<div class="texto-categoria" ng-click="sucursal.agregarCategoria()">
 							<img id="categoria" src="img/menu/pizza.jpg">
 							<div class="tit-cat">Pizza</div>
@@ -116,67 +136,67 @@
 							<!-- producto -->
 						</div>
 					</div>
-				</md-tab-body>
-			</md-tab>
-			<!-- HOME -->
-			<md-tab>
-	        <md-tab-label><i class="material-icons">home</i></md-tab-label>
+			</md-tab-body>
+		</md-tab>
+		<!-- HOME -->
+		<md-tab>
+        	<md-tab-label><i class="material-icons">home</i></md-tab-label>
 	        <md-tab-body>
-						<div class="ubicacion">
-							<h3>Datos Geograficos</h3>
-							<div class="leyenda" ng-show="sucursal.edit">
+				<div class="ubicacion">
+					<h3>Datos Geograficos</h3>
+					<div class="leyenda" ng-show="sucursal.edit">
+						<ul>
+							<li>
+								<div class="text" ng-click="sucursal.agregarUbicacion()">Ubicacion <i  class="material-icons {{sucursal.temp.ubicacion.clase || ''}}">{{sucursal.temp.ubicacion.icono}}</i></div>
+							</li>
+							<li>
+								<div class="text disabled">Zonas de atencion</div>
 								<ul>
-									<li>
-										<div class="text" ng-click="sucursal.agregarUbicacion()">Ubicacion <i  class="material-icons {{sucursal.temp.ubicacion.clase || ''}}">{{sucursal.temp.ubicacion.icono}}</i></div>
+									<li ng-repeat="zona in sucursal.temp.zonasAtencion">
+										<div ng-click="sucursal.modificarZona(zona)" class="text">
+											{{zona.nombre}}
+											<i class="material-icons {{zona.clase || ''}}">{{zona.icono}}</i>
+										</div>
 									</li>
-									<li>
-										<div class="text disabled">Zonas de atencion</div>
-										<ul>
-											<li ng-repeat="zona in sucursal.temp.zonasAtencion">
-												<div ng-click="sucursal.modificarZona(zona)" class="text">
-													{{zona.nombre}}
-													<i class="material-icons {{zona.clase || ''}}">{{zona.icono}}</i>
-												</div>
-											</li>
-											<li ><div ng-click="sucursal.agregarZona($event)" class="text">agregar <i class="material-icons">add</i></div></li>
-										</ul>
-									</li>
+									<li ><div ng-click="sucursal.agregarZona($event)" class="text">agregar <i class="material-icons">add</i></div></li>
 								</ul>
-							</div>
-							<leaflet lf-center="Acarigua" markers="sucursal.temp.markers" paths="sucursal.paths"></leaflet>
+							</li>
+						</ul>
+					</div>
+					<leaflet lf-center="Acarigua" markers="sucursal.temp.markers" paths="sucursal.paths"></leaflet>
+				</div>
+				<div class="descripcion">
+					<h3>Conocenos</h3>
+					<textarea id="descripcion" ng-show="sucursal.edit" ng-model="sucursal.temp.descripcion"></textarea>
+					<div ng-show="!sucursal.edit">
+						{{sucursal.temp.descripcion}}
+					</div>
+	  			</div>
+				<div class="contactos">
+					<h3>Ubicanos</h3>
+					<section ng-repeat="contacto in sucursal.temp.contactos" class="{{contacto.clase}}">
+						<div >
+							<i class="{{contacto.icono}}"></i>
 						</div>
-						<div class="descripcion">
-							<h3>Conocenos</h3>
-							<textarea id="descripcion" ng-show="sucursal.edit" ng-model="sucursal.temp.descripcion"></textarea>
-							<div ng-show="!sucursal.edit">
-								{{sucursal.temp.descripcion}}
-							</div>
-	          			</div>
-						<div class="contactos">
-							<h3>Ubicanos</h3>
-							<section ng-repeat="contacto in sucursal.temp.contactos" class="{{contacto.clase}}">
-								<div >
-									<i class="{{contacto.icono}}"></i>
-								</div>
-								{{contacto.contenido}}
-							</section>
-							<section class="agregar" ng-show="sucursal.edit" ng-click="sucursal.agregarContacto($event)">
-								<div class="add">
-									<i class="material-icons">add</i>
-								</div>
-								Agregar
-							</section>
+						{{contacto.contenido}}
+					</section>
+					<section class="agregar" ng-show="sucursal.edit" ng-click="sucursal.agregarContacto($event)">
+						<div class="add">
+							<i class="material-icons">add</i>
 						</div>
-						<div class="clear"></div>
+						Agregar
+					</section>
+				</div>
+				<div class="clear"></div>
 	        </md-tab-body>
         </md-tab>
-				<!-- PUNTUACION -->
-				<md-tab>
-					<md-tab-label><i class="material-icons">star</i></md-tab-label>
-		        <md-tab-body>
-		        	<h2>Puntuacion</h2>
-		        </md-tab-body>
-		    </md-tab>
+		<!-- PUNTUACION -->
+		<md-tab>
+			<md-tab-label><i class="material-icons">star</i></md-tab-label>
+	        <md-tab-body>
+	        	<h2>Puntuacion</h2>
+	        </md-tab-body>
+	    </md-tab>
 	</md-tabs>
 	<div ng-show="false">
 		<form  name="sucursal.tempForm">
