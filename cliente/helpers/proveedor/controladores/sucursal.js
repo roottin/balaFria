@@ -1,9 +1,14 @@
 angular.module('balafria')
-.controller('ctrlSucursal', ['Upload','$mdToast','$state','Sucursales','$scope','$timeout','$sesion','$mdDialog','$http', function (Upload,$mdToast,$state,Sucursales,$scope,$timeout,$sesion,$mdDialog,$http){
+.controller('ctrlSucursal', ['Categorias','Upload','$mdToast','$state','Sucursales','$scope','$timeout','$sesion','$mdDialog','$http', function (Categorias,Upload,$mdToast,$state,Sucursales,$scope,$timeout,$sesion,$mdDialog,$http){
   var yo = this;
 
   if(!$state.params.sucursal){
     $state.go('proveedor.dashboard');
+  }
+  //variables secundarias
+  yo.textoCat = true;
+  yo.newCat = {
+    titulo:"Nombre de la categoria",
   }
   //variables principales
   yo.SUID = 0; //Secuencia UID de objetos creados temporalmente
@@ -13,16 +18,25 @@ angular.module('balafria')
   yo.usuario = null;
   yo.icono = "edit";
   yo.paths = [];
+  yo.proveedor = false;
+  yo.cliente = false;
   Sucursales.get({id:$state.params.sucursal},function(result){
     $timeout(function(){
       yo.datos = angular.copy(result);
       yo.temp = completarTemp(result);
-      yo.inicializarTemp();
+      yo.inicializarTemp();      
     });
     $sesion.obtenerPerfil()
       .then(function(result){
         yo.usuario = result;
+        if(yo.usuario.tipo == "proveedor"){
+          yo.proveedor = true;
+        }
       });
+  });
+  //cargo menu
+  Sucursales.getMenu({id:$state.params.sucursal},function(result){
+    yo.menu = yo.inicializarMenu(result);
   });
   //fin declaracion de variables
   yo.inicializarTemp = function(){
@@ -62,6 +76,18 @@ angular.module('balafria')
       });
     }
   };
+  yo.inicializarMenu = function(menu){
+    menu.categorias = menu.categorias.map(function(categoria){
+      categoria.class="edit";
+      categoria.icono="edit";
+      categoria.textoCat = (categoria.titulo)?true:false;
+      categoria.edit = false;
+      categoria.newPro = {}
+      return categoria;
+    });
+    return menu;
+  }
+  //fin funciones de inicalizacion
   yo.cambioBanner = function(){
     document.querySelector('#bannerFile').click();
   }
@@ -245,21 +271,180 @@ angular.module('balafria')
       yo.temp.contactos.push(datos);
     });
   }
-  ////////////////////////////////  MENU//////////////////////////////////////
-  yo.menu = {
-    "categorias": []
+  ////////////////////////////////MENU//////////////////////////////////////
+  yo.buscarCategorias = function(ev){
+    $mdDialog.show({
+      controller: 'ctrlBucarCategorias',
+      controllerAs: 'categorias',
+      templateUrl: '/views/plantillas/proveedor/categorias.tmpl.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose:true
+    }).then(function(categoria){
+      Sucursales.getMenu({id:$state.params.sucursal},function(result){
+        yo.menu = yo.inicializarMenu(result);
+      });
+    });
   }
-  yo.agregarCategoria = function(){
-    document.querySelector('#categoriaImg').click();
+  yo.toggleTitCat = function(){
+    if(yo.textoCat){
+      yo.newCat.titulo = "";
+    }
+    yo.textoCat = !yo.textoCat;
   }
-  $scope.cambioCategoria = function(files){
-    var newCat = {
-      id:"new"+yo.SUID++,
-      ruta:(window.URL || window.webkitURL).createObjectURL( files[0] ),
-      file:files[0]
-    };
-    yo.menu.categorias.push(newCat);
-    document.querySelector('#categoria').setAttribute('src',newCat.ruta);
+  yo.agregarCategoria = function(id){
+    id = id || "Img";
+    document.querySelector('#categoria'+id).click();
+  }
+  yo.agregarImagen = function(id){
+    document.querySelector('#'+id).click();
+  }
+  $scope.colocarImagen = function(files,seudoId){
+    var id = seudoId.substr(9,seudoId.length-1);
+    if(seudoId.substr(0,9)=="newProduc"){
+      yo.menu.categorias.forEach(function(categoria){
+        console.log(categoria.id,id);
+        if(categoria.id == id){
+          categoria.newPro.file = files[0];
+          categoria.newPro.ruta = (window.URL || window.webkitURL).createObjectURL( files[0] );
+          document.querySelector('#newP'+id).setAttribute('src',categoria.newPro.ruta);
+        }
+      });
+    }
+  }
+  $scope.cambioCategoria = function(files,seudoId){    
+    if(!seudoId){
+      yo.newCat.file = files[0];
+      yo.newCat.ruta = (window.URL || window.webkitURL).createObjectURL( files[0] );
+      document.querySelector('#categoria').setAttribute('src',yo.newCat.ruta);
+    }else{
+      var id = seudoId.substr(9,seudoId.length-1);
+      yo.menu.categorias.forEach(function(categoria){
+        if(categoria.id==id){
+          categoria.ruta = (window.URL || window.webkitURL).createObjectURL( files[0] );
+          categoria.file = files[0];
+          document.querySelector('#cat'+categoria.id).setAttribute('src',yo.newCat.ruta);
+        }
+      })
+    }
+  }
+  yo.guardarCategoria = function(categoria){
+    if(categoria=="nueva"){
+      if((yo.newCat.titulo != "Nombre de la categoria")&&(yo.newCat.ruta)){
+        Upload.upload({
+          url: '/api/categorias/',
+          data:{
+            file:yo.newCat.file,
+            id_menu: yo.menu.id_menu,
+            titulo: yo.newCat.titulo,
+            id_proveedor:yo.usuario.id
+          }
+        })
+          .then(function(resp){
+            if(!yo.menu.categorias){
+              yo.menu.categorias = [];
+            }
+            yo.menu.categorias.push(resp);
+            $mdToast.show(
+              $mdToast.simple()
+                .textContent("Categoria Agregada de forma exitosa")
+                .position('top right')
+                .hideDelay(3000)
+            );
+            yo.newCat = {
+              titulo:"Nombre de la categoria",
+            }
+            document.querySelector('#categoria').setAttribute('src','');
+            Sucursales.getMenu({id:$state.params.sucursal},function(result){
+              yo.menu = yo.inicializarMenu(result);
+            });
+          });
+      }else{
+        $mdToast.show(
+          $mdToast.simple()
+            .textContent("Debe agregar una imagen antes de poder continuar")
+            .position('top right')
+            .hideDelay(3000)
+        );
+      }
+    }else{
+      if(!categoria.edit){
+        categoria.edit = !categoria.edit;
+        categoria.class="guardar";
+        categoria.icono ="save";
+      }else{
+        Upload.upload({
+          url: '/api/categorias/imagen',
+          data:{
+            file:categoria.file,
+            id_categoria: categoria.id_categoria,
+          }
+        })
+          .then(function(resp){
+            if(!yo.menu.categorias){
+              yo.menu.categorias = [];
+            }
+            yo.menu.categorias.push(resp);
+            $mdToast.show(
+              $mdToast.simple()
+                .textContent("Categoria modificada de forma exitosa")
+                .position('top right')
+                .hideDelay(3000)
+            );
+            Categorias.update({id:categoria.id},{
+              titulo:categoria.titulo
+            })
+            Sucursales.getMenu({id:$state.params.sucursal},function(result){
+              yo.menu = yo.inicializarMenu(result);
+            });
+          });
+      }
+    }
+  }
+  yo.borrarCategoria = function(categoria){
+    Categorias
+      .desasociar({id_categoria:categoria.id_categoria,id_menu:yo.menu.id_menu})
+      .$promise
+      .then(function(result){
+        $mdToast.show(
+          $mdToast.simple()
+            .textContent("categoria desasociada con exito")
+            .position('top right')
+            .hideDelay(3000)
+        );
+        Sucursales.getMenu({id:$state.params.sucursal},function(result){
+          yo.menu = yo.inicializarMenu(result);
+        });
+      });
+  }
+  yo.agregarMenu = function(ev){
+    $mdDialog.show({
+      controller: 'ctrlAddMenu',
+      controllerAs: 'menu',
+      templateUrl: '/views/plantillas/proveedor/agregarMenu.tmpl.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose:true
+    }).then(function(menu){
+      $mdToast.show(
+          $mdToast.simple()
+            .textContent("Menu "+menu.nombre+" creado de forma exitosa")
+            .position('top right')
+            .hideDelay(3000)
+        );
+    });
+  }
+  yo.cambiarMenu =  function(ev){
+    $mdDialog.show({
+      controller: 'ctrlCambiarMenu',
+      controllerAs: 'menu',
+      templateUrl: '/views/plantillas/proveedor/cambiarMenu.tmpl.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose:true
+    }).then(function(menu){
+      yo.menu = menu;
+    });
   }
 }]);
 ///////////////////////////////////////////////////////////////////////////////
@@ -288,7 +473,6 @@ function completarTemp(datos){
   return temp;
 }
 function crearPath(datos){
-
   var path = {
     id:datos.id,
     type:"polygon",

@@ -722,6 +722,14 @@ div.contVerificacion {
     width: calc(50% - 20px);
     margin-top: 30px; }
 
+md-dialog[modal-categoria] {
+  width: 100%; }
+md-dialog div.menu-item-lista {
+  transition: all 0.3s ease-in-out;
+  border-bottom: 1px solid white; }
+  md-dialog div.menu-item-lista:hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    transform: scale(1.03); }
 md-dialog div.barra {
   width: 100%;
   margin-bottom: 40px;
@@ -1017,7 +1025,10 @@ md-dialog section.preview {
                 color: rgba(255, 255, 255, 0.8); }
     .sucursal div[md-tabs-template] div.categoria {
       width: calc(100% - 20px);
-      margin-left: 10px; }
+      margin-left: 10px;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden; }
       .sucursal div[md-tabs-template] div.categoria div.tit-cat {
         position: absolute;
         bottom: 0px;
@@ -1043,9 +1054,52 @@ md-dialog section.preview {
           width: calc(100%);
           left: 0px;
           margin-top: -50px;
-          /* height: 100%; */
+          min-height: 150px;
           position: absolute;
           z-index: 0; }
+        .sucursal div[md-tabs-template] div.categoria div.texto-categoria input {
+          background-color: transparent;
+          border: 1px dashed silver;
+          padding: 0px 3px;
+          width: 100%;
+          font-size: 20px;
+          color: white; }
+        .sucursal div[md-tabs-template] div.categoria div.texto-categoria:hover i.edit, .sucursal div[md-tabs-template] div.categoria div.texto-categoria:hover i.guardar {
+          left: 10px; }
+        .sucursal div[md-tabs-template] div.categoria div.texto-categoria:hover i.borrar {
+          right: 10px; }
+        .sucursal div[md-tabs-template] div.categoria div.texto-categoria i {
+          transition: box-shadow 0.3s ease-in-out;
+          position: absolute;
+          color: #0D47A1;
+          z-index: 10;
+          cursor: pointer;
+          border-radius: 100px;
+          padding: 3px;
+          background: white; }
+          .sucursal div[md-tabs-template] div.categoria div.texto-categoria i:hover {
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
+          .sucursal div[md-tabs-template] div.categoria div.texto-categoria i.guardar {
+            left: -60px;
+            top: 10px;
+            transition: all 0.3s ease-in-out; }
+          .sucursal div[md-tabs-template] div.categoria div.texto-categoria i.borrar {
+            right: -60px;
+            top: 10px;
+            transition: all 0.3s ease-in-out;
+            width: 30px; }
+          .sucursal div[md-tabs-template] div.categoria div.texto-categoria i.mostrar {
+            right: 16px;
+            bottom: 13px; }
+          .sucursal div[md-tabs-template] div.categoria div.texto-categoria i.edit {
+            left: -60px;
+            top: 10px;
+            transition: all 0.3s ease-in-out; }
+          .sucursal div[md-tabs-template] div.categoria div.texto-categoria i.close {
+            background-color: transparent;
+            right: 15px;
+            top: 12px;
+            color: white; }
       .sucursal div[md-tabs-template] div.categoria div.cont-productos {
         display: flex;
         align-items: space-between;
@@ -1058,6 +1112,10 @@ md-dialog section.preview {
           background-color: white;
           width: calc((100% / 2) - 5px);
           margin-bottom: 10px; }
+          .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto:hover i.edit, .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto:hover i.guardar {
+            left: 10px; }
+          .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto:hover i.borrar {
+            right: 10px; }
           .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto:hover div.img img {
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
             transform: scale(1.05); }
@@ -1081,12 +1139,56 @@ md-dialog section.preview {
             .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img img {
               transition: all 0.3s ease-in-out;
               width: 100%;
-              height: 100%; }
+              height: 100%;
+              min-height: 228px; }
+            .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img:hover i.edit, .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img:hover i.guardar {
+              left: 10px; }
+            .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img:hover i.borrar {
+              right: 10px; }
+            .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img i {
+              transition: box-shadow 0.3s ease-in-out;
+              position: absolute;
+              color: #0D47A1;
+              z-index: 10;
+              cursor: pointer;
+              border-radius: 100px;
+              padding: 3px;
+              background: white; }
+              .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img i:hover {
+                box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
+              .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img i.guardar {
+                left: -60px;
+                top: 10px;
+                transition: all 0.3s ease-in-out; }
+              .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img i.borrar {
+                right: -60px;
+                top: 10px;
+                transition: all 0.3s ease-in-out;
+                width: 30px; }
+              .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img i.mostrar {
+                right: 16px;
+                bottom: 13px; }
+              .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img i.edit {
+                left: -60px;
+                top: 10px;
+                transition: all 0.3s ease-in-out; }
+              .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img i.close {
+                background-color: transparent;
+                right: 15px;
+                top: 12px;
+                color: white; }
           .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.descrip {
             color: grey;
             padding-top: 15px;
             padding-bottom: 15px;
             height: 100%; }
+            .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.descrip textarea {
+              min-height: 100px;
+              border: 1px dashed silver;
+              width: 100%; }
+            .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.descrip input {
+              border: 1px dashed silver;
+              width: 150px; }
             .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.descrip h4 {
               color: #303030; }
             .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.descrip div.precio {
@@ -1103,6 +1205,8 @@ md-dialog section.preview {
                 content: "00";
                 font-size: 10px;
                 transform: translateX(-15px); }
+              .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.descrip div.precio input {
+                width: 100px; }
             .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.descrip div.arriba {
               right: 20px;
               top: 10px;

@@ -1,7 +1,7 @@
 <div class="sucursal" md-theme="light">
 	<div banner>
 		<img id="banner" ng-src="{{sucursal.temp.banner.ruta}}">
-		<div class="edit" ng-click="sucursal.cambioBanner()">
+		<div class="edit" ng-show="sucursal.proveedor" ng-click="sucursal.cambioBanner()">
 			<i class="material-icons">photo</i>
 		</div>
 		<div class="puntuacion material-icons">
@@ -35,7 +35,7 @@
 					</li>
 				</ul>
 			</div>
-			<i class="material-icons" ng-click="sucursal.editar();">{{sucursal.icono}}</i>
+			<i class="material-icons" ng-show="sucursal.proveedor" ng-click="sucursal.editar();">{{sucursal.icono}}</i>
 		</div>
 	</div>
 	<div class="cambios" ng-show="sucursal.temp.cambio">
@@ -49,8 +49,8 @@
 		<md-tab>
 			<md-tab-label><i class="material-icons">shopping_basket</i></md-tab-label>
 			<md-tab-body>
-				<h2>
-					Menu
+				<h2 ng-show="sucursal.proveedor">
+					Menu {{sucursal.menu.nombre}}
 					<md-fab-toolbar class="menu" md-open="open" count="0" md-direction="left">
 					    <md-fab-trigger class="align-with-text">
 					      <md-button aria-label="menu" class="md-fab md-primary">
@@ -60,44 +60,78 @@
 					    <md-toolbar>
 					      <md-fab-actions class="md-toolbar-tools">
 					        <md-button aria-label="comment" class="md-icon-button">
-					          <md-icon class="material-icons" onclick="sucursal.agregarMenu()">add</md-icon>
+					          <md-icon class="material-icons" ng-click="sucursal.agregarMenu($event)">add</md-icon>
 					        </md-button>
 					        <md-button aria-label="label" class="md-icon-button">
-					          <md-icon class="material-icons" onclick="sucursal.cambiarMenu()">sync</md-icon>
+					          <md-icon class="material-icons" ng-click="sucursal.cambiarMenu($event)">sync</md-icon>
+					        </md-button>
+					        <md-button aria-label="label" class="md-icon-button">
+					          <md-icon class="material-icons" ng-click="sucursal.buscarCategorias($event)">work</md-icon>
 					        </md-button>
 					    	<div texto>Operaciones disponibles</div>
 					      </md-fab-actions>
 					    </md-toolbar>
 				  	</md-fab-toolbar>
 				</h2>
-				<div class="categoria" >
-						<div class="texto-categoria" ng-click="sucursal.agregarCategoria()">
-							<img id="categoria" src="img/menu/pizza.jpg">
-							<div class="tit-cat">Pizza</div>
-							Agrege Una Categoria
+				<h2 ng-show="!sucursal.proveedor">
+					Menu
+				</h2>
+				<div ng-show="sucursal.proveedor" class="categoria">					
+					<div class="texto-categoria">
+						<!-- iconos de operaciones-->
+						<i class="material-icons guardar" ng-show="sucursal.proveedor" ng-click="sucursal.guardarCategoria('nueva')">save</i>
+						<i class="material-icons mostrar" ng-show="!sucursal.textoCat" ng-click="sucursal.toggleTitCat()">remove_red_eye</i>
+						<!-- iconos de operaciones-->
+						<img id="categoria" src="" ng-click="sucursal.agregarCategoria()">
+						<div class="tit-cat" ng-show="sucursal.textoCat">							
+							<input type='text' ng-model = "sucursal.newCat.titulo">
+							<i class="material-icons close" ng-click="sucursal.toggleTitCat()">close</i>
 						</div>
-						<div class="cont-productos">
-							<!-- producto -->
-							<div class="producto">
-								<div class="col-lg-6 img">
-									<img src="img/menu/m1.jpg" alt="">
-								</div>
-								<div class="col-lg-6 descrip">
-									<h4>Margarita</h4>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim venia.</p>
-									<div class="precio arriba">25.000</div>
-									<button class="material-icons shop-btn">
-										<div class="texto-aparece">
-											Ordenar
-										</div>
-										add_shopping_cart
-									</button>
-								</div>
-								<!-- <div class="texto-producto">Agrege un Producto</div> -->
+						Imagen
+					</div>
+				</div>
+				<div ng-repeat="categoria in sucursal.menu.categorias" class="categoria">
+					<!-- campo file-->
+					<input ng-show="false" type="file" ngf-select name="file" id="categoria{{categoria.id}}" ngf-pattern="\'image/*\'" accept="image/*" ngf-max-size="20MB" name="categoriaImg" ng-model="categoria.files" onchange="angular.element(this).scope().cambioCategoria(this.files,this.id)" />
+					<!-- campo file-->
+					<div class="texto-categoria">
+						<!-- iconos de operaciones-->
+						<i class="material-icons {{categoria.class}}" ng-show="sucursal.proveedor" ng-click="sucursal.guardarCategoria(categoria)">{{categoria.icono}}</i>
+						<i class="material-icons mostrar" ng-show="!categoria.textoCat" ng-click="sucursal.toggleTitCat()">remove_red_eye</i>
+						<i class="material-icons borrar" ng-show="sucursal.proveedor" ng-click="sucursal.borrarCategoria(categoria)">delete_forever</i>
+						<!-- iconos de operaciones-->
+						<img id="{{'cat'+categoria.id}}" ng-src="{{categoria.ruta}}" ng-click="sucursal.agregarCategoria(categoria.id)">
+						<div class="tit-cat" ng-show="sucursal.textoCat">
+							<div ng-show="!categoria.edit">{{categoria.titulo}}</div>
+							<input type='text' ng-model = "categoria.titulo" ng-show="categoria.edit">
+							<i class="material-icons close" ng-click="sucursal.toggleTitCat()" ng-show="categoria.edit">close</i>
+						</div>
+					</div>
+					<div class="cont-productos">
+						<!-- producto -->
+						<div class="producto">
+							<!-- campo file-->
+							<input ng-show="false" type="file" ngf-select name="file" id="newProduc{{categoria.id}}" ngf-pattern="\'image/*\'" accept="image/*" ngf-max-size="20MB" name="categoriaImg" ng-model="producto.files" onchange="angular.element(this).scope().colocarImagen(this.files,this.id)" />
+							<!-- campo file-->
+							<div class="col-lg-6 img">
+								<!-- iconos de operaciones-->
+								<i class="material-icons guardar" ng-show="sucursal.proveedor" ng-click="sucursal.guardarProducto('nuevo')">save</i>
+								<!-- iconos de operaciones-->
+								<img src="" id="newP{{categoria.id}}" ng-click="sucursal.agregarImagen('newProduc'+categoria.id)">
 							</div>
-							<!-- producto -->
-							<!-- producto -->
-							<div class="producto">
+							<div class="col-lg-6 descrip">
+								<h4><input type="text" ng-model="newProd.nombre"></h4>
+								<textarea class="" ng-model="categoria.newPro.descripcion"></textarea>
+								<div class="precio arriba"><input type="text" ng-model="categoria.newPro.precio"></div>
+								<button class="material-icons shop-btn">
+									<div class="texto-aparece">
+										Ordenar
+									</div>
+									add_shopping_cart
+								</button>
+							</div>
+						</div><!-- producto -->
+						<div class="producto"><!-- producto -->
 								<div class="col-lg-6 img">
 									<img src="img/menu/m2.jpg" alt="">
 								</div>
@@ -115,27 +149,8 @@
 								<!-- <div class="texto-producto">Agrege un Producto</div> -->
 							</div>
 							<!-- producto -->
-							<!-- producto -->
-							<div class="producto">
-								<div class="col-lg-6 img">
-									<img src="img/menu/m3.jpg" alt="">
-								</div>
-								<div class="col-lg-6 descrip">
-									<h4>Especial</h4>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim venia.</p>
-									<div class="precio arriba">25.000</div>
-									<button class="material-icons shop-btn">
-										<div class="texto-aparece">
-											Ordenar
-										</div>
-										add_shopping_cart
-									</button>
-								</div>
-								<!-- <div class="texto-producto">Agrege un Producto</div> -->
-							</div>
-							<!-- producto -->
-						</div>
-					</div>
+					</div><!-- cont-producto -->
+				</div>
 			</md-tab-body>
 		</md-tab>
 		<!-- HOME -->

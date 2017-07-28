@@ -1,6 +1,5 @@
 var models = require('../models/index');
 
-
 module.exports = function(app){
   //obtener menus de un proveedor
   app.get('/api/menus/:id', function(req, res) {
@@ -12,7 +11,8 @@ module.exports = function(app){
   app.post('/api/menus', function(req, res) {
     models.menu.create({
       nombre: req.body.nombre,
-      descripcion: req.body.descripcion
+      descripcion: req.body.descripcion,
+      id_proveedor: req.body.id_proveedor
     })
     .then(function(menu){
         res.json(menu);
@@ -25,7 +25,15 @@ module.exports = function(app){
         id_menu: req.params.id
       }
     }).then(function(menu) {
-      res.json(menu);
+      models.sequelize.query("select dm.*,c.*,i.* from detalle_menu dm "+
+                              "join categoria c on dm.id_categoria = c.id_categoria "+
+                              "join imagen_categoria ic on c.id_categoria = ic.id_categoria and ic.estado = 'A' "+
+                              "join imagen i on ic.id_imagen =i.id_imagen ",
+        { model: models.detalle_menu}
+      ).then(result =>{
+        menu.dataValues.categorias = result;
+        res.json(menu);
+      });
     });
   });
   //modificar
@@ -37,9 +45,8 @@ module.exports = function(app){
     }).then(function(menu) {
       if(menu){
         menu.updateAttributes({
-          id_menu: req.body.id_menu,
           nombre: req.body.nombre,
-          documento: req.body.descripcion
+          descripcion: req.body.descripcion
         }).then(function(menu) {
           res.send(menu);
         });
@@ -47,7 +54,7 @@ module.exports = function(app){
     });
   });
   // delete a single menu
-  app.delete('/api/menun/:id', function(req, res) {
+  app.delete('/api/menu/:id', function(req, res) {
     models.menu.destroy({
       where: {
         id_menu: req.params.id
@@ -55,5 +62,18 @@ module.exports = function(app){
     }).then(function(menu) {
       res.json(menu);
     });
+  });
+  //asociar categoria a menu
+  app.put('/api/menus/cambiarCategoria', function(req, res) {
+    models.menu_sucursal.find({where:{id_sucursal:req.body.id_sucursal}})
+    .then(function(menu_sucursal){
+      models.detalle_menu.create({
+        id_categoria: req.body.id_categoria,
+        id_menu: menu_sucursal.id_menu
+      })
+      .then(function(menu){
+          res.json(menu);
+      });
+    })
   });
 };
