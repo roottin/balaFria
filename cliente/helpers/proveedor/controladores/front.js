@@ -1,5 +1,5 @@
 angular.module('balafria')
-.controller('ctrlProveedor', ['$scope','$state','$mdDialog','Upload','$sesion', function ($scope,$state,$mdDialog,Upload,$sesion){
+.controller('ctrlProveedor', ['$scope','$state','$mdDialog','Upload','$sesion','$mdToast', function ($scope,$state,$mdDialog,Upload,$sesion,$mdToast){
   var yo = this;
   yo.textoBoton = "envialo";
   yo.submit = function(){ //function to call on form submit
@@ -8,9 +8,21 @@ angular.module('balafria')
           yo.upload(yo.file); //call upload function
        }else{
          console.warn('formulario archivo invalido');
+         $mdToast.show(
+          $mdToast.simple()
+            .textContent("Por favor cargue su imagen avatar")
+            .position('top right')
+            .hideDelay(3000)
+        );
        }
     }else{
       console.warn('formulario invalido');
+      $mdToast.show(
+        $mdToast.simple()
+          .textContent("Llene todos los valores antes de continuar")
+          .position('top right')
+          .hideDelay(3000)
+      );
     }
   };
   yo.upload = function (file) {
@@ -46,46 +58,4 @@ angular.module('balafria')
          yo.progress = 'progress: ' + progressPercentage + '% '; // capture upload progress
      });
    };
-}])
-.controller('ctrlCorreo', ['$state','$sesion', function ($state,$sesion){
-  var yo = this;
-  yo.usuario = $sesion.obtenerPerfil();
-}])
-.controller('ctrlHeaderPro', ['$state','$sesion','$auth', function ($state,$sesion,$auth){
-  var yo = this;
-  yo.usuario = $sesion.obtenerPerfil();
-  yo.logOut = function(){
-    $auth.logout()
-          .then(function() {
-              // Desconectamos al usuario y lo redirijimos
-              $sesion.desconectar();
-              $state.go("frontPage");
-          });
-  };
-}])
-.controller('ctrlLogPro', ['$scope','$http','$state','$sesion','$auth','$mdToast', function ($scope,$http,$state,$sesion,$auth,$mdToast) {
-  $scope.login = function(){
-        $auth.login({
-            "field": $scope.field,
-            "clave": $scope.clave,
-            "tipo": "proveedor"
-        })
-        .then(function(response) {
-          if(response.data.success){
-            $sesion.crear(response.data.user,'proveedor').conectar();
-            $state.go('proveedor.dashboard');
-          }else{
-            $mdToast.show(
-              $mdToast.simple()
-                .textContent("Error de Autenticacion")
-                .position('top right')
-                .hideDelay(3000)
-            );
-          }
-        })
-        .catch(function(response) {
-            // Si ha habido errores, llegaremos a esta función
-            console.error(new Error(response));
-        });
-    };
 }]);

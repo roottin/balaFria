@@ -1,31 +1,30 @@
 /* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('direccion_sucursal', {
+  return sequelize.define('notificacion_cliente', {
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
     },
-    id_direccion: {
+    id_cliente: {
       type: DataTypes.INTEGER,
       allowNull: true,
       references: {
-        model: 'direccion',
-        key: 'id_direccion'
-      },
-      unique: true
+        model: 'cliente',
+        key: 'id_cliente'
+      }
     },
-    id_sucursal: {
+    id_notificacion: {
       type: DataTypes.INTEGER,
       allowNull: true,
       references: {
-        model: 'sucursal',
-        key: 'id_sucursal'
+        model: 'notificacion',
+        key: 'id_notificacion'
       }
     }
   }, {
-    tableName: 'direccion_sucursal'
+    tableName: 'notificacion_cliente'
   });
 };

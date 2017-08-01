@@ -1,5 +1,6 @@
 angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','ui.router',"satellizer",'leaflet-directive','ngFileUpload'])
-.config(['$stateProvider','$urlRouterProvider','$mdThemingProvider','$authProvider', function ($stateProvider,$urlRouterProvider,$mdThemingProvider,$authProvider) {
+.config(['$stateProvider','$urlRouterProvider','$mdThemingProvider','$authProvider','$compileProvider', function ($stateProvider,$urlRouterProvider,$mdThemingProvider,$authProvider,$compileProvider) {
+  $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|tel|file|blob):/);
   //-------------------------------- Autenticacion ----------------------------------------
   $authProvider.loginUrl = "/api/autenticar";
   $authProvider.signupUrl = "/api/registrar";
@@ -10,52 +11,8 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
       clientId: '163659061347-caaqel0ef9nid4nv79kamoofcvkche33.apps.googleusercontent.com'
     });
 
-  var AdminLoggedRequired = ['$q', '$location', '$auth', function($q, $location, $auth) {
-    var deferred = $q.defer();
-    var storage = sessionStorage.getItem('balaFria_token');
-    if (storage !== null) {
-      if(JSON.parse(storage).tipo == "admin"){
-        deferred.resolve();
-      }else{
-        $location.path('/cliente');
-      }
-    } else {
-      $location.path('/cliente');
-    }
-    return deferred.promise;
-  }];
-  var ProveedorLoggedRequired = ['$q', '$location', '$auth', function($q, $location, $auth) {
-    var deferred = $q.defer();
-    var storage = sessionStorage.getItem('balaFria_token');
-    if (storage !== null) {
-      if(JSON.parse(storage).tipo == "proveedor"){
-        deferred.resolve();
-      }else{
-        $location.path('/cliente');
-      }
-    } else {
-      $location.path('/cliente');
-    }
-    return deferred.promise;
-  }];
-  var clienteLoggedRequired = ['$q', '$location', '$auth', function($q, $location, $auth) {
-    var deferred = $q.defer();
-    var storage = sessionStorage.getItem('balaFria_token');
-    if (storage !== null) {
-      if(JSON.parse(storage).tipo == "cliente"){
-        deferred.resolve();
-      }else{
-        $location.path('/cliente');
-      }
-    } else {
-      $location.path('/cliente');
-    }
-    return deferred.promise;
-  }];
-
   //------------------------ Rutas ---------------------------------------------------
   $urlRouterProvider.otherwise('/cliente');
-
   //-----------------------------------------cliente
   $stateProvider
     .state('frontPage', {
@@ -127,6 +84,9 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
           "body@proveedor":{
             templateUrl: '/views/plantillas/proveedor/login.html',
             controller: 'ctrlLogPro'
+          },
+          "foot@proveedor":{
+            templateUrl: '/views/plantillas/proveedor/foot.html'
           }
         }
       })
@@ -140,6 +100,54 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
           },
           "body@proveedor":{
             templateUrl: '/views/plantillas/proveedor/dashboard.html'
+          },
+          "foot@proveedor":{
+            templateUrl: '/views/plantillas/proveedor/foot.html'
+          }
+        },
+        resolve:{
+          loginRequired: ProveedorLoggedRequired
+        }
+      })
+      .state('proveedor.nuevaSucursal',{
+        url:'/nuevaSucursal',
+        views:{
+          "header@proveedor":{
+            templateUrl:"/views/plantillas/proveedor/headerLogIn.html",
+            controller:'ctrlHeaderPro',
+            controllerAs:'header'
+          },
+          "body@proveedor":{
+            templateUrl: '/views/plantillas/proveedor/nuevaSucursal.html',
+            controller:'ctrlNuevaSucursal',
+            controllerAs:'sucursal'
+          },
+          "foot@proveedor":{
+            templateUrl: '/views/plantillas/proveedor/foot.html'
+          }
+        },
+        resolve:{
+          loginRequired: ProveedorLoggedRequired
+        }
+      })
+      .state('proveedor.sucursal',{
+        url:'/sucursal',
+        params:{
+          sucursal: null
+        },
+        views:{
+          "header@proveedor":{
+            templateUrl:"/views/plantillas/proveedor/headerLogIn.html",
+            controller:'ctrlHeaderPro',
+            controllerAs:'header'
+          },
+          "body@proveedor":{
+            templateUrl: '/views/plantillas/proveedor/sucursal.html',
+            controller:'ctrlSucursal',
+            controllerAs:'sucursal'
+          },
+          "foot@proveedor":{
+            templateUrl: '/views/plantillas/proveedor/foot.html'
           }
         },
         resolve:{
@@ -195,6 +203,53 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
           .primaryPalette('indigo')
           .accentPalette('blue-grey')
           .dark();
+    $mdThemingProvider.theme('light')
+          .primaryPalette('indigo')
+          .accentPalette('blue-grey');
+
+    /////////////////////////////////////////////////////////////////////////
+    function AdminLoggedRequired($q, $location, $auth) {
+      var deferred = $q.defer();
+      var storage = sessionStorage.getItem('balaFria_token');
+      if (storage !== null) {
+        if(JSON.parse(storage).tipo == "admin"){
+          deferred.resolve();
+        }else{
+          $location.path('/cliente');
+        }
+      } else {
+        $location.path('/cliente');
+      }
+      return deferred.promise;
+    };
+    function ProveedorLoggedRequired($q, $location, $auth) {
+      var deferred = $q.defer();
+      var storage = sessionStorage.getItem('balaFria_token');
+      if (storage !== null) {
+        if(JSON.parse(storage).tipo == "proveedor"){
+          deferred.resolve();
+        }else{
+          $location.path('/cliente');
+        }
+      } else {
+        $location.path('/cliente');
+      }
+      return deferred.promise;
+    };
+    function clienteLoggedRequired($q, $location, $auth) {
+      var deferred = $q.defer();
+      var storage = sessionStorage.getItem('balaFria_token');
+      if (storage !== null) {
+        if(JSON.parse(storage).tipo == "cliente"){
+          deferred.resolve();
+        }else{
+          $location.path('/cliente');
+        }
+      } else {
+        $location.path('/cliente');
+      }
+      return deferred.promise;
+    };
 }])
 //--------------------------------------- Manejo de Token en localStorage ----------------------------------
 .config(['$httpProvider', '$authProvider', function($httpProvider, config) {

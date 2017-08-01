@@ -37,7 +37,7 @@ channel.on('enviarEmail', function(data){
   let host = data.host;
   let perfil = data.perfil;
   let rand = crypto.createHmac('sha1',perfil.email).update(perfil.nombre).digest('hex');
-  let link = 'http://'+host+"/api/cliente/verificar?user="+perfil.email+"&id="+rand;
+  let link = 'http://'+host+"/api/proveedor/verificar?user="+perfil.email+"&id="+rand;
   // setup email data with unicode symbols
   let mailOptions = {
       from: 'roottinca@gmail.com', // sender address
@@ -168,22 +168,22 @@ module.exports = function(app){
       res.json(proveedor);
     });
   });
-  app.get('/api/cliente/verificar',function(req,res){
-    models.cliente.findOne({
+  app.get('/api/proveedor/verificar',function(req,res){
+    models.proveedor.findOne({
       'where':{
         'email':req.query.user
       }
     })
-      .then(function(cliente){
-        if (cliente == null) {
+      .then(function(proveedor){
+        if (proveedor == null) {
           res.redirect('http://'+req.get('host')+'/errorVerificacion');
         }
-        let pass = crypto.createHmac('sha1',cliente.email).update(cliente.nombre).digest('hex');
+        let pass = crypto.createHmac('sha1',proveedor.email).update(proveedor.nombre).digest('hex');
         if(pass == req.query.id){
-          models.cliente.update({
+          models.proveedor.update({
             email_v: true
           },{
-            where:{ id_cliente:cliente.dataValues.id_cliente},
+            where:{ id_proveedor:proveedor.dataValues.id_proveedor},
             returning:true,
             plain:true
           })

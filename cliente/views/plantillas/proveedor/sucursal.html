@@ -1,0 +1,187 @@
+<div class="sucursal" md-theme="light">
+	<div banner>
+		<img id="banner" ng-src="{{sucursal.temp.banner.ruta}}">
+		<div class="edit" ng-click="sucursal.cambioBanner()">
+			<i class="material-icons">photo</i>
+		</div>
+		<div class="puntuacion material-icons">
+			star star star star star
+		</div>
+		<div titulo>
+			<img ng-src="{{sucursal.usuario.avatar.ruta}}" alt="">
+			<div ng-show="!sucursal.edit">{{sucursal.temp.nombre }}</div>
+			<input id="nombre" ng-show="sucursal.edit" type="text"  value="{{sucursal.temp.nombre }}">
+			<div class="informacion-sucursal">
+				<ul>
+					<li>
+						35<br>
+						<label>Pedidos</label>
+					</li>
+					<li>
+						200<br>
+						<label>visitas</label>
+					</li>
+					<li>
+						4<br>
+						<label>visitas hoy</label>
+					</li>
+					<li>
+						3<br>
+						<label>favoritos</label>
+					</li>
+					<li>
+						20<br>
+						<label>promociones</label>
+					</li>
+				</ul>
+			</div>
+			<i class="material-icons" ng-click="sucursal.editar();">{{sucursal.icono}}</i>
+		</div>
+	</div>
+	<div class="cambios" ng-show="sucursal.temp.cambio">
+		<div texto>¿Desea guardar los cambios?</div>
+		<button class="md-raised material-icons" style="background-color:#4CAF50" ng-click="sucursal.guardarCambios()">save</button>
+		<button class="md-raised material-icons" style="background-color:#f44336" ng-click="sucursal.revertirCambios()">close</button>
+		<div class="clear"></div>
+	</div>
+	<md-tabs md-dynamic-height md-border-bottom md-center-tabs="true">
+		<!-- MENU -->
+		<md-tab>
+				<md-tab-label><i class="material-icons">shopping_basket</i></md-tab-label>
+				<md-tab-body>
+					<h2>Menu</h2>
+					<div class="categoria" >
+						<div class="texto-categoria" ng-click="sucursal.agregarCategoria()">
+							<img id="categoria" src="img/menu/pizza.jpg">
+							<div class="tit-cat">Pizza</div>
+							Agrege Una Categoria
+						</div>
+						<div class="cont-productos">
+							<!-- producto -->
+							<div class="producto">
+								<div class="col-lg-6 img">
+									<img src="img/menu/m1.jpg" alt="">
+								</div>
+								<div class="col-lg-6 descrip">
+									<h4>Margarita</h4>
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim venia.</p>
+									<div class="precio arriba">25.000</div>
+									<button class="material-icons shop-btn">
+										<div class="texto-aparece">
+											Ordenar
+										</div>
+										add_shopping_cart
+									</button>
+								</div>
+								<!-- <div class="texto-producto">Agrege un Producto</div> -->
+							</div>
+							<!-- producto -->
+							<!-- producto -->
+							<div class="producto">
+								<div class="col-lg-6 img">
+									<img src="img/menu/m2.jpg" alt="">
+								</div>
+								<div class="col-lg-6 descrip">
+									<h4>Napolitana</h4>
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim venia.</p>
+									<div class="precio arriba">35.000</div>
+									<button class="material-icons shop-btn">
+										<div class="texto-aparece">
+											Ordenar
+										</div>
+										add_shopping_cart
+									</button>
+								</div>
+								<!-- <div class="texto-producto">Agrege un Producto</div> -->
+							</div>
+							<!-- producto -->
+							<!-- producto -->
+							<div class="producto">
+								<div class="col-lg-6 img">
+									<img src="img/menu/m3.jpg" alt="">
+								</div>
+								<div class="col-lg-6 descrip">
+									<h4>Especial</h4>
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim venia.</p>
+									<div class="precio arriba">25.000</div>
+									<button class="material-icons shop-btn">
+										<div class="texto-aparece">
+											Ordenar
+										</div>
+										add_shopping_cart
+									</button>
+								</div>
+								<!-- <div class="texto-producto">Agrege un Producto</div> -->
+							</div>
+							<!-- producto -->
+						</div>
+					</div>
+				</md-tab-body>
+			</md-tab>
+			<!-- HOME -->
+			<md-tab>
+	        <md-tab-label><i class="material-icons">home</i></md-tab-label>
+	        <md-tab-body>
+						<div class="ubicacion">
+							<h3>Datos Geograficos</h3>
+							<div class="leyenda" ng-show="sucursal.edit">
+								<ul>
+									<li>
+										<div class="text" ng-click="sucursal.agregarUbicacion()">Ubicacion <i  class="material-icons {{sucursal.temp.ubicacion.clase || ''}}">{{sucursal.temp.ubicacion.icono}}</i></div>
+									</li>
+									<li>
+										<div class="text disabled">Zonas de atencion</div>
+										<ul>
+											<li ng-repeat="zona in sucursal.temp.zonasAtencion">
+												<div ng-click="sucursal.modificarZona(zona)" class="text">
+													{{zona.nombre}}
+													<i class="material-icons {{zona.clase || ''}}">{{zona.icono}}</i>
+												</div>
+											</li>
+											<li ><div ng-click="sucursal.agregarZona($event)" class="text">agregar <i class="material-icons">add</i></div></li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+							<leaflet lf-center="Acarigua" markers="sucursal.temp.markers" paths="sucursal.paths"></leaflet>
+						</div>
+						<div class="descripcion">
+							<h3>Conocenos</h3>
+							<textarea id="descripcion" ng-show="sucursal.edit" ng-model="sucursal.temp.descripcion"></textarea>
+							<div ng-show="!sucursal.edit">
+								{{sucursal.temp.descripcion}}
+							</div>
+	          			</div>
+						<div class="contactos">
+							<h3>Ubicanos</h3>
+							<section ng-repeat="contacto in sucursal.temp.contactos" class="{{contacto.clase}}">
+								<div >
+									<i class="{{contacto.icono}}"></i>
+								</div>
+								{{contacto.contenido}}
+							</section>
+							<section class="agregar" ng-show="sucursal.edit" ng-click="sucursal.agregarContacto($event)">
+								<div class="add">
+									<i class="material-icons">add</i>
+								</div>
+								Agregar
+							</section>
+						</div>
+						<div class="clear"></div>
+	        </md-tab-body>
+        </md-tab>
+				<!-- PUNTUACION -->
+				<md-tab>
+					<md-tab-label><i class="material-icons">star</i></md-tab-label>
+		        <md-tab-body>
+		        	<h2>Puntuacion</h2>
+		        </md-tab-body>
+		    </md-tab>
+	</md-tabs>
+	<div ng-show="false">
+		<form  name="sucursal.tempForm">
+			<input type="file" ngf-select name="sucursa.banner" id="bannerFile" ngf-pattern="\'image/*\'" accept="image/*" ngf-max-size="20MB" ng-model="sucursal.bannerFile" name="bannerFile" onchange="angular.element(this).scope().cambio(this.files)" />
+			<input type="file" ngf-select name="sucursa.categoria" id="categoriaImg" ngf-pattern="\'image/*\'" accept="image/*" ngf-max-size="20MB" ng-model="sucursal.categoriaImg" name="categoriaImg" onchange="angular.element(this).scope().cambioCategoria(this.files)" />
+		</form>
+	</div>
+</div>

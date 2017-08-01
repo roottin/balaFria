@@ -3,18 +3,15 @@ angular
     .controller("ctrlLogCliente", ctrlLogCliente)
     .controller("ctrlInicio", LoginController);
 
-function LoginController($auth, $state,$scope,$sesion,$mdDialog) {
-    $scope.showAdvanced = function(ev) {
-        $mdDialog.show({
-          controller: 'ctrlLogCliente',
-          controllerAs: 'log',
-          templateUrl: '/views/plantillas/cliente/inicio.tmpl.html',
-          parent: angular.element(document.body),
-          targetEvent: ev,
-          clickOutsideToClose:true,
-          fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
-      });
+function LoginController($auth, $state,$scope,$sesion,$mdSidenav) {
+  $scope.toggleLeft = buildToggler('left');
+  $scope.toggleRight = buildToggler('right');
+
+  function buildToggler(componentId) {
+    return function() {
+      $mdSidenav(componentId).toggle();
     };
+  }
 }
 function ctrlLogCliente( $mdDialog,$http,$sesion,$state,$auth,$mdToast) {
     var yo = this;

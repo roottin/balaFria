@@ -2,7 +2,7 @@
   "name": "balafria",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "",
   "scripts": {
     "start": "node ./bin/www"
   },
@@ -44,7 +44,7 @@
     "type": "git",
     "url": "git+https://github.com/vrinox/balaFria.git"
   },
-  "author": "vrinox",
+  "author": "roottin",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/vrinox/balaFria/issues"

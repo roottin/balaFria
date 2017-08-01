@@ -1,6 +1,6 @@
 angular.module('balafria')
-.controller('ctrlMap', ['$scope','Rubros', function ($scope,Rubros) {
-  angular.extend($scope, {
+.controller('ctrlMap', ['$scope','Rubros','$rootScope', function ($scope,Rubros,$rootScope) {
+  angular.extend($rootScope, {
         Acarigua: {
             lat: 9.55972,
             lng: -69.20194,
@@ -8,7 +8,7 @@ angular.module('balafria')
         }
     });
   $scope.rubros = Rubros.query(function(){
-    
+
   });
   $scope.disponibles = [];
   $scope.openMenu = function($mdMenu, ev) {
