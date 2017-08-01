@@ -55,6 +55,7 @@ md-checkbox{
 [login]{
   max-width: 500px;
   width: 100%;
+  height: 100%;
   md-tabs-canvas{
     width: 100%;
     md-pagination-wrapper{
@@ -92,6 +93,7 @@ div[divider]{
   height: 1px;
   background: silver;
   margin-left: -2px;
+  padding: 0px;
 }
 md-content[landing].cliente{
   div[ui-view="body"]{

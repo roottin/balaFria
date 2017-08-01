@@ -1225,7 +1225,8 @@ md-checkbox div.md-container div.md-icon {
 
 [login] {
   max-width: 500px;
-  width: 100%; }
+  width: 100%;
+  height: 100%; }
   [login] md-tabs-canvas {
     width: 100%; }
     [login] md-tabs-canvas md-pagination-wrapper {
@@ -1254,7 +1255,8 @@ div[divider] {
   width: calc(100% - 0px);
   height: 1px;
   background: silver;
-  margin-left: -2px; }
+  margin-left: -2px;
+  padding: 0px; }
 
 md-content[landing].cliente div[ui-view="body"] {
   width: 100%;
