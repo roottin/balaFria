@@ -257,7 +257,7 @@ div.titulo {
   div.titulo i {
     font-size: 50px;
     transform: translateY(9px);
-    color: #FFCA28; }
+    color: #607D8B; }
 
 div[form-central] {
   width: 50%;
@@ -286,14 +286,14 @@ div[form-central] {
       width: 148px;
       height: 148px;
       float: left;
-      border: 2px solid #FFCA28;
+      border: 2px solid #607D8B;
       position: relative; }
       div[form-central] div[lista] div[categoria].activo {
         border: 1px solid #303030; }
         div[form-central] div[lista] div[categoria].activo div[nombre] {
           color: white; }
       div[form-central] div[lista] div[categoria] div[nombre] {
-        color: #FFCA28;
+        color: #607D8B;
         position: absolute;
         width: 100%;
         height: 100%;
@@ -319,7 +319,7 @@ md-backdrop {
 
 md-sidenav section[cabecera] {
   height: 60px;
-  border-bottom: 1px solid #FFCA28;
+  border-bottom: 1px solid #607D8B;
   color: #303030;
   background-color: white;
   font-size: 20px;
@@ -338,13 +338,13 @@ md-sidenav h5 {
   margin: 0px;
   transition: all 0.3s ease-in-out;
   color: white;
-  background-color: #0D47A1; }
+  background-color: #3F51B5; }
   md-sidenav h5 i {
     float: left;
     margin-right: 10px;
     margin-top: -5px;
     cursor: pointer;
-    color: #FFCA28; }
+    color: #607D8B; }
   md-sidenav h5:hover {
     background-color: white;
     color: black; }
@@ -387,7 +387,7 @@ md-sidenav section.perfil {
         transition: all 0.3s ease-in-out;
         border-bottom: 1px dashed rgba(255, 255, 255, 0.4);
         color: white;
-        background-color: #0D47A1; }
+        background-color: #3F51B5; }
         md-sidenav section.perfil div[opciones] ul li:hover {
           background: rgba(0, 0, 0, 0.2); }
         md-sidenav section.perfil div[opciones] ul li:last-child {
@@ -401,7 +401,7 @@ md-sidenav section.perfil {
           transform: translateY(7px);
           margin-right: 5px;
           margin-top: -10px;
-          color: #FFCA28; }
+          color: #607D8B; }
 
 md-content[landing] div[registro][proovedor-full].inicio {
   padding: 0px;
@@ -697,7 +697,7 @@ div.contVerificacion {
     width: 100%;
     padding: 20px 0px;
     text-align: center;
-    background: #0D47A1;
+    background: #3F51B5;
     color: white; }
   div.contVerificacion div.avatar {
     width: 200px;
@@ -1101,7 +1101,7 @@ md-dialog section.preview {
             .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.descrip button.shop-btn {
               transition: all 0.3s ease-in-out;
               color: white;
-              background-color: #FFCA28;
+              background-color: #607D8B;
               border: none;
               padding: 7px 6px 7px 0px;
               border-radius: 100px;
@@ -1201,7 +1201,7 @@ html, body {
 
 div.md-toast-content {
   background: white !important;
-  color: #0D47A1 !important; }
+  color: #3F51B5 !important; }
 
 md-sidenav {
   background-color: white; }
@@ -1234,8 +1234,8 @@ md-checkbox div.md-container div.md-icon {
       [login] md-tabs-canvas md-pagination-wrapper md-tab-item {
         width: 50%; }
         [login] md-tabs-canvas md-pagination-wrapper md-tab-item.md-tab.md-active {
-          background-color: #0D47A1;
-          color: #FFCA28; }
+          background-color: #3F51B5;
+          color: #607D8B; }
   [login] .inicio {
     background-color: rgba(0, 0, 0, 0.3);
     width: 100%;
@@ -1248,7 +1248,7 @@ md-checkbox div.md-container div.md-icon {
     [login] .inicio.google {
       background: #dd4b39; }
     [login] .inicio.md-raised {
-      background: #0D47A1; }
+      background: #3F51B5; }
 
 div[divider] {
   margin: 10px 10px;
@@ -1270,7 +1270,7 @@ md-content[landing] {
   md-content[landing] header.cliente {
     width: 100%;
     height: 70px;
-    background-color: #0D47A1;
+    background-color: #3F51B5;
     margin-top: -10px; }
     md-content[landing] header.cliente i.material-icons {
       float: right;
@@ -1280,7 +1280,7 @@ md-content[landing] {
       cursor: pointer;
       transition: all 0.3s ease-in-out; }
       md-content[landing] header.cliente i.material-icons:hover {
-        background: #0D47A1; }
+        background: #3F51B5; }
     md-content[landing] header.cliente div[titulo] {
       font-family: 'Bebas';
       font-size: 40px;
@@ -1346,10 +1346,10 @@ md-content[landing] {
           padding: 6px;
           border-radius: 3px;
           margin-top: 10px;
-          background-color: #0D47A1;
+          background-color: #3F51B5;
           position: absolute; }
           md-content[landing] header.cliente div[sociales] i:hover div[tooltip]:after {
-            border-bottom: 10px solid #0D47A1; }
+            border-bottom: 10px solid #3F51B5; }
   md-content[landing] div[principal] {
     width: 100%;
     height: calc(100%); }
