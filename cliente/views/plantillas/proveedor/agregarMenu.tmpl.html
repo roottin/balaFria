@@ -1,4 +1,4 @@
-<md-dialog aria-label="tipoImagen" login>
+<md-dialog aria-label="tipoImagen" md-theme="default">
    <md-toolbar>
      <div class="md-toolbar-tools">
       <h2>Agregar nuevo Menu</h2>
@@ -8,6 +8,7 @@
       </md-button>
      </div>
    </md-toolbar>
+   <md-content>
     <div class="inicio"  md-theme="default" registro  layout="column" layout-sm="column"  layout-wrap>
       <form name="menu.formulario">
         <md-input-container md-no-float class="md-block">
@@ -31,4 +32,5 @@
            <md-button class="md-raised md-primary" type="submit" ng-click="menu.submit()">Enviar</md-button>
       </form>
    </div>
+   </md-content>
 </md-dialog>
