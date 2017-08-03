@@ -6,10 +6,14 @@ module.exports = function(app){
   });
   //rutas clientes
   require('./cliente')(app);
-  require('./proveedor')(app);
   require('./autenticar')(app);
+  //rutas administrador
+  require('./tipo_imagen')(app);
   require('./adminPanel')(app);
   require('./rubro')(app);
-  require('./tipo_imagen')(app);
+  //rutas proveedor
+  require('./proveedor')(app);
   require('./sucursal')(app);
+  require('./menu')(app);
+  require('./categoria')(app);
 };

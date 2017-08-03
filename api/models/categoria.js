@@ -16,11 +16,7 @@ module.exports = function(sequelize, DataTypes) {
         key: 'id_proveedor'
       }
     },
-    nombre: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    descripcion: {
+    titulo: {
       type: DataTypes.STRING,
       allowNull: true
     }

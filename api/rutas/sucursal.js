@@ -193,6 +193,29 @@ module.exports = function(app){
       res.json(sucursal);
     });
   });
+  app.put('/api/sucursales/cambiarMenu',function(req, res){
+    models.menu_sucursal
+      .find({where:{id_sucursal:req.body.id_sucursal}})
+      .then(menu_sucursal => {
+        if(menu_sucursal){
+          menu_sucursal.updateAttributes({
+            id_menu: req.body.id_menu
+          })
+          .then(result => {
+            res.json(result);
+          })
+        }else{
+          models.menu_sucursal
+            .create({
+              id_menu: req.body.id_menu,
+              id_sucursal: req.body.id_sucursal
+            })
+            .then(result =>{
+              res.json(result);
+            })
+        }
+      })
+  });
 };
 //////////////////////////////////////////////////////////////////////////////
 //NOTE: modificar contactos

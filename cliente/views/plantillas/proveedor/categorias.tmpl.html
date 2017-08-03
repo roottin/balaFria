@@ -1,0 +1,25 @@
+<md-dialog aria-label="Categoria" modal-categoria>
+   <md-toolbar>
+     <div class="md-toolbar-tools">
+      <h2>Usar Categoria</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="categorias.cancel()">
+         <md-icon class="material-icons" aria-label="Close dialog">close</md-icon>
+      </md-button>
+     </div>
+   </md-toolbar>
+   <div class="inicio"  md-theme="default" registro  layout="column" layout-sm="column"  layout-wrap>
+     <div class="sucursal">
+        <div md-tabs-template>
+          <div ng-repeat="categoria in categorias.lista" class="categoria" ng-click="categorias.elegir($index)">
+            <div class="texto-categoria">
+              <img id="{{'cat'+categoria.id}}" ng-src="{{categoria.imagen_ruta}}">
+              <div class="tit-cat" ng-show="categoria.titulo">
+                <div>{{categoria.titulo}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+     </div>
+    </div>
+</md-dialog>

@@ -7,6 +7,11 @@ angular.module('balafria')
     	url:'/api/sucursales/:id',
     	params:{id: '@id'},
       isArray:true
+    },
+    'getMenu':{
+    	method:'GET',
+    	url:'/api/menu/:id',
+    	params:{id: '@id'},
     }
   });
 }]);
