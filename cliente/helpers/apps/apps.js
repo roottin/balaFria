@@ -202,6 +202,10 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
     $mdThemingProvider.theme('light')
           .primaryPalette('indigo')
           .accentPalette('blue-grey');
+    $mdThemingProvider.theme('default')
+          .primaryPalette('indigo')
+          .accentPalette('blue-grey')
+          .dark();
 
     /////////////////////////////////////////////////////////////////////////
     function AdminLoggedRequired($q, $location, $auth) {

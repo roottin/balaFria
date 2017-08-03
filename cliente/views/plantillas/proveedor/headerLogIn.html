@@ -29,6 +29,17 @@
       <div avatar>
       <img src="{{header.usuario.avatar.ruta }}" alt="">
     </div>
+    <div opciones>
+         <ul>
+          <li>{{header.usuario.nombre}}</li>
+          <li ui-sref='proveedor.dashboard'><span class="material-icons">dashboard</span>dashboard</li>
+          <li><span class="material-icons">settings</span>Ajustes</li>
+          <li><span class="material-icons">security</span>Datos seguridad</li>
+          <li ng-click="header.logOut()"><span class="material-icons">power_settings_new</span>Cerrar Sesion</li>
+        </ul>
+      </div>
+    </section>
+    <section cabecera> Notificaciones <i class="material-icons right">notifications_none</i></section>
     <div notificaciones ng-click="header.openLeftMenu()">
         <i class="material-icons">notifications_none</i>
     </div>
