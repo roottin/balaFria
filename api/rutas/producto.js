@@ -36,7 +36,8 @@ module.exports = function(app){
   //guardar registro
   app.post('/api/productos',upload, function(req, res) {
     models.producto.create({
-      titulo: req.body.titulo,
+      nombre: req.body.nombre,
+      descripcion: req.body.descripcion,
       id_proveedor:req.body.id_proveedor
     }).then(function(producto) {
       models.imagen.create({
@@ -49,9 +50,9 @@ module.exports = function(app){
           id_imagen:imagen.id_imagen
         }).then(function(imagen_producto){
           producto.dataValues.imagen = imagen;
-          models.detalle_menu.create({
+          models.detalle_categoria.create({
             id_producto:producto.id_producto,
-            id_menu:req.body.id_menu
+            id_detalle_menu:req.body.id_detalle_menu
           }).then(function(){
             res.json(producto);
           });

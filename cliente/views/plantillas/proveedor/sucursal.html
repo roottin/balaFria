@@ -76,14 +76,14 @@
 				<h2 ng-show="!sucursal.proveedor">
 					Menu
 				</h2>
-				<div ng-show="sucursal.proveedor" class="categoria">					
+				<div ng-show="sucursal.proveedor" class="categoria">
 					<div class="texto-categoria">
 						<!-- iconos de operaciones-->
 						<i class="material-icons guardar" ng-show="sucursal.proveedor" ng-click="sucursal.guardarCategoria('nueva')">save</i>
 						<i class="material-icons mostrar" ng-show="!sucursal.textoCat" ng-click="sucursal.toggleTitCat()">remove_red_eye</i>
 						<!-- iconos de operaciones-->
 						<img id="categoria" src="" ng-click="sucursal.agregarCategoria()">
-						<div class="tit-cat" ng-show="sucursal.textoCat">							
+						<div class="tit-cat" ng-show="sucursal.textoCat">
 							<input type='text' ng-model = "sucursal.newCat.titulo">
 							<i class="material-icons close" ng-click="sucursal.toggleTitCat()">close</i>
 						</div>
@@ -115,14 +115,14 @@
 							<!-- campo file-->
 							<div class="col-lg-6 img">
 								<!-- iconos de operaciones-->
-								<i class="material-icons guardar" ng-show="sucursal.proveedor" ng-click="sucursal.guardarProducto('nuevo')">save</i>
+								<i class="material-icons guardar" ng-show="sucursal.proveedor" ng-click="sucursal.guardarProducto('nuevo',categoria)">save</i>
 								<!-- iconos de operaciones-->
-								<img src="" id="newP{{categoria.id}}" ng-click="sucursal.agregarImagen('newProduc'+categoria.id)">
+								<img id="newP{{categoria.id}}" ng-click="sucursal.agregarImagen('newProduc'+categoria.id)" src="img/thumbnails/Captura.PNG">
 							</div>
 							<div class="col-lg-6 descrip">
-								<h4><input type="text" ng-model="newProd.nombre"></h4>
-								<textarea class="" ng-model="categoria.newPro.descripcion"></textarea>
-								<div class="precio arriba"><input type="text" ng-model="categoria.newPro.precio"></div>
+								<h4><input type="text" ng-model="categoria.newPro.nombre" placeholder="Nombre"></h4>
+								<textarea class="" ng-model="categoria.newPro.descripcion" placeholder="descripcion de producto"></textarea>
+								<div class="precio arriba"><input type="text" ng-model="categoria.newPro.precio" placeholder="XXXXX"></div>
 								<button class="material-icons shop-btn">
 									<div class="texto-aparece">
 										Ordenar
@@ -131,13 +131,13 @@
 								</button>
 							</div>
 						</div><!-- producto -->
-						<div class="producto"><!-- producto -->
+						<div class="producto" ng-repeat="producto in categoria.productos"><!-- producto -->
 								<div class="col-lg-6 img">
-									<img src="img/menu/m2.jpg" alt="">
+									<img ng-src="{{producto.ruta}}" alt="">
 								</div>
 								<div class="col-lg-6 descrip">
-									<h4>Napolitana</h4>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim venia.</p>
+									<h4>{{producto.nombre}}</h4>
+									<p>{{producto.descripcion}}</p>
 									<div class="precio arriba">35.000</div>
 									<button class="material-icons shop-btn">
 										<div class="texto-aparece">

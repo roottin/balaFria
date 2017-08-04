@@ -282,7 +282,7 @@ angular.module('balafria')
       clickOutsideToClose:true
     }).then(function(categoria){
       if(categoria){
-        Sucursales.getMenu({id:$state.params.sucursal},function(result){
+        Sucursales.getMenu({id:result.id_menu},function(result){
           yo.menu = yo.inicializarMenu(result);
         });
       }
@@ -312,6 +312,36 @@ angular.module('balafria')
           document.querySelector('#newP'+id).setAttribute('src',categoria.newPro.ruta);
         }
       });
+    }
+  }
+  yo.guardarProducto = function(producto,categoria){
+    if(producto == "nuevo"){
+      if (categoria.newPro.nombre && categoria.newPro.descripcion && categoria.newPro.precio && categoria.newPro.ruta) {
+        Upload.upload({
+          url: '/api/productos/',
+          data:{
+            file:categoria.newPro.file,
+            id_detalle_menu: categoria.id_detalle_menu,
+            descripcion: categoria.newPro.descripcion,
+            nombre: categoria.newPro.nombre,
+            id_proveedor: yo.usuario.id,
+            precio: categoria.newPro.precio
+          }
+        })
+          .then(function(result){
+            categoria.newPro = {};
+            Sucursales.getMenu({id:yo.menu.id_menu},function(result){
+              yo.menu = yo.inicializarMenu(result);
+            });
+          });
+      }else{
+        $mdToast.show(
+          $mdToast.simple()
+            .textContent("Llene todos los datos antes de guardar")
+            .position('top right')
+            .hideDelay(3000)
+          );
+        }
     }
   }
   $scope.cambioCategoria = function(files,seudoId){
@@ -357,7 +387,7 @@ angular.module('balafria')
               titulo:"Nombre de la categoria",
             }
             document.querySelector('#categoria').setAttribute('src','');
-            Sucursales.getMenu({id:$state.params.sucursal},function(result){
+            Sucursales.getMenu({id:yo.menu.id_menu},function(result){
               yo.menu = yo.inicializarMenu(result);
             });
           });
@@ -396,7 +426,7 @@ angular.module('balafria')
             Categorias.update({id:categoria.id},{
               titulo:categoria.titulo
             })
-            Sucursales.getMenu({id:$state.params.sucursal},function(result){
+            Sucursales.getMenu({id:result.id_menu},function(result){
               yo.menu = yo.inicializarMenu(result);
             });
           });
@@ -414,7 +444,7 @@ angular.module('balafria')
             .position('top right')
             .hideDelay(3000)
         );
-        Sucursales.getMenu({id:$state.params.sucursal},function(result){
+        Sucursales.getMenu({id:result.id_menu},function(result){
           yo.menu = yo.inicializarMenu(result);
         });
       });
@@ -445,7 +475,9 @@ angular.module('balafria')
       targetEvent: ev,
       clickOutsideToClose:true
     }).then(function(menu){
-      yo.menu = menu;
+      Sucursales.getMenu({id:menu.id_menu},function(result){
+        yo.menu = yo.inicializarMenu(result);
+      });
     });
   }
 }]);

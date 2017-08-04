@@ -9,7 +9,7 @@ angular.module('balafria')
         .$promise.then(function(data){
           yo.lista = data;
         });
-    })  
+    })
     yo.elegir = function(index){
       var data = {
         id_categoria: yo.lista[index].id_categoria,
@@ -17,7 +17,7 @@ angular.module('balafria')
       }
       $http
         .put('/api/menus/cambiarCategoria/',data)
-        .then(function(){          
+        .then(function(){
           $mdDialog.hide(yo.lista[index]);
         })
     }

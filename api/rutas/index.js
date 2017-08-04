@@ -16,4 +16,5 @@ module.exports = function(app){
   require('./sucursal')(app);
   require('./menu')(app);
   require('./categoria')(app);
+  require('./producto')(app);
 };

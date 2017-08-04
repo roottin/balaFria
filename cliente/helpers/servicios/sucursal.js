@@ -9,7 +9,7 @@ angular.module('balafria')
       isArray:true
     },
     'getMenu':{
-    	method:'GET',
+      method:'GET',
     	url:'/api/menu/:id',
     	params:{id: '@id'},
     }

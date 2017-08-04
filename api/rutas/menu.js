@@ -25,14 +25,28 @@ module.exports = function(app){
         id_menu: req.params.id
       }
     }).then(function(menu) {
-      models.sequelize.query("select dm.*,c.*,i.* from detalle_menu dm "+
+      models.sequelize.query("select dm.*,c.*,i.*,dm.id as id_detalle_menu from detalle_menu dm "+
                               "join categoria c on dm.id_categoria = c.id_categoria "+
                               "join imagen_categoria ic on c.id_categoria = ic.id_categoria and ic.estado = 'A' "+
-                              "join imagen i on ic.id_imagen =i.id_imagen ",
+                              "join imagen i on ic.id_imagen =i.id_imagen "+
+                              "where dm.id_menu = "+req.params.id,
         { model: models.detalle_menu}
       ).then(result =>{
-        menu.dataValues.categorias = result;
-        res.json(menu);
+        menu.dataValues.categorias = [];
+        Promise.all(result.map(categoria => {
+          return models.sequelize.query("select p.*,i.ruta, dc.id as id_detalle_categoria from detalle_categoria dc"+
+                            " join producto p on dc.id_producto = p.id_producto"+
+                            " join imagen_producto ip on ip.id_producto = p.id_producto"+
+                            " join imagen i on ip.id_imagen = i.id_imagen"+
+                            " where id_detalle_menu ="+categoria.dataValues.id_detalle_menu,
+            { model: models.detalle_categoria}
+          ).then(productos => {
+            categoria.dataValues.productos = productos;
+            menu.dataValues.categorias.push(categoria);
+          })
+        })).then(result => {
+          res.json(menu);
+        });
       });
     });
   });
