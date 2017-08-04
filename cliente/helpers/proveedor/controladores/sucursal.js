@@ -24,7 +24,11 @@ angular.module('balafria')
     $timeout(function(){
       yo.datos = angular.copy(result);
       yo.temp = completarTemp(result);
-      yo.inicializarTemp();      
+      yo.inicializarTemp();
+    });
+    //cargo menu
+    Sucursales.getMenu({id:result.id_menu},function(result){
+      yo.menu = yo.inicializarMenu(result);
     });
     $sesion.obtenerPerfil()
       .then(function(result){
@@ -33,10 +37,6 @@ angular.module('balafria')
           yo.proveedor = true;
         }
       });
-  });
-  //cargo menu
-  Sucursales.getMenu({id:$state.params.sucursal},function(result){
-    yo.menu = yo.inicializarMenu(result);
   });
   //fin declaracion de variables
   yo.inicializarTemp = function(){
@@ -281,9 +281,11 @@ angular.module('balafria')
       targetEvent: ev,
       clickOutsideToClose:true
     }).then(function(categoria){
-      Sucursales.getMenu({id:$state.params.sucursal},function(result){
-        yo.menu = yo.inicializarMenu(result);
-      });
+      if(categoria){
+        Sucursales.getMenu({id:$state.params.sucursal},function(result){
+          yo.menu = yo.inicializarMenu(result);
+        });
+      }
     });
   }
   yo.toggleTitCat = function(){
@@ -312,7 +314,7 @@ angular.module('balafria')
       });
     }
   }
-  $scope.cambioCategoria = function(files,seudoId){    
+  $scope.cambioCategoria = function(files,seudoId){
     if(!seudoId){
       yo.newCat.file = files[0];
       yo.newCat.ruta = (window.URL || window.webkitURL).createObjectURL( files[0] );
