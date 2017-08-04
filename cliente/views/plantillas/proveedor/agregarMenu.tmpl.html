@@ -1,34 +1,36 @@
-<md-dialog aria-label="tipoImagen">
+<md-dialog aria-label="tipoImagen" md-theme="default">
    <md-toolbar>
      <div class="md-toolbar-tools">
-      <h2>Zona de Atencion</h2>
+      <h2>Agregar nuevo Menu</h2>
       <span flex></span>
-      <md-button class="md-icon-button" ng-click="form.cancel()">
+      <md-button class="md-icon-button" ng-click="menu.cancel()">
          <md-icon class="material-icons" aria-label="Close dialog">close</md-icon>
       </md-button>
      </div>
    </md-toolbar>
+   <md-content>
     <div class="inicio"  md-theme="default" registro  layout="column" layout-sm="column"  layout-wrap>
-      <form name="form.formulario">
+      <form name="menu.formulario">
         <md-input-container md-no-float class="md-block">
           <label>Nombre</label>
-          <input required name="nombre" minlength="5"  ng-model="form.zona.nombre">
+          <input required name="nombre" minlength="5"  ng-model="menu.zona.nombre">
             <!-- mensajes  -->
-          <div ng-messages="form.formulario.nombre.$error" role="alert">
+          <div ng-messages="menu.formulario.nombre.$error" role="alert">
             <div ng-message="required">Este campo es requerido</div>
             <div ng-message="minlength">Debe poseer al menos 5 carateres</div>
           </div>
         </md-input-container>
         <md-input-container md-no-float class="md-block">
           <label>Descripcion</label>
-          <input required name="descripcion" minlength="5"  ng-model="form.zona.descripcion">
+          <input required name="descripcion" minlength="5"  ng-model="menu.zona.descripcion">
             <!-- mensajes  -->
-          <div ng-messages="form.formulario.descripcion.$error" role="alert">
+          <div ng-messages="menu.formulario.descripcion.$error" role="alert">
             <div ng-message="required">Este campo es requerido</div>
             <div ng-message="minlength">Debe poseer al menos 10 carateres</div>
           </div>
         </md-input-container>
-           <md-button class="md-raised md-primary" type="submit" ng-click="form.submit()">Enviar</md-button>
+           <md-button class="md-raised md-primary" type="submit" ng-click="menu.submit()">Enviar</md-button>
       </form>
    </div>
+   </md-content>
 </md-dialog>

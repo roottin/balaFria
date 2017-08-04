@@ -55,11 +55,12 @@ module.exports = function(app){
   app.get('/api/sucursal/:id', function(req, res) {
     var zonasAtencion = [];
     //busco la sucursal con su banner
-    models.sequelize.query("SELECT s.*,i.ruta as imagen_ruta, c.latitud, c.longitud FROM sucursal s" +
+    models.sequelize.query("SELECT s.*,i.ruta as imagen_ruta, c.latitud, c.longitud, ms.id_menu FROM sucursal s" +
             " left join imagen_sucursal isu on s.id_sucursal = isu.id_sucursal"+
             " AND isu.estado = 'A' AND isu.id_tipo_imagen = 1"+
             " left join imagen i on isu.id_imagen = i.id_imagen" +
             " left join coordenada c on s.id_coordenada = c.id_coordenada" +
+            " left join menu_sucursal ms on s.id_sucursal = ms.id_sucursal" +
             " where s.id_sucursal = "+req.params.id ,
       { model: models.sucursal}
     )
@@ -113,7 +114,7 @@ module.exports = function(app){
           });
       });
   });
-  //NOTE: modificar banner 
+  //NOTE: modificar banner
   app.post('/api/sucursal/banner/:id',upload, function(req, res) {
     req.body = req.body.datos;
     models.imagen_sucursal.find({
@@ -192,6 +193,29 @@ module.exports = function(app){
     }).then(function(sucursal) {
       res.json(sucursal);
     });
+  });
+  app.put('/api/sucursales/cambiarMenu',function(req, res){
+    models.menu_sucursal
+      .find({where:{id_sucursal:req.body.id_sucursal}})
+      .then(menu_sucursal => {
+        if(menu_sucursal){
+          menu_sucursal.updateAttributes({
+            id_menu: req.body.id_menu
+          })
+          .then(result => {
+            res.json(result);
+          })
+        }else{
+          models.menu_sucursal
+            .create({
+              id_menu: req.body.id_menu,
+              id_sucursal: req.body.id_sucursal
+            })
+            .then(result =>{
+              res.json(result);
+            })
+        }
+      })
   });
 };
 //////////////////////////////////////////////////////////////////////////////
