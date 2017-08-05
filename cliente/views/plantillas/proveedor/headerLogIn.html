@@ -1,11 +1,35 @@
 <header class="cliente">
+  <i class="material-icons left-menu" ng-click="header.openLeftMenu()">menu</i>
   <div titulo>
     Panel de Control
   </div>
   <div sociales>
-    <div avatar>
-      <img src="{{header.usuario.avatar.ruta}}" alt="">
-      <div opciones>
+    <div avatar ng-click="header.openRightMenu()">
+      <img src="{{header.usuario.avatar.ruta }}" alt="">
+    </div>
+    <div notificaciones ng-click="header.openRightMenu()">
+        <i class="material-icons">notifications_none</i>
+    </div>
+  </div>
+</header>
+<!-- SIDENAV -->
+  <!-- LEFT -->
+  <md-sidenav md-component-id="left" class="md-sidenav-left" md-disable-scroll-target="body" md-disabled-backdrop="true">
+    <section cabecera>Sucursales <i class="material-icons left">store</i></section>
+    <h5 ng-click="header.irASucursal(sucursal.id_sucursal)" ng-repeat="sucursal in header.sucursales">
+      {{sucursal.nombre}}
+      <i class="material-icons left">store</i>
+    </h5>
+    <h5 ng-click="header.agregarSucursal();">AGREGAR <i class="material-icons">add</i></h5>
+    <div class="clear"></div>
+  </md-sidenav>
+  <!-- RIGHT -->
+  <md-sidenav md-component-id="right" class="md-sidenav-right" md-disabled-backdrop="true">
+    <section class="perfil">
+      <div avatar>
+      <img src="{{header.usuario.avatar.ruta }}" alt="">
+    </div>
+    <div opciones>
         <ul>
           <li>{{header.usuario.nombre}}</li>
           <li ui-sref='proveedor.dashboard'><span class="material-icons">dashboard</span>dashboard</li>
@@ -14,6 +38,7 @@
           <li ng-click="header.logOut()"><span class="material-icons">power_settings_new</span>Cerrar Sesion</li>
         </ul>
       </div>
-    </div>
-  </div>
-</header>
+    </section>    
+    <section cabecera> Notificaciones <i class="material-icons right">notifications_none</i></section>
+  </md-sidenav>
+<!-- SIDENAV -->

@@ -1,16 +1,24 @@
 angular.module('balafria')
 .service('$sesion',['$rootScope','$state','$http',function($rootScope,$state,$http){
   var self = this;
-  self.perfil = null;
-  self.socket = null;
-  self.estado = "desconectado";
+  self.iniciazar = function(){
+    return {
+      perfil : null,
+      socket : null,
+      estado : "desconectado",
+      notificaciones : []
+    }
+  }
+  if(!$rootScope.sesion){
+    $rootScope.sesion = self.iniciazar();
+  }
 
   self.obtenerPerfil = function(){
-    if(self.estado == "desconectado"){
+    if($rootScope.sesion.estado == "desconectado"){
       var datosSesion = sessionStorage.getItem('balaFria_token');
       if(!datosSesion){
         $state.go('frontPage');
-      }else{        
+      }else{
         datosSesion = JSON.parse(datosSesion);
         return new Promise(function(completado,rechazado){
           $http.post('/api/recuperar',datosSesion)
@@ -18,13 +26,13 @@ angular.module('balafria')
               if(!resultado.data.success){
                 $state.go('frontPage');
               }else{
-                self.perfil = resultado.data.user;
-                self.tipo = self.perfil.tipo;
+                $rootScope.sesion.perfil = resultado.data.user;
+                $rootScope.sesion.tipo = $rootScope.sesion.perfil.tipo;
                 self.conectar();
-                if(self.tipo == "cliente"){
+                if($rootScope.sesion.tipo == "cliente"){
                   $state.go('frontPage.iniciado');
                 }else{
-                  $state.go('proveedor.dashboard');
+                  completado($rootScope.sesion.perfil);
                 }
               }
             })
@@ -34,12 +42,13 @@ angular.module('balafria')
         });
       }
     }else{
-      return self.perfil;
+      return Promise.resolve($rootScope.sesion.perfil);
     }
   }
+
   self.crear = function(perfil,tipo){
-    self.perfil = perfil;
-    self.perfil.tipo = tipo;
+    $rootScope.sesion.perfil = perfil;
+    $rootScope.sesion.perfil.tipo = tipo;
     var storage = {
       "token": perfil.token,
       "nombre": perfil.nombre,
@@ -53,7 +62,7 @@ angular.module('balafria')
   };
   self.actualizarDatos = function($http){
     return new Promise(function(completada,rechazada){
-      $http.get('/api/'+self.perfil.tipo+'/'+self.usuario.id)
+      $http.get('/api/'+$rootScope.sesion.perfil.tipo+'/'+self.usuario.id)
         .then(function(resultado){
           console.log(resultado);
         })
@@ -63,45 +72,66 @@ angular.module('balafria')
     });
   }
   self.conectar = function(){
-    self.estado = "conectado";
-    self.socket = io.connect('',{
+    $rootScope.sesion.estado = "conectado";
+    $rootScope.sesion.socket = io.connect('',{
       'transports': ['websocket', 'polling'],
-      "query":"id="+self.perfil.id+
-              "&tipo="+self.perfil.tipo+
-              "&tokenKey="+self.perfil.token
+      "query":"id="+$rootScope.sesion.perfil.id+
+              "&tipo="+$rootScope.sesion.perfil.tipo+
+              "&tokenKey="+$rootScope.sesion.perfil.token
     });
 
-    self.socket.on('init',function(data){
-      console.log(self.perfil);
+    $rootScope.sesion.socket.on('init',function(data){
+      console.log($rootScope.sesion.perfil);
     });
-    self.socket.on('session',function(data){
+    $rootScope.sesion.socket.on('session',function(data){
       if(data.texto === 'cerrada'){
         console.log('socket desconectado');
-        self.socket = null;
-        self.perfil = null;
+        $rootScope.sesion.socket = null;
+        $rootScope.sesion.perfil = null;
       }
     });
     return self;
   };
+  self.buscarNotificaciones = function(){
+    if($rootScope.sesion.perfil){
+      $http.get('api/notificacion/'+perfil.tipo+'/'+perfil.id)
+        .then(function(resultado){
+          $rootScope.sesion.notificaciones = resultado.data.notificaciones;
+          //inicializo el modulo
+          self.on('modNot',function(data){
+            console.log(data);
+            //muestro contenido de la notificacion segun el tipo
+              //trivial: toast
+              //accion-corta: toast
+              //accion-larga: modal
+              //urgente: modal
+          });
+        })
+        .catch(function(err){
+          console.error(new Error(err));
+        });
+    }else{
+      console.error('Perfil no se encuentra inicializado para buscar notificaciones');
+    }
+  }
   //control de socket
   self.on = function (eventName, callback) {
-    if(self.socket){
-      self.socket.on(eventName, function () {
+    if($rootScope.sesion.socket){
+      $rootScope.sesion.socket.on(eventName, function () {
         var args = arguments;
         $rootScope.$apply(function () {
-          callback.apply(self.socket, args);
+          callback.apply($rootScope.sesion.socket, args);
         });
       });
-
     }
   };
   self.emit = function (eventName, data, callback) {
-    if(self.socket){
-      self.socket.emit(eventName, data, function () {
+    if($rootScope.sesion.socket){
+      $rootScope.sesion.socket.emit(eventName, data, function () {
         var args = arguments;
         $rootScope.$apply(function () {
           if (callback) {
-            callback.apply(self.socket, args);
+            callback.apply($rootScope.sesion.socket, args);
           }
         });
       });
@@ -109,6 +139,6 @@ angular.module('balafria')
   };
   self.desconectar = function(){
     sessionStorage.clear();
-    self.socket.emit('session',{"texto":'cerrar'});
+    $rootScope.sesion.socket.emit('session',{"texto":'cerrar'});
   };
 }]);

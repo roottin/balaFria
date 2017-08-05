@@ -21,7 +21,19 @@ module.exports = function(sequelize, DataTypes) {
         key: 'id_proveedor'
       }
     },
+    id_coordenada: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'coordenada',
+        key: 'id_coordenada'
+      }
+    },
     nombre: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    descripcion: {
       type: DataTypes.STRING,
       allowNull: true
     }
