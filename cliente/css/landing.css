@@ -1079,22 +1079,16 @@ md-dialog section.preview {
           background: white; }
           .sucursal div[md-tabs-template] div.categoria div.texto-categoria i:hover {
             box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
-          .sucursal div[md-tabs-template] div.categoria div.texto-categoria i.guardar {
+          .sucursal div[md-tabs-template] div.categoria div.texto-categoria i.guardar, .sucursal div[md-tabs-template] div.categoria div.texto-categoria i.borrar, .sucursal div[md-tabs-template] div.categoria div.texto-categoria i.edit {
             left: -60px;
             top: 10px;
             transition: all 0.3s ease-in-out; }
           .sucursal div[md-tabs-template] div.categoria div.texto-categoria i.borrar {
-            right: -60px;
-            top: 10px;
-            transition: all 0.3s ease-in-out;
+            top: 45px;
             width: 30px; }
           .sucursal div[md-tabs-template] div.categoria div.texto-categoria i.mostrar {
             right: 16px;
             bottom: 13px; }
-          .sucursal div[md-tabs-template] div.categoria div.texto-categoria i.edit {
-            left: -60px;
-            top: 10px;
-            transition: all 0.3s ease-in-out; }
           .sucursal div[md-tabs-template] div.categoria div.texto-categoria i.close {
             background-color: transparent;
             right: 15px;
@@ -1112,10 +1106,8 @@ md-dialog section.preview {
           background-color: white;
           width: calc((100% / 2) - 5px);
           margin-bottom: 10px; }
-          .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto:hover i.edit, .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto:hover i.guardar {
+          .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto:hover i.edit, .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto:hover i.guardar, .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto:hover i.borrar {
             left: 10px; }
-          .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto:hover i.borrar {
-            right: 10px; }
           .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto:hover div.img img {
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
             transform: scale(1.05); }
@@ -1156,22 +1148,16 @@ md-dialog section.preview {
               background: white; }
               .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img i:hover {
                 box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
-              .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img i.guardar {
+              .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img i.guardar, .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img i.edit, .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img i.borrar {
                 left: -60px;
                 top: 10px;
                 transition: all 0.3s ease-in-out; }
               .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img i.borrar {
-                right: -60px;
-                top: 10px;
-                transition: all 0.3s ease-in-out;
+                top: 45px;
                 width: 30px; }
               .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img i.mostrar {
                 right: 16px;
                 bottom: 13px; }
-              .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img i.edit {
-                left: -60px;
-                top: 10px;
-                transition: all 0.3s ease-in-out; }
               .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img i.close {
                 background-color: transparent;
                 right: 15px;

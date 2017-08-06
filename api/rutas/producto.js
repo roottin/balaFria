@@ -1,5 +1,6 @@
 var models = require('../models/index');
 var fs = require('fs');
+var dateParser = require('../../Servidor/dateParser');
 //configuracion subida de archivos
 
 //ruta por defecto para producto
@@ -54,7 +55,15 @@ module.exports = function(app){
             id_producto:producto.id_producto,
             id_detalle_menu:req.body.id_detalle_menu
           }).then(function(){
-            res.json(producto);
+            models.producto_precio.create({
+              id_producto:producto.id_producto,
+              precio:req.body.precio,
+              fecha_inicio:dateParser.getParseDate()
+            }).then(producto_precio => {
+              producto.dataValues.precio = producto_precio.precio;
+              producto.dataValues.fecha_precio = producto_precio.fecha_inicio;
+              res.json(producto);
+            })
           });
         });
       });

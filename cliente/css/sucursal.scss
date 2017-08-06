@@ -435,25 +435,18 @@ md-dialog{
 					&:hover{
 						@include BoxShadowHelper(2);
 					}
-					&.guardar{		
+					&.guardar,&.borrar,&.edit{		
 						left: -60px;
 						top: 10px;					
 						transition: all 0.3s ease-in-out;
 					}
-					&.borrar{		
-						right: -60px;
-						top: 10px;					
-						transition: all 0.3s ease-in-out;
+					&.borrar{							
+						top: 45px;
 						width: 30px;
 					}
 					&.mostrar{					
 						right: 16px;
 						bottom: 13px;
-					}
-					&.edit{
-						left: -60px;
-						top: 10px;
-						transition: all 0.3s ease-in-out;
 					}
 					&.close{
 						background-color: transparent;
@@ -476,11 +469,8 @@ md-dialog{
 					background-color: white;
 					width: calc((100% / 2) - 5px);
     				margin-bottom: 10px;
-    				&:hover i.edit,&:hover i.guardar{
+    				&:hover i.edit,&:hover i.guardar,&:hover i.borrar{
 						left:10px;
-					}
-					&:hover i.borrar{
-						right: 10px;
 					}
 					&:hover div.img img{
 						@include BoxShadowHelper(3);
@@ -534,25 +524,18 @@ md-dialog{
 							&:hover{
 								@include BoxShadowHelper(2);
 							}
-							&.guardar{		
+							&.guardar,&.edit,&.borrar{		
 								left: -60px;
 								top: 10px;					
 								transition: all 0.3s ease-in-out;
 							}
-							&.borrar{		
-								right: -60px;
-								top: 10px;					
-								transition: all 0.3s ease-in-out;
+							&.borrar{
+								top:45px;
 								width: 30px;
 							}
 							&.mostrar{					
 								right: 16px;
 								bottom: 13px;
-							}
-							&.edit{
-								left: -60px;
-								top: 10px;
-								transition: all 0.3s ease-in-out;
 							}
 							&.close{
 								background-color: transparent;

@@ -133,12 +133,15 @@
 						</div><!-- producto -->
 						<div class="producto" ng-repeat="producto in categoria.productos"><!-- producto -->
 								<div class="col-lg-6 img">
+								<!-- iconos de operaciones-->
+									<i class="material-icons {{categoria.class}}" ng-show="sucursal.proveedor" ng-click="sucursal.guardarProducto(producto)">{{producto.icono}}</i>
+									<i class="material-icons borrar" ng-show="sucursal.proveedor" ng-click="sucursal.borrarProducto(Producto)">delete_forever</i>
 									<img ng-src="{{producto.ruta}}" alt="">
 								</div>
 								<div class="col-lg-6 descrip">
 									<h4>{{producto.nombre}}</h4>
 									<p>{{producto.descripcion}}</p>
-									<div class="precio arriba">35.000</div>
+									<div class="precio arriba">{{producto.precio}}</div>
 									<button class="material-icons shop-btn">
 										<div class="texto-aparece">
 											Ordenar
