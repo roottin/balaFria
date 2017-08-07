@@ -87,6 +87,13 @@ angular.module('balafria')
         producto.icono="edit";
         producto.class="edit";
         producto.edit=false;
+        producto.ant ={
+          "ruta":producto.ruta,
+          "nombre":producto.nombre,
+          "descripcion":producto.descripcion,
+          "secuencia":producto.secuencia,
+          "precio":producto.precio,
+        }
         return producto;
       });
       return categoria;
@@ -331,15 +338,41 @@ angular.module('balafria')
     var id = seudoId.substr(9,seudoId.length-1);
     if(seudoId.substr(0,9)=="newProduc"){
       yo.menu.categorias.forEach(function(categoria){
-        console.log(categoria.id,id);
         if(categoria.id == id){
           categoria.newPro.file = files[0];
           categoria.newPro.ruta = (window.URL || window.webkitURL).createObjectURL( files[0] );
           document.querySelector('#newP'+id).setAttribute('src',categoria.newPro.ruta);
         }
       });
+    }else{
+      var valores = seudoId.split('-');
+      valores[0]=valores[0].substr(1,valores[0].length);
+      valores[1]=valores[1].substr(1,valores[1].length);
+      console.log(valores,yo.menu.categorias);
+      yo.menu.categorias.forEach(function(categoria){
+        if (categoria.id_categoria==valores[1]){
+          categoria.productos.forEach(function(producto) {
+            if (producto.id_producto==valores[0]) {
+              console.log(producto);
+              producto.files = files[0];
+              producto.ruta = (window.URL || window.webkitURL).createObjectURL( files[0] );
+              document.querySelector('#p'+id).setAttribute('src',producto.ruta);
+            }
+          });
+        }
+      });
     }
   }
+  yo.cancelarProducto =  function(producto){
+    producto.ruta = producto.ant.ruta;
+    producto.nombre = producto.ant.nombre;
+    producto.descripcion = producto.ant.descripcion;
+    producto.secuencia = producto.ant.secuencia;
+    producto.precio = producto.ant.precio;
+    producto.icono = "edit";
+    producto.edit = !producto.edit;
+    producto.class = "edit";
+  };
   yo.guardarProducto = function(producto,categoria){
     if(producto == "nuevo"){
       if (categoria.newPro.nombre && categoria.newPro.descripcion && categoria.newPro.precio && categoria.newPro.ruta) {

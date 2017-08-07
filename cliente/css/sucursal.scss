@@ -511,7 +511,7 @@ md-dialog{
 							height: 100%;
 							min-height: 228px;
 						}
-						&:hover i.edit,&:hover i.guardar,&:hover i.borrar{
+						&:hover i.edit,&:hover i.guardar,&:hover i.borrar,&:hover i.cancelar{
 							transform: scale(1);
 						}
 						i{
@@ -526,7 +526,7 @@ md-dialog{
 							&:hover{
 								@include BoxShadowHelper(2);
 							}
-							&.guardar,&.edit,&.borrar{
+							&.guardar,&.edit,&.borrar,&.cancelar{
 								transform: scale(0);
 								left: 10px;
 								top: 10px;
@@ -535,6 +535,11 @@ md-dialog{
 							&.borrar{
 								transition: all 0.4s ease-in-out;
 								top:55px;
+								width: 30px;
+							}
+							&.cancelar{
+								transition: all 0.6s ease-in-out;
+								top:100px;
 								width: 30px;
 							}
 							&.mostrar{

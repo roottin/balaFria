@@ -1138,7 +1138,7 @@ md-dialog section.preview {
               width: 100%;
               height: 100%;
               min-height: 228px; }
-            .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img:hover i.edit, .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img:hover i.guardar, .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img:hover i.borrar {
+            .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img:hover i.edit, .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img:hover i.guardar, .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img:hover i.borrar, .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img:hover i.cancelar {
               transform: scale(1); }
             .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img i {
               transition: box-shadow 0.3s ease-in-out;
@@ -1151,7 +1151,7 @@ md-dialog section.preview {
               background: white; }
               .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img i:hover {
                 box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
-              .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img i.guardar, .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img i.edit, .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img i.borrar {
+              .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img i.guardar, .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img i.edit, .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img i.borrar, .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img i.cancelar {
                 transform: scale(0);
                 left: 10px;
                 top: 10px;
@@ -1159,6 +1159,10 @@ md-dialog section.preview {
               .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img i.borrar {
                 transition: all 0.4s ease-in-out;
                 top: 55px;
+                width: 30px; }
+              .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img i.cancelar {
+                transition: all 0.6s ease-in-out;
+                top: 100px;
                 width: 30px; }
               .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img i.mostrar {
                 right: 16px;
