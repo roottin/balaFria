@@ -83,6 +83,12 @@ angular.module('balafria')
       categoria.textoCat = (categoria.titulo)?true:false;
       categoria.edit = false;
       categoria.newPro = {}
+      categoria.productos = categoria.productos.map(function(producto){
+        producto.icono="edit";
+        producto.class="edit";
+        producto.edit=false;
+        return producto;
+      });
       return categoria;
     });
     return menu;
@@ -345,7 +351,8 @@ angular.module('balafria')
             descripcion: categoria.newPro.descripcion,
             nombre: categoria.newPro.nombre,
             id_proveedor: yo.usuario.id,
-            precio: categoria.newPro.precio
+            precio: categoria.newPro.precio,
+            secuencia: categoria.newPro.secuencia
           }
         })
           .then(function(result){
@@ -362,6 +369,34 @@ angular.module('balafria')
             .hideDelay(3000)
           );
         }
+    }else{
+      if(!producto.edit) {
+        producto.edit=!producto.edit;
+        producto.icono="save";
+        producto.class="guardar";
+      }else{
+        Productos
+          .update({id:producto.id_producto},producto)
+          .$promise
+          .then(function(){
+            Sucursales.getMenu({id:yo.menu.id_menu},function(result){
+              yo.menu = yo.inicializarMenu(result);
+            });
+          })
+        if(producto.file){
+          Upload.upload({
+            url: '/api/productos/imagen',
+            data:{
+              file:categoria.newPro.file,
+              id_producto:producto.id_producto
+            }
+          }).then(function(){
+            Sucursales.getMenu({id:yo.menu.id_menu},function(result){
+              yo.menu = yo.inicializarMenu(result);
+            });
+          })
+        }
+      }
     }
   }
   $scope.cambioCategoria = function(files,seudoId){
@@ -425,31 +460,43 @@ angular.module('balafria')
         categoria.class="guardar";
         categoria.icono ="save";
       }else{
-        Upload.upload({
-          url: '/api/categorias/imagen',
-          data:{
-            file:categoria.file,
-            id_categoria: categoria.id_categoria,
-          }
-        })
-          .then(function(resp){
-            if(!yo.menu.categorias){
-              yo.menu.categorias = [];
-            }
-            yo.menu.categorias.push(resp);
-            $mdToast.show(
-              $mdToast.simple()
-                .textContent("Categoria modificada de forma exitosa")
-                .position('top right')
-                .hideDelay(3000)
-            );
-            Categorias.update({id:categoria.id},{
-              titulo:categoria.titulo
-            })
+        Categorias
+          .update({id:categoria.id_categoria},{
+            titulo:categoria.titulo,
+            secuencia:categoria.secuencia,
+            id_detalle_menu:categoria.id
+          })
+          .$promise
+          .then(function(){
             Sucursales.getMenu({id:yo.menu.id_menu},function(result){
               yo.menu = yo.inicializarMenu(result);
             });
           });
+        if(categoria.file){
+          Upload.upload({
+            url: '/api/categorias/imagen',
+            data:{
+              file:categoria.file,
+              id_categoria: categoria.id_categoria,
+            }
+          })
+            .then(function(resp){
+              if(!yo.menu.categorias){
+                yo.menu.categorias = [];
+              }
+              yo.menu.categorias.push(resp);
+              $mdToast.show(
+                $mdToast.simple()
+                  .textContent("Categoria modificada de forma exitosa")
+                  .position('top right')
+                  .hideDelay(3000)
+              );
+              Sucursales.getMenu({id:yo.menu.id_menu},function(result){
+                yo.menu = yo.inicializarMenu(result);
+              });
+            });
+        }
+
       }
     }
   }

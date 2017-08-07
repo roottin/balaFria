@@ -56,11 +56,12 @@ module.exports = function(app){
           producto.dataValues.imagen = imagen;
           models.detalle_categoria.create({
             id_producto:producto.id_producto,
-            id_detalle_menu:req.body.id_detalle_menu
+            id_detalle_menu:req.body.id_detalle_menu,
+            secuencia:req.body.secuencia
           }).then(function(){
             models.producto_precio.create({
               id_producto:producto.id_producto,
-              precio:req.body.precio,
+              valor:req.body.precio,
               fecha_inicio:dateParser.getParseDate()
             }).then(producto_precio => {
               producto.dataValues.precio = producto_precio.precio;
@@ -123,10 +124,37 @@ module.exports = function(app){
     }).then(function(producto) {
       if(producto){
         producto.updateAttributes({
-          id_producto: req.body.id_producto,
-          titulo: req.body.titulo
+          nombre: req.body.nombre,
+          descripcion: req.body.descripcion
         }).then(function(producto) {
-          res.send(producto);
+          models.sequelize.query("update detalle_categoria set secuencia="+req.body.secuencia+
+                                  " where id = "+req.body.id_detalle_categoria)
+            .then(function(){
+              models.producto_precio.find({
+                where:{
+                  id_producto:producto.id_producto,
+                  fecha_final: null
+                }
+              })
+              .then(function(producto_precio){
+                if(producto_precio.valor != producto.precio){
+                  producto_precio
+                    .updateAttributes({fecha_final:dateParser.getParseDate()})
+                    .then(function(){
+                      models.producto_precio.create({
+                        id_producto:producto.id_producto,
+                        valor:req.body.precio,
+                        fecha_inicio:dateParser.getParseDate()
+                      })
+                        .then(function(){
+                          res.json(producto);
+                        })
+                    })
+                }else{
+                  res.json(producto);
+                }
+              })
+            });
         });
       }
     });

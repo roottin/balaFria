@@ -409,12 +409,19 @@ md-dialog{
 				    z-index: 0;
 				}
 				input{
-					background-color: transparent;
+						background-color: transparent;
 				    border: 1px dashed silver;
 				    padding: 0px 3px;
 				    width: 100%;
 				    font-size: 20px;
-				    color: white
+				    color: white;
+						&.secuencia{
+							position: absolute;
+							width: 60px;
+							top: 10px;
+							right: 10px;
+							color: #303030;
+						}
 				}
 
 				&:hover i.edit,&:hover i.guardar,&:hover i.borrar{
@@ -556,6 +563,11 @@ md-dialog{
 						input{
 							border: 1px dashed silver;
 							width: 150px;
+							&.secuencia{
+								margin-top: 10px;
+								width: 60px;
+								font-size: 20px;
+							}
 						}
 						h4{
 							color: #303030;

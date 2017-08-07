@@ -16,6 +16,10 @@ module.exports = function(sequelize, DataTypes) {
         key: 'id_menu'
       }
     },
+    secuencia: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
     id_categoria: {
       type: DataTypes.INTEGER,
       allowNull: true,

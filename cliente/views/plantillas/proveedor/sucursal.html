@@ -82,7 +82,8 @@
 						<i class="material-icons guardar" ng-show="sucursal.proveedor" ng-click="sucursal.guardarCategoria('nueva')">save</i>
 						<i class="material-icons mostrar" ng-show="!sucursal.textoCat" ng-click="sucursal.toggleTitCat()">remove_red_eye</i>
 						<!-- iconos de operaciones-->
-						<img id="categoria" src="" ng-click="sucursal.agregarCategoria()">
+						<img id="categoria" src="" ng-click="sucursal.agregarCategoria()" ng-model = "sucursal.newCat.secuencia">
+						<input class="secuencia" type="text" placeholder="sec" >
 						<div class="tit-cat" ng-show="sucursal.textoCat">
 							<input type='text' ng-model = "sucursal.newCat.titulo">
 							<i class="material-icons close" ng-click="sucursal.toggleTitCat()">close</i>
@@ -101,6 +102,7 @@
 						<i class="material-icons borrar" ng-show="sucursal.proveedor" ng-click="sucursal.borrarCategoria(categoria)">delete_forever</i>
 						<!-- iconos de operaciones-->
 						<img id="{{'cat'+categoria.id}}" ng-src="{{categoria.ruta}}" ng-click="sucursal.agregarCategoria(categoria.id)">
+						<input class="secuencia" type="text" placeholder="sec" ng-show="categoria.edit" ng-model="categoria.secuencia">
 						<div class="tit-cat" ng-show="sucursal.textoCat">
 							<div ng-show="!categoria.edit">{{categoria.titulo}}</div>
 							<input type='text' ng-model = "categoria.titulo" ng-show="categoria.edit">
@@ -124,25 +126,26 @@
 								<h4><input type="text" ng-model="categoria.newPro.nombre" placeholder="Nombre"></h4>
 								<textarea class="" ng-model="categoria.newPro.descripcion" placeholder="descripcion de producto"></textarea>
 								<div class="precio arriba"><input type="text" ng-model="categoria.newPro.precio" placeholder="XXXXX"></div>
-								<button class="material-icons shop-btn">
-									<div class="texto-aparece">
-										Ordenar
-									</div>
-									add_shopping_cart
-								</button>
+								<input class="secuencia" type="text" placeholder="sec" ng-model="categoria.newPro.secuencia">
 							</div>
 						</div><!-- producto -->
 						<div class="producto" ng-repeat="producto in categoria.productos"><!-- producto -->
 								<div class="col-lg-6 img">
 								<!-- iconos de operaciones-->
-									<i class="material-icons {{categoria.class}}" ng-show="sucursal.proveedor" ng-click="sucursal.guardarProducto(producto)">edit</i>
+									<i class="material-icons {{producto.class}}" ng-show="sucursal.proveedor" ng-click="sucursal.guardarProducto(producto)">{{producto.icono}}</i>
 									<i class="material-icons borrar" ng-show="sucursal.proveedor" ng-click="sucursal.borrarProducto(producto,categoria)">delete_forever</i>
 									<img ng-src="{{producto.ruta}}" alt="">
 								</div>
 								<div class="col-lg-6 descrip">
-									<h4>{{producto.nombre}}</h4>
-									<p>{{producto.descripcion}}</p>
-									<div class="precio arriba">{{producto.precio}}</div>
+									<!-- campos edicion-->
+									<h4 ng-show="producto.edit"><input type="text" ng-model="producto.nombre" placeholder="Nombre"></h4>
+									<textarea ng-show="producto.edit"  class="" ng-model="producto.descripcion" placeholder="descripcion de producto"></textarea>
+									<div ng-show="producto.edit" class="precio arriba"><input type="text" ng-model="producto.precio" placeholder="XXXXX"></div>
+									<input ng-show="producto.edit" class="secuencia" type="text" placeholder="sec" ng-model="producto.secuencia">
+									<!-- display normal-->
+									<h4 ng-show="!producto.edit">{{producto.nombre}}</h4>
+									<p ng-show="!producto.edit">{{producto.descripcion}}</p>
+									<div ng-show="!producto.edit" class="precio arriba">{{producto.precio}}</div>
 									<button class="material-icons shop-btn">
 										<div class="texto-aparece">
 											Ordenar

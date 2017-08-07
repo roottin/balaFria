@@ -1064,6 +1064,12 @@ md-dialog section.preview {
           width: 100%;
           font-size: 20px;
           color: white; }
+          .sucursal div[md-tabs-template] div.categoria div.texto-categoria input.secuencia {
+            position: absolute;
+            width: 60px;
+            top: 10px;
+            right: 10px;
+            color: #303030; }
         .sucursal div[md-tabs-template] div.categoria div.texto-categoria:hover i.edit, .sucursal div[md-tabs-template] div.categoria div.texto-categoria:hover i.guardar, .sucursal div[md-tabs-template] div.categoria div.texto-categoria:hover i.borrar {
           left: 10px; }
         .sucursal div[md-tabs-template] div.categoria div.texto-categoria i {
@@ -1174,6 +1180,10 @@ md-dialog section.preview {
             .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.descrip input {
               border: 1px dashed silver;
               width: 150px; }
+              .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.descrip input.secuencia {
+                margin-top: 10px;
+                width: 60px;
+                font-size: 20px; }
             .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.descrip h4 {
               color: #303030; }
             .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.descrip div.precio {

@@ -58,7 +58,8 @@ module.exports = function(app){
           categoria.dataValues.imagen = imagen;
           models.detalle_menu.create({
             id_categoria:categoria.id_categoria,
-            id_menu:req.body.id_menu
+            id_menu:req.body.id_menu,
+            secuencia:req.body.secuencia
           }).then(function(){
             res.json(categoria);
           });
@@ -120,7 +121,11 @@ module.exports = function(app){
           id_categoria: req.body.id_categoria,
           titulo: req.body.titulo
         }).then(function(categoria) {
-          res.send(categoria);
+          models.sequelize.query("update detalle_menu set secuencia="+req.body.secuencia+" where id = "+req.body.id_detalle_menu)
+            .then(function(){
+              categoria.dataValues.secuencia=req.body.secuencia;
+              res.send(categoria);
+            })
         });
       }
     });
