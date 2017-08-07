@@ -239,7 +239,7 @@ md-dialog{
 			    width: 100%;
 			    [texto]{
 			    	float: left;
-			    	
+
 			    }
 			}
 		}
@@ -417,11 +417,8 @@ md-dialog{
 				    color: white
 				}
 
-				&:hover i.edit,&:hover i.guardar{
+				&:hover i.edit,&:hover i.guardar,&:hover i.borrar{
 					left:10px;
-				}
-				&:hover i.borrar{
-					right: 10px;
 				}
 				i{
 					transition: box-shadow 0.3s ease-in-out;
@@ -435,16 +432,17 @@ md-dialog{
 					&:hover{
 						@include BoxShadowHelper(2);
 					}
-					&.guardar,&.borrar,&.edit{		
+					&.guardar,&.borrar,&.edit{
 						left: -60px;
-						top: 10px;					
+						top: 10px;
 						transition: all 0.3s ease-in-out;
 					}
-					&.borrar{							
-						top: 45px;
+					&.borrar{
+						top: 55px;
 						width: 30px;
+						transition: all 0.6s ease-in-out;
 					}
-					&.mostrar{					
+					&.mostrar{
 						right: 16px;
 						bottom: 13px;
 					}
@@ -468,8 +466,8 @@ md-dialog{
 					border-radius: 3px;
 					background-color: white;
 					width: calc((100% / 2) - 5px);
-    				margin-bottom: 10px;
-    				&:hover i.edit,&:hover i.guardar,&:hover i.borrar{
+  				margin-bottom: 10px;
+  				&:hover i.edit,&:hover i.guardar,&:hover i.borrar{
 						left:10px;
 					}
 					&:hover div.img img{
@@ -506,11 +504,8 @@ md-dialog{
 							height: 100%;
 							min-height: 228px;
 						}
-						&:hover i.edit,&:hover i.guardar{
-							left:10px;
-						}
-						&:hover i.borrar{
-							right: 10px;
+						&:hover i.edit,&:hover i.guardar,&:hover i.borrar{
+							transform: scale(1);
 						}
 						i{
 							transition: box-shadow 0.3s ease-in-out;
@@ -524,16 +519,18 @@ md-dialog{
 							&:hover{
 								@include BoxShadowHelper(2);
 							}
-							&.guardar,&.edit,&.borrar{		
-								left: -60px;
-								top: 10px;					
-								transition: all 0.3s ease-in-out;
+							&.guardar,&.edit,&.borrar{
+								transform: scale(0);
+								left: 10px;
+								top: 10px;
+								transition: all 0.2s ease-in-out;
 							}
 							&.borrar{
-								top:45px;
+								transition: all 0.4s ease-in-out;
+								top:55px;
 								width: 30px;
 							}
-							&.mostrar{					
+							&.mostrar{
 								right: 16px;
 								bottom: 13px;
 							}

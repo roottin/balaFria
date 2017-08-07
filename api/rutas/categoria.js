@@ -127,13 +127,23 @@ module.exports = function(app){
   });
   // delete a single categoria
   app.delete('/api/categoria/:id_menu&:id_categoria', function(req, res) {
-    models.detalle_menu.destroy({
+    models.detalle_menu.find({
       where: {
         id_categoria: req.params.id_categoria,
         id_menu: req.params.id_menu
       }
-    }).then(function(result) {
-      res.json(result);
+    }).then(function(detalle) {
+      models.detalle_categoria.destroy({
+        where: {
+          id_detalle_menu: detalle.id
+        }
+      }).then(function(result){
+        detalle
+          .destroy()
+          .then(function(result){
+            res.json(result);
+          });
+      })
     });
   });
 };

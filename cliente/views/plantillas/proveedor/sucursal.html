@@ -115,7 +115,8 @@
 							<!-- campo file-->
 							<div class="col-lg-6 img">
 								<!-- iconos de operaciones-->
-								<i class="material-icons guardar" ng-show="sucursal.proveedor" ng-click="sucursal.guardarProducto('nuevo',categoria)">save</i>
+								<i class="material-icons guardar"  ng-click="sucursal.guardarProducto('nuevo',categoria)">save</i>
+								<i class="material-icons borrar"  ng-click="sucursal.buscarProductos($event,categoria)">work</i>
 								<!-- iconos de operaciones-->
 								<img id="newP{{categoria.id}}" ng-click="sucursal.agregarImagen('newProduc'+categoria.id)" src="img/thumbnails/Captura.PNG">
 							</div>
@@ -134,8 +135,8 @@
 						<div class="producto" ng-repeat="producto in categoria.productos"><!-- producto -->
 								<div class="col-lg-6 img">
 								<!-- iconos de operaciones-->
-									<i class="material-icons {{categoria.class}}" ng-show="sucursal.proveedor" ng-click="sucursal.guardarProducto(producto)">{{producto.icono}}</i>
-									<i class="material-icons borrar" ng-show="sucursal.proveedor" ng-click="sucursal.borrarProducto(Producto)">delete_forever</i>
+									<i class="material-icons {{categoria.class}}" ng-show="sucursal.proveedor" ng-click="sucursal.guardarProducto(producto)">edit</i>
+									<i class="material-icons borrar" ng-show="sucursal.proveedor" ng-click="sucursal.borrarProducto(producto,categoria)">delete_forever</i>
 									<img ng-src="{{producto.ruta}}" alt="">
 								</div>
 								<div class="col-lg-6 descrip">

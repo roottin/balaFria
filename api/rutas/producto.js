@@ -24,10 +24,13 @@ var upload = Multer({storage: Multer.diskStorage({
 
 module.exports = function(app){
   //obtener productos
-  app.get('/api/productos', function(req, res) {
-    models.sequelize.query('SELECT r.*,i.ruta as imagen_ruta FROM producto r '+
+  app.get('/api/productos/:id_proveedor&:id_detalle_menu', function(req, res) {
+    models.sequelize.query('SELECT r.*,i.ruta,pp.valor as precio FROM producto r '+
                     ' join imagen_producto ir on r.id_producto = ir.id_producto AND ir.estado = '+"'A'"+
-                    ' join imagen i on ir.id_imagen = i.id_imagen  ',
+                    ' join imagen i on ir.id_imagen = i.id_imagen  '+
+                    " join producto_precio pp on pp.id_producto_precio = (select id_producto_precio from producto_precio where id_producto = r.id_producto and fecha_final is null )"+
+                    ' where id_proveedor =  '+req.params.id_proveedor+
+                    ' and r.id_producto not in(select id_producto from detalle_categoria where id_detalle_menu = '+req.params.id_detalle_menu+')',
       { model: models.producto}
     )
       .then(function(productos) {
@@ -129,11 +132,11 @@ module.exports = function(app){
     });
   });
   // delete a single producto
-  app.delete('/api/producto/:id_menu&:id_producto', function(req, res) {
-    models.detalle_menu.destroy({
+  app.delete('/api/producto/:id_detalle_menu&:id_producto', function(req, res) {
+    models.detalle_categoria.destroy({
       where: {
         id_producto: req.params.id_producto,
-        id_menu: req.params.id_menu
+        id_detalle_menu: req.params.id_detalle_menu
       }
     }).then(function(result) {
       res.json(result);

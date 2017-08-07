@@ -86,9 +86,19 @@ module.exports = function(app){
         id_categoria: req.body.id_categoria,
         id_menu: menu_sucursal.id_menu
       })
+      .then(function(){
+          res.json(1);
+      });
+    })
+  });
+  //asociar categoria a menu
+  app.put('/api/menus/cambiarProducto', function(req, res) {
+      models.detalle_categoria.create({
+        id_detalle_menu: req.body.id_detalle_menu,
+        id_producto: req.body.id_producto
+      })
       .then(function(menu){
           res.json(menu);
       });
-    })
   });
 };

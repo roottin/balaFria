@@ -1,5 +1,5 @@
 angular.module('balafria')
-.controller('ctrlSucursal', ['Categorias','Upload','$mdToast','$state','Sucursales','$scope','$timeout','$sesion','$mdDialog','$http', function (Categorias,Upload,$mdToast,$state,Sucursales,$scope,$timeout,$sesion,$mdDialog,$http){
+.controller('ctrlSucursal', ['Categorias','Productos','Upload','$mdToast','$state','Sucursales','$scope','$timeout','$sesion','$mdDialog','$http', function (Categorias,Productos,Upload,$mdToast,$state,Sucursales,$scope,$timeout,$sesion,$mdDialog,$http){
   var yo = this;
 
   if(!$state.params.sucursal){
@@ -279,15 +279,35 @@ angular.module('balafria')
       templateUrl: '/views/plantillas/proveedor/categorias.tmpl.html',
       parent: angular.element(document.body),
       targetEvent: ev,
-      clickOutsideToClose:true
+      clickOutsideToClose:true,
     }).then(function(categoria){
       if(categoria){
-        Sucursales.getMenu({id:result.id_menu},function(result){
+        Sucursales.getMenu({id:yo.menu.id_menu},function(result){
           yo.menu = yo.inicializarMenu(result);
         });
       }
     });
-  }
+  };
+  yo.buscarProductos = function(ev,categoria){
+    $mdDialog.show({
+      controller: 'ctrlBucarProductos',
+      controllerAs: 'productos',
+      templateUrl: '/views/plantillas/proveedor/productos.tmpl.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose:true,
+      locals:{
+        "categoriaPadre":categoria
+      },
+      preserveScope: true
+    }).then(function(producto){
+      if(producto){
+        Sucursales.getMenu({id:yo.menu.id_menu},function(result){
+          yo.menu = yo.inicializarMenu(result);
+        });
+      }
+    });
+  };
   yo.toggleTitCat = function(){
     if(yo.textoCat){
       yo.newCat.titulo = "";
@@ -426,7 +446,7 @@ angular.module('balafria')
             Categorias.update({id:categoria.id},{
               titulo:categoria.titulo
             })
-            Sucursales.getMenu({id:result.id_menu},function(result){
+            Sucursales.getMenu({id:yo.menu.id_menu},function(result){
               yo.menu = yo.inicializarMenu(result);
             });
           });
@@ -444,7 +464,23 @@ angular.module('balafria')
             .position('top right')
             .hideDelay(3000)
         );
-        Sucursales.getMenu({id:result.id_menu},function(result){
+        Sucursales.getMenu({id:yo.menu.id_menu},function(result){
+          yo.menu = yo.inicializarMenu(result);
+        });
+      });
+  }
+  yo.borrarProducto = function(producto,categoria){
+    Productos
+      .desasociar({id_detalle_menu:categoria.id_detalle_menu,id_producto:producto.id_producto})
+      .$promise
+      .then(function(result){
+        $mdToast.show(
+          $mdToast.simple()
+            .textContent("Producto desasociado con exito")
+            .position('top right')
+            .hideDelay(3000)
+        );
+        Sucursales.getMenu({id:yo.menu.id_menu},function(result){
           yo.menu = yo.inicializarMenu(result);
         });
       });
