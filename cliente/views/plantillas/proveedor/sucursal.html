@@ -134,7 +134,7 @@
 									<!-- campo file-->
 									<input ng-show="false" type="file" ngf-select name="file" id="{{'p'+producto.id_producto+'-c'+categoria.id_categoria}}" ngf-pattern="\'image/*\'" accept="image/*" ngf-max-size="20MB" name="categoriaImg" ng-model="producto.files" onchange="angular.element(this).scope().colocarImagen(this.files,this.id)" />
 								<!-- iconos de operaciones-->
-									<i class="material-icons {{producto.class}}" ng-show="sucursal.proveedor" ng-click="sucursal.guardarProducto(producto)">{{producto.icono}}</i>
+									<i class="material-icons {{producto.class}}" ng-show="sucursal.proveedor" ng-click="sucursal.guardarProducto(producto,categoria)">{{producto.icono}}</i>
 									<i class="material-icons borrar" ng-show="sucursal.proveedor" ng-click="sucursal.borrarProducto(producto,categoria)">delete_forever</i>
 									<i class="material-icons cancelar" ng-show="producto.edit" ng-click="sucursal.cancelarProducto(producto)">close</i>
 									<img ng-src="{{producto.ruta}}" id="p{{producto.id_producto}}"alt="" ng-click="sucursal.agregarImagen('p'+producto.id_producto+'-c'+categoria.id_categoria)">

@@ -137,7 +137,8 @@ module.exports = function(app){
                 }
               })
               .then(function(producto_precio){
-                if(producto_precio.valor != producto.precio){
+                console.log(producto.precio);
+                if(producto_precio.valor != producto.dataValues.precio){
                   producto_precio
                     .updateAttributes({fecha_final:dateParser.getParseDate()})
                     .then(function(){

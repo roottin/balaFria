@@ -348,15 +348,13 @@ angular.module('balafria')
       var valores = seudoId.split('-');
       valores[0]=valores[0].substr(1,valores[0].length);
       valores[1]=valores[1].substr(1,valores[1].length);
-      console.log(valores,yo.menu.categorias);
       yo.menu.categorias.forEach(function(categoria){
         if (categoria.id_categoria==valores[1]){
           categoria.productos.forEach(function(producto) {
             if (producto.id_producto==valores[0]) {
-              console.log(producto);
-              producto.files = files[0];
+              producto.file = document.querySelector('#'+seudoId).files[0];
               producto.ruta = (window.URL || window.webkitURL).createObjectURL( files[0] );
-              document.querySelector('#p'+id).setAttribute('src',producto.ruta);
+              document.querySelector('#p'+valores[0]).setAttribute('src',producto.ruta);
             }
           });
         }
@@ -408,19 +406,22 @@ angular.module('balafria')
         producto.icono="save";
         producto.class="guardar";
       }else{
-        Productos
-          .update({id:producto.id_producto},producto)
-          .$promise
-          .then(function(){
-            Sucursales.getMenu({id:yo.menu.id_menu},function(result){
-              yo.menu = yo.inicializarMenu(result);
+        var ant = producto.ant;
+        if((ant.nombre != producto.nombre)||(ant.descripcion != producto.descripcion)||(ant.secuencia != producto.secuencia)||(ant.precio != producto.precio)){
+          Productos
+            .update({id:producto.id_producto},producto)
+            .$promise
+            .then(function(){
+              Sucursales.getMenu({id:yo.menu.id_menu},function(result){
+                yo.menu = yo.inicializarMenu(result);
+              });
             });
-          })
-        if(producto.file){
+        }
+        if(ant.ruta != producto.ruta){
           Upload.upload({
             url: '/api/productos/imagen',
             data:{
-              file:categoria.newPro.file,
+              file:document.querySelector('#p'+producto.id_producto+'-c'+categoria.id_categoria).files[0],
               id_producto:producto.id_producto
             }
           }).then(function(){

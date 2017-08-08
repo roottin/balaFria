@@ -37,7 +37,7 @@ module.exports = function(app){
         Promise.all(result.map(categoria => {
           return models.sequelize.query("select p.*,i.ruta,dc.secuencia, dc.id as id_detalle_categoria,pp.valor as precio from detalle_categoria dc"+
                             " join producto p on dc.id_producto = p.id_producto"+
-                            " join imagen_producto ip on ip.id_producto = p.id_producto"+
+                            " join imagen_producto ip on ip.id_producto = p.id_producto and ip.estado = 'A'"+
                             " join imagen i on ip.id_imagen = i.id_imagen"+
                             " join producto_precio pp on pp.id_producto_precio = (select id_producto_precio from producto_precio where id_producto = p.id_producto and fecha_final is null )"+
                             " where id_detalle_menu ="+categoria.dataValues.id_detalle_menu+
