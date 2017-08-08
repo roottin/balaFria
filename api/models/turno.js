@@ -1,24 +1,24 @@
 /* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('horario', {
-    id_horario: {
+  return sequelize.define('turno', {
+    id_turno: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
     },
-    tipo: {
+    nombre: {
       type: DataTypes.STRING,
       allowNull: false,
       defaultValue: "A"
     },
-    id_sucursal: {
+    id_horario: {
       type: DataTypes.INTEGER,
       allowNull: true,
       references: {
-        model: 'sucursal',
-        key: 'id_sucursal'
+        model: 'horario',
+        key: 'id_horario'
       }
     },
     estado: {
@@ -27,6 +27,6 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: "A"
     }
   }, {
-    tableName: 'horario'
+    tableName: 'turno'
   });
 };
