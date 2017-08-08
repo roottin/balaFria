@@ -146,7 +146,7 @@ module.exports = function(app){
         detalle
           .destroy()
           .then(function(result){
-            res.json(result);
+            res.json(1);
           });
       })
     });

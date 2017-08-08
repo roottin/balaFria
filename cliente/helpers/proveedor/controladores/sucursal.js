@@ -458,7 +458,8 @@ angular.module('balafria')
             file:yo.newCat.file,
             id_menu: yo.menu.id_menu,
             titulo: yo.newCat.titulo,
-            id_proveedor:yo.usuario.id
+            id_proveedor:yo.usuario.id,
+            secuencia:yo.newCat.secuencia
           }
         })
           .then(function(resp){
@@ -577,7 +578,7 @@ angular.module('balafria')
     }).then(function(menu){
       $mdToast.show(
           $mdToast.simple()
-            .textContent("Menu "+menu.nombre+" creado de forma exitosa")
+            .textContent("Menu creado de forma exitosa")
             .position('top right')
             .hideDelay(3000)
         );
