@@ -13,6 +13,12 @@ angular.module('balafria')
     	url:'/api/sucursal/all',
       isArray:true
     },
+    'buscarPorRubro':{
+    	method:'GET',
+    	url:'/api/sucursal/rubro/:id',
+    	params:{id: '@id'},
+      isArray:true
+    },
     'getMenu':{
       method:'GET',
     	url:'/api/menu/:id',

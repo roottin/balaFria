@@ -333,6 +333,12 @@ md-content[landing]{
             text-indent: 15px;
             font-size: 25px;
           }
+          i.cerrar{
+            position: absolute;
+            right: 0px;
+            padding: 10px;
+            cursor:pointer;
+          }
         }
       }
     }

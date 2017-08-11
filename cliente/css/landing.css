@@ -1639,6 +1639,11 @@ md-content[landing] {
           margin: 10px 0px;
           text-indent: 15px;
           font-size: 25px; }
+        md-content[landing] div[principal] div[lista] div.cont-sucursales i.cerrar {
+          position: absolute;
+          right: 0px;
+          padding: 10px;
+          cursor: pointer; }
   md-content[landing] div[registro] {
     background-color: rgba(0, 0, 0, 0.6);
     position: absolute;

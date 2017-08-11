@@ -1,8 +1,5 @@
 angular.module('balafria')
 .controller('ctrlMap', ['$scope','Rubros','Sucursales','$rootScope', function ($scope,Rubros,Sucursales,$rootScope) {
-  $scope.letras = "abcdefghijklmnopqrstuvwxyz".toUpperCase().split('').map(function(letra){
-    return {"letra":letra,"sucursales":[]};
-  });
   angular.extend($rootScope, {
         Acarigua: {
             lat: 9.55972,
@@ -16,30 +13,39 @@ angular.module('balafria')
     .then(function(result){
         $scope.rubros = result;
     });
-  Sucursales
-    .buscar()
-    .$promise
-    .then(function(result){
-      var sucursales = [];
-      result.forEach(function(sucursal){
-        $scope.letras.forEach(function(letra){
-          if (sucursal.nombre.substr(0,1).toUpperCase() === letra.letra) {
-            letra.sucursales.push(sucursal);
-          }
-        });
-      });
-      $scope.letras.forEach(function(letra){
-        if(letra.sucursales.length){
-          sucursales.push(letra);
-        }
-      });
-      $scope.sucursales = sucursales;
-    })
   $scope.disponibles = [];
   $scope.openMenu = function($mdMenu, ev) {
     originatorEv = ev;
     $mdMenu.open(ev);
   };
+  $scope.buscarSucursales = function(){
+    Sucursales
+      .buscar()
+      .$promise
+      .then(function(result){
+        $scope.sucursales = $scope.organizarLista(result);
+        $scope.vistaLista();
+      })
+  }
+  $scope.organizarLista = function(result){
+    $scope.letras = "abcdefghijklmnopqrstuvwxyz".toUpperCase().split('').map(function(letra){
+      return {"letra":letra,"sucursales":[]};
+    });
+    var sucursales = [];
+    result.forEach(function(sucursal){
+      $scope.letras.forEach(function(letra){
+        if (sucursal.nombre.substr(0,1).toUpperCase() === letra.letra) {
+          letra.sucursales.push(sucursal);
+        }
+      });
+    });
+    $scope.letras.forEach(function(letra){
+      if(letra.sucursales.length){
+        sucursales.push(letra);
+      }
+    });
+    return sucursales;
+  }
   $scope.toggleRubro = function($index){
     if($scope.disponibles.indexOf($scope.rubros[$index]) === -1){
       $scope.disponibles.push($scope.rubros[$index]);
@@ -47,6 +53,16 @@ angular.module('balafria')
       $scope.disponibles.splice($scope.disponibles.indexOf($scope.rubros[$index]),1);
     }
   };
+  $scope.buscarSucursalesRubro = function(rubro){
+    Sucursales
+      .buscarPorRubro({id:rubro.id_rubro})
+      .$promise
+      .then(function(result){
+        $scope.sucursales = [];
+        $scope.sucursales = $scope.organizarLista(result);
+        $scope.vistaLista();
+      })
+  }
   $scope.vistaLista = function(){
     document.querySelector('#cont-rubros').classList.remove("entrada-lateral-izquierda");
     document.querySelector('#cont-sucursales').classList.remove("salida-lateral-izquierda");

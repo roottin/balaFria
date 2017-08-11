@@ -34,6 +34,19 @@ module.exports = function(app){
         res.json(sucursales);
       });
   });
+  //NOTE: obtener sucursales por rubro
+  app.get('/api/sucursal/rubro/:id', function(req, res) {
+    models.sequelize
+      .query("select s.*, i.ruta from sucursal s "+
+        "join imagen_proveedor ip on s.id_proveedor = ip.id_proveedor "+
+        "join imagen i on ip.id_imagen = i.id_imagen "+
+        "join sucursal_rubro sr on s.id_sucursal = sr.id_sucursal "+
+        "where sr.id_rubro = "+req.params.id,
+        { model: models.sucursal})
+      .then(function(sucursales){
+        res.json(sucursales);
+      });
+  });
   //NOTE: obtener sucursales
   app.get('/api/sucursales/:id', function(req, res) {
     models.sucursal.findAll({
