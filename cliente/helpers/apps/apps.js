@@ -17,7 +17,6 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
   $stateProvider
     .state('frontPage', {
       url: '/cliente',
-      controller: 'ctrlFront',
       views:{
         "@":{
           templateUrl: '/views/plantillas/cliente/front.html',

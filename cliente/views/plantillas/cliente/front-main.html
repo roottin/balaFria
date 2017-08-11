@@ -1,8 +1,19 @@
 <div principal>
   <div lista>
+    <!--
       <div categoria ng-repeat="rubro in rubros" >
           <div nombre >{{rubro.nombre}}</div>
           <img ng-src="{{rubro.imagen_ruta || '#'}}" alt="">
+      </div>
+       -->
+      <div sucursal ng-repeat="sucursal in sucursales" layout="column">
+        <div class="imagen col-md-4">
+          <img ng-src="{{sucursal.ruta}}" alt="">
+        </div>
+        <div class="col-md-8">
+          <h5>{{sucursal.nombre}}</h5>
+          <p>{{sucursal.descripcion}}</p>
+        </div>
       </div>
   </div>
   <div mapa >

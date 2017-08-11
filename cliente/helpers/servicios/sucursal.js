@@ -8,6 +8,11 @@ angular.module('balafria')
     	params:{id: '@id'},
       isArray:true
     },
+    'buscar':{
+    	method:'GET',
+    	url:'/api/sucursal/all',
+      isArray:true
+    },
     'getMenu':{
       method:'GET',
     	url:'/api/menu/:id',
