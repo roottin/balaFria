@@ -1,5 +1,5 @@
 angular.module('balafria')
-.controller('ctrlMap', ['$scope','Rubros','Sucursales','$rootScope', function ($scope,Rubros,Sucursales,$rootScope) {
+.controller('ctrlMap', ['$scope','Rubros','Sucursales','$rootScope','$state', function ($scope,Rubros,Sucursales,$rootScope,$state) {
   angular.extend($rootScope, {
         Acarigua: {
             lat: 9.55972,
@@ -26,6 +26,9 @@ angular.module('balafria')
         $scope.sucursales = $scope.organizarLista(result);
         $scope.vistaLista();
       })
+  }
+  $scope.verSucursal = function(sucursal){
+    $state.go('proveedor.sucursal',{"sucursal":sucursal.id_sucursal});
   }
   $scope.organizarLista = function(result){
     $scope.letras = "abcdefghijklmnopqrstuvwxyz".toUpperCase().split('').map(function(letra){

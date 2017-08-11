@@ -23,7 +23,7 @@
       <md-list flex>
       <div class="letra" ng-repeat="letra in sucursales">
         <h4>{{letra.letra}}</h4>
-         <md-list-item class="md-2-line" ng-repeat="sucursal in letra.sucursales" ng-click="null">
+         <md-list-item class="md-2-line" ng-repeat="sucursal in letra.sucursales" ng-click="verSucursal(sucursal)">
             <img ng-src="{{sucursal.ruta}}" class="md-avatar" alt="{{item.who}}" />
            <div class="md-list-item-text" layout="column">
              <h3>{{ sucursal.nombre }}</h3>
