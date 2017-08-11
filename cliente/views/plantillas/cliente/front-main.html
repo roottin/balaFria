@@ -1,20 +1,33 @@
 <div principal>
   <div lista>
-    <!--
-      <div categoria ng-repeat="rubro in rubros" >
+    <div class="toolbar-search">
+      <i class="material-icons buscar">search</i>
+      <i class="material-icons lista"  ng-click="vistaLista()">list</i>
+      <input type="text" ng-model="search" placeholder="Busqueda rapida" value="">
+    </div>
+    <div class="cont-rubros" id="cont-rubros">
+      <div categoria ng-repeat="rubro in rubros" ng-click="vistaLista()">
           <div nombre >{{rubro.nombre}}</div>
           <img ng-src="{{rubro.imagen_ruta || '#'}}" alt="">
+          <div class="clear"></div>
       </div>
-       -->
-      <div sucursal ng-repeat="sucursal in sucursales" layout="column">
-        <div class="imagen col-md-4">
-          <img ng-src="{{sucursal.ruta}}" alt="">
-        </div>
-        <div class="col-md-8">
-          <h5>{{sucursal.nombre}}</h5>
-          <p>{{sucursal.descripcion}}</p>
-        </div>
+      <div class="clear"></div>
+    </div>
+    <div class="cont-sucursales" id="cont-sucursales" ng-click="vistaRubros()">
+      <md-list flex>
+      <div class="letra" ng-repeat="letra in sucursales">
+        <h4>{{letra.letra}}</h4>
+         <md-list-item class="md-2-line" ng-repeat="sucursal in letra.sucursales" ng-click="null">
+            <img ng-src="{{sucursal.ruta}}" class="md-avatar" alt="{{item.who}}" />
+           <div class="md-list-item-text" layout="column">
+             <h3>{{ sucursal.nombre }}</h3>
+             <p>{{ sucursal.descripcion }}</p>
+           </div>
+           <md-divider ></md-divider>
+         </md-list-item>
       </div>
+     </md-list>
+    </div>
   </div>
   <div mapa >
     <md-toolbar class="md-hue-2">

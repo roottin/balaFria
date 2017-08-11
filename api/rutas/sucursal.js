@@ -154,6 +154,7 @@ module.exports = function(app){
               id_imagen:imagen.id_imagen,
               id_tipo_imagen:1//Banner
             }).then(function(imagen_sucursal){
+              console.log(sucursal);
               sucursal.dataValues.banner = imagen;
             });
           })

@@ -66,9 +66,8 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
         url:"/correo",
         views:{
           "header@proveedor":{
-            templateUrl:"/views/plantillas/proveedor/headerLogIn.html",
-            controller:'ctrlHeaderPro',
-            controllerAs:'header'
+            templateUrl:"/views/plantillas/proveedor/headerLogOff.html",
+            controller:'ctrlInicio'
           },
           "body@proveedor":{
             templateUrl: '/views/plantillas/proveedor/verificarCorreo.html',

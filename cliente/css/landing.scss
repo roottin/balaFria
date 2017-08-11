@@ -251,36 +251,88 @@ md-content[landing]{
       float: left;
       border-top: 1px solid silver;
       border-right:1px solid silver;
-
-      div[categoria]{
-        width: 148px;
-        height: 148px;
-        float: left;
-        border: 1px solid white;
-        position: relative;
-
-        div[nombre]{
-          color: white;
-          position: absolute;
+      position: relative;
+      div{
+        &.toolbar-search{
           width: 100%;
-          height: 100%;
-          cursor: pointer;
-          background-color: rgba(0, 0, 0, 0.6);
-          text-align: center;
-          z-index: 2;
-          font-family: bebas;
-          display: flex;
-          align-content: space-between;
-          justify-content: center;
-          align-items: center;
-          font-size: 31px;
+          height: 40px;
+          margin-bottom: 2px;
+          @include BoxShadowHelper(3);
+          background-color: white;
+          input{
+            height: 100%;
+            border:none;
+            padding: 5px;
+            float: right;
+            outline: none;
+            width: calc(100% - 78px);
+          }
+          i{
+            color: #777;
+            padding-top: 10px;
+            &.buscar{
+              padding-left: 20px;
+            }
+            &.lista{
+              padding-right: 10px;
+              float: right;
+              cursor: pointer;
+            }
+          }
         }
-        img{
+        &.cont-rubros{
+          position: absolute;
+          background-color: #303030;
+          padding-bottom:  3px;
+          overflow: hidden;
+          height: calc(100% - 43px);
+          width: 100%;
+          left: 0px;
+          top:43px;
+          [categoria]{
+            width: 148px;
+            height: 148px;
+            float: left;
+            border: 1px solid white;
+            position: relative;
+            background: white;
+            div[nombre]{
+              color: white;
+              position: absolute;
+              width: 100%;
+              height: 100%;
+              cursor: pointer;
+              background-color: rgba(0, 0, 0, 0.6);
+              text-align: center;
+              z-index: 2;
+              font-family: bebas;
+              display: flex;
+              align-content: space-between;
+              justify-content: center;
+              align-items: center;
+              font-size: 31px;
+            }
+            img{
+              position: absolute;
+              width: 100%;
+              height: 100%;
+              cursor: pointer;
+              z-index: 1;
+            }
+          }
+        }
+        &.cont-sucursales{
           position: absolute;
           width: 100%;
-          height: 100%;
-          cursor: pointer;
-          z-index: 1;
+          height: calc(100% - 43px);
+          left: 100%;
+          top:43px;
+          background-color: #303030;
+          h4{
+            margin: 10px 0px;
+            text-indent: 15px;
+            font-size: 25px;
+          }
         }
       }
     }

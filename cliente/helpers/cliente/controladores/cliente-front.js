@@ -1,5 +1,8 @@
 angular.module('balafria')
 .controller('ctrlMap', ['$scope','Rubros','Sucursales','$rootScope', function ($scope,Rubros,Sucursales,$rootScope) {
+  $scope.letras = "abcdefghijklmnopqrstuvwxyz".toUpperCase().split('').map(function(letra){
+    return {"letra":letra,"sucursales":[]};
+  });
   angular.extend($rootScope, {
         Acarigua: {
             lat: 9.55972,
@@ -17,8 +20,20 @@ angular.module('balafria')
     .buscar()
     .$promise
     .then(function(result){
-      console.log(result);
-      $scope.sucursales = result;
+      var sucursales = [];
+      result.forEach(function(sucursal){
+        $scope.letras.forEach(function(letra){
+          if (sucursal.nombre.substr(0,1).toUpperCase() === letra.letra) {
+            letra.sucursales.push(sucursal);
+          }
+        });
+      });
+      $scope.letras.forEach(function(letra){
+        if(letra.sucursales.length){
+          sucursales.push(letra);
+        }
+      });
+      $scope.sucursales = sucursales;
     })
   $scope.disponibles = [];
   $scope.openMenu = function($mdMenu, ev) {
@@ -26,13 +41,24 @@ angular.module('balafria')
     $mdMenu.open(ev);
   };
   $scope.toggleRubro = function($index){
-    console.log($scope.disponibles.indexOf($scope.rubros[$index]));
     if($scope.disponibles.indexOf($scope.rubros[$index]) === -1){
       $scope.disponibles.push($scope.rubros[$index]);
     }else{
       $scope.disponibles.splice($scope.disponibles.indexOf($scope.rubros[$index]),1);
     }
   };
+  $scope.vistaLista = function(){
+    document.querySelector('#cont-rubros').classList.remove("entrada-lateral-izquierda");
+    document.querySelector('#cont-sucursales').classList.remove("salida-lateral-izquierda");
+    document.querySelector('#cont-rubros').classList.add("salida-lateral-derecha");
+    document.querySelector('#cont-sucursales').classList.add("entrada-lateral-derecha");
+  }
+  $scope.vistaRubros = function(){
+    document.querySelector('#cont-rubros').classList.remove("salida-lateral-derecha");
+    document.querySelector('#cont-sucursales').classList.remove("entrada-lateral-derecha");
+    document.querySelector('#cont-rubros').classList.add("entrada-lateral-izquierda");
+    document.querySelector('#cont-sucursales').classList.add("salida-lateral-izquierda");
+  }
 }])
 .controller('ctrlHeaderCli', ['$state','$sesion','$auth','$mdDialog','$http', function ($state,$sesion,$auth,$mdDialog,$http){
   var yo = this;

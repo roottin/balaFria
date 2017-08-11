@@ -1255,6 +1255,75 @@ md-dialog section.preview {
   100% {
     -moz-box-shadow: 0 0 0 0 rgba(33, 150, 243, 0);
     box-shadow: 0 0 0 0 rgba(33, 150, 243, 0); } }
+/*-------------salidas--------------------------------*/
+.salida-lateral-derecha {
+  animation-name: salida-derecha;
+  animation-duration: 1s;
+  animation-delay: 0s;
+  animation-fill-mode: forwards; }
+
+@keyframes salida-derecha {
+  0% {
+    transform: scale(1); }
+  50% {
+    transform: scale(0.9);
+    left: 0px; }
+  100% {
+    transform: scale(0.9);
+    left: -100%; } }
+.salida-lateral-izquierda {
+  animation-name: salida-izquierda;
+  animation-duration: 1s;
+  animation-delay: 0s;
+  animation-fill-mode: forwards; }
+
+@keyframes salida-izquierda {
+  0% {
+    transform: scale(1);
+    left: 0px; }
+  50% {
+    transform: scale(0.9);
+    left: 0px; }
+  100% {
+    transform: scale(0.9);
+    left: 100%; } }
+/*-------------entradas--------------------------------*/
+.entrada-lateral-izquierda {
+  animation-name: entrada-izquierda;
+  animation-duration: 1s;
+  animation-delay: 0s;
+  animation-fill-mode: forwards; }
+
+@keyframes entrada-izquierda {
+  0% {
+    transform: scale(0.9);
+    left: -100%; }
+  50% {
+    transform: scale(0.9);
+    left: -100%; }
+  90% {
+    transform: scale(0.9); }
+  100% {
+    transform: scale(1);
+    left: 0%; } }
+.entrada-lateral-derecha {
+  animation-name: entrada-derecha;
+  animation-duration: 1s;
+  animation-delay: 0s;
+  animation-fill-mode: forwards; }
+
+@keyframes entrada-derecha {
+  0% {
+    transform: scale(0.9);
+    left: 100%; }
+  50% {
+    transform: scale(0.9);
+    left: 100%; }
+  90% {
+    transform: scale(0.9); }
+  100% {
+    transform: scale(1);
+    left: 0; } }
 div.foot {
   text-align: center; }
   div.foot h1 {
@@ -1498,34 +1567,78 @@ md-content[landing] {
       height: 100%;
       float: left;
       border-top: 1px solid silver;
-      border-right: 1px solid silver; }
-      md-content[landing] div[principal] div[lista] div[categoria] {
-        width: 148px;
-        height: 148px;
-        float: left;
-        border: 1px solid white;
-        position: relative; }
-        md-content[landing] div[principal] div[lista] div[categoria] div[nombre] {
-          color: white;
-          position: absolute;
-          width: 100%;
+      border-right: 1px solid silver;
+      position: relative; }
+      md-content[landing] div[principal] div[lista] div.toolbar-search {
+        width: 100%;
+        height: 40px;
+        margin-bottom: 2px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+        background-color: white; }
+        md-content[landing] div[principal] div[lista] div.toolbar-search input {
           height: 100%;
-          cursor: pointer;
-          background-color: rgba(0, 0, 0, 0.6);
-          text-align: center;
-          z-index: 2;
-          font-family: bebas;
-          display: flex;
-          align-content: space-between;
-          justify-content: center;
-          align-items: center;
-          font-size: 31px; }
-        md-content[landing] div[principal] div[lista] div[categoria] img {
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          cursor: pointer;
-          z-index: 1; }
+          border: none;
+          padding: 5px;
+          float: right;
+          outline: none;
+          width: calc(100% - 78px); }
+        md-content[landing] div[principal] div[lista] div.toolbar-search i {
+          color: #777;
+          padding-top: 10px; }
+          md-content[landing] div[principal] div[lista] div.toolbar-search i.buscar {
+            padding-left: 20px; }
+          md-content[landing] div[principal] div[lista] div.toolbar-search i.lista {
+            padding-right: 10px;
+            float: right;
+            cursor: pointer; }
+      md-content[landing] div[principal] div[lista] div.cont-rubros {
+        position: absolute;
+        background-color: #303030;
+        padding-bottom: 3px;
+        overflow: hidden;
+        height: calc(100% - 43px);
+        width: 100%;
+        left: 0px;
+        top: 43px; }
+        md-content[landing] div[principal] div[lista] div.cont-rubros [categoria] {
+          width: 148px;
+          height: 148px;
+          float: left;
+          border: 1px solid white;
+          position: relative;
+          background: white; }
+          md-content[landing] div[principal] div[lista] div.cont-rubros [categoria] div[nombre] {
+            color: white;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0.6);
+            text-align: center;
+            z-index: 2;
+            font-family: bebas;
+            display: flex;
+            align-content: space-between;
+            justify-content: center;
+            align-items: center;
+            font-size: 31px; }
+          md-content[landing] div[principal] div[lista] div.cont-rubros [categoria] img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            z-index: 1; }
+      md-content[landing] div[principal] div[lista] div.cont-sucursales {
+        position: absolute;
+        width: 100%;
+        height: calc(100% - 43px);
+        left: 100%;
+        top: 43px;
+        background-color: #303030; }
+        md-content[landing] div[principal] div[lista] div.cont-sucursales h4 {
+          margin: 10px 0px;
+          text-indent: 15px;
+          font-size: 25px; }
   md-content[landing] div[registro] {
     background-color: rgba(0, 0, 0, 0.6);
     position: absolute;
