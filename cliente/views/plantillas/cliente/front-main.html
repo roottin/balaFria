@@ -11,28 +11,38 @@
           <img ng-src="{{'#'}}" alt="">
           <div class="clear"></div>
       </div>
+      <!--- Rubros --->
       <div categoria ng-repeat="rubro in rubros" ng-click="buscarSucursalesRubro(rubro)">
           <div nombre >{{rubro.nombre}}</div>
           <img ng-src="{{rubro.imagen_ruta || '#'}}" alt="">
           <div class="clear"></div>
       </div>
       <div class="clear"></div>
-    </div>
+    </div><!--- Rubros --->
     <div class="cont-sucursales" id="cont-sucursales" >
-      <i class="material-icons cerrar" ng-click="vistaRubros()">close</i>
-      <md-list flex>
-      <div class="letra" ng-repeat="letra in sucursales">
-        <h4>{{letra.letra}}</h4>
-         <md-list-item class="md-2-line" ng-repeat="sucursal in letra.sucursales" ng-click="verSucursal(sucursal)">
-            <img ng-src="{{sucursal.ruta}}" class="md-avatar" alt="{{item.who}}" />
-           <div class="md-list-item-text" layout="column">
-             <h3>{{ sucursal.nombre }}</h3>
-             <p>{{ sucursal.descripcion }}</p>
-           </div>
-           <md-divider ></md-divider>
-         </md-list-item>
+      <!--- Busqueda rapida --->
+      <div class="busq-rap">
+        <i class="material-icons cerrar" ng-click="deshabilitarBusq()">chevron_left</i>
+        <div ng-repeat="letra in letras" class="cls-letra {{letra.estado}}" ng-click="mover(letra)">
+            {{letra.letra}}
+        </div>
+        <div class="clear"></div>
       </div>
-     </md-list>
+      <!--- Lista --->
+      <md-list flex id="lista-sucursales">
+      <i class="material-icons cerrar" ng-click="vistaRubros()">close</i>
+        <div class="letra" ng-repeat="letra in sucursales" letra="{{letra.letra}}">
+          <h4 ng-click="activarBusq();">{{letra.letra}}</h4>
+          <md-list-item class="md-2-line" ng-repeat="sucursal in letra.sucursales" ng-click="verSucursal(sucursal)">
+            <img ng-src="{{sucursal.ruta}}" class="md-avatar" alt="{{item.who}}" />
+            <div class="md-list-item-text" layout="column">
+              <h3>{{ sucursal.nombre }}</h3>
+              <p>{{ sucursal.descripcion }}</p>
+            </div>
+            <md-divider ></md-divider>
+          </md-list-item>
+        </div><!--- Letra --->
+      </md-list><!--- Lista --->
     </div>
   </div>
   <div mapa >

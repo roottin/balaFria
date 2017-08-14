@@ -17,20 +17,20 @@ angular.module('balafria')
     if($rootScope.sesion.estado == "desconectado"){
       var datosSesion = sessionStorage.getItem('balaFria_token');
       if(!datosSesion){
-        $state.go('frontPage');
+        $state.go('cliente');
       }else{
         datosSesion = JSON.parse(datosSesion);
         return new Promise(function(completado,rechazado){
           $http.post('/api/recuperar',datosSesion)
             .then(function(resultado){
               if(!resultado.data.success){
-                $state.go('frontPage');
+                $state.go('cliente');
               }else{
                 $rootScope.sesion.perfil = resultado.data.user;
                 $rootScope.sesion.tipo = $rootScope.sesion.perfil.tipo;
                 self.conectar();
                 if($rootScope.sesion.tipo == "cliente"){
-                  $state.go('frontPage.iniciado');
+                  $state.go('cliente.iniciado');
                 }else{
                   completado($rootScope.sesion.perfil);
                 }

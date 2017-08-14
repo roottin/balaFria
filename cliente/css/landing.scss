@@ -328,16 +328,61 @@ md-content[landing]{
           left: 100%;
           top:51px;
           background-color: #303030;
-          h4{
-            margin: 10px 0px;
-            text-indent: 15px;
-            font-size: 25px;
+          md-list{
+            width: 100%;
+            z-index: 1;
+            position: absolute;
+            top: 3px;
+            background-color: #303030;
+            min-height: calc(100% - 3px);
+            div.letra{
+              h4{
+                cursor: pointer;
+                margin: 10px 0px;
+                text-indent: 15px;
+                font-size: 25px;
+              }
+            }
           }
           i.cerrar{
             position: absolute;
             right: 0px;
             padding: 10px;
             cursor:pointer;
+            top:0px;
+            z-index: 2;
+          }
+          div.busq-rap{
+            transition: all 0.3s linear;
+            overflow: hidden;
+            position: absolute;
+            z-index: 2;
+            background: #303030;
+            width: 0%;
+            padding: 40px 0px;
+            height: 100%;
+            &.visible{
+              opacity: 1;
+              width: 100%;
+            }
+            div.cls-letra{
+              transition: all 0.3s ease-in-out;
+              cursor:pointer;
+              width: 60px;
+              height: 60px;
+              color: white;
+              float: left;
+              padding: 15px;
+              font-size: 30px;
+              margin-left: 10px;
+              margin-bottom: 10px;
+              &.inactiva{
+                color:gray;
+              }
+              &.activa:hover{
+                border:1px solid white;
+              }
+            }
           }
         }
       }

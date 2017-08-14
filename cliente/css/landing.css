@@ -1635,15 +1635,52 @@ md-content[landing] {
         left: 100%;
         top: 51px;
         background-color: #303030; }
-        md-content[landing] div[principal] div[lista] div.cont-sucursales h4 {
-          margin: 10px 0px;
-          text-indent: 15px;
-          font-size: 25px; }
+        md-content[landing] div[principal] div[lista] div.cont-sucursales md-list {
+          width: 100%;
+          z-index: 1;
+          position: absolute;
+          top: 3px;
+          background-color: #303030;
+          min-height: calc(100% - 3px); }
+          md-content[landing] div[principal] div[lista] div.cont-sucursales md-list div.letra h4 {
+            cursor: pointer;
+            margin: 10px 0px;
+            text-indent: 15px;
+            font-size: 25px; }
         md-content[landing] div[principal] div[lista] div.cont-sucursales i.cerrar {
           position: absolute;
           right: 0px;
           padding: 10px;
-          cursor: pointer; }
+          cursor: pointer;
+          top: 0px;
+          z-index: 2; }
+        md-content[landing] div[principal] div[lista] div.cont-sucursales div.busq-rap {
+          transition: all 0.3s linear;
+          overflow: hidden;
+          position: absolute;
+          z-index: 2;
+          background: #303030;
+          width: 0%;
+          padding: 40px 0px;
+          height: 100%; }
+          md-content[landing] div[principal] div[lista] div.cont-sucursales div.busq-rap.visible {
+            opacity: 1;
+            width: 100%; }
+          md-content[landing] div[principal] div[lista] div.cont-sucursales div.busq-rap div.cls-letra {
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+            width: 60px;
+            height: 60px;
+            color: white;
+            float: left;
+            padding: 15px;
+            font-size: 30px;
+            margin-left: 10px;
+            margin-bottom: 10px; }
+            md-content[landing] div[principal] div[lista] div.cont-sucursales div.busq-rap div.cls-letra.inactiva {
+              color: gray; }
+            md-content[landing] div[principal] div[lista] div.cont-sucursales div.busq-rap div.cls-letra.activa:hover {
+              border: 1px solid white; }
   md-content[landing] div[registro] {
     background-color: rgba(0, 0, 0, 0.6);
     position: absolute;

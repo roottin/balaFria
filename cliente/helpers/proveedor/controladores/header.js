@@ -15,7 +15,7 @@ angular.module('balafria')
           .then(function() {
               // Desconectamos al usuario y lo redirijimos
               $sesion.desconectar();
-              $state.go("frontPage");
+              $state.go("cliente");
           });
   };
   yo.openLeftMenu = function() {
@@ -25,7 +25,6 @@ angular.module('balafria')
     $mdSidenav('right').toggle();
   };
   yo.agregarSucursal = function(){
-    console.log('sucursal');
     $state.go('proveedor.nuevaSucursal');
   }
   yo.irASucursal = function(id){

@@ -1,0 +1,105 @@
+<div class="sucursal" md-theme="light">
+	<div banner>
+		<img id="banner" ng-src="{{sucursal.datos.banner.ruta}}">
+		<div class="puntuacion material-icons">
+			star star star star star
+		</div>
+		<div titulo>
+			<img ng-src="{{sucursal.usuario.avatar.ruta}}" alt="">
+			<div class="informacion-sucursal">
+				<ul>
+					<li>
+						35<br>
+						<label>Pedidos</label>
+					</li>
+					<li>
+						200<br>
+						<label>visitas</label>
+					</li>
+					<li>
+						4<br>
+						<label>visitas hoy</label>
+					</li>
+					<li>
+						3<br>
+						<label>favoritos</label>
+					</li>
+					<li>
+						20<br>
+						<label>promociones</label>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<md-tabs md-dynamic-height md-border-bottom md-center-tabs="true">
+		<!-- MENU -->
+		<md-tab>
+			<md-tab-label><i class="material-icons">shopping_basket</i></md-tab-label>
+			<md-tab-body>
+				<h2 >Menu</h2>
+				<div ng-repeat="categoria in sucursal.menu.categorias" class="categoria">
+					<div class="texto-categoria">
+						<img id="{{'cat'+categoria.id}}" ng-src="{{categoria.ruta}}" ng-click="sucursal.agregarCategoria(categoria.id)">
+							<div class="tit-cat" ng-show="categoria.titulo">
+								<div >{{categoria.titulo}}</div>
+							</div>
+					</div>
+					<div class="cont-productos">
+						<div class="producto" ng-repeat="producto in categoria.productos"><!-- producto -->
+								<div class="col-lg-6 img">
+									<img ng-src="{{producto.ruta}}" id="p{{producto.id_producto}}"alt="" ng-click="sucursal.agregarImagen('p'+producto.id_producto+'-c'+categoria.id_categoria)">
+								</div>
+								<div class="col-lg-6 descrip">
+									<!-- display normal-->
+									<h4 >{{producto.nombre}}</h4>
+									<p >{{producto.descripcion}}</p>
+									<div  class="precio arriba">{{producto.precio}}</div>
+									<button class="material-icons shop-btn">
+										<div class="texto-aparece">
+											Ordenar
+										</div>
+										add_shopping_cart
+									</button>
+								</div>
+							</div>
+							<!-- producto -->
+					</div><!-- cont-producto -->
+				</div>
+			</md-tab-body>
+		</md-tab>
+		<!-- HOME -->
+		<md-tab>
+        	<md-tab-label><i class="material-icons">home</i></md-tab-label>
+	        <md-tab-body>
+				<div class="ubicacion">
+					<h3>Datos Geograficos</h3>
+					<leaflet lf-center="Acarigua" markers="sucursal.datos.markers" paths="sucursal.paths"></leaflet>
+				</div>
+				<div class="descripcion">
+					<h3>Conocenos</h3>
+					<div >
+						{{sucursal.datos.descripcion}}
+					</div>
+	  		</div>
+				<div class="contactos">
+					<h3>Ubicanos</h3>
+					<section ng-repeat="contacto in sucursal.datos.contactos" class="{{contacto.clase}}">
+						<div >
+							<i class="{{contacto.icono}}"></i>
+						</div>
+						{{contacto.contenido}}
+					</section>
+				</div>
+				<div class="clear"></div>
+	        </md-tab-body>
+        </md-tab>
+		<!-- PUNTUACION -->
+		<md-tab>
+			<md-tab-label><i class="material-icons">star</i></md-tab-label>
+	        <md-tab-body>
+	        	<h2>Puntuacion</h2>
+	        </md-tab-body>
+	    </md-tab>
+	</md-tabs>
+</div>

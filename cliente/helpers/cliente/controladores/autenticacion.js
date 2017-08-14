@@ -29,7 +29,7 @@ function ctrlLogCliente( $mdDialog,$http,$sesion,$state,$auth,$mdToast) {
             };
             $sesion.crear(user,'cliente').conectar();
             yo.hide();
-            $state.go('frontPage.iniciado');
+            $state.go('clente.iniciado');
           });
     };
     yo.login = function(){
@@ -42,7 +42,7 @@ function ctrlLogCliente( $mdDialog,$http,$sesion,$state,$auth,$mdToast) {
             if(response.data.success){
               $sesion.crear(response.data.user,'cliente').conectar();
               yo.hide();
-              $state.go("frontPage.iniciado");
+              $state.go("cliente.iniciado");
             }else{
               $mdToast.show(
                 $mdToast.simple()

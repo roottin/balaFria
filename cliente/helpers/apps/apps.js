@@ -15,26 +15,26 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
   $urlRouterProvider.otherwise('/cliente');
   //-----------------------------------------cliente
   $stateProvider
-    .state('frontPage', {
+    .state('cliente', {
       url: '/cliente',
       views:{
         "@":{
           templateUrl: '/views/plantillas/cliente/front.html',
         },
-        "header@frontPage":{
+        "header@cliente":{
           templateUrl:"/views/plantillas/cliente/headerLogOff.html",
           controller:'ctrlInicio'
         },
-        "body@frontPage":{
+        "body@cliente":{
           templateUrl: '/views/plantillas/cliente/front-main.html',
           controller: 'ctrlMap'
         }
       }
     })
-      .state('frontPage.iniciado', {
+      .state('cliente.iniciado', {
         url: '/usuario',
         views:{
-          "header@frontPage":{
+          "header@cliente":{
             templateUrl:"/views/plantillas/cliente/headerLogIn.html",
             controller:'ctrlHeaderCli',
             controllerAs:'header'
@@ -42,6 +42,20 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
         },
         resolve:{
           loginRequired: clienteLoggedRequired
+        }
+      })
+      .state('cliente.sucursal', {
+        url:'/sucursal',
+        views:{
+          "body@cliente":{
+            templateUrl: '/views/plantillas/cliente/sucursal.html',
+            controller: 'ctrlSucursalCliente',
+            controllerAs:'sucursal'
+          }
+
+        },
+        params:{
+          sucursal: null
         }
       })
     //-----------------------------------------proveedor--------------------------------------------------
