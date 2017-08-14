@@ -1,5 +1,5 @@
 angular.module('balafria')
-.controller('ctrlSucursalCliente', ['$stateParams','Categorias','Productos','$mdToast','$state','Sucursales','$scope','$timeout','$sesion','$mdDialog','$http', function ($stateParams,Categorias,Productos,$mdToast,$state,Sucursales,$scope,$timeout,$sesion,$mdDialog,$http){
+.controller('ctrlSucursalCliente', ['$stateParams','Categorias','Productos','$mdToast','$state','Sucursales','$scope','$timeout','$sesion','$mdDialog','$http','Proveedores', function ($stateParams,Categorias,Productos,$mdToast,$state,Sucursales,$scope,$timeout,$sesion,$mdDialog,$http,Proveedores){
   var yo = this;
   $state.params = $stateParams;
   yo.SUID = 0; //Secuencia UID de objetos creados temporalmente
@@ -13,6 +13,13 @@ angular.module('balafria')
     Sucursales.getMenu({id:result.id_menu},function(result){
       yo.menu = yo.inicializarMenu(result);
     });
+    Proveedores
+      .query({id:result.id_proveedor})
+      .$promise
+      .then(function(result){
+        console.log(result[0]);
+        yo.proveedor = result[0];
+      });
   });
   yo.inicializarMenu = function(menu){
     menu.categorias = menu.categorias.map(function(categoria){
