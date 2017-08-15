@@ -1,24 +1,12 @@
 angular
     .module("balafria")
-    .controller("ctrlLogCliente", ctrlLogCliente)
-    .controller("ctrlInicio", LoginController);
+    .controller("ctrlInicio", ctrlLogCliente);
 
-function LoginController($auth, $state,$scope,$sesion,$mdSidenav) {
-  $scope.toggleLeft = buildToggler('left');
-  $scope.toggleRight = buildToggler('right');
-
-  function buildToggler(componentId) {
-    return function() {
-      $mdSidenav(componentId).toggle();
-    };
-  }
-}
-function ctrlLogCliente( $mdDialog,$http,$sesion,$state,$auth,$mdToast) {
+function ctrlLogCliente( $mdDialog,$http,$sesion,$state,$auth,$mdToast,$mdSidenav) {
     var yo = this;
     yo.registro = function(){
         $http.post('/api/cliente',yo.cliente)
           .then(function(resp){
-            yo.hide();
             var user = {
               "nombre":resp.data.nombre,
               "apellido":resp.data.apellido,
@@ -28,8 +16,7 @@ function ctrlLogCliente( $mdDialog,$http,$sesion,$state,$auth,$mdToast) {
               "token":resp.data.token,
             };
             $sesion.crear(user,'cliente').conectar();
-            yo.hide();
-            $state.go('clente.iniciado');
+            $state.go('cliente.iniciado');
           });
     };
     yo.login = function(){
@@ -63,13 +50,12 @@ function ctrlLogCliente( $mdDialog,$http,$sesion,$state,$auth,$mdToast) {
     yo.authenticate = function(provider) {
       $auth.authenticate(provider);
     };
-    yo.hide = function() {
-        $mdDialog.hide();
-    };
-    yo.cancel = function() {
-        $mdDialog.cancel();
-    };
-    yo.answer = function(answer) {
-        $mdDialog.hide(answer);
-    };
+    yo.toggleLeft = buildToggler('left');
+    yo.toggleRight = buildToggler('right');
+
+    function buildToggler(componentId) {
+      return function() {
+        $mdSidenav(componentId).toggle();
+      };
+    }
 }

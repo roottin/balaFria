@@ -17,7 +17,6 @@ angular.module('balafria')
       .query({id:result.id_proveedor})
       .$promise
       .then(function(result){
-        console.log(result[0]);
         yo.proveedor = result[0];
       });
   });

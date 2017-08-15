@@ -23,7 +23,8 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
         },
         "header@cliente":{
           templateUrl:"/views/plantillas/cliente/headerLogOff.html",
-          controller:'ctrlInicio'
+          controller:'ctrlInicio',
+          controllerAs:"log"
         },
         "body@cliente":{
           templateUrl: '/views/plantillas/cliente/front-main.html',

@@ -29,7 +29,7 @@ angular.module('balafria')
                 $rootScope.sesion.perfil = resultado.data.user;
                 $rootScope.sesion.tipo = $rootScope.sesion.perfil.tipo;
                 self.conectar();
-                if($rootScope.sesion.tipo == "cliente"){
+                if(($rootScope.sesion.tipo == "cliente")&&($state.current.name!="cliente.iniciado")){
                   $state.go('cliente.iniciado');
                 }else{
                   completado($rootScope.sesion.perfil);
