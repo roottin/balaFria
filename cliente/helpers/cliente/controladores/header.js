@@ -1,5 +1,5 @@
 angular.module('balafria')
-.controller('ctrlHeaderCli', ['$state','$sesion','$auth','$mdDialog','$http','$mdSidenav','$mdToast', function ($state,$sesion,$auth,$mdDialog,$http,$mdSidenav,$mdToast){
+.controller('ctrlHeaderCli', ['$rootScope','$state','$sesion','$auth','$mdDialog','$http','$mdSidenav','$mdToast', function ($rootScope,$state,$sesion,$auth,$mdDialog,$http,$mdSidenav,$mdToast){
   var yo = this;
   $sesion.obtenerPerfil()
     .then(function(perfil){
@@ -24,23 +24,7 @@ angular.module('balafria')
               "email":resp.data.email,
               "token":resp.data.token,
             };
-            $sesion.crear(user,'cliente').conectar();
-            $sesion
-              .obtenerPerfil()
-              .then(function(perfil){
-                yo.usuario = perfil;
-                $sesion
-                  .actualizarDatos($http)
-                  .then(function(usuarioFull){
-                    yo.usuario = usuarioFull;
-                    $mdToast.show(
-                      $mdToast.simple()
-                        .textContent('Bienvenido '+usuarioFull.nombre+' '+usuarioFull.apellido)
-                        .position('top left')
-                        .hideDelay(3000)
-                    );
-                  });
-              })
+            yo.inicioSesion(user);
           });
     };
     yo.login = function(){
@@ -51,23 +35,7 @@ angular.module('balafria')
         })
         .then(function(response){
             if(response.data.success){
-              $sesion.crear(response.data.user,'cliente').conectar();
-              $sesion
-                .obtenerPerfil()
-                .then(function(perfil){
-                  yo.usuario = perfil;
-                  $sesion
-                    .actualizarDatos($http)
-                    .then(function(usuarioFull){
-                      yo.usuario = usuario;
-                      $mdToast.show(
-                        $mdToast.simple()
-                          .textContent('Bienvenido '+usuarioFull.nombre+' '+usuarioFull.apellido)
-                          .position('top left')
-                          .hideDelay(3000)
-                      );
-                    });
-                })
+              yo.inicioSesion(response.data.user);
             }else{
               $mdToast.show(
                 $mdToast.simple()
@@ -90,6 +58,8 @@ angular.module('balafria')
               // Desconectamos al usuario y lo redirijimos
               $sesion.desconectar();
               yo.usuario = null;
+              $rootScope.$broadcast('sesion finalizada');              
+              yo.toggleRight();
               $mdToast.show(
                 $mdToast.simple()
                   .textContent('Sesion cerrada de forma exitosa')
@@ -97,6 +67,27 @@ angular.module('balafria')
                   .hideDelay(3000)
               );
           });
+  };
+  yo.inicioSesion = function(user){
+    $sesion.crear(user,'cliente').conectar();
+    $sesion
+      .obtenerPerfil()
+      .then(function(perfil){
+        yo.usuario = perfil;
+        $rootScope.$broadcast('inicio sesion');
+        yo.toggleRight();
+        $sesion
+          .actualizarDatos($http)
+          .then(function(usuarioFull){
+            yo.usuario = usuarioFull;
+            $mdToast.show(
+              $mdToast.simple()
+                .textContent('Bienvenido '+usuarioFull.nombre+' '+usuarioFull.apellido)
+                .position('top left')
+                .hideDelay(3000)
+            );
+          });
+      })
   };
   yo.cambiarImagen = function(ev){
     $mdDialog.show({

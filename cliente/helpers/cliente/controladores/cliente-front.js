@@ -1,5 +1,5 @@
 angular.module('balafria')
-.controller('ctrlMap', ['$scope','Rubros','Sucursales','$rootScope','$state', function ($scope,Rubros,Sucursales,$rootScope,$state) {
+.controller('ctrlMap', ['$sesion','$scope','Rubros','Sucursales','$rootScope','$state', function ($sesion,$scope,Rubros,Sucursales,$rootScope,$state) {
   angular.extend($rootScope, {
         Acarigua: {
             lat: 9.55972,
@@ -7,12 +7,32 @@ angular.module('balafria')
             zoom: 13
         }
     });
+    $scope.clase="sin-logear";
   Rubros
     .query(function(){ })
     .$promise
     .then(function(result){
         $scope.rubros = result;
     });
+  $sesion.obtenerPerfil()
+    .then(function(perfil){
+      $scope.usuario = perfil;
+      $scope.clase="logeado";
+    })
+    .catch(function(error){
+      $scope.usuario = null;
+    });
+  $scope.$on('inicio sesion',function(event,args){
+    $sesion.obtenerPerfil()
+      .then(function(perfil){
+        $scope.usuario = perfil;
+        $scope.clase="logeado";
+      })
+  });
+  $scope.$on('sesion finalizada',function(event,args){
+    $scope.usuario = null;
+    $scope.clase="sin-logear";
+  });
   $scope.disponibles = [];
   $scope.openMenu = function($mdMenu, ev) {
     originatorEv = ev;

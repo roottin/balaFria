@@ -64,8 +64,10 @@
         </md-menu>
       </div>
     </md-toolbar>
-    <leaflet lf-center="Acarigua"></leaflet>
-    <md-toolbar class="md-hue-2 bottom">
+    <div class="cont-mapa {{clase}}">
+      <leaflet lf-center="Acarigua"></leaflet>
+    </div>
+    <md-toolbar ng-show="usuario" class="md-hue-2 bottom">
       <div class="md-toolbar-tools" layout="row" layout-align="space-around center">
         <md-button class="md-icon-button" aria-label="Favorite"  >
           <i class="material-icons">payment</i>

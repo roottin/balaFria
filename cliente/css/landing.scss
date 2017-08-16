@@ -224,12 +224,20 @@ md-content[landing]{
             background-color: rgba(0,0,0,0.2);
           }
         }
-
       }
-
-      div.angular-leaflet-map{
+      div.cont-mapa{
         width: calc(100% - 0px);
-        height: calc(100% - 96px);
+        transition:all 0.3s ease-in-out;
+        &.logeado{
+          height: calc(100% - 96px);
+        }
+        &.sin-logear{
+          height: calc(100% - 48px);
+        }
+        div.angular-leaflet-map{
+          width: calc(100%);
+          height: calc(100%);
+        }
       }
 
       md-toolbar.bottom{

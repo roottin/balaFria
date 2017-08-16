@@ -1552,9 +1552,16 @@ md-content[landing] {
           border-bottom: 4px solid; }
           md-content[landing] div[principal] div[mapa] md-toolbar div[rubros-tab].active {
             background-color: rgba(0, 0, 0, 0.2); }
-      md-content[landing] div[principal] div[mapa] div.angular-leaflet-map {
+      md-content[landing] div[principal] div[mapa] div.cont-mapa {
         width: calc(100% - 0px);
-        height: calc(100% - 96px); }
+        transition: all 0.3s ease-in-out; }
+        md-content[landing] div[principal] div[mapa] div.cont-mapa.logeado {
+          height: calc(100% - 96px); }
+        md-content[landing] div[principal] div[mapa] div.cont-mapa.sin-logear {
+          height: calc(100% - 48px); }
+        md-content[landing] div[principal] div[mapa] div.cont-mapa div.angular-leaflet-map {
+          width: calc(100%);
+          height: calc(100%); }
       md-content[landing] div[principal] div[mapa] md-toolbar.bottom {
         bottom: 0;
         position: absolute; }
