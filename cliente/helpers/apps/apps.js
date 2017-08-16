@@ -22,9 +22,9 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
           templateUrl: '/views/plantillas/cliente/front.html',
         },
         "header@cliente":{
-          templateUrl:"/views/plantillas/cliente/headerLogOff.html",
-          controller:'ctrlInicio',
-          controllerAs:"log"
+          templateUrl:"/views/plantillas/cliente/header.html",
+          controller:'ctrlHeaderCli',
+          controllerAs:'header'
         },
         "body@cliente":{
           templateUrl: '/views/plantillas/cliente/front-main.html',
@@ -32,19 +32,6 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
         }
       }
     })
-      .state('cliente.iniciado', {
-        url: '/usuario',
-        views:{
-          "header@cliente":{
-            templateUrl:"/views/plantillas/cliente/headerLogIn.html",
-            controller:'ctrlHeaderCli',
-            controllerAs:'header'
-          }
-        },
-        resolve:{
-          loginRequired: clienteLoggedRequired
-        }
-      })
       .state('cliente.sucursal', {
         url:'/sucursal',
         views:{
@@ -53,7 +40,6 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
             controller: 'ctrlSucursalCliente',
             controllerAs:'sucursal'
           }
-
         },
         params:{
           sucursal: null

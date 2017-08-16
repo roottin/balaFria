@@ -17,7 +17,7 @@ angular.module('balafria')
     if($rootScope.sesion.estado == "desconectado"){
       var datosSesion = sessionStorage.getItem('balaFria_token');
       if(!datosSesion){
-        $state.go('cliente');
+        return Promise.reject("no ha iniciado sesion");
       }else{
         datosSesion = JSON.parse(datosSesion);
         return new Promise(function(completado,rechazado){
@@ -29,11 +29,7 @@ angular.module('balafria')
                 $rootScope.sesion.perfil = resultado.data.user;
                 $rootScope.sesion.tipo = $rootScope.sesion.perfil.tipo;
                 self.conectar();
-                if(($rootScope.sesion.tipo == "cliente")&&($state.current.name!="cliente.iniciado")){
-                  $state.go('cliente.iniciado');
-                }else{
-                  completado($rootScope.sesion.perfil);
-                }
+                completado($rootScope.sesion.perfil);
               }
             })
             .catch(function(err){

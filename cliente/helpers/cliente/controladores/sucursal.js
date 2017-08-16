@@ -5,6 +5,9 @@ angular.module('balafria')
   yo.SUID = 0; //Secuencia UID de objetos creados temporalmente
   yo.datos = null;
   yo.paths = [];
+  if(!$state.params.sucursal){
+    $state.go('cliente');
+  }
   Sucursales.get({id:$state.params.sucursal},function(result){
     $timeout(function(){
       yo.datos = angular.copy(result);
