@@ -3,8 +3,12 @@ angular.module('balafria')
   var yo = this;
   $sesion.obtenerPerfil()
     .then(function(perfil){
-      console.log(perfil);
       yo.usuario = perfil;
+      $sesion
+        .actualizarDatos($http)
+        .then(function(usuarioFull){
+          yo.usuario = usuario;
+        });
     })
     .catch(function(error){
       console.log(error);
@@ -26,6 +30,7 @@ angular.module('balafria')
       targetEvent: ev,
       clickOutsideToClose:true
     }).then(function(cambio){
+      console.log(cambio);
       if(cambio){
         yo.usuario = $sesion.actualizarDatos($http);
       }

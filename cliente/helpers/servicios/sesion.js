@@ -45,7 +45,6 @@ angular.module('balafria')
       return Promise.resolve($rootScope.sesion.perfil);
     }
   }
-
   self.crear = function(perfil,tipo){
     $rootScope.sesion.perfil = perfil;
     $rootScope.sesion.perfil.tipo = tipo;
@@ -62,7 +61,7 @@ angular.module('balafria')
   };
   self.actualizarDatos = function($http){
     return new Promise(function(completada,rechazada){
-      $http.get('/api/'+$rootScope.sesion.perfil.tipo+'/'+self.usuario.id)
+      $http.get('/api/'+$rootScope.sesion.perfil.tipo+'/'+$rootScope.sesion.perfil.id)
         .then(function(resultado){
           console.log(resultado);
         })

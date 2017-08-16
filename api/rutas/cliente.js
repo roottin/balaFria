@@ -110,7 +110,7 @@ module.exports = function(app){
     models.sequelize.query('SELECT r.*,i.id_imagen,i.ruta as imagen_ruta FROM cliente r '+
                     ' left join imagen_cliente ir on r.id_cliente = ir.id_cliente AND ir.estado = '+"'A' AND id_tipo_imagen = 2"+
                     ' left join imagen i on ir.id_imagen = i.id_imagen  '+
-                    " where id_cliente ='"+req.params.id+"'",
+                    " where r.id_cliente ='"+req.params.id+"'",
       { model:models.cliente}
     )
       .then(function(registro){

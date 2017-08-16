@@ -28,7 +28,6 @@ function ctrlLogCliente( $mdDialog,$http,$sesion,$state,$auth,$mdToast,$mdSidena
         .then(function(response){
             if(response.data.success){
               $sesion.crear(response.data.user,'cliente').conectar();
-              yo.hide();
               $state.go("cliente.iniciado");
             }else{
               $mdToast.show(
@@ -45,7 +44,6 @@ function ctrlLogCliente( $mdDialog,$http,$sesion,$state,$auth,$mdToast,$mdSidena
     };
     yo.redirect = function(){
       $state.go('proveedor');
-      yo.hide();
     }
     yo.authenticate = function(provider) {
       $auth.authenticate(provider);
