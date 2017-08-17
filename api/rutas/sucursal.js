@@ -266,37 +266,48 @@ function modificarContactos(sucursal,contactos){
 };
 //NOTE: modificar Ubicacion
 function modificarUbicacion(sucursal,latlng){
-  var cambio = false;
-  if(!sucursal.id_coordenada){
-    if(latlng){
-      cambio = true;
-    }
-  }else{
-    models.coordenada.find({
-      id_coordenada:sucursal.id_coordenada
-    })
-      .then(function(coordenada){
-        if((coordenada.latitud !== latlng.latitud)&&(coordenada.longitud !== latlng.longitud)){
-          cambio = true;
-        }
-      });
-  }
-  if(cambio){
-    return models.coordenada.create({
-      latitud:latlng.lat,
-      longitud:latlng.lng
-    })
-      .then(function(coordenada){
-        return sucursal.updateAttributes({
-          id_coordenada:coordenada.dataValues.id_coordenada
-        }).then(result => {
-          return coordenada;
+  return verificarCambioUbicacion(sucursal,latlng)
+    .then(function(cambio){
+      if(cambio){
+        return models.coordenada.create({
+          latitud:latlng.lat,
+          longitud:latlng.lng
         })
-      });
-  }else{
-    return models.coordenada.find({where:{"id_coordenada":sucursal.id_coordenada}});
-  }
+          .then(function(coordenada){
+            return sucursal.updateAttributes({
+              id_coordenada:coordenada.dataValues.id_coordenada
+            }).then(result => {
+              return coordenada;
+            })
+          });
+      }else{
+        return models.coordenada.find({where:{"id_coordenada":sucursal.id_coordenada}});
+      }
+    })
 };
+function verificarCambioUbicacion(sucursal,latlng){
+  return new Promise(function(resolve, reject) {
+    var cambio = false;
+    if(!sucursal.id_coordenada){
+      if(latlng){
+        resolve(true);
+      }else{
+        resolve(false);
+      }
+    }else{
+      models.coordenada.find({
+        id_coordenada:sucursal.id_coordenada
+      })
+        .then(function(coordenada){
+          if((coordenada.latitud !== latlng.latitud)&&(coordenada.longitud !== latlng.longitud)){
+            resolve(true);
+          }else{
+            resolve(false);
+          }
+        });
+    }
+  });
+}
 //NOTE: modificar Zonas
 function modificarZonas(sucursal,zonas){
   return models.zona_envio.findAll({

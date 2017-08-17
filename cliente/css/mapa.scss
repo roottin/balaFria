@@ -22,6 +22,8 @@ div.marker{
   border-radius: 100px;
   overflow: hidden;
   @include BoxShadowHelper(2);
+  margin-left: -15px;
+margin-top: -15px;
   img{
     width: 100%;
     height: 100%;
