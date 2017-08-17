@@ -14,6 +14,11 @@ angular.module('balafria')
             zoom: 13
         }
     });
+  leafletData
+    .getMap()
+    .then(function(map){
+      $scope.map = map;
+    })
   Rubros
     .query(function(){ })
     .$promise
@@ -64,18 +69,22 @@ angular.module('balafria')
   });
 //------------------ Maenjo de UI ---------------------------------
   $scope.ubicarSucursales = function(){
-    $scope.sucursales.forEach(function(letra){
-      letra.sucursales.forEach(function(sucursal){
-        if(sucursal.id_coordenada){
-          $scope.addMark(
-            "<div class='marker'>"+
-              "<img src='"+sucursal.ruta+"'>"+
-            "</div>"
-            ,{lat:sucursal.latitud,lng:sucursal.longitud}
-          );
-        }
+    $scope
+      .removeAllMarkers()
+      .then(function(){
+        $scope.sucursales.forEach(function(letra){
+          letra.sucursales.forEach(function(sucursal){
+            if(sucursal.id_coordenada){
+              $scope.addMark(
+                "<div class='marker'>"+
+                  "<img src='"+sucursal.ruta+"'>"+
+                "</div>"
+                ,{lat:sucursal.latitud,lng:sucursal.longitud}
+              );
+            }
+          });
+        });
       });
-    });
   }
   $scope.addMark = function(html,latLng){
     var markerLocation = new L.LatLng(latLng.lat, latLng.lng);
@@ -83,11 +92,19 @@ angular.module('balafria')
         "html" : html
     });
     var marker = new L.Marker(markerLocation, {icon: helloLondonHtmlIcon});
-    leafletData
-      .getMap()
-      .then(function(map){
-        map.addLayer(marker);
-      })
+    $scope.markers.push(marker);
+    $scope.map.addLayer(marker);
+  };
+  $scope.removeMArker = function(marker){
+    return new Promise(function(resolve, reject) {
+      $scope.map.removeLayer(marker);
+      resolve(true);
+    });
+  }
+  $scope.removeAllMarkers = function(){
+      return Promise.all($scope.markers.map(function(marker){
+                return $scope.map.removeLayer(marker);
+              }))
   };
   $scope.verSucursal = function(sucursal){
     var id = sucursal.id_sucursal;
