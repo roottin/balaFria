@@ -11,13 +11,12 @@
 @import "sucursal.scss";
 @import "animaciones.scss";
 @import "foot.scss";
+@import "mapa.scss";
 
 html,body{
   min-height: 100%;
 }
-.leaflet-bottom {
-  display: none;
-}
+
 div.md-toast-content{
   background: white !important;
   color:$color-primary !important;
@@ -225,21 +224,6 @@ md-content[landing]{
           }
         }
       }
-      div.cont-mapa{
-        width: calc(100% - 0px);
-        transition:all 0.3s ease-in-out;
-        &.logeado{
-          height: calc(100% - 96px);
-        }
-        &.sin-logear{
-          height: calc(100% - 48px);
-        }
-        div.angular-leaflet-map{
-          width: calc(100%);
-          height: calc(100%);
-        }
-      }
-
       md-toolbar.bottom{
         bottom: 0;
         position: absolute;

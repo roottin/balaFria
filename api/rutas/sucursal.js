@@ -37,10 +37,11 @@ module.exports = function(app){
   //NOTE: obtener sucursales por rubro
   app.get('/api/sucursal/rubro/:id', function(req, res) {
     models.sequelize
-      .query("select s.*, i.ruta from sucursal s "+
+      .query("select s.*, i.ruta,c.latitud, c.longitud from sucursal s "+
         "join imagen_proveedor ip on s.id_proveedor = ip.id_proveedor "+
         "join imagen i on ip.id_imagen = i.id_imagen "+
         "join sucursal_rubro sr on s.id_sucursal = sr.id_sucursal "+
+        "left join coordenada c on s.id_coordenada = c.id_coordenada " +
         "where sr.id_rubro = "+req.params.id,
         { model: models.sucursal})
       .then(function(sucursales){
