@@ -33,7 +33,7 @@
       <i class="material-icons cerrar" ng-click="vistaRubros()">close</i>
         <div class="letra" ng-repeat="letra in sucursales" letra="{{letra.letra}}">
           <h4 ng-click="activarBusq();">{{letra.letra}}</h4>
-          <md-list-item class="md-2-line" ng-repeat="sucursal in letra.sucursales" ng-click="verSucursal(sucursal)">
+          <md-list-item class="md-2-line" ng-repeat="sucursal in letra.sucursales" ng-click="verSucursal(sucursal.id_sucursal)">
             <img ng-src="{{sucursal.ruta}}" class="md-avatar" alt="{{item.who}}" />
             <div class="md-list-item-text" layout="column">
               <h3>{{ sucursal.nombre }}</h3>

@@ -1,5 +1,5 @@
 angular.module('balafria')
-.controller('ctrlMap', ['leafletData','$sesion','$scope','Rubros','Sucursales','$rootScope','$state', function (leafletData,$sesion,$scope,Rubros,Sucursales,$rootScope,$state) {
+.controller('ctrlMap', ['leafletData','$sesion','$scope','Rubros','Sucursales','$rootScope','$state','$timeout', function (leafletData,$sesion,$scope,Rubros,Sucursales,$rootScope,$state,$timeout) {
   //declaracion de variables
   $scope.disponibles = [];
   $scope.rubros = [];
@@ -96,7 +96,7 @@ angular.module('balafria')
           letra.sucursales.forEach(function(sucursal){
             if(sucursal.id_coordenada){
               $scope.addMark(
-                "<div class='marker'>"+
+                "<div class='marker' sucursal='"+sucursal.id_sucursal+"'>"+
                   "<img src='"+sucursal.ruta+"'>"+
                 "</div>"
                 ,{lat:sucursal.latitud,lng:sucursal.longitud}
@@ -104,6 +104,16 @@ angular.module('balafria')
             }
           });
         });
+        document
+          .querySelectorAll('.marker')
+          .forEach(function(marker){
+            marker.onclick = function() {
+              var mark = this;
+              $timeout(function(){
+                $scope.verSucursal(mark.getAttribute('sucursal'));
+              });
+            };
+          });
       });
   }
   $scope.addMark = function(html,latLng){
@@ -126,8 +136,7 @@ angular.module('balafria')
                 return $scope.map.removeLayer(marker);
               }))
   };
-  $scope.verSucursal = function(sucursal){
-    var id = sucursal.id_sucursal;
+  $scope.verSucursal = function(id){
     $state.go('cliente.sucursal',{"sucursal":id});
   }
   $scope.organizarLista = function(result){
