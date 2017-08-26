@@ -58,7 +58,7 @@ angular.module('balafria')
               // Desconectamos al usuario y lo redirijimos
               $sesion.desconectar();
               yo.usuario = null;
-              $rootScope.$broadcast('sesion finalizada');              
+              $rootScope.$broadcast('sesion finalizada');
               yo.toggleRight();
               $mdToast.show(
                 $mdToast.simple()
