@@ -1,5 +1,5 @@
 angular.module('balafria')
-.controller('ctrlHeaderPro', ['$state','$sesion','$auth','$mdSidenav','Sucursales','$timeout', function ($state,$sesion,$auth, $mdSidenav,Sucursales,$timeout){
+.controller('ctrlHeaderPro', ['$rootScope','$state','$sesion','$auth','$mdSidenav','Sucursales','$timeout', function ($rootScope,$state,$sesion,$auth, $mdSidenav,Sucursales,$timeout){
   var yo = this;
   $sesion.obtenerPerfil()
     .then(function(perfil){
@@ -15,6 +15,7 @@ angular.module('balafria')
           .then(function() {
               // Desconectamos al usuario y lo redirijimos
               $sesion.desconectar();
+              $rootScope.$broadcast('sesion finalizada');
               $state.go("cliente");
           });
   };

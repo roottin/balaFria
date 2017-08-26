@@ -89,6 +89,19 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
           }
         }
       })
+      .state('proveedor.registro',{
+        url:"/registro",
+        views:{
+          "body@proveedor":{
+            templateUrl: '/views/plantillas/proveedor/registro.html',
+            controller: 'ctrlProveedor',
+            controllerAs: 'up',
+          },
+          "foot@proveedor":{
+            templateUrl: '/views/plantillas/proveedor/foot.html'
+          }
+        }
+      })
       .state('proveedor.dashboard',{
         url:'/dashboard',
         views:{

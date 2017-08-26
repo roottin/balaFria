@@ -2,28 +2,60 @@
 
    <div izquierda-form>
       <form name="up.upload_form">
-       <file-input ng-model="up.file"></file-input>
-       <md-input-container md-no-float class="md-block">
-          <label>Nombre</label>
-          <input ng-required="true" name="nombre" minlength="5"  ng-model="up.nombre">
-            <!-- mensajes  -->
-          <div ng-messages="up.upload_form.nombre.$error" role="alert">
-            <div ng-message="required">Este campo es requerido</div>
-            <div ng-message="minlength">Debe poseer al menos 5 carateres</div>
-          </div>
-       </md-input-container>
-       <md-input-container md-no-float class="md-block">
-          <label>Email</label>
-          <input ng-required="true" name="email" type="email" minlength="5"  ng-model="up.email">
-            <!-- mensajes  -->
-          <div ng-messages="up.upload_form.descripcion.$error" role="alert">
-            <div ng-message="required">Este campo es requerido</div>
-            <div ng-message="minlength">Debe poseer al menos 10 carateres</div>
-          </div>
-       </md-input-container>
-           <md-button ng-disabled="up.upload_form.$invalid" class="md-raised md-primary" type="submit" ng-click="up.submit()">{{up.textoBoton}}</md-button>
-          <p>{{up.progress}}</p>
-      </form>
+               <file-input ng-model="up.file"></file-input>
+               <md-input-container md-no-float class="md-block">
+                  <label>Nombre</label>
+                  <input ng-required="true" name="nombre" minlength="5"  ng-model="up.nombre">
+                    <!-- mensajes  -->
+                  <div ng-messages="up.upload_form.nombre.$error" role="alert">
+                    <div ng-message="required">Este campo es requerido</div>
+                    <div ng-message="minlength">Debe poseer al menos 5 carateres</div>
+                  </div>
+               </md-input-container>
+               <md-input-container md-no-float class="md-block">
+                  <label>Documento (RIF)</label>
+                  <input ng-required="true" name="rif" type="text" minlength="5"  ng-model="up.rif" ng-pattern="/[V,G,J,P,E]{1}[0-9]{8}-[0-9]{1}/">
+                    <!-- mensajes  -->
+                  <div ng-messages="up.upload_form.rif.$error" role="alert">
+                      <div ng-message="required">Este campo es requerido</div>
+                      <div ng-message="pattern">El campo debe poseer la sigueinte estructura:<br>
+                                              *primer caracater debe se V,J,G,P,E<br>
+                                              *los caracteres del 2 al 8 deben ser numericos<br>
+                                              *seguido de un "-"<br>
+                                              *ultimo caracter debe ser numerico
+                                          </div>
+                  </div>
+               </md-input-container>
+               <md-input-container md-no-float class="md-block">
+                  <label>Email</label>
+                  <input ng-required="true" name="email" type="email" minlength="5"  ng-model="up.email">
+                    <!-- mensajes  -->
+                  <div ng-messages="up.upload_form.email.$error" role="alert">
+                    <div ng-message="required">Este campo es requerido</div>
+                  </div>
+               </md-input-container>
+               <md-input-container md-no-float class="md-block">
+                  <label>Clave</label>
+                  <input ng-required="true" name="clave" type="password" minlength="10"  ng-model="up.clave">
+                    <!-- mensajes  -->
+                  <div ng-messages="up.upload_form.clave.$error" role="alert">
+                    <div ng-message="required">Este campo es requerido</div>
+                    <div ng-message="minlength">Debe poseer al menos 10 carateres</div>
+                  </div>
+               </md-input-container>
+               <md-input-container md-no-float class="md-block">
+                  <label>Reingrese Clave</label>
+                  <input ng-required="true" name="clave2" type="password" minlength="10"  ng-model="up.clave2">
+                    <!-- mensajes  -->
+                  <div ng-messages="up.upload_form.clave2.$error" role="alert">
+                    <div ng-message="required">Este campo es requerido</div>
+                    <div ng-message="minlength">Debe poseer al menos 10 carateres</div>
+                  </div>
+               </md-input-container>
+                  <p>{{up.progress}}</p>
+                  <md-button ng-disabled="up.upload_form.$invalid" class="md-raised md-primary" type="submit" ng-click="up.submit()">{{up.textoBoton}}</md-button>
+
+              </form>
    </div>
    <div class="vertical-divider">
 
@@ -31,26 +63,26 @@
 
    <div derecha-form>
       <h2>Registrate con Nosotros</h2>
-      <section>
-         <md-button class="md-fab md-primary" aria-label="Use Android">
-          <md-icon classs="material-icons">save</md-icon>
-        </md-button>
-         <div class="texto">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore</div>
-         <div class="clear"></div>
-      </section>
-      <section>
-         <md-button class="md-fab md-primary" aria-label="Use Android">
-          <md-icon classs="material-icons">save</md-icon>
-        </md-button>
-         <div class="texto">mag   na aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse</div>
-         <div class="clear"></div>
-      </section>
-      <section>
-         <md-button class="md-fab md-primary" aria-label="Use Android">
-          <md-icon classs="material-icons">save</md-icon>
-        </md-button>
-         <div class="texto">cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-         <div class="clear"></div>
-      </section>
+              <section>
+                 <md-button class="md-fab md-primary" aria-label="Use Android">
+                  <md-icon classs="material-icons">offline_pin</md-icon>
+                </md-button>
+                 <div class="texto">Completa todos los campo necesarios para poder realizar el registro de manera correcta.</div>
+                 <div class="clear"></div>
+              </section>
+              <section>
+                 <md-button class="md-fab md-primary" aria-label="Use Android">
+                  <md-icon classs="material-icons">offline_pin</md-icon>
+                </md-button>
+                 <div class="texto">Recuerda que la imgen que uses debe ser preferiblemente la del logo de tu negocio o empresa.</div>
+                 <div class="clear"></div>
+              </section>
+              <section>
+                 <md-button class="md-fab md-primary" aria-label="Use Android">
+                  <md-icon classs="material-icons">offline_pin</md-icon>
+                </md-button>
+                 <div class="texto">Al completar todos tus datos así como imagen puede comenzar a elegir el plan a tu preferencia.</div>
+                 <div class="clear"></div>
+              </section>
    </div>
 </div>
