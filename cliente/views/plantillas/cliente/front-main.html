@@ -11,16 +11,16 @@
           <img ng-src="{{'#'}}" alt="">
           <div class="clear"></div>
       </div>
-      <!--- Rubros --->
+      <!--- Rubros -->
       <div categoria ng-repeat="rubro in rubros" ng-click="buscarSucursalesRubro(rubro)">
           <div nombre >{{rubro.nombre}}</div>
           <img ng-src="{{rubro.imagen_ruta || '#'}}" alt="">
           <div class="clear"></div>
       </div>
       <div class="clear"></div>
-    </div><!--- Rubros --->
+    </div><!--- Rubros -->
     <div class="cont-sucursales" id="cont-sucursales" >
-      <!--- Busqueda rapida --->
+      <!--- Busqueda rapida -->
       <div class="busq-rap">
         <i class="material-icons cerrar" ng-click="deshabilitarBusq()">chevron_left</i>
         <div ng-repeat="letra in letras" class="cls-letra {{letra.estado}}" ng-click="mover(letra)">
@@ -28,7 +28,7 @@
         </div>
         <div class="clear"></div>
       </div>
-      <!--- Lista --->
+      <!--- Lista -->
       <md-list flex id="lista-sucursales">
       <i class="material-icons cerrar" ng-click="vistaRubros()">close</i>
         <div class="letra" ng-repeat="letra in sucursales" letra="{{letra.letra}}">
@@ -41,8 +41,8 @@
             </div>
             <md-divider ></md-divider>
           </md-list-item>
-        </div><!--- Letra --->
-      </md-list><!--- Lista --->
+        </div><!--- Letra -->
+      </md-list><!--- Lista -->
     </div>
   </div>
   <div mapa >

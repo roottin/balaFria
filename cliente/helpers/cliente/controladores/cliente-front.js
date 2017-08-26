@@ -18,7 +18,7 @@ angular.module('balafria')
     .getMap()
     .then(function(map){
       $scope.map = map;
-    })
+    });
   Rubros
     .query(function(){ })
     .$promise
@@ -67,7 +67,27 @@ angular.module('balafria')
     $scope.usuario = null;
     $scope.clase="sin-logear";
   });
-//------------------ Maenjo de UI ---------------------------------
+  $scope.$watch(function(scope) { return scope.search },
+              function(newValue, oldValue) {
+                  if(newValue){
+                    $scope.buscar(newValue);
+                  }else{
+                    $scope.vistaRubros();
+                  }
+              }
+             );
+//------------------ Manejo de UI ---------------------------------
+  $scope.buscar = function(value){
+    Sucursales
+      .filtro({filtro:value})
+      .$promise
+      .then(function(result){
+        $scope.sucursales = [];
+        $scope.sucursales = $scope.organizarLista(result);
+        $scope.vistaLista();
+        $scope.ubicarSucursales();
+      });
+  }
   $scope.ubicarSucursales = function(){
     $scope
       .removeAllMarkers()

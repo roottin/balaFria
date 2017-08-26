@@ -54,7 +54,7 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
         },
         "header@proveedor":{
           templateUrl:"/views/plantillas/proveedor/headerLogOff.html",
-          controller:'ctrlInicio'
+          controller:'ctrlLogPro'
         },
         "body@proveedor":{
           templateUrl: '/views/plantillas/proveedor/frontPage.html',
@@ -68,7 +68,7 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
         views:{
           "header@proveedor":{
             templateUrl:"/views/plantillas/proveedor/headerLogOff.html",
-            controller:'ctrlInicio'
+            controller:'ctrlLogPro'
           },
           "body@proveedor":{
             templateUrl: '/views/plantillas/proveedor/verificarCorreo.html',

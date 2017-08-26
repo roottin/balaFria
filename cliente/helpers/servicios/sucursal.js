@@ -8,6 +8,11 @@ angular.module('balafria')
     	params:{id: '@id'},
       isArray:true
     },
+    'filtro':{
+      method:'POST',
+      url:'/api/sucursal/filtro',
+      isArray:true
+    },
     'buscar':{
     	method:'GET',
     	url:'/api/sucursal/all',
