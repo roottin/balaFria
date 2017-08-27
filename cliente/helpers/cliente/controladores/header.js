@@ -1,5 +1,5 @@
 angular.module('balafria')
-.controller('ctrlHeaderCli', ['$rootScope','$state','$sesion','$auth','$mdDialog','$http','$mdSidenav','$mdToast', function ($rootScope,$state,$sesion,$auth,$mdDialog,$http,$mdSidenav,$mdToast){
+.controller('ctrlHeaderCli', ['$scope','Paises','Ciudades','$rootScope','$state','$sesion','$auth','$mdDialog','$http','$mdSidenav','$mdToast', function ($scope,Paises,Ciudades,$rootScope,$state,$sesion,$auth,$mdDialog,$http,$mdSidenav,$mdToast){
   var yo = this;
   $sesion.obtenerPerfil()
     .then(function(perfil){
@@ -8,11 +8,32 @@ angular.module('balafria')
         .actualizarDatos($http)
         .then(function(usuarioFull){
           yo.usuario = usuario;
+          yo.asignarCiudad(usuario.ciudad);
         });
     })
     .catch(function(error){
       yo.usuario = null;
     });
+  Paises
+    .query()
+    .$promise
+    .then(function(paises){
+      yo.paises = paises
+    })
+  Ciudades
+    .query()
+    .$promise
+    .then(function(ciudades){
+      yo.ciudades = ciudades;
+      $scope.ciudad = 1;
+      $scope.pais = 1; 
+    })
+  $scope.$watch(function(scope) { return scope.ciudad },
+      function(newValue, oldValue) {
+          yo.asignarCiudad(newValue);
+      }
+     );
+
     yo.registro = function(){
         $http.post('/api/cliente',yo.cliente)
           .then(function(resp){
@@ -89,6 +110,19 @@ angular.module('balafria')
           });
       })
   };
+  yo.asignarCiudad = function(id){
+    if(id){
+      yo.ciudades.forEach(function(ciudad){
+        if(ciudad.id_ciudad == id){
+          yo.paises.forEach(function(pais){
+            if(pais.id_pais == ciudad.id_pais){
+              $rootScope.$broadcast("cambio ciudad",ciudad);
+            }
+          });
+        }
+      });
+    }
+  }
   yo.cambiarImagen = function(ev){
     $mdDialog.show({
       controller: 'ctrlCambiarImg',

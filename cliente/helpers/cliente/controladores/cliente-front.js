@@ -8,12 +8,20 @@ angular.module('balafria')
   $scope.clase="sin-logear";
   //optencion de datos
   angular.extend($rootScope, {
-        Acarigua: {
+        center: {
             lat: 9.55972,
             lng: -69.20194,
             zoom: 13
         }
     });
+  $scope.$on("cambio ciudad",function(event,data){
+    var center = {
+      lat:data.latlng.lat,
+      lng:data.latlng.lng,
+      zoom:parseInt(data.zoom)
+    }
+    $scope.center = center;
+  });
   leafletData
     .getMap()
     .then(function(map){

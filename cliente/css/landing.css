@@ -1589,6 +1589,13 @@ md-content[landing] {
           position: absolute; }
           md-content[landing] header.cliente div[sociales] i:hover div[tooltip]:after {
             border-bottom: 10px solid #3F51B5; }
+    md-content[landing] header.cliente div[ubicaciones] {
+      width: 300px;
+      float: right; }
+      md-content[landing] header.cliente div[ubicaciones] md-input-container {
+        float: right;
+        margin-top: 25px;
+        margin-bottom: 10px; }
   md-content[landing] div[principal] {
     width: 100%;
     height: calc(100%); }

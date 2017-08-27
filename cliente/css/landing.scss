@@ -221,6 +221,15 @@ md-content[landing]{
         }
       }
     }
+    div[ubicaciones]{
+      width: 300px;
+      float: right;
+      md-input-container{
+        float: right;
+        margin-top: 25px;
+        margin-bottom: 10px;
+      }
+    }
   }
   div[principal]{
     width: 100%;

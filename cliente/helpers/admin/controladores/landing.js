@@ -63,7 +63,7 @@ angular.module('balafria')
         clickOutsideToClose:true,
         fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
     }).then(function(){
-      $scope.ciudad =  Ciudades.query(function(){});
+      $scope.ciudades =  Ciudades.query(function(){});
     });
   };
 
@@ -107,8 +107,8 @@ angular.module('balafria')
     $auth.logout()
           .then(function() {
               // Desconectamos al usuario y lo redirijimos
-              $rootScope.$broadcast('sesion finalizada');
               $sesion.desconectar();
+              $rootScope.$broadcast('sesion finalizada');
               $location.path("/cliente");
           });
   };

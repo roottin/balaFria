@@ -5,7 +5,25 @@ module.exports = function(app){
   //obtener ciudades
   app.get('/api/ciudades', function(req, res) {
     models.ciudad.findAll({}).then(function(ciudades) {
-      res.json(ciudades);
+      Promise.all(ciudades.map(ciudad => {
+         return models
+          .coordenada
+          .find({
+            where:{
+              id_coordenada:ciudad.id_coordenada
+            }
+          })
+          .then(coordenada => {
+            ciudad.dataValues.latlng = {
+              lat:coordenada.latitud,
+              lng:coordenada.longitud
+            }
+            return ciudad;
+          })
+      }))
+      .then(ciudades => {
+        res.json(ciudades);
+      })
     });
   });
   //guardar registro

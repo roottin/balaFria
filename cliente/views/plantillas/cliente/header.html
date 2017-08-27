@@ -13,7 +13,30 @@
         <i class="material-icons">notifications_none</i>
     </div>
   </div>
-    <i ng-show="!header.usuario" class="material-icons" ng-click='header.toggleRight()'>account_circle</i>
+  <i ng-show="!header.usuario" class="material-icons" ng-click='header.toggleRight()'>account_circle</i>
+  <div ubicaciones>
+    <!-- combos -->
+    <md-input-container>
+      <label>Ciudad</label>
+      <md-select ng-model="ciudad">
+        <md-option><em>None</em></md-option>
+        <md-option ng-repeat="ciudad in header.ciudades" ng-value="ciudad.id_ciudad" >
+          {{ciudad.nombre}}
+        </md-option>
+      </md-select>
+    </md-input-container>
+    <md-input-container>
+      <label>Pais</label>
+      <md-select ng-model="pais">
+        <md-option><em>None</em></md-option>
+        <md-option ng-repeat="pais in header.paises" ng-value="pais.id_pais" >
+          {{pais.nombre}}
+        </md-option>
+      </md-select>
+    </md-input-container>
+    <div class="clear"></div>
+    <!-- combos -->
+  </div>
 </header>
 <!-- Left side nav -->
 <md-sidenav class="md-sidenav-left" md-component-id="left" >
