@@ -34,6 +34,18 @@ module.exports = function(app){
         res.json(sucursales);
       });
   });
+  //NOTE: obtener por ciudad
+  app.get('/api/sucursal/ciudad/:id', function(req, res) {
+    models.sequelize
+      .query("select s.*, i.ruta from sucursal s "+
+            "join imagen_proveedor ip on s.id_proveedor = ip.id_proveedor "+
+            "join imagen i on ip.id_imagen = i.id_imagen "+
+            "where s.id_ciudad = "+re,
+        { model: models.sucursal})
+      .then(function(sucursales){
+        res.json(sucursales);
+      });
+  });
   //NOTE: obtener sucursales por nombre
   app.post('/api/sucursal/filtro', function(req, res) {
     models.sequelize
@@ -78,7 +90,8 @@ module.exports = function(app){
     models.sucursal.create({
       nombre: req.body.nombre,
       tipo: req.body.tipo,
-      id_proveedor: req.body.id_proveedor
+      id_proveedor: req.body.id_proveedor,
+      id_ciudad: req.body.id_ciudad
     })
     .then(function(sucursal){
         Promise.all(req.body.rubros.map(function(rubro){
@@ -204,6 +217,7 @@ module.exports = function(app){
           id_sucursal: req.body.id_sucursal,
           nombre: req.body.nombre,
           descripcion: req.body.descripcion,
+          id_ciudad: req.body.id_ciudad,
         }).then(function(sucursal) {
           Promise.all([
             modificarUbicacion(sucursal,req.body.ubicacion.latlng),

@@ -1,6 +1,6 @@
 angular.module('balafria')
-.controller('ctrlLandAdmin', ['$http','$scope','$sesion','$adminPanel','$auth','$location','Rubros','$mdDialog','TipoImagen',
-  function ($http,$scope,$sesion,$adminPanel,$auth,$location,Rubros,$mdDialog,TipoImagen) {
+.controller('ctrlLandAdmin', ["$state","Paises","Ciudades",'$rootScope','$http','$scope','$sesion','$adminPanel','$auth','$location','Rubros','$mdDialog','TipoImagen',
+  function ($state,Paises,Ciudades,$rootScope,$http,$scope,$sesion,$adminPanel,$auth,$location,Rubros,$mdDialog,TipoImagen) {
   $scope.usuario = $sesion.obtenerPerfil();
   $adminPanel.getClientes($http,$scope);
   $adminPanel.getProveedores($http,$scope);
@@ -8,6 +8,9 @@ angular.module('balafria')
   //Rubros
   $scope.rubros = Rubros.query(function(){});
   $scope.tipos_imagen = TipoImagen.query(function(){});
+  $scope.paises = Paises.query(function(){});
+  $scope.ciudades = Ciudades.query(function(){});
+  
   $scope.showAdvanced = function(ev) {
       $mdDialog.show({
         controller: 'ctrlRubro',
@@ -33,6 +36,34 @@ angular.module('balafria')
         fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
     }).then(function(){
       $scope.tipos_imagen =  TipoImagen.query(function(){});
+    });
+  };
+
+  $scope.showPaises = function(ev) {
+      $mdDialog.show({
+        controller: 'ctrlPais',
+        controllerAs:"up",
+        templateUrl: '/views/plantillas/admin/pais.tmpl.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true,
+        fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+    }).then(function(){
+      $scope.paises =  Paises.query(function(){});
+    });
+  };
+
+  $scope.showCiudades = function(ev) {
+    $mdDialog.show({
+        controller: 'ctrlCiudad',
+        controllerAs:"up",
+        templateUrl: '/views/plantillas/admin/ciudad.tmpl.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true,
+        fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+    }).then(function(){
+      $scope.ciudad =  Ciudades.query(function(){});
     });
   };
 
@@ -76,6 +107,7 @@ angular.module('balafria')
     $auth.logout()
           .then(function() {
               // Desconectamos al usuario y lo redirijimos
+              $rootScope.$broadcast('sesion finalizada');
               $sesion.desconectar();
               $location.path("/cliente");
           });

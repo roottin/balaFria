@@ -11,6 +11,8 @@ module.exports = function(app){
   require('./tipo_imagen')(app);
   require('./adminPanel')(app);
   require('./rubro')(app);
+  require('./pais')(app);
+  require('./ciudad')(app);
   //rutas proveedor
   require('./proveedor')(app);
   require('./sucursal')(app);

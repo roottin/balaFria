@@ -76,6 +76,23 @@ md-content[landing].admin {
           md-content[landing].admin div.admin div.form-log div.content-login section .md-raised:hover {
             background-color: #3f51b5 !important; }
 
+md-dialog div.cont-pais {
+  width: 100%;
+  display: flex;
+  justify-content: space-around; }
+  md-dialog div.cont-pais div[pais] {
+    border: 1px solid white;
+    padding: 10px;
+    border-radius: 40px;
+    background: #3F51B5;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
+md-dialog div.mod-form-map {
+  width: 100%;
+  height: 300px; }
+  md-dialog div.mod-form-map div.angular-leaflet-map {
+    width: 100%;
+    height: 100%; }
+
 div.dash {
   background: #505050;
   min-height: 100%;

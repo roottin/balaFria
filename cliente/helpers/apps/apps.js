@@ -194,21 +194,6 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
         resolve:{
           loginRequired: AdminLoggedRequired
         }
-      })
-      .state('admin.rubro',{
-        url:'/rubros',
-        views:{
-          "body@admin":{
-            templateUrl: '/views/plantillas/admin/rubro.html',
-            controller: 'ctrlRubro as up',
-          },
-          "header@admin":{
-            templateUrl: '/views/plantillas/admin/headerIn.html'
-          }
-        },
-        resolve:{
-          loginRequired: AdminLoggedRequired
-        }
       });
     //------------------------ Tema -------------------------------------------------------
     $mdThemingProvider.theme('light')
