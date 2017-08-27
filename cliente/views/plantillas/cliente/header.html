@@ -20,7 +20,7 @@
       <label>Ciudad</label>
       <md-select ng-model="ciudad">
         <md-option><em>None</em></md-option>
-        <md-option ng-repeat="ciudad in header.ciudades" ng-value="ciudad.id_ciudad" >
+        <md-option ng-repeat="ciudad in header.ciudadesAct" ng-value="ciudad.id_ciudad" >
           {{ciudad.nombre}}
         </md-option>
       </md-select>

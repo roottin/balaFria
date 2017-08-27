@@ -1,6 +1,7 @@
 angular.module('balafria')
 .controller('ctrlHeaderCli', ['$scope','Paises','Ciudades','$rootScope','$state','$sesion','$auth','$mdDialog','$http','$mdSidenav','$mdToast', function ($scope,Paises,Ciudades,$rootScope,$state,$sesion,$auth,$mdDialog,$http,$mdSidenav,$mdToast){
   var yo = this;
+  yo.ciudadesAct = [];
   $sesion.obtenerPerfil()
     .then(function(perfil){
       yo.usuario = perfil;
@@ -31,6 +32,18 @@ angular.module('balafria')
   $scope.$watch(function(scope) { return scope.ciudad },
       function(newValue, oldValue) {
           yo.asignarCiudad(newValue);
+      }
+     );
+  $scope.$watch(function(scope) { return scope.pais },
+      function(newValue, oldValue) {
+          if(newValue){
+            yo.ciudadesAct = [];
+            yo.ciudades.forEach(function(ciudad){
+              if(ciudad.id_pais == newValue){
+                yo.ciudadesAct.push(ciudad);
+              }
+            });
+          }
       }
      );
 
