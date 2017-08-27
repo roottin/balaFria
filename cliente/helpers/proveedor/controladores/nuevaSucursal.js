@@ -1,10 +1,35 @@
 angular.module('balafria')
-.controller('ctrlNuevaSucursal', ['$state','Rubros','$http','$sesion', function ($state,Rubros,$http,$sesion){
+.controller('ctrlNuevaSucursal', ['$scope','$state','Rubros','$http','$sesion', function ($scope,$state,Rubros,$http,$sesion){
   var yo = this;
+  yo.ciudadesAct =[];
   $sesion.obtenerPerfil()
     .then(perfil => {
       yo.usuario = perfil;
     });
+  Paises
+    .query()
+    .$promise
+    .then(function(paises){
+      yo.paises = paises
+    })
+  Ciudades
+    .query()
+    .$promise
+    .then(function(ciudades){
+      yo.ciudades = ciudades;
+    })
+  $scope.$watch(function(scope) { return yo.pais },
+    function(newValue, oldValue) {
+        if(newValue){
+          yo.ciudadesAct = [];
+          yo.ciudades.forEach(function(ciudad){
+            if(ciudad.id_pais == newValue){
+              yo.ciudadesAct.push(ciudad);
+            }
+          });
+        }
+    }
+   );
   yo.rubros = Rubros.query(function(){});
   yo.data = {
     "rubros":[]
