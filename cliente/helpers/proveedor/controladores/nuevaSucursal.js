@@ -1,5 +1,5 @@
 angular.module('balafria')
-.controller('ctrlNuevaSucursal', ['$scope','$state','Rubros','$http','$sesion', function ($scope,$state,Rubros,$http,$sesion){
+.controller('ctrlNuevaSucursal', ['Paises','Ciudades','$scope','$state','Rubros','$http','$sesion', function (Paises,Ciudades,$scope,$state,Rubros,$http,$sesion){
   var yo = this;
   yo.ciudadesAct =[];
   $sesion.obtenerPerfil()
@@ -48,6 +48,7 @@ angular.module('balafria')
     yo.data.tipo = yo.radio;
     yo.data.nombre = yo.nombre;
     yo.data.id_proveedor = yo.usuario.id;
+    yo.data.id_ciudad = yo.ciudad;
     if(yo.data.rubros.length){
       if(yo.data.tipo){
         $http.post('/api/sucursal',yo.data)

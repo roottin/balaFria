@@ -20,14 +20,19 @@ angular.module('balafria')
     },
     'buscarPorRubro':{
     	method:'GET',
-    	url:'/api/sucursal/rubro/:id',
-    	params:{id: '@id'},
+    	url:'/api/sucursal/rubro/:id_rubro&:id_ciudad',
+    	params:{id_rubro: '@id_rubro',id_ciudad :'@id_ciudad'},
       isArray:true
     },
     'getMenu':{
       method:'GET',
     	url:'/api/menu/:id',
     	params:{id: '@id'},
+    },
+    'getByCiudad':{
+      method:'GET',
+      url:'/api/sucursal/ciudad/:id',
+      params:{id: '@id'},
     }
   });
 }]);

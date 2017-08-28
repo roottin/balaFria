@@ -14,14 +14,6 @@ angular.module('balafria')
             zoom: 13
         }
     });
-  $scope.$on("cambio ciudad",function(event,data){
-    var center = {
-      lat:data.latlng.lat,
-      lng:data.latlng.lng,
-      zoom:parseInt(data.zoom)
-    }
-    $scope.center = center;
-  });
   leafletData
     .getMap()
     .then(function(map){
@@ -44,7 +36,7 @@ angular.module('balafria')
     });
   $scope.buscarSucursales = function(){
     Sucursales
-      .buscar()
+      .getByCiudad({id:$scope.ciudad.id_ciudad})
       .$promise
       .then(function(result){
         $scope.sucursales = $scope.organizarLista(result);
@@ -54,7 +46,7 @@ angular.module('balafria')
   }
   $scope.buscarSucursalesRubro = function(rubro){
     Sucursales
-      .buscarPorRubro({id:rubro.id_rubro})
+      .buscarPorRubro({"id_rubro":rubro.id_rubro,"id_ciudad":$scope.ciudad.id_ciudad})
       .$promise
       .then(function(result){
         $scope.sucursales = [];
@@ -74,6 +66,15 @@ angular.module('balafria')
   $scope.$on('sesion finalizada',function(event,args){
     $scope.usuario = null;
     $scope.clase="sin-logear";
+  });
+  $scope.$on("cambio ciudad",function(event,data){
+    $scope.ciudad = data;
+    var center = {
+      lat:data.latlng.lat,
+      lng:data.latlng.lng,
+      zoom:parseInt(data.zoom)
+    }
+    $scope.center = center;
   });
   $scope.$watch(function(scope) { return scope.search },
               function(newValue, oldValue) {

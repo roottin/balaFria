@@ -12,7 +12,6 @@
          <div ng-message="minlength">Debe poseer al menos 5 carateres</div>
        </div>
     </md-input-container>
-    <br>
     <md-input-container md-no-float class="md-block">
       <label>Pais</label>
       <md-select ng-model="sucursal.pais">
@@ -26,7 +25,7 @@
     <br>
     <md-input-container  md-no-float class="md-block" ng-show="sucursal.pais">
       <label>Ciudad</label>
-      <md-select ng-model="ciudad">
+      <md-select ng-model="sucursal.ciudad">
         <md-option><em>None</em></md-option>
         <md-option ng-repeat="ciudad in sucursal.ciudadesAct" ng-value="ciudad.id_ciudad" >
           {{ciudad.nombre}}
