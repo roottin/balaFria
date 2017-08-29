@@ -38,6 +38,9 @@
 			<md-tab-label><i class="material-icons">shopping_basket</i></md-tab-label>
 			<md-tab-body>
 				<h2 >Menu</h2>
+				<!-- Filtrado -->
+				<!-- NOTE:miguel colocar aqui el html para la construccion de los mismos -->
+				<!-- Filtrado -->
 				<div ng-repeat="categoria in sucursal.menu.categorias" class="categoria">
 					<div class="texto-categoria">
 						<img id="{{'cat'+categoria.id}}" ng-src="{{categoria.ruta}}" ng-click="sucursal.agregarCategoria(categoria.id)">
