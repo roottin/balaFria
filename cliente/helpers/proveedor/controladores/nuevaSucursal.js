@@ -83,20 +83,23 @@ angular.module('balafria')
     }
   }
   yo.submit = function(){
-    yo.data.tipo = yo.radio;
-    yo.data.nombre = yo.nombre;
-    yo.data.id_proveedor = yo.usuario.id;
-    yo.data.id_ciudad = yo.ciudad;
-    if(yo.tipo == 'F'){
-      yo.data.latlng = to.latlng;
-    }
-    if(yo.data.rubros.length){
-      if(yo.data.tipo){
-        $http.post('/api/sucursal',yo.data)
-          .then(function(respuesta){
-            $state.go('proveedor.sucursal',{"sucursal":respuesta.data.id_sucursal});
-          });
+    var guardar = false;
+    if(yo.rubros.length){
+      guardar = true;
+      if(yo.tipo == 'F' && !yo.latlng){
+        guardar = false;
       }
+    }
+    if(guardar){
+      yo.data.tipo = yo.radio;
+      yo.data.nombre = yo.nombre;
+      yo.data.id_proveedor = yo.usuario.id;
+      yo.data.id_ciudad = yo.ciudad;
+      yo.data.latlng = yo.latlng;
+      $http.post('/api/sucursal',yo.data)
+        .then(function(respuesta){
+          $state.go('proveedor.sucursal',{"sucursal":respuesta.data.id_sucursal});
+        });
     }
   }
 }]);

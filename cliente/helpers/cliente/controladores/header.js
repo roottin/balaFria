@@ -27,8 +27,11 @@ angular.module('balafria')
     .then(function(ciudades){
       yo.ciudades = ciudades;
       $scope.ciudad = 1;
-      $scope.pais = 1; 
+      $scope.pais = 1;
     })
+  $scope.$on('sesion finalizada',function(event,args){
+    $scope.usuario = null
+  });
   $scope.$watch(function(scope) { return scope.ciudad },
       function(newValue, oldValue) {
           yo.asignarCiudad(newValue);
@@ -92,7 +95,7 @@ angular.module('balafria')
               // Desconectamos al usuario y lo redirijimos
               $sesion.desconectar();
               yo.usuario = null;
-              $rootScope.$broadcast('sesion finalizada');              
+              $rootScope.$broadcast('sesion finalizada');
               yo.toggleRight();
               $mdToast.show(
                 $mdToast.simple()

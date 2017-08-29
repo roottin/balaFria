@@ -117,12 +117,14 @@ module.exports = function(app){
   app.get('/api/sucursal/:id', function(req, res) {
     var zonasAtencion = [];
     //busco la sucursal con su banner
-    models.sequelize.query("SELECT s.*,i.ruta as imagen_ruta, c.latitud, c.longitud, ms.id_menu FROM sucursal s" +
+    models.sequelize.query("SELECT s.*,i.ruta as imagen_ruta, c.latitud, c.longitud, ms.id_menu,cic.latitud as latciu,cic.longitud as lngciu, ci.zoom FROM sucursal s" +
             " left join imagen_sucursal isu on s.id_sucursal = isu.id_sucursal"+
             " AND isu.estado = 'A' AND isu.id_tipo_imagen = 1"+
             " left join imagen i on isu.id_imagen = i.id_imagen" +
             " left join coordenada c on s.id_coordenada = c.id_coordenada" +
             " left join menu_sucursal ms on s.id_sucursal = ms.id_sucursal" +
+            " left join ciudad ci on s.id_ciudad = ci.id_ciudad" +
+            " left join coodenada cic on cic.id_coordenada = ci.id_coordenada" +
             " where s.id_sucursal = "+req.params.id ,
       { model: models.sucursal}
     )
