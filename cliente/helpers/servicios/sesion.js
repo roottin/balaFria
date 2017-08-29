@@ -17,23 +17,19 @@ angular.module('balafria')
     if($rootScope.sesion.estado == "desconectado"){
       var datosSesion = sessionStorage.getItem('balaFria_token');
       if(!datosSesion){
-        $state.go('frontPage');
+        return Promise.reject("no ha iniciado sesion");
       }else{
         datosSesion = JSON.parse(datosSesion);
         return new Promise(function(completado,rechazado){
           $http.post('/api/recuperar',datosSesion)
             .then(function(resultado){
               if(!resultado.data.success){
-                $state.go('frontPage');
+                $state.go('cliente');
               }else{
                 $rootScope.sesion.perfil = resultado.data.user;
                 $rootScope.sesion.tipo = $rootScope.sesion.perfil.tipo;
                 self.conectar();
-                if($rootScope.sesion.tipo == "cliente"){
-                  $state.go('frontPage.iniciado');
-                }else{
-                  completado($rootScope.sesion.perfil);
-                }
+                completado($rootScope.sesion.perfil);
               }
             })
             .catch(function(err){
@@ -45,7 +41,6 @@ angular.module('balafria')
       return Promise.resolve($rootScope.sesion.perfil);
     }
   }
-
   self.crear = function(perfil,tipo){
     $rootScope.sesion.perfil = perfil;
     $rootScope.sesion.perfil.tipo = tipo;
@@ -62,7 +57,7 @@ angular.module('balafria')
   };
   self.actualizarDatos = function($http){
     return new Promise(function(completada,rechazada){
-      $http.get('/api/'+$rootScope.sesion.perfil.tipo+'/'+self.usuario.id)
+      $http.get('/api/'+$rootScope.sesion.perfil.tipo+'/'+$rootScope.sesion.perfil.id)
         .then(function(resultado){
           console.log(resultado);
         })

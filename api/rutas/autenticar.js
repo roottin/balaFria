@@ -89,7 +89,6 @@ module.exports = function(app){
   });
   app.post('/api/recuperar',function(req,res){
     var datos = req.body;
-    console.log(datos);
     var usuario = servidor.buscarUsuario(datos.id,datos.tipo);
     if(!usuario){
       console.log('SESION: error de recuperacion');

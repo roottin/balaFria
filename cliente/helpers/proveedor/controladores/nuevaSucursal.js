@@ -1,10 +1,35 @@
 angular.module('balafria')
-.controller('ctrlNuevaSucursal', ['$state','Rubros','$http','$sesion', function ($state,Rubros,$http,$sesion){
+.controller('ctrlNuevaSucursal', ['Paises','Ciudades','$scope','$state','Rubros','$http','$sesion', function (Paises,Ciudades,$scope,$state,Rubros,$http,$sesion){
   var yo = this;
+  yo.ciudadesAct =[];
   $sesion.obtenerPerfil()
     .then(perfil => {
       yo.usuario = perfil;
     });
+  Paises
+    .query()
+    .$promise
+    .then(function(paises){
+      yo.paises = paises
+    })
+  Ciudades
+    .query()
+    .$promise
+    .then(function(ciudades){
+      yo.ciudades = ciudades;
+    })
+  $scope.$watch(function(scope) { return yo.pais },
+    function(newValue, oldValue) {
+        if(newValue){
+          yo.ciudadesAct = [];
+          yo.ciudades.forEach(function(ciudad){
+            if(ciudad.id_pais == newValue){
+              yo.ciudadesAct.push(ciudad);
+            }
+          });
+        }
+    }
+   );
   yo.rubros = Rubros.query(function(){});
   yo.data = {
     "rubros":[]
@@ -23,6 +48,7 @@ angular.module('balafria')
     yo.data.tipo = yo.radio;
     yo.data.nombre = yo.nombre;
     yo.data.id_proveedor = yo.usuario.id;
+    yo.data.id_ciudad = yo.ciudad;
     if(yo.data.rubros.length){
       if(yo.data.tipo){
         $http.post('/api/sucursal',yo.data)

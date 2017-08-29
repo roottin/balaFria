@@ -1,9 +1,14 @@
 angular.module('balafria')
-.controller('ctrlSucursal', ['Upload','$mdToast','$state','Sucursales','$scope','$timeout','$sesion','$mdDialog','$http', function (Upload,$mdToast,$state,Sucursales,$scope,$timeout,$sesion,$mdDialog,$http){
+.controller('ctrlSucursal', ['Categorias','Productos','Upload','$mdToast','$state','Sucursales','$scope','$timeout','$sesion','$mdDialog','$http', function (Categorias,Productos,Upload,$mdToast,$state,Sucursales,$scope,$timeout,$sesion,$mdDialog,$http){
   var yo = this;
 
   if(!$state.params.sucursal){
     $state.go('proveedor.dashboard');
+  }
+  //variables secundarias
+  yo.textoCat = true;
+  yo.newCat = {
+    titulo:"Nombre de la categoria",
   }
   //variables principales
   yo.SUID = 0; //Secuencia UID de objetos creados temporalmente
@@ -13,15 +18,24 @@ angular.module('balafria')
   yo.usuario = null;
   yo.icono = "edit";
   yo.paths = [];
+  yo.proveedor = false;
+  yo.cliente = false;
   Sucursales.get({id:$state.params.sucursal},function(result){
     $timeout(function(){
       yo.datos = angular.copy(result);
       yo.temp = completarTemp(result);
       yo.inicializarTemp();
     });
+    //cargo menu
+    Sucursales.getMenu({id:result.id_menu},function(result){
+      yo.menu = yo.inicializarMenu(result);
+    });
     $sesion.obtenerPerfil()
       .then(function(result){
         yo.usuario = result;
+        if(yo.usuario.tipo == "proveedor"){
+          yo.proveedor = true;
+        }
       });
   });
   //fin declaracion de variables
@@ -62,6 +76,31 @@ angular.module('balafria')
       });
     }
   };
+  yo.inicializarMenu = function(menu){
+    menu.categorias = menu.categorias.map(function(categoria){
+      categoria.class="edit";
+      categoria.icono="edit";
+      categoria.textoCat = (categoria.titulo)?true:false;
+      categoria.edit = false;
+      categoria.newPro = {}
+      categoria.productos = categoria.productos.map(function(producto){
+        producto.icono="edit";
+        producto.class="edit";
+        producto.edit=false;
+        producto.ant ={
+          "ruta":producto.ruta,
+          "nombre":producto.nombre,
+          "descripcion":producto.descripcion,
+          "secuencia":producto.secuencia,
+          "precio":producto.precio,
+        }
+        return producto;
+      });
+      return categoria;
+    });
+    return menu;
+  }
+  //fin funciones de inicalizacion
   yo.cambioBanner = function(){
     document.querySelector('#bannerFile').click();
   }
@@ -245,21 +284,319 @@ angular.module('balafria')
       yo.temp.contactos.push(datos);
     });
   }
-  ////////////////////////////////  MENU//////////////////////////////////////
-  yo.menu = {
-    "categorias": []
+  ////////////////////////////////MENU//////////////////////////////////////
+  yo.buscarCategorias = function(ev){
+    $mdDialog.show({
+      controller: 'ctrlBucarCategorias',
+      controllerAs: 'categorias',
+      templateUrl: '/views/plantillas/proveedor/categorias.tmpl.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose:true,
+    }).then(function(categoria){
+      if(categoria){
+        Sucursales.getMenu({id:yo.menu.id_menu},function(result){
+          yo.menu = yo.inicializarMenu(result);
+        });
+      }
+    });
+  };
+  yo.buscarProductos = function(ev,categoria){
+    $mdDialog.show({
+      controller: 'ctrlBucarProductos',
+      controllerAs: 'productos',
+      templateUrl: '/views/plantillas/proveedor/productos.tmpl.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose:true,
+      locals:{
+        "categoriaPadre":categoria
+      },
+      preserveScope: true
+    }).then(function(producto){
+      if(producto){
+        Sucursales.getMenu({id:yo.menu.id_menu},function(result){
+          yo.menu = yo.inicializarMenu(result);
+        });
+      }
+    });
+  };
+  yo.toggleTitCat = function(){
+    if(yo.textoCat){
+      yo.newCat.titulo = "";
+    }
+    yo.textoCat = !yo.textoCat;
   }
-  yo.agregarCategoria = function(){
-    document.querySelector('#categoriaImg').click();
+  yo.agregarCategoria = function(id){
+    id = id || "Img";
+    document.querySelector('#categoria'+id).click();
   }
-  $scope.cambioCategoria = function(files){
-    var newCat = {
-      id:"new"+yo.SUID++,
-      ruta:(window.URL || window.webkitURL).createObjectURL( files[0] ),
-      file:files[0]
-    };
-    yo.menu.categorias.push(newCat);
-    document.querySelector('#categoria').setAttribute('src',newCat.ruta);
+  yo.agregarImagen = function(id){
+    document.querySelector('#'+id).click();
+  }
+  $scope.colocarImagen = function(files,seudoId){
+    var id = seudoId.substr(9,seudoId.length-1);
+    if(seudoId.substr(0,9)=="newProduc"){
+      yo.menu.categorias.forEach(function(categoria){
+        if(categoria.id == id){
+          categoria.newPro.file = files[0];
+          categoria.newPro.ruta = (window.URL || window.webkitURL).createObjectURL( files[0] );
+          document.querySelector('#newP'+id).setAttribute('src',categoria.newPro.ruta);
+        }
+      });
+    }else{
+      var valores = seudoId.split('-');
+      valores[0]=valores[0].substr(1,valores[0].length);
+      valores[1]=valores[1].substr(1,valores[1].length);
+      yo.menu.categorias.forEach(function(categoria){
+        if (categoria.id_categoria==valores[1]){
+          categoria.productos.forEach(function(producto) {
+            if (producto.id_producto==valores[0]) {
+              producto.file = document.querySelector('#'+seudoId).files[0];
+              producto.ruta = (window.URL || window.webkitURL).createObjectURL( files[0] );
+              document.querySelector('#p'+valores[0]).setAttribute('src',producto.ruta);
+            }
+          });
+        }
+      });
+    }
+  }
+  yo.cancelarProducto =  function(producto){
+    producto.ruta = producto.ant.ruta;
+    producto.nombre = producto.ant.nombre;
+    producto.descripcion = producto.ant.descripcion;
+    producto.secuencia = producto.ant.secuencia;
+    producto.precio = producto.ant.precio;
+    producto.icono = "edit";
+    producto.edit = !producto.edit;
+    producto.class = "edit";
+  };
+  yo.guardarProducto = function(producto,categoria){
+    if(producto == "nuevo"){
+      if (categoria.newPro.nombre && categoria.newPro.descripcion && categoria.newPro.precio && categoria.newPro.ruta) {
+        Upload.upload({
+          url: '/api/productos/',
+          data:{
+            file:categoria.newPro.file,
+            id_detalle_menu: categoria.id_detalle_menu,
+            descripcion: categoria.newPro.descripcion,
+            nombre: categoria.newPro.nombre,
+            id_proveedor: yo.usuario.id,
+            precio: categoria.newPro.precio,
+            secuencia: categoria.newPro.secuencia
+          }
+        })
+          .then(function(result){
+            categoria.newPro = {};
+            Sucursales.getMenu({id:yo.menu.id_menu},function(result){
+              yo.menu = yo.inicializarMenu(result);
+            });
+          });
+      }else{
+        $mdToast.show(
+          $mdToast.simple()
+            .textContent("Llene todos los datos antes de guardar")
+            .position('top right')
+            .hideDelay(3000)
+          );
+        }
+    }else{
+      if(!producto.edit) {
+        producto.edit=!producto.edit;
+        producto.icono="save";
+        producto.class="guardar";
+      }else{
+        var ant = producto.ant;
+        if((ant.nombre != producto.nombre)||(ant.descripcion != producto.descripcion)||(ant.secuencia != producto.secuencia)||(ant.precio != producto.precio)){
+          Productos
+            .update({id:producto.id_producto},producto)
+            .$promise
+            .then(function(){
+              Sucursales.getMenu({id:yo.menu.id_menu},function(result){
+                yo.menu = yo.inicializarMenu(result);
+              });
+            });
+        }
+        if(ant.ruta != producto.ruta){
+          Upload.upload({
+            url: '/api/productos/imagen',
+            data:{
+              file:document.querySelector('#p'+producto.id_producto+'-c'+categoria.id_categoria).files[0],
+              id_producto:producto.id_producto
+            }
+          }).then(function(){
+            Sucursales.getMenu({id:yo.menu.id_menu},function(result){
+              yo.menu = yo.inicializarMenu(result);
+            });
+          })
+        }
+      }
+    }
+  }
+  $scope.cambioCategoria = function(files,seudoId){
+    if(!seudoId){
+      yo.newCat.file = files[0];
+      yo.newCat.ruta = (window.URL || window.webkitURL).createObjectURL( files[0] );
+      document.querySelector('#categoria').setAttribute('src',yo.newCat.ruta);
+    }else{
+      var id = seudoId.substr(9,seudoId.length-1);
+      yo.menu.categorias.forEach(function(categoria){
+        if(categoria.id==id){
+          categoria.ruta = (window.URL || window.webkitURL).createObjectURL( files[0] );
+          categoria.file = files[0];
+          document.querySelector('#cat'+categoria.id).setAttribute('src',yo.newCat.ruta);
+        }
+      })
+    }
+  }
+  yo.guardarCategoria = function(categoria){
+    if(categoria=="nueva"){
+      if((yo.newCat.titulo != "Nombre de la categoria")&&(yo.newCat.ruta)){
+        Upload.upload({
+          url: '/api/categorias/',
+          data:{
+            file:yo.newCat.file,
+            id_menu: yo.menu.id_menu,
+            titulo: yo.newCat.titulo,
+            id_proveedor:yo.usuario.id,
+            secuencia:yo.newCat.secuencia
+          }
+        })
+          .then(function(resp){
+            if(!yo.menu.categorias){
+              yo.menu.categorias = [];
+            }
+            yo.menu.categorias.push(resp);
+            $mdToast.show(
+              $mdToast.simple()
+                .textContent("Categoria Agregada de forma exitosa")
+                .position('top right')
+                .hideDelay(3000)
+            );
+            yo.newCat = {
+              titulo:"Nombre de la categoria",
+            }
+            document.querySelector('#categoria').setAttribute('src','');
+            Sucursales.getMenu({id:yo.menu.id_menu},function(result){
+              yo.menu = yo.inicializarMenu(result);
+            });
+          });
+      }else{
+        $mdToast.show(
+          $mdToast.simple()
+            .textContent("Debe agregar una imagen antes de poder continuar")
+            .position('top right')
+            .hideDelay(3000)
+        );
+      }
+    }else{
+      if(!categoria.edit){
+        categoria.edit = !categoria.edit;
+        categoria.class="guardar";
+        categoria.icono ="save";
+      }else{
+        Categorias
+          .update({id:categoria.id_categoria},{
+            titulo:categoria.titulo,
+            secuencia:categoria.secuencia,
+            id_detalle_menu:categoria.id
+          })
+          .$promise
+          .then(function(){
+            Sucursales.getMenu({id:yo.menu.id_menu},function(result){
+              yo.menu = yo.inicializarMenu(result);
+            });
+          });
+        if(categoria.file){
+          Upload.upload({
+            url: '/api/categorias/imagen',
+            data:{
+              file:categoria.file,
+              id_categoria: categoria.id_categoria,
+            }
+          })
+            .then(function(resp){
+              if(!yo.menu.categorias){
+                yo.menu.categorias = [];
+              }
+              yo.menu.categorias.push(resp);
+              $mdToast.show(
+                $mdToast.simple()
+                  .textContent("Categoria modificada de forma exitosa")
+                  .position('top right')
+                  .hideDelay(3000)
+              );
+              Sucursales.getMenu({id:yo.menu.id_menu},function(result){
+                yo.menu = yo.inicializarMenu(result);
+              });
+            });
+        }
+
+      }
+    }
+  }
+  yo.borrarCategoria = function(categoria){
+    Categorias
+      .desasociar({id_categoria:categoria.id_categoria,id_menu:yo.menu.id_menu})
+      .$promise
+      .then(function(result){
+        $mdToast.show(
+          $mdToast.simple()
+            .textContent("categoria desasociada con exito")
+            .position('top right')
+            .hideDelay(3000)
+        );
+        Sucursales.getMenu({id:yo.menu.id_menu},function(result){
+          yo.menu = yo.inicializarMenu(result);
+        });
+      });
+  }
+  yo.borrarProducto = function(producto,categoria){
+    Productos
+      .desasociar({id_detalle_menu:categoria.id_detalle_menu,id_producto:producto.id_producto})
+      .$promise
+      .then(function(result){
+        $mdToast.show(
+          $mdToast.simple()
+            .textContent("Producto desasociado con exito")
+            .position('top right')
+            .hideDelay(3000)
+        );
+        Sucursales.getMenu({id:yo.menu.id_menu},function(result){
+          yo.menu = yo.inicializarMenu(result);
+        });
+      });
+  }
+  yo.agregarMenu = function(ev){
+    $mdDialog.show({
+      controller: 'ctrlAddMenu',
+      controllerAs: 'menu',
+      templateUrl: '/views/plantillas/proveedor/agregarMenu.tmpl.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose:true
+    }).then(function(menu){
+      $mdToast.show(
+          $mdToast.simple()
+            .textContent("Menu creado de forma exitosa")
+            .position('top right')
+            .hideDelay(3000)
+        );
+    });
+  }
+  yo.cambiarMenu =  function(ev){
+    $mdDialog.show({
+      controller: 'ctrlCambiarMenu',
+      controllerAs: 'menu',
+      templateUrl: '/views/plantillas/proveedor/cambiarMenu.tmpl.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose:true
+    }).then(function(menu){
+      Sucursales.getMenu({id:menu.id_menu},function(result){
+        yo.menu = yo.inicializarMenu(result);
+      });
+    });
   }
 }]);
 ///////////////////////////////////////////////////////////////////////////////
@@ -288,7 +625,6 @@ function completarTemp(datos){
   return temp;
 }
 function crearPath(datos){
-
   var path = {
     id:datos.id,
     type:"polygon",

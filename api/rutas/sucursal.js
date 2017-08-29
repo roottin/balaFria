@@ -22,6 +22,59 @@ var channel = new events.EventEmitter();
 //----------------------configuracion subida de archivos---------------------
 
 module.exports = function(app){
+
+  //NOTE: obtener sucursales
+  app.get('/api/sucursal/all', function(req, res) {
+    models.sequelize
+      .query("select s.*, i.ruta from sucursal s "+
+                              "join imagen_proveedor ip on s.id_proveedor = ip.id_proveedor "+
+                              "join imagen i on ip.id_imagen = i.id_imagen",
+        { model: models.sucursal})
+      .then(function(sucursales){
+        res.json(sucursales);
+      });
+  });
+  //NOTE: obtener por ciudad
+  app.get('/api/sucursal/ciudad/:id', function(req, res) {
+    models.sequelize
+      .query("select s.*, i.ruta from sucursal s "+
+            "join imagen_proveedor ip on s.id_proveedor = ip.id_proveedor "+
+            "join imagen i on ip.id_imagen = i.id_imagen "+
+            "where s.id_ciudad = "+re,
+        { model: models.sucursal})
+      .then(function(sucursales){
+        res.json(sucursales);
+      });
+  });
+  //NOTE: obtener sucursales por nombre
+  app.post('/api/sucursal/filtro', function(req, res) {
+    models.sequelize
+      .query("select s.*, i.ruta,c.latitud, c.longitud from sucursal s "+
+        "join imagen_proveedor ip on s.id_proveedor = ip.id_proveedor "+
+        "join imagen i on ip.id_imagen = i.id_imagen "+
+        "join sucursal_rubro sr on s.id_sucursal = sr.id_sucursal "+
+        "left join coordenada c on s.id_coordenada = c.id_coordenada " +
+        "where upper(s.nombre) like '%"+req.body.filtro.toUpperCase()+"%'",
+        { model: models.sucursal})
+      .then(function(sucursales){
+        res.json(sucursales);
+      });
+  });
+  //NOTE: obtener sucursales por rubro
+  app.get('/api/sucursal/rubro/:id_rubro&:id_ciudad', function(req, res) {
+    models.sequelize
+      .query("select s.*, i.ruta,c.latitud, c.longitud from sucursal s "+
+        "join imagen_proveedor ip on s.id_proveedor = ip.id_proveedor "+
+        "join imagen i on ip.id_imagen = i.id_imagen "+
+        "join sucursal_rubro sr on s.id_sucursal = sr.id_sucursal "+
+        "left join coordenada c on s.id_coordenada = c.id_coordenada " +
+        "where sr.id_rubro = "+req.params.id_rubro+
+        " and s.id_ciudad = "+req.params.id_ciudad,
+        { model: models.sucursal})
+      .then(function(sucursales){
+        res.json(sucursales);
+      });
+  });
   //NOTE: obtener sucursales
   app.get('/api/sucursales/:id', function(req, res) {
     models.sucursal.findAll({
@@ -38,7 +91,8 @@ module.exports = function(app){
     models.sucursal.create({
       nombre: req.body.nombre,
       tipo: req.body.tipo,
-      id_proveedor: req.body.id_proveedor
+      id_proveedor: req.body.id_proveedor,
+      id_ciudad: req.body.id_ciudad
     })
     .then(function(sucursal){
         Promise.all(req.body.rubros.map(function(rubro){
@@ -55,11 +109,12 @@ module.exports = function(app){
   app.get('/api/sucursal/:id', function(req, res) {
     var zonasAtencion = [];
     //busco la sucursal con su banner
-    models.sequelize.query("SELECT s.*,i.ruta as imagen_ruta, c.latitud, c.longitud FROM sucursal s" +
+    models.sequelize.query("SELECT s.*,i.ruta as imagen_ruta, c.latitud, c.longitud, ms.id_menu FROM sucursal s" +
             " left join imagen_sucursal isu on s.id_sucursal = isu.id_sucursal"+
             " AND isu.estado = 'A' AND isu.id_tipo_imagen = 1"+
             " left join imagen i on isu.id_imagen = i.id_imagen" +
             " left join coordenada c on s.id_coordenada = c.id_coordenada" +
+            " left join menu_sucursal ms on s.id_sucursal = ms.id_sucursal" +
             " where s.id_sucursal = "+req.params.id ,
       { model: models.sucursal}
     )
@@ -113,7 +168,7 @@ module.exports = function(app){
           });
       });
   });
-  //NOTE: modificar banner 
+  //NOTE: modificar banner
   app.post('/api/sucursal/banner/:id',upload, function(req, res) {
     req.body = req.body.datos;
     models.imagen_sucursal.find({
@@ -141,6 +196,7 @@ module.exports = function(app){
               id_imagen:imagen.id_imagen,
               id_tipo_imagen:1//Banner
             }).then(function(imagen_sucursal){
+              console.log(sucursal);
               sucursal.dataValues.banner = imagen;
             });
           })
@@ -162,6 +218,7 @@ module.exports = function(app){
           id_sucursal: req.body.id_sucursal,
           nombre: req.body.nombre,
           descripcion: req.body.descripcion,
+          id_ciudad: req.body.id_ciudad,
         }).then(function(sucursal) {
           Promise.all([
             modificarUbicacion(sucursal,req.body.ubicacion.latlng),
@@ -193,6 +250,29 @@ module.exports = function(app){
       res.json(sucursal);
     });
   });
+  app.put('/api/sucursales/cambiarMenu',function(req, res){
+    models.menu_sucursal
+      .find({where:{id_sucursal:req.body.id_sucursal}})
+      .then(menu_sucursal => {
+        if(menu_sucursal){
+          menu_sucursal.updateAttributes({
+            id_menu: req.body.id_menu
+          })
+          .then(result => {
+            res.json(result);
+          })
+        }else{
+          models.menu_sucursal
+            .create({
+              id_menu: req.body.id_menu,
+              id_sucursal: req.body.id_sucursal
+            })
+            .then(result =>{
+              res.json(result);
+            })
+        }
+      })
+  });
 };
 //////////////////////////////////////////////////////////////////////////////
 //NOTE: modificar contactos
@@ -215,37 +295,48 @@ function modificarContactos(sucursal,contactos){
 };
 //NOTE: modificar Ubicacion
 function modificarUbicacion(sucursal,latlng){
-  var cambio = false;
-  if(!sucursal.id_coordenada){
-    if(latlng){
-      cambio = true;
-    }
-  }else{
-    models.coordenada.find({
-      id_coordenada:sucursal.id_coordenada
-    })
-      .then(function(coordenada){
-        if((coordenada.latitud !== latlng.latitud)&&(coordenada.longitud !== latlng.longitud)){
-          cambio = true;
-        }
-      });
-  }
-  if(cambio){
-    return models.coordenada.create({
-      latitud:latlng.lat,
-      longitud:latlng.lng
-    })
-      .then(function(coordenada){
-        return sucursal.updateAttributes({
-          id_coordenada:coordenada.dataValues.id_coordenada
-        }).then(result => {
-          return coordenada;
+  return verificarCambioUbicacion(sucursal,latlng)
+    .then(function(cambio){
+      if(cambio){
+        return models.coordenada.create({
+          latitud:latlng.lat,
+          longitud:latlng.lng
         })
-      });
-  }else{
-    return models.coordenada.find({where:{"id_coordenada":sucursal.id_coordenada}});
-  }
+          .then(function(coordenada){
+            return sucursal.updateAttributes({
+              id_coordenada:coordenada.dataValues.id_coordenada
+            }).then(result => {
+              return coordenada;
+            })
+          });
+      }else{
+        return models.coordenada.find({where:{"id_coordenada":sucursal.id_coordenada}});
+      }
+    })
 };
+function verificarCambioUbicacion(sucursal,latlng){
+  return new Promise(function(resolve, reject) {
+    var cambio = false;
+    if(!sucursal.id_coordenada){
+      if(latlng){
+        resolve(true);
+      }else{
+        resolve(false);
+      }
+    }else{
+      models.coordenada.find({
+        id_coordenada:sucursal.id_coordenada
+      })
+        .then(function(coordenada){
+          if((coordenada.latitud !== latlng.latitud)&&(coordenada.longitud !== latlng.longitud)){
+            resolve(true);
+          }else{
+            resolve(false);
+          }
+        });
+    }
+  });
+}
 //NOTE: modificar Zonas
 function modificarZonas(sucursal,zonas){
   return models.zona_envio.findAll({

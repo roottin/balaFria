@@ -35,6 +35,14 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: true
     },
+    id_ciudad: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'ciudad',
+        key: 'id_ciudad'
+      }
+    },
     clave: {
       type: DataTypes.STRING,
       allowNull: true

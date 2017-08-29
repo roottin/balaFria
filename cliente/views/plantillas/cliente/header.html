@@ -1,0 +1,129 @@
+<header class="cliente">
+  <div titulo ng-click='toggleLeft()'>
+    BalaFria
+  </div>
+  <div sociales ng-show="header.usuario">
+    <div avatar>
+      <img
+        src="{{header.usuario.avatar.ruta || '/img/thumbnails/thumbnail.png'}}" alt=""
+        ng-click="header.cambiarImagen($event)"
+      >
+    </div>
+    <div notificaciones ng-click="header.toggleRight()">
+        <i class="material-icons">notifications_none</i>
+    </div>
+  </div>
+  <i ng-show="!header.usuario" class="material-icons" ng-click='header.toggleRight()'>account_circle</i>
+  <div ubicaciones>
+    <!-- combos -->
+    <md-input-container>
+      <label>Ciudad</label>
+      <md-select ng-model="ciudad">
+        <md-option><em>None</em></md-option>
+        <md-option ng-repeat="ciudad in header.ciudadesAct" ng-value="ciudad.id_ciudad" >
+          {{ciudad.nombre}}
+        </md-option>
+      </md-select>
+    </md-input-container>
+    <md-input-container>
+      <label>Pais</label>
+      <md-select ng-model="pais">
+        <md-option><em>None</em></md-option>
+        <md-option ng-repeat="pais in header.paises" ng-value="pais.id_pais" >
+          {{pais.nombre}}
+        </md-option>
+      </md-select>
+    </md-input-container>
+    <div class="clear"></div>
+    <!-- combos -->
+  </div>
+</header>
+<!-- Left side nav -->
+<md-sidenav class="md-sidenav-left" md-component-id="left" >
+  <!-- TODO:llenar con informacion de balafria y llamada a trabajar con nostros como proveedor  -->
+</md-sidenav>
+<!-- right side nav -->
+<md-sidenav   class="md-sidenav-right" md-component-id="right" >
+  <!-- Antes de logearce -->
+  <md-content login ng-show="!header.usuario">
+  <md-toolbar class="md-theme-indigo">
+    <h1 class="md-toolbar-tools">Acceso</h1>
+  </md-toolbar>
+    <md-tabs md-dynamic-height md-border-bottom>
+       <md-tab label="Ingresar">
+           <div layout-padding layout="column" layout-sm="column"  layout-wrap>
+            <form name="formInicio" method="post">
+              <md-input-container md-no-float class="md-block">
+                <label>Nombre o Email</label>
+                <input required name="nombre" minlength="5"  ng-model="header.field">
+                  <!-- mensajes  -->
+                <div ng-messages="formInicio.nombre.$error" role="alert">
+                  <div ng-message="required">Este campo es requerido</div>
+                  <div ng-message="minlength">Debe poseer al menos 5 carateres</div>
+                </div>
+              </md-input-container>
+              <md-input-container md-no-float class="md-block" name="clave">
+                <label>Clave</label>
+                <input required type="password" ng-model="header.clave">
+                <div ng-messages="formInicio.clave.$error" role="alert">
+                  <div ng-message="required">Este campo es requerido</div>
+                </div>
+              </md-input-container>
+              <section   layout-align="center" >
+                <button class="md-raised md-primary inicio" ng-click="header.login()">Iniciar sesion</button>
+                <div divider></div>
+                <button class="google inicio" type="button" ng-click="header.authenticate('google')"><i class="ion-social-google"></i> Sign in with Google</button>
+              </section>
+            </form>
+          </div>
+       </md-tab>
+       <md-tab label="Registro" >
+           <div layout-padding layout="column" layout-sm="column"  layout-wrap>
+             <p >¿No posees cuenta? registrate ahora con nostros de forma totalmente gratuita y empiza a comprar con nostros</p>
+             <div divider></div><!-- linea divisora  -->
+             <md-input-container md-no-float class="md-block">
+               <label>Nombre</label>
+               <input ng-model="header.cliente.nombre">
+             </md-input-container>
+             <md-input-container md-no-float class="md-block">
+               <label>Apellido</label>
+               <input ng-model="header.cliente.apellido">
+             </md-input-container>
+             <md-input-container md-no-float class="md-block">
+               <label>Correo</label>
+               <input type="email" ng-model="header.cliente.correo">
+             </md-input-container>
+             <md-input-container md-no-float class="md-block">
+               <label>Clave</label>
+               <input type="password" ng-model="header.cliente.clave">
+             </md-input-container>
+             <md-input-container md-no-float class="md-block">
+               <label>Reingrese Clave</label>
+               <input type="password" ng-model="header.clave2">
+             </md-input-container>
+             <section layout="row"  layout-align="center" >
+               <md-button class="md-raised md-primary" ng-click="header.registro()">Enviar</md-button>
+             </section>
+           </div>
+        </md-tab>
+    </md-tabs>
+  </md-content>
+    <!-- Despues de logueado-->
+  <md-content ng-show="header.usuario">
+    <section class="perfil">
+      <div avatar>
+      <img src="{{header.usuario.avatar.ruta || '/img/thumbnails/thumbnail.png'}}" alt="">
+    </div>
+    <div opciones>
+         <ul>
+          <li>{{header.usuario.nombre+" "+header.usuario.apellido}}</li>
+          <li><span class="material-icons">settings</span>Ajustes</li>
+          <li><span class="material-icons">security</span>Datos seguridad</li>
+          <li ng-click="header.logOut()"><span class="material-icons">power_settings_new</span>Cerrar Sesion</li>
+        </ul>
+      </div>
+    </section>
+    <section cabecera> Notificaciones <i class="material-icons right">notifications_none</i></section>
+    
+  </md-content>
+</md-sidenav>

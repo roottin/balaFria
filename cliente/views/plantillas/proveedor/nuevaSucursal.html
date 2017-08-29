@@ -12,6 +12,26 @@
          <div ng-message="minlength">Debe poseer al menos 5 carateres</div>
        </div>
     </md-input-container>
+    <md-input-container md-no-float class="md-block">
+      <label>Pais</label>
+      <md-select ng-model="sucursal.pais">
+        <md-option><em>None</em></md-option>
+        <md-option ng-repeat="pais in sucursal.paises" ng-value="pais.id_pais" >
+          {{pais.nombre}}
+        </md-option>
+      </md-select>
+    </md-input-container>
+    <div class="clear"></div>
+    <br>
+    <md-input-container  md-no-float class="md-block" ng-show="sucursal.pais">
+      <label>Ciudad</label>
+      <md-select ng-model="sucursal.ciudad">
+        <md-option><em>None</em></md-option>
+        <md-option ng-repeat="ciudad in sucursal.ciudadesAct" ng-value="ciudad.id_ciudad" >
+          {{ciudad.nombre}}
+        </md-option>
+      </md-select>
+    </md-input-container>
     <h4 class="md-primary">Tipo de Sucursal</h4>
     <md-divider></md-divider>
     <br>

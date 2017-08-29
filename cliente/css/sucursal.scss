@@ -1,4 +1,15 @@
 md-dialog{
+	&[modal-categoria]{
+		width: 100%;
+	}
+	div.menu-item-lista{
+		transition:all 0.3s ease-in-out;
+		border-bottom: 1px solid white;
+		&:hover{
+			@include BoxShadowHelper(3);
+			transform: scale(1.03);
+		}
+	}
 	div.barra{
 		width: 100%;
 		margin-bottom: 40px;
@@ -195,7 +206,7 @@ md-dialog{
 				margin-top: -10px;
 			}
 	    i{
-				float: right;
+			float: right;
     		transform: translate(-10px,-40px);
 	    }
 			img{
@@ -219,6 +230,18 @@ md-dialog{
 		background-color: #E0E0E0;
 		H2{
 			padding-left: 30px;
+			position: relative;
+			margin-bottom: 17px;
+			.menu{
+				position: absolute;
+			    top: -21px;
+			    right: 0;
+			    width: 100%;
+			    [texto]{
+			    	float: left;
+
+			    }
+			}
 		}
 		div.descripcion,div.contactos,div.ubicacion{
 			margin-bottom: 20px;
@@ -242,13 +265,13 @@ md-dialog{
 		div.contactos{
 			section{
 				width: calc(50% - 10px);
-		    float: left;
-		    margin-top: 10px;
-		    border-radius: 3px;
-		    color: white;
-		    padding: 15px;
-		    height: 50px;
-		    margin-right: 10px;
+			    float: left;
+			    margin-top: 10px;
+			    border-radius: 3px;
+			    color: white;
+			    padding: 15px;
+			    height: 50px;
+			    margin-right: 10px;
 				@include BoxShadowHelper(1);
 				&.web{
 					background-color: #3F51B5;
@@ -274,8 +297,8 @@ md-dialog{
 					width: 36px;
 					height: 36px;
 					border-radius: 100px;
-			    color: white;
-			    margin-right: 10px;
+				    color: white;
+				    margin-right: 10px;
 					display: flex;
 					align-items: center;
 					justify-content: center;
@@ -352,6 +375,9 @@ md-dialog{
 		div.categoria{
 			width: calc(100% - 20px);
 			margin-left: 10px;
+			margin-bottom: 20px;
+			position:relative;
+			overflow:hidden;
 			div.tit-cat{
 				position: absolute;
 				bottom: 0px;
@@ -376,11 +402,63 @@ md-dialog{
 				overflow: hidden;
 				img{
 					width: calc(100%);
-			    left: 0px;
-			    margin-top: -50px;
-			    /* height: 100%; */
-			    position: absolute;
-			    z-index: 0;
+				    left: 0px;
+				    margin-top: -50px;
+				    min-height: 150px;
+				    position: absolute;
+				    z-index: 0;
+				}
+				input{
+						background-color: transparent;
+				    border: 1px dashed silver;
+				    padding: 0px 3px;
+				    width: 100%;
+				    font-size: 20px;
+				    color: white;
+						&.secuencia{
+							position: absolute;
+							width: 60px;
+							top: 10px;
+							right: 10px;
+							color: #303030;
+						}
+				}
+
+				&:hover i.edit,&:hover i.guardar,&:hover i.borrar{
+					left:10px;
+				}
+				i{
+					transition: box-shadow 0.3s ease-in-out;
+					position: absolute;
+					color: $color-primary;
+					z-index: 10;
+					cursor:pointer;
+					border-radius: 100px;
+					padding: 3px;
+					background: white;
+					&:hover{
+						@include BoxShadowHelper(2);
+					}
+					&.guardar,&.borrar,&.edit{
+						left: -60px;
+						top: 10px;
+						transition: all 0.3s ease-in-out;
+					}
+					&.borrar{
+						top: 55px;
+						width: 30px;
+						transition: all 0.6s ease-in-out;
+					}
+					&.mostrar{
+						right: 16px;
+						bottom: 13px;
+					}
+					&.close{
+						background-color: transparent;
+					    right: 15px;
+					    top: 12px;
+					    color: white;
+					}
 				}
 			}
 			div.cont-productos{
@@ -389,12 +467,16 @@ md-dialog{
 				justify-content: space-between;
 				flex-wrap:wrap;
 				padding: 10px;
+
 				div.producto{
 					@include BoxShadowHelper(1);
 					border-radius: 3px;
 					background-color: white;
 					width: calc((100% / 2) - 5px);
-    			margin-bottom: 10px;
+  				margin-bottom: 10px;
+  				&:hover i.edit,&:hover i.guardar,&:hover i.borrar{
+						left:10px;
+					}
 					&:hover div.img img{
 						@include BoxShadowHelper(3);
 						transform: scale(1.05);
@@ -427,6 +509,49 @@ md-dialog{
 							transition: all 0.3s ease-in-out;
 							width: 100%;
 							height: 100%;
+							min-height: 228px;
+						}
+						&:hover i.edit,&:hover i.guardar,&:hover i.borrar,&:hover i.cancelar{
+							transform: scale(1);
+						}
+						i{
+							transition: box-shadow 0.3s ease-in-out;
+							position: absolute;
+							color: $color-primary;
+							z-index: 10;
+							cursor:pointer;
+							border-radius: 100px;
+							padding: 3px;
+							background: white;
+							&:hover{
+								@include BoxShadowHelper(2);
+							}
+							&.guardar,&.edit,&.borrar,&.cancelar{
+								transform: scale(0);
+								left: 10px;
+								top: 10px;
+								transition: all 0.2s ease-in-out;
+							}
+							&.borrar{
+								transition: all 0.4s ease-in-out;
+								top:55px;
+								width: 30px;
+							}
+							&.cancelar{
+								transition: all 0.6s ease-in-out;
+								top:100px;
+								width: 30px;
+							}
+							&.mostrar{
+								right: 16px;
+								bottom: 13px;
+							}
+							&.close{
+								background-color: transparent;
+							    right: 15px;
+							    top: 12px;
+							    color: white;
+							}
 						}
 					}
 
@@ -435,15 +560,29 @@ md-dialog{
 						padding-top: 15px;
 						padding-bottom: 15px;
 						height: 100%;
+						textarea{
+							min-height: 100px;
+    						border: 1px dashed silver;
+    						width: 100%;
+						}
+						input{
+							border: 1px dashed silver;
+							width: 150px;
+							&.secuencia{
+								margin-top: 10px;
+								width: 60px;
+								font-size: 20px;
+							}
+						}
 						h4{
 							color: #303030;
 						}
 						div.precio{
 							position: absolute;
-					    right: 20px;
-					    bottom: 10px;
-					    font-size: 25px;
-					    color: #303030;
+						    right: 20px;
+						    bottom: 10px;
+						    font-size: 25px;
+						    color: #303030;
 							&:before{
 								content:"Bs ";
 								color: grey;
@@ -453,6 +592,9 @@ md-dialog{
 								content:"00";
 								font-size: 10px;
 								transform:translateX(-15px);
+							}
+							input{
+								width: 100px;
 							}
 						}
 						div.arriba{
@@ -480,8 +622,8 @@ md-dialog{
 								position: absolute;
 								overflow: hidden;
 								font-size: 17px;
-						    text-align: left;
-						    padding: 5px 10px;
+							    text-align: left;
+							    padding: 5px 10px;
 								opacity: 0;
 								font-family: serif;
 							}

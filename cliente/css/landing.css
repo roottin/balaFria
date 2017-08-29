@@ -76,6 +76,23 @@ md-content[landing].admin {
           md-content[landing].admin div.admin div.form-log div.content-login section .md-raised:hover {
             background-color: #3f51b5 !important; }
 
+md-dialog div.cont-pais {
+  width: 100%;
+  display: flex;
+  justify-content: space-around; }
+  md-dialog div.cont-pais div[pais] {
+    border: 1px solid white;
+    padding: 10px;
+    border-radius: 40px;
+    background: #3F51B5;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
+md-dialog div.mod-form-map {
+  width: 100%;
+  height: 300px; }
+  md-dialog div.mod-form-map div.angular-leaflet-map {
+    width: 100%;
+    height: 100%; }
+
 div.dash {
   background: #505050;
   min-height: 100%;
@@ -257,7 +274,7 @@ div.titulo {
   div.titulo i {
     font-size: 50px;
     transform: translateY(9px);
-    color: #FFCA28; }
+    color: #FFB300; }
 
 div[form-central] {
   width: 50%;
@@ -286,14 +303,14 @@ div[form-central] {
       width: 148px;
       height: 148px;
       float: left;
-      border: 2px solid #FFCA28;
+      border: 2px solid #FFB300;
       position: relative; }
       div[form-central] div[lista] div[categoria].activo {
         border: 1px solid #303030; }
         div[form-central] div[lista] div[categoria].activo div[nombre] {
           color: white; }
       div[form-central] div[lista] div[categoria] div[nombre] {
-        color: #FFCA28;
+        color: #FFB300;
         position: absolute;
         width: 100%;
         height: 100%;
@@ -319,7 +336,7 @@ md-backdrop {
 
 md-sidenav section[cabecera] {
   height: 60px;
-  border-bottom: 1px solid #FFCA28;
+  border-bottom: 1px solid #FFB300;
   color: #303030;
   background-color: white;
   font-size: 20px;
@@ -338,13 +355,13 @@ md-sidenav h5 {
   margin: 0px;
   transition: all 0.3s ease-in-out;
   color: white;
-  background-color: #0D47A1; }
+  background-color: #3F51B5; }
   md-sidenav h5 i {
     float: left;
     margin-right: 10px;
     margin-top: -5px;
     cursor: pointer;
-    color: #FFCA28; }
+    color: #FFB300; }
   md-sidenav h5:hover {
     background-color: white;
     color: black; }
@@ -387,7 +404,7 @@ md-sidenav section.perfil {
         transition: all 0.3s ease-in-out;
         border-bottom: 1px dashed rgba(255, 255, 255, 0.4);
         color: white;
-        background-color: #0D47A1; }
+        background-color: #3F51B5; }
         md-sidenav section.perfil div[opciones] ul li:hover {
           background: rgba(0, 0, 0, 0.2); }
         md-sidenav section.perfil div[opciones] ul li:last-child {
@@ -401,7 +418,7 @@ md-sidenav section.perfil {
           transform: translateY(7px);
           margin-right: 5px;
           margin-top: -10px;
-          color: #FFCA28; }
+          color: #FFB300; }
 
 md-content[landing] div[registro][proovedor-full].inicio {
   padding: 0px;
@@ -671,7 +688,7 @@ header div[sociales] {
     height: 50px;
     border-radius: 100px;
     float: right;
-    margin: -7px 60px 0 0;
+    margin: -7px 20px 0 0;
     cursor: pointer;
     transition: all 0.5s ease-in-out;
     position: relative;
@@ -697,7 +714,7 @@ div.contVerificacion {
     width: 100%;
     padding: 20px 0px;
     text-align: center;
-    background: #0D47A1;
+    background: #3F51B5;
     color: white; }
   div.contVerificacion div.avatar {
     width: 200px;
@@ -722,6 +739,14 @@ div.contVerificacion {
     width: calc(50% - 20px);
     margin-top: 30px; }
 
+md-dialog[modal-categoria] {
+  width: 100%; }
+md-dialog div.menu-item-lista {
+  transition: all 0.3s ease-in-out;
+  border-bottom: 1px solid white; }
+  md-dialog div.menu-item-lista:hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    transform: scale(1.03); }
 md-dialog div.barra {
   width: 100%;
   margin-bottom: 40px;
@@ -905,7 +930,16 @@ md-dialog section.preview {
   .sucursal div[md-tabs-template] {
     background-color: #E0E0E0; }
     .sucursal div[md-tabs-template] H2 {
-      padding-left: 30px; }
+      padding-left: 30px;
+      position: relative;
+      margin-bottom: 17px; }
+      .sucursal div[md-tabs-template] H2 .menu {
+        position: absolute;
+        top: -21px;
+        right: 0;
+        width: 100%; }
+        .sucursal div[md-tabs-template] H2 .menu [texto] {
+          float: left; }
     .sucursal div[md-tabs-template] div.descripcion, .sucursal div[md-tabs-template] div.contactos, .sucursal div[md-tabs-template] div.ubicacion {
       margin-bottom: 20px;
       color: #303030;
@@ -1008,7 +1042,10 @@ md-dialog section.preview {
                 color: rgba(255, 255, 255, 0.8); }
     .sucursal div[md-tabs-template] div.categoria {
       width: calc(100% - 20px);
-      margin-left: 10px; }
+      margin-left: 10px;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden; }
       .sucursal div[md-tabs-template] div.categoria div.tit-cat {
         position: absolute;
         bottom: 0px;
@@ -1034,9 +1071,51 @@ md-dialog section.preview {
           width: calc(100%);
           left: 0px;
           margin-top: -50px;
-          /* height: 100%; */
+          min-height: 150px;
           position: absolute;
           z-index: 0; }
+        .sucursal div[md-tabs-template] div.categoria div.texto-categoria input {
+          background-color: transparent;
+          border: 1px dashed silver;
+          padding: 0px 3px;
+          width: 100%;
+          font-size: 20px;
+          color: white; }
+          .sucursal div[md-tabs-template] div.categoria div.texto-categoria input.secuencia {
+            position: absolute;
+            width: 60px;
+            top: 10px;
+            right: 10px;
+            color: #303030; }
+        .sucursal div[md-tabs-template] div.categoria div.texto-categoria:hover i.edit, .sucursal div[md-tabs-template] div.categoria div.texto-categoria:hover i.guardar, .sucursal div[md-tabs-template] div.categoria div.texto-categoria:hover i.borrar {
+          left: 10px; }
+        .sucursal div[md-tabs-template] div.categoria div.texto-categoria i {
+          transition: box-shadow 0.3s ease-in-out;
+          position: absolute;
+          color: #3F51B5;
+          z-index: 10;
+          cursor: pointer;
+          border-radius: 100px;
+          padding: 3px;
+          background: white; }
+          .sucursal div[md-tabs-template] div.categoria div.texto-categoria i:hover {
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
+          .sucursal div[md-tabs-template] div.categoria div.texto-categoria i.guardar, .sucursal div[md-tabs-template] div.categoria div.texto-categoria i.borrar, .sucursal div[md-tabs-template] div.categoria div.texto-categoria i.edit {
+            left: -60px;
+            top: 10px;
+            transition: all 0.3s ease-in-out; }
+          .sucursal div[md-tabs-template] div.categoria div.texto-categoria i.borrar {
+            top: 55px;
+            width: 30px;
+            transition: all 0.6s ease-in-out; }
+          .sucursal div[md-tabs-template] div.categoria div.texto-categoria i.mostrar {
+            right: 16px;
+            bottom: 13px; }
+          .sucursal div[md-tabs-template] div.categoria div.texto-categoria i.close {
+            background-color: transparent;
+            right: 15px;
+            top: 12px;
+            color: white; }
       .sucursal div[md-tabs-template] div.categoria div.cont-productos {
         display: flex;
         align-items: space-between;
@@ -1049,6 +1128,8 @@ md-dialog section.preview {
           background-color: white;
           width: calc((100% / 2) - 5px);
           margin-bottom: 10px; }
+          .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto:hover i.edit, .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto:hover i.guardar, .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto:hover i.borrar {
+            left: 10px; }
           .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto:hover div.img img {
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
             transform: scale(1.05); }
@@ -1072,12 +1153,58 @@ md-dialog section.preview {
             .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img img {
               transition: all 0.3s ease-in-out;
               width: 100%;
-              height: 100%; }
+              height: 100%;
+              min-height: 228px; }
+            .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img:hover i.edit, .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img:hover i.guardar, .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img:hover i.borrar, .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img:hover i.cancelar {
+              transform: scale(1); }
+            .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img i {
+              transition: box-shadow 0.3s ease-in-out;
+              position: absolute;
+              color: #3F51B5;
+              z-index: 10;
+              cursor: pointer;
+              border-radius: 100px;
+              padding: 3px;
+              background: white; }
+              .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img i:hover {
+                box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
+              .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img i.guardar, .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img i.edit, .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img i.borrar, .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img i.cancelar {
+                transform: scale(0);
+                left: 10px;
+                top: 10px;
+                transition: all 0.2s ease-in-out; }
+              .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img i.borrar {
+                transition: all 0.4s ease-in-out;
+                top: 55px;
+                width: 30px; }
+              .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img i.cancelar {
+                transition: all 0.6s ease-in-out;
+                top: 100px;
+                width: 30px; }
+              .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img i.mostrar {
+                right: 16px;
+                bottom: 13px; }
+              .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img i.close {
+                background-color: transparent;
+                right: 15px;
+                top: 12px;
+                color: white; }
           .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.descrip {
             color: grey;
             padding-top: 15px;
             padding-bottom: 15px;
             height: 100%; }
+            .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.descrip textarea {
+              min-height: 100px;
+              border: 1px dashed silver;
+              width: 100%; }
+            .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.descrip input {
+              border: 1px dashed silver;
+              width: 150px; }
+              .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.descrip input.secuencia {
+                margin-top: 10px;
+                width: 60px;
+                font-size: 20px; }
             .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.descrip h4 {
               color: #303030; }
             .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.descrip div.precio {
@@ -1094,6 +1221,8 @@ md-dialog section.preview {
                 content: "00";
                 font-size: 10px;
                 transform: translateX(-15px); }
+              .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.descrip div.precio input {
+                width: 100px; }
             .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.descrip div.arriba {
               right: 20px;
               top: 10px;
@@ -1101,7 +1230,7 @@ md-dialog section.preview {
             .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.descrip button.shop-btn {
               transition: all 0.3s ease-in-out;
               color: white;
-              background-color: #FFCA28;
+              background-color: #FFB300;
               border: none;
               padding: 7px 6px 7px 0px;
               border-radius: 100px;
@@ -1143,6 +1272,75 @@ md-dialog section.preview {
   100% {
     -moz-box-shadow: 0 0 0 0 rgba(33, 150, 243, 0);
     box-shadow: 0 0 0 0 rgba(33, 150, 243, 0); } }
+/*-------------salidas--------------------------------*/
+.salida-lateral-derecha {
+  animation-name: salida-derecha;
+  animation-duration: 1s;
+  animation-delay: 0s;
+  animation-fill-mode: forwards; }
+
+@keyframes salida-derecha {
+  0% {
+    transform: scale(1); }
+  50% {
+    transform: scale(0.9);
+    left: 0px; }
+  100% {
+    transform: scale(0.9);
+    left: -100%; } }
+.salida-lateral-izquierda {
+  animation-name: salida-izquierda;
+  animation-duration: 1s;
+  animation-delay: 0s;
+  animation-fill-mode: forwards; }
+
+@keyframes salida-izquierda {
+  0% {
+    transform: scale(1);
+    left: 0px; }
+  50% {
+    transform: scale(0.9);
+    left: 0px; }
+  100% {
+    transform: scale(0.9);
+    left: 100%; } }
+/*-------------entradas--------------------------------*/
+.entrada-lateral-izquierda {
+  animation-name: entrada-izquierda;
+  animation-duration: 1s;
+  animation-delay: 0s;
+  animation-fill-mode: forwards; }
+
+@keyframes entrada-izquierda {
+  0% {
+    transform: scale(0.9);
+    left: -100%; }
+  50% {
+    transform: scale(0.9);
+    left: -100%; }
+  90% {
+    transform: scale(0.9); }
+  100% {
+    transform: scale(1);
+    left: 0%; } }
+.entrada-lateral-derecha {
+  animation-name: entrada-derecha;
+  animation-duration: 1s;
+  animation-delay: 0s;
+  animation-fill-mode: forwards; }
+
+@keyframes entrada-derecha {
+  0% {
+    transform: scale(0.9);
+    left: 100%; }
+  50% {
+    transform: scale(0.9);
+    left: 100%; }
+  90% {
+    transform: scale(0.9); }
+  100% {
+    transform: scale(1);
+    left: 0; } }
 div.foot {
   text-align: center; }
   div.foot h1 {
@@ -1193,15 +1391,39 @@ div.foot {
         div.foot ul.social li a i {
           font-size: 24px !important; }
 
-html, body {
-  min-height: 100%; }
-
 .leaflet-bottom {
   display: none; }
 
+div.cont-mapa {
+  width: calc(100% - 0px);
+  transition: all 0.3s ease-in-out; }
+  div.cont-mapa.logeado {
+    height: calc(100% - 96px); }
+  div.cont-mapa.sin-logear {
+    height: calc(100% - 48px); }
+  div.cont-mapa div.angular-leaflet-map {
+    width: calc(100%);
+    height: calc(100%); }
+
+div.marker {
+  width: 30px;
+  height: 30px;
+  border: 1px dashed black;
+  border-radius: 100px;
+  overflow: hidden;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  margin-left: -15px;
+  margin-top: -15px; }
+  div.marker img {
+    width: 100%;
+    height: 100%; }
+
+html, body {
+  min-height: 100%; }
+
 div.md-toast-content {
   background: white !important;
-  color: #0D47A1 !important; }
+  color: #3F51B5 !important; }
 
 md-sidenav {
   background-color: white; }
@@ -1234,8 +1456,8 @@ md-checkbox div.md-container div.md-icon {
       [login] md-tabs-canvas md-pagination-wrapper md-tab-item {
         width: 50%; }
         [login] md-tabs-canvas md-pagination-wrapper md-tab-item.md-tab.md-active {
-          background-color: #0D47A1;
-          color: #FFCA28; }
+          background-color: #3F51B5;
+          color: #FFB300; }
   [login] .inicio {
     background-color: rgba(0, 0, 0, 0.3);
     width: 100%;
@@ -1248,7 +1470,7 @@ md-checkbox div.md-container div.md-icon {
     [login] .inicio.google {
       background: #dd4b39; }
     [login] .inicio.md-raised {
-      background: #0D47A1; }
+      background: #3F51B5; }
 
 div[divider] {
   margin: 10px 10px;
@@ -1270,7 +1492,7 @@ md-content[landing] {
   md-content[landing] header.cliente {
     width: 100%;
     height: 70px;
-    background-color: #0D47A1;
+    background-color: #3F51B5;
     margin-top: -10px; }
     md-content[landing] header.cliente i.material-icons {
       float: right;
@@ -1280,7 +1502,24 @@ md-content[landing] {
       cursor: pointer;
       transition: all 0.3s ease-in-out; }
       md-content[landing] header.cliente i.material-icons:hover {
-        background: #0D47A1; }
+        background: #3F51B5; }
+    md-content[landing] header.cliente div.derecha {
+      float: right;
+      margin-top: 20px;
+      margin-right: 25px;
+      font-size: 30px; }
+      md-content[landing] header.cliente div.derecha a {
+        font-size: 15px;
+        margin-right: 5px;
+        margin-bottom: 10px;
+        margin-top: 10px;
+        color: white; }
+        md-content[landing] header.cliente div.derecha a.derecha {
+          float: right;
+          margin-left: 5px; }
+        md-content[landing] header.cliente div.derecha a.izquierda {
+          float: left;
+          margin-right: 5px; }
     md-content[landing] header.cliente div[titulo] {
       font-family: 'Bebas';
       font-size: 40px;
@@ -1346,10 +1585,17 @@ md-content[landing] {
           padding: 6px;
           border-radius: 3px;
           margin-top: 10px;
-          background-color: #0D47A1;
+          background-color: #3F51B5;
           position: absolute; }
           md-content[landing] header.cliente div[sociales] i:hover div[tooltip]:after {
-            border-bottom: 10px solid #0D47A1; }
+            border-bottom: 10px solid #3F51B5; }
+    md-content[landing] header.cliente div[ubicaciones] {
+      width: 300px;
+      float: right; }
+      md-content[landing] header.cliente div[ubicaciones] md-input-container {
+        float: right;
+        margin-top: 25px;
+        margin-bottom: 10px; }
   md-content[landing] div[principal] {
     width: 100%;
     height: calc(100%); }
@@ -1371,9 +1617,6 @@ md-content[landing] {
           border-bottom: 4px solid; }
           md-content[landing] div[principal] div[mapa] md-toolbar div[rubros-tab].active {
             background-color: rgba(0, 0, 0, 0.2); }
-      md-content[landing] div[principal] div[mapa] div.angular-leaflet-map {
-        width: calc(100% - 0px);
-        height: calc(100% - 96px); }
       md-content[landing] div[principal] div[mapa] md-toolbar.bottom {
         bottom: 0;
         position: absolute; }
@@ -1386,34 +1629,123 @@ md-content[landing] {
       height: 100%;
       float: left;
       border-top: 1px solid silver;
-      border-right: 1px solid silver; }
-      md-content[landing] div[principal] div[lista] div[categoria] {
-        width: 148px;
-        height: 148px;
-        float: left;
-        border: 1px solid white;
-        position: relative; }
-        md-content[landing] div[principal] div[lista] div[categoria] div[nombre] {
-          color: white;
-          position: absolute;
-          width: 100%;
+      border-right: 1px solid silver;
+      position: relative; }
+      md-content[landing] div[principal] div[lista] div.toolbar-search {
+        width: 100%;
+        height: 48px;
+        margin-bottom: 2px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+        background-color: white; }
+        md-content[landing] div[principal] div[lista] div.toolbar-search input {
           height: 100%;
+          border: none;
+          padding: 5px;
+          float: right;
+          outline: none;
+          width: calc(100% - 78px); }
+        md-content[landing] div[principal] div[lista] div.toolbar-search i {
+          color: #777;
+          padding-top: 10px; }
+          md-content[landing] div[principal] div[lista] div.toolbar-search i.buscar {
+            padding-left: 20px; }
+          md-content[landing] div[principal] div[lista] div.toolbar-search i.lista {
+            padding-right: 10px;
+            float: right;
+            cursor: pointer; }
+      md-content[landing] div[principal] div[lista] div.cont-rubros {
+        position: absolute;
+        background-color: #303030;
+        padding-bottom: 3px;
+        overflow: hidden;
+        height: calc(100% - 51px);
+        width: 100%;
+        left: 0px;
+        top: 51px; }
+        md-content[landing] div[principal] div[lista] div.cont-rubros [categoria] {
+          width: 148px;
+          height: 148px;
+          float: left;
+          border: 1px solid white;
+          position: relative;
+          background: white; }
+          md-content[landing] div[principal] div[lista] div.cont-rubros [categoria] div[nombre] {
+            color: white;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0.6);
+            text-align: center;
+            z-index: 2;
+            font-family: bebas;
+            display: flex;
+            align-content: space-between;
+            justify-content: center;
+            align-items: center;
+            font-size: 31px; }
+          md-content[landing] div[principal] div[lista] div.cont-rubros [categoria] img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            z-index: 1; }
+      md-content[landing] div[principal] div[lista] div.cont-sucursales {
+        position: absolute;
+        width: 100%;
+        height: calc(100% - 51px);
+        left: 100%;
+        top: 51px;
+        background-color: #303030; }
+        md-content[landing] div[principal] div[lista] div.cont-sucursales md-list {
+          width: 100%;
+          z-index: 1;
+          position: absolute;
+          top: 3px;
+          background-color: #303030;
+          min-height: calc(100% - 3px); }
+          md-content[landing] div[principal] div[lista] div.cont-sucursales md-list div.letra h4 {
+            cursor: pointer;
+            margin: 10px 0px;
+            text-indent: 15px;
+            font-size: 25px; }
+          md-content[landing] div[principal] div[lista] div.cont-sucursales md-list div.letra i.fav {
+            margin-top: 15px;
+            font-size: 28px; }
+        md-content[landing] div[principal] div[lista] div.cont-sucursales i.cerrar {
+          position: absolute;
+          right: 0px;
+          padding: 10px;
           cursor: pointer;
-          background-color: rgba(0, 0, 0, 0.6);
-          text-align: center;
+          top: 0px;
+          z-index: 2; }
+        md-content[landing] div[principal] div[lista] div.cont-sucursales div.busq-rap {
+          transition: all 0.3s linear;
+          overflow: hidden;
+          position: absolute;
           z-index: 2;
-          font-family: bebas;
-          display: flex;
-          align-content: space-between;
-          justify-content: center;
-          align-items: center;
-          font-size: 31px; }
-        md-content[landing] div[principal] div[lista] div[categoria] img {
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          cursor: pointer;
-          z-index: 1; }
+          background: #303030;
+          width: 0%;
+          padding: 40px 0px;
+          height: 100%; }
+          md-content[landing] div[principal] div[lista] div.cont-sucursales div.busq-rap.visible {
+            opacity: 1;
+            width: 100%; }
+          md-content[landing] div[principal] div[lista] div.cont-sucursales div.busq-rap div.cls-letra {
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+            width: 60px;
+            height: 60px;
+            color: white;
+            float: left;
+            padding: 15px;
+            font-size: 30px;
+            margin-left: 10px;
+            margin-bottom: 10px; }
+            md-content[landing] div[principal] div[lista] div.cont-sucursales div.busq-rap div.cls-letra.inactiva {
+              color: gray; }
+            md-content[landing] div[principal] div[lista] div.cont-sucursales div.busq-rap div.cls-letra.activa:hover {
+              border: 1px solid white; }
   md-content[landing] div[registro] {
     background-color: rgba(0, 0, 0, 0.6);
     position: absolute;

@@ -82,6 +82,7 @@ module.exports = function(app){
       "nombre": req.body.nombre,
       "apellido": req.body.apellido,
       "email": req.body.correo,
+      "id_ciudad": req.body.id_ciudad,
       "documento": req.body.documento,
       "clave": pass
     }).then(function(cliente){
@@ -91,6 +92,7 @@ module.exports = function(app){
         "apellido":cliente.dataValues.apellido,
         "id":cliente.dataValues.id_cliente,
         "email":cliente.dataValues.email,
+        "id_ciudad":cliente.dataValues.id_ciudad,
         "tipo":"cliente",
       };
       usuario.token = service.createToken(usuario);
@@ -110,7 +112,7 @@ module.exports = function(app){
     models.sequelize.query('SELECT r.*,i.id_imagen,i.ruta as imagen_ruta FROM cliente r '+
                     ' left join imagen_cliente ir on r.id_cliente = ir.id_cliente AND ir.estado = '+"'A' AND id_tipo_imagen = 2"+
                     ' left join imagen i on ir.id_imagen = i.id_imagen  '+
-                    " where id_cliente ='"+req.params.id+"'",
+                    " where r.id_cliente ='"+req.params.id+"'",
       { model:models.cliente}
     )
       .then(function(registro){
@@ -120,7 +122,8 @@ module.exports = function(app){
             "nombre":registro.dataValues.nombre,
             "documento":registro.dataValues.documento,
             "id":registro.dataValues['id_'+req.body.tipo],
-            "email":registro.dataValues.email
+            "email":registro.dataValues.email,
+            "id_ciudad":registro.dataValues.id_ciudad
           };
           if(registro.dataValues.id_imagen){
             usuario.avatar={
