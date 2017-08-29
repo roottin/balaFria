@@ -88,22 +88,30 @@ module.exports = function(app){
   });
   //NOTE: guardar registro
   app.post('/api/sucursal', function(req, res) {
-    models.sucursal.create({
-      nombre: req.body.nombre,
-      tipo: req.body.tipo,
-      id_proveedor: req.body.id_proveedor,
-      id_ciudad: req.body.id_ciudad
-    })
-    .then(function(sucursal){
-        Promise.all(req.body.rubros.map(function(rubro){
-          return models.sucursal_rubro.create({
-            id_sucursal: sucursal.id_sucursal,
-            id_rubro: rubro.id_rubro
+    crearCoordenada(req)
+    .then(coordenada => {
+      var id_coordenada =null;
+      if(coordenada){
+        id_coordenada = coordenada.id_coordenada;
+      }
+      models.sucursal.create({
+        "nombre": req.body.nombre,
+        "tipo": req.body.tipo,
+        "id_proveedor": req.body.id_proveedor,
+        "id_ciudad": req.body.id_ciudad,
+        "id_coordenada": id_coordenada
+      })
+      .then(function(sucursal){
+          Promise.all(req.body.rubros.map(function(rubro){
+            return models.sucursal_rubro.create({
+              id_sucursal: sucursal.id_sucursal,
+              id_rubro: rubro.id_rubro
+            });
+          })).then(function(resultado){
+            res.json(sucursal);
           });
-        })).then(function(resultado){
-          res.json(sucursal);
-        });
-    });
+      });
+    })
   });
   //NOTE: buscar uno solo
   app.get('/api/sucursal/:id', function(req, res) {
@@ -433,3 +441,20 @@ function modificarZonas(sucursal,zonas){
         return Promise.resolve(zonas);
       });
 };
+function crearCoordenada(req){
+  return new Promise(function(resolve, reject) {
+    if(req.tipo == 'F'){
+      models
+        .coordenada
+        .create({
+          "latitud":req.latlng.lat,
+          "longitud":req.latlng.lng
+        })
+        .then(coordenada => {
+          resolve(coordenada);
+        } )
+    }else{
+      resolve();
+    }
+  });
+}

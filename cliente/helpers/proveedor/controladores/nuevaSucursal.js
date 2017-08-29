@@ -2,6 +2,12 @@ angular.module('balafria')
 .controller('ctrlNuevaSucursal', ['Paises','Ciudades','$scope','$state','Rubros','$http','$sesion', function (Paises,Ciudades,$scope,$state,Rubros,$http,$sesion){
   var yo = this;
   yo.ciudadesAct =[];
+  yo.centro = {
+          lat: 31.353636941500987,
+          lng: -41.66015625000001,
+          zoom: 2
+  };
+  yo.markers = [];
   $sesion.obtenerPerfil()
     .then(perfil => {
       yo.usuario = perfil;
@@ -18,6 +24,10 @@ angular.module('balafria')
     .then(function(ciudades){
       yo.ciudades = ciudades;
     })
+   yo.rubros = Rubros.query(function(){});
+   yo.data = {
+     "rubros":[]
+   };
   $scope.$watch(function(scope) { return yo.pais },
     function(newValue, oldValue) {
         if(newValue){
@@ -30,10 +40,21 @@ angular.module('balafria')
         }
     }
    );
-  yo.rubros = Rubros.query(function(){});
-  yo.data = {
-    "rubros":[]
-  };
+  $scope.$watch(function(scope) { return yo.ciudad },
+      function(newValue, oldValue) {
+          yo.asignarCiudad(newValue);
+      }
+     );
+   $scope.$on('leafletDirectiveMap.click', function(event, args) {
+         var leafEvent = args.leafletEvent;
+         yo.markers=[];
+         yo.markers.push({
+           lat: leafEvent.latlng.lat,
+           lng: leafEvent.latlng.lng,
+           message: "Estas Aqui"
+         });
+         yo.latlng = leafEvent.latlng;
+       });
   yo.toggleRubro = function(indice){
     var rubro = yo.rubros[indice];
     if(yo.data.rubros.indexOf(rubro) == -1){
@@ -44,11 +65,31 @@ angular.module('balafria')
       rubro.clase = "";
     }
   };
+  yo.asignarCiudad = function(id){
+    if(id){
+      yo.ciudades.forEach(function(ciudad){
+        if(ciudad.id_ciudad == id){
+          yo.paises.forEach(function(pais){
+            if(pais.id_pais == ciudad.id_pais){
+              yo.centro = {
+                lat:ciudad.latlng.lat,
+                lng:ciudad.latlng.lng,
+                zoom:parseInt(ciudad.zoom)
+              }
+            }
+          });
+        }
+      });
+    }
+  }
   yo.submit = function(){
     yo.data.tipo = yo.radio;
     yo.data.nombre = yo.nombre;
     yo.data.id_proveedor = yo.usuario.id;
     yo.data.id_ciudad = yo.ciudad;
+    if(yo.tipo == 'F'){
+      yo.data.latlng = to.latlng;
+    }
     if(yo.data.rubros.length){
       if(yo.data.tipo){
         $http.post('/api/sucursal',yo.data)
