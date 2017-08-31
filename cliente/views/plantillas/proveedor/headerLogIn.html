@@ -30,7 +30,7 @@
       <img src="{{header.usuario.avatar.ruta }}" alt="">
     </div>
     <div opciones>
-        <ul>
+         <ul>
           <li>{{header.usuario.nombre}}</li>
           <li ui-sref='proveedor.dashboard'><span class="material-icons">dashboard</span>dashboard</li>
           <li><span class="material-icons">settings</span>Ajustes</li>
@@ -38,7 +38,21 @@
           <li ng-click="header.logOut()"><span class="material-icons">power_settings_new</span>Cerrar Sesion</li>
         </ul>
       </div>
-    </section>    
+    </section>
     <section cabecera> Notificaciones <i class="material-icons right">notifications_none</i></section>
+    <div notificaciones ng-click="header.openLeftMenu()">
+        <i class="material-icons">notifications_none</i>
+    </div>
+  </div>
+<!-- SIDENAV -->
+  <!-- left -->
+  <md-sidenav md-component-id="left" class="md-sidenav-left" md-disabled-backdrop="true">
+    left Nav!
+  </md-sidenav>
+  <!-- Right -->
+  <md-sidenav md-component-id="right" class="md-sidenav-right" md-disabled-backdrop="true">
+    right Nav!
+    <h3>Sucursales:</h3>
+    <h4>Agregar sucursual <i class="material-icons">plus</i></h4>
   </md-sidenav>
 <!-- SIDENAV -->

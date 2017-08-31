@@ -131,12 +131,14 @@ module.exports = function(app){
     });
   });
   //buscar uno solo
-  app.get('/api/proveedor/:id', function(req, res) {
-    models.proveedor.find({
-      where: {
-        id_proveedor: req.params.id
-      }
-    }).then(function(proveedor) {
+  app.get('/api/proveedores/:id', function(req, res) {
+    models.sequelize.query( "select p.*,i.ruta from proveedor p "+
+                            "join imagen_proveedor ip on p.id_proveedor = ip.id_proveedor "+
+                            "and ip.estado ='A' and ip.id_tipo_imagen = 2 "+
+                            "join imagen i on ip.id_imagen = i.id_imagen "+
+                            "where p.id_proveedor = "+req.params.id,
+      {model:models.proveedor}
+    ).then(function(proveedor) {
       res.json(proveedor);
     });
   });

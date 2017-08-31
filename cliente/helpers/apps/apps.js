@@ -15,34 +15,34 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
   $urlRouterProvider.otherwise('/cliente');
   //-----------------------------------------cliente
   $stateProvider
-    .state('frontPage', {
+    .state('cliente', {
       url: '/cliente',
-      controller: 'ctrlFront',
       views:{
         "@":{
           templateUrl: '/views/plantillas/cliente/front.html',
         },
-        "header@frontPage":{
-          templateUrl:"/views/plantillas/cliente/headerLogOff.html",
-          controller:'ctrlInicio'
+        "header@cliente":{
+          templateUrl:"/views/plantillas/cliente/header.html",
+          controller:'ctrlHeaderCli',
+          controllerAs:'header'
         },
-        "body@frontPage":{
+        "body@cliente":{
           templateUrl: '/views/plantillas/cliente/front-main.html',
           controller: 'ctrlMap'
         }
       }
     })
-      .state('frontPage.iniciado', {
-        url: '/usuario',
+      .state('cliente.sucursal', {
+        url:'/sucursal',
         views:{
-          "header@frontPage":{
-            templateUrl:"/views/plantillas/cliente/headerLogIn.html",
-            controller:'ctrlHeaderCli',
-            controllerAs:'header'
+          "body@cliente":{
+            templateUrl: '/views/plantillas/cliente/sucursal.html',
+            controller: 'ctrlSucursalCliente',
+            controllerAs:'sucursal'
           }
         },
-        resolve:{
-          loginRequired: clienteLoggedRequired
+        params:{
+          sucursal: null
         }
       })
     //-----------------------------------------proveedor--------------------------------------------------
@@ -54,7 +54,7 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
         },
         "header@proveedor":{
           templateUrl:"/views/plantillas/proveedor/headerLogOff.html",
-          controller:'ctrlInicio'
+          controller:'ctrlLogPro'
         },
         "body@proveedor":{
           templateUrl: '/views/plantillas/proveedor/frontPage.html',
@@ -67,9 +67,8 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
         url:"/correo",
         views:{
           "header@proveedor":{
-            templateUrl:"/views/plantillas/proveedor/headerLogIn.html",
-            controller:'ctrlHeaderPro',
-            controllerAs:'header'
+            templateUrl:"/views/plantillas/proveedor/headerLogOff.html",
+            controller:'ctrlLogPro'
           },
           "body@proveedor":{
             templateUrl: '/views/plantillas/proveedor/verificarCorreo.html',
@@ -84,6 +83,19 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
           "body@proveedor":{
             templateUrl: '/views/plantillas/proveedor/login.html',
             controller: 'ctrlLogPro'
+          },
+          "foot@proveedor":{
+            templateUrl: '/views/plantillas/proveedor/foot.html'
+          }
+        }
+      })
+      .state('proveedor.registro',{
+        url:"/registro",
+        views:{
+          "body@proveedor":{
+            templateUrl: '/views/plantillas/proveedor/registro.html',
+            controller: 'ctrlProveedor',
+            controllerAs: 'up',
           },
           "foot@proveedor":{
             templateUrl: '/views/plantillas/proveedor/foot.html'
@@ -182,30 +194,15 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
         resolve:{
           loginRequired: AdminLoggedRequired
         }
-      })
-      .state('admin.rubro',{
-        url:'/rubros',
-        views:{
-          "body@admin":{
-            templateUrl: '/views/plantillas/admin/rubro.html',
-            controller: 'ctrlRubro as up',
-          },
-          "header@admin":{
-            templateUrl: '/views/plantillas/admin/headerIn.html'
-          }
-        },
-        resolve:{
-          loginRequired: AdminLoggedRequired
-        }
       });
     //------------------------ Tema -------------------------------------------------------
+    $mdThemingProvider.theme('light')
+          .primaryPalette('indigo')
+          .accentPalette('blue-grey');
     $mdThemingProvider.theme('default')
           .primaryPalette('indigo')
           .accentPalette('blue-grey')
           .dark();
-    $mdThemingProvider.theme('light')
-          .primaryPalette('indigo')
-          .accentPalette('blue-grey');
 
     /////////////////////////////////////////////////////////////////////////
     function AdminLoggedRequired($q, $location, $auth) {

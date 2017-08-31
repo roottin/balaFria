@@ -1,9 +1,50 @@
 <div principal>
   <div lista>
-      <div categoria ng-repeat="rubro in rubros" >
+    <div class="toolbar-search">
+      <i class="material-icons buscar">search</i>
+      <i class="material-icons lista"  ng-click="buscarSucursales()">list</i>
+      <input type="text" ng-model="search" placeholder="Busqueda rapida" value="">
+    </div>
+    <div class="cont-rubros" id="cont-rubros">
+      <div categoria ng-click="buscarSucursales()">
+          <div nombre >Todos</div>
+          <img ng-src="{{'#'}}" alt="">
+          <div class="clear"></div>
+      </div>
+      <!--- Rubros -->
+      <div categoria ng-repeat="rubro in rubros" ng-click="buscarSucursalesRubro(rubro)">
           <div nombre >{{rubro.nombre}}</div>
           <img ng-src="{{rubro.imagen_ruta || '#'}}" alt="">
+          <div class="clear"></div>
       </div>
+      <div class="clear"></div>
+    </div><!--- Rubros -->
+    <div class="cont-sucursales" id="cont-sucursales" >
+      <!--- Busqueda rapida -->
+      <div class="busq-rap">
+        <i class="material-icons cerrar" ng-click="deshabilitarBusq()">chevron_left</i>
+        <div ng-repeat="letra in letras" class="cls-letra {{letra.estado}}" ng-click="mover(letra)">
+            {{letra.letra}}
+        </div>
+        <div class="clear"></div>
+      </div>
+      <!--- Lista -->
+      <md-list flex id="lista-sucursales">
+      <i class="material-icons cerrar" ng-click="vistaRubros()">close</i>
+        <div class="letra" ng-repeat="letra in sucursales" letra="{{letra.letra}}">
+          <h4 ng-click="activarBusq();">{{letra.letra}}</h4>
+          <md-list-item class="md-2-line" ng-repeat="sucursal in letra.sucursales" >
+            <img ng-src="{{sucursal.ruta}}" class="md-avatar" alt="{{item.who}}" />
+            <div class="md-list-item-text" layout="column" ng-click="verSucursal(sucursal.id_sucursal)">
+              <h3>{{ sucursal.nombre }}</h3>
+              <p>{{ sucursal.descripcion }}</p>
+            </div>
+            <i class="material-icons fav" >favorite_border</i>
+            <md-divider ></md-divider>
+          </md-list-item>
+        </div><!--- Letra -->
+      </md-list><!--- Lista -->
+    </div>
   </div>
   <div mapa >
     <md-toolbar class="md-hue-2">
@@ -24,8 +65,10 @@
         </md-menu>
       </div>
     </md-toolbar>
-    <leaflet lf-center="Acarigua"></leaflet>
-    <md-toolbar class="md-hue-2 bottom">
+    <div class="cont-mapa {{clase}}">
+      <leaflet lf-center="center"></leaflet>
+    </div>
+    <md-toolbar ng-show="usuario" class="md-hue-2 bottom">
       <div class="md-toolbar-tools" layout="row" layout-align="space-around center">
         <md-button class="md-icon-button" aria-label="Favorite"  >
           <i class="material-icons">payment</i>

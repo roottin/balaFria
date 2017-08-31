@@ -7,7 +7,6 @@ function init(app) {
 	var io = socketio(app);
 	io.use(function(socket, next){
 			console.log('SESION: conexion socket establecida');
-			console.log('Autenticando:',socket.handshake.query);
 			var error;
 			//verificacion usuario o admin
 			if(socket.handshake.query.tipo == 'admin'){

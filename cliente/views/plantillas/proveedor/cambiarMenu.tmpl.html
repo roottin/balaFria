@@ -1,0 +1,17 @@
+<md-dialog aria-label="tipoImagen">
+   <md-toolbar>
+     <div class="md-toolbar-tools">
+      <h2>Menus Disponibles</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="menu.cancel()">
+         <md-icon class="material-icons" aria-label="Close dialog">close</md-icon>
+      </md-button>
+     </div>
+   </md-toolbar>
+    <div class="inicio"  md-theme="default" registro  layout="column" layout-sm="column"  layout-wrap>
+      <div class="menu-item-lista" ng-repeat="item in menu.lista" ng-click="menu.cambiar($index)">
+        <h2>{{item.nombre}}</h2>
+        <p>{{item.descripcion}}</p>
+      </div>
+   </div>
+</md-dialog>

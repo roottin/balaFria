@@ -2,7 +2,7 @@
   "name": "balafria",
   "version": "1.0.0",
   "description": "",
-  "main": "",
+  "main": "index.js",
   "scripts": {
     "start": "node ./bin/www"
   },
@@ -26,6 +26,7 @@
     "express": "~4.14.1",
     "jwt-simple": "^0.5.1",
     "leaflet": "^1.0.3",
+    "mime":"*",
     "moment": "^2.18.1",
     "morgan": "~1.7.0",
     "multer": "^1.3.0",
