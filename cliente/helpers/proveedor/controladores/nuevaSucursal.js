@@ -1,5 +1,5 @@
 angular.module('balafria')
-.controller('ctrlNuevaSucursal', ['Paises','Ciudades','$scope','$state','Rubros','$http','$sesion', function (Paises,Ciudades,$scope,$state,Rubros,$http,$sesion){
+.controller('ctrlNuevaSucursal', ['Paises','Ciudades','$scope','$state','Rubros','$http','$sesion','$mdToast', function (Paises,Ciudades,$scope,$state,Rubros,$http,$sesion,$mdToast){
   var yo = this;
   yo.ciudadesAct =[];
   yo.centro = {
@@ -84,11 +84,45 @@ angular.module('balafria')
   }
   yo.submit = function(){
     var guardar = false;
-    if(yo.rubros.length){
+    if(yo.data.rubros.length){
       guardar = true;
-      if(yo.tipo == 'F' && !yo.latlng){
+      if(yo.tipo){
+        if(yo.tipo == 'F' && yo.latlng){
+          
+        }else{
+          guardar = false;
+          $mdToast.show(
+            $mdToast.simple()
+              .textContent("Eliga una ubicacion para la sucursal")
+              .position('top right')
+              .hideDelay(3000)
+          );
+        }
+        if(!yo.ciudad){
+          guardar = false;
+          $mdToast.show(
+            $mdToast.simple()
+              .textContent("Eliga el pais y la ciudad a la que pertenece esa sucursal")
+              .position('top right')
+              .hideDelay(3000)
+          );
+        }
+      }else{
         guardar = false;
+        $mdToast.show(
+            $mdToast.simple()
+              .textContent("Eliga un tipo de sucursal")
+              .position('top right')
+              .hideDelay(3000)
+          );
       }
+    }else{
+      $mdToast.show(
+        $mdToast.simple()
+          .textContent("Debe Seleccionar al menos un Rubro antes de guardar")
+          .position('top right')
+          .hideDelay(3000)
+      );
     }
     if(guardar){
       yo.data.tipo = yo.radio;
@@ -96,10 +130,10 @@ angular.module('balafria')
       yo.data.id_proveedor = yo.usuario.id;
       yo.data.id_ciudad = yo.ciudad;
       yo.data.latlng = yo.latlng;
-      $http.post('/api/sucursal',yo.data)
-        .then(function(respuesta){
-          $state.go('proveedor.sucursal',{"sucursal":respuesta.data.id_sucursal});
-        });
+      // $http.post('/api/sucursal',yo.data)
+      //   .then(function(respuesta){
+      //     $state.go('proveedor.sucursal',{"sucursal":respuesta.data.id_sucursal});
+      //   });
     }
   }
 }]);

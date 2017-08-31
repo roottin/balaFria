@@ -10,6 +10,11 @@ angular.module('balafria')
   yo.newCat = {
     titulo:"Nombre de la categoria",
   }
+   yo.centro = {
+          lat: 31.353636941500987,
+          lng: -41.66015625000001,
+          zoom: 2
+  };
   //variables principales
   yo.SUID = 0; //Secuencia UID de objetos creados temporalmente
   yo.edit=false;

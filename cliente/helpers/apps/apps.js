@@ -45,6 +45,36 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
           sucursal: null
         }
       })
+       .state('cliente.formasDePago', {
+        url:'/sucursal',
+        views:{
+          "body@cliente":{
+            templateUrl: '/views/plantillas/cliente/formasDePago.html',
+            controller: 'ctrlFormasDePago',
+            controllerAs:'user'
+          }
+        }
+      })
+       .state('cliente.historial', {
+        url:'/sucursal',
+        views:{
+          "body@cliente":{
+            templateUrl: '/views/plantillas/cliente/historial.html',
+            controller: 'ctrlHistorial',
+            controllerAs:'user'
+          }
+        }
+      })
+       .state('cliente.seguridad', {
+        url:'/sucursal',
+        views:{
+          "body@cliente":{
+            templateUrl: '/views/plantillas/cliente/seguridad.html',
+            controller: 'ctrlSeguridad ',
+            controllerAs:'user'
+          }
+        }
+      })
     //-----------------------------------------proveedor--------------------------------------------------
     .state('proveedor',{
       url: '/proveedor',

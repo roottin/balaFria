@@ -124,7 +124,7 @@ module.exports = function(app){
             " left join coordenada c on s.id_coordenada = c.id_coordenada" +
             " left join menu_sucursal ms on s.id_sucursal = ms.id_sucursal" +
             " left join ciudad ci on s.id_ciudad = ci.id_ciudad" +
-            " left join coodenada cic on cic.id_coordenada = ci.id_coordenada" +
+            " left join coordenada cic on cic.id_coordenada = ci.id_coordenada" +
             " where s.id_sucursal = "+req.params.id ,
       { model: models.sucursal}
     )
