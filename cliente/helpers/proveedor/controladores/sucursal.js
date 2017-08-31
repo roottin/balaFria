@@ -63,9 +63,18 @@ angular.module('balafria')
         lng: temp.ubicacion.lng,
         message: "Estas Aqui"
       });
-      yo.centro = {
-        lat: temp.ubicacion.lat,
-        lng: temp.ubicacion.lng,
+      if(!temp.ubicacion){
+        yo.centro = {
+          lat: temp.latciu,
+          lng: temp.lngciu,
+          zoom: parseInt(temp.zoom),
+        }
+      }else{
+        yo.centro = {
+          lat: temp.ubicacion.lat,
+          lng: temp.ubicacion.lng,
+          zoom: parseInt(temp.zoom),
+        }
       }
     }
     if(temp.contactos.length){

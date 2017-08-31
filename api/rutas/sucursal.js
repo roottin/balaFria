@@ -206,7 +206,6 @@ module.exports = function(app){
               id_imagen:imagen.id_imagen,
               id_tipo_imagen:1//Banner
             }).then(function(imagen_sucursal){
-              console.log(sucursal);
               sucursal.dataValues.banner = imagen;
             });
           })
@@ -445,12 +444,12 @@ function modificarZonas(sucursal,zonas){
 };
 function crearCoordenada(req){
   return new Promise(function(resolve, reject) {
-    if(req.tipo == 'F'){
+    if(req.body.tipo == 'F'){
       models
         .coordenada
         .create({
-          "latitud":req.latlng.lat,
-          "longitud":req.latlng.lng
+          "latitud":req.body.latlng.lat,
+          "longitud":req.body.latlng.lng
         })
         .then(coordenada => {
           resolve(coordenada);

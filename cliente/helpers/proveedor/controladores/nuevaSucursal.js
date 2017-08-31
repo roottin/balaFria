@@ -125,15 +125,15 @@ angular.module('balafria')
       );
     }
     if(guardar){
-      yo.data.tipo = yo.radio;
+      yo.data.tipo = yo.tipo;
       yo.data.nombre = yo.nombre;
       yo.data.id_proveedor = yo.usuario.id;
       yo.data.id_ciudad = yo.ciudad;
       yo.data.latlng = yo.latlng;
-      // $http.post('/api/sucursal',yo.data)
-      //   .then(function(respuesta){
-      //     $state.go('proveedor.sucursal',{"sucursal":respuesta.data.id_sucursal});
-      //   });
+      $http.post('/api/sucursal',yo.data)
+         .then(function(respuesta){
+          $state.go('proveedor.sucursal',{"sucursal":respuesta.data.id_sucursal});
+         });
     }
   }
 }]);
