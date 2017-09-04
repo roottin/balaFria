@@ -2,6 +2,7 @@ angular.module('balafria')
 .controller('ctrlHeaderCli', ['$scope','Paises','Ciudades','$rootScope','$state','$sesion','$auth','$mdDialog','$http','$mdSidenav','$mdToast', function ($scope,Paises,Ciudades,$rootScope,$state,$sesion,$auth,$mdDialog,$http,$mdSidenav,$mdToast){
   var yo = this;
   yo.ciudadesAct = [];
+  //optencion de datos
   $sesion.obtenerPerfil()
     .then(function(perfil){
       yo.usuario = perfil;
@@ -29,6 +30,15 @@ angular.module('balafria')
       $scope.ciudad = 1;
       $scope.pais = 1;
     })
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position){
+      $scope.$apply(function(){
+        $rootScope.position = position; //Obtenemos info de la localizaicon
+        $rootScope.$broadcast("ubicacion obtenida",position);
+      });
+    });
+  }
+  //------------------ disparado de Eventos ---------------------------------
   $scope.$on('sesion finalizada',function(event,args){
     $scope.usuario = null
   });
@@ -49,7 +59,7 @@ angular.module('balafria')
           }
       }
      );
-
+    //------------------ Manejo de Autenticacion---------------------------------
     yo.registro = function(){
         $http.post('/api/cliente',yo.cliente)
           .then(function(resp){
@@ -126,6 +136,7 @@ angular.module('balafria')
           });
       })
   };
+  //------------------ Manejo de UI ---------------------------------
   yo.asignarCiudad = function(id){
     if(id){
       yo.ciudades.forEach(function(ciudad){
@@ -138,7 +149,7 @@ angular.module('balafria')
         }
       });
     }
-  }
+  };
   yo.cambiarImagen = function(ev){
     $mdDialog.show({
       controller: 'ctrlCambiarImg',
@@ -153,7 +164,16 @@ angular.module('balafria')
         yo.usuario = $sesion.actualizarDatos($http);
       }
     });
-  }
+  };
+  yo.irAlInicio = function(){
+    $state.go('cliente');
+  };
+  yo.verPerfil = function(){
+    $state.go('cliente.perfil');
+  };
+  yo.abrirSeguridad = function(){
+    $state.go('cliente.perfil');
+  };
   yo.toggleLeft = buildToggler('left');
   yo.toggleRight = buildToggler('right');
 

@@ -46,33 +46,55 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
         }
       })
        .state('cliente.formasDePago', {
-        url:'/sucursal',
+        url:'/formaDePago',
         views:{
           "body@cliente":{
             templateUrl: '/views/plantillas/cliente/formasDePago.html',
             controller: 'ctrlFormasDePago',
             controllerAs:'user'
           }
+        },
+        resolve:{
+          loginRequired: clienteLoggedRequired
         }
       })
        .state('cliente.historial', {
-        url:'/sucursal',
+        url:'/historial',
         views:{
           "body@cliente":{
             templateUrl: '/views/plantillas/cliente/historial.html',
             controller: 'ctrlHistorial',
             controllerAs:'user'
           }
+        },
+        resolve:{
+          loginRequired: clienteLoggedRequired
         }
       })
        .state('cliente.seguridad', {
-        url:'/sucursal',
+        url:'/seguridad',
         views:{
           "body@cliente":{
             templateUrl: '/views/plantillas/cliente/seguridad.html',
-            controller: 'ctrlSeguridad ',
+            controller: 'ctrlSeguridad',
             controllerAs:'user'
           }
+        },
+        resolve:{
+          loginRequired: clienteLoggedRequired
+        }
+      })
+       .state('cliente.perfil', {
+        url:'/perfil',
+        views:{
+          "body@cliente":{
+            templateUrl: '/views/plantillas/cliente/perfil.html',
+            controller: 'ctrlPerfil',
+            controllerAs:'perfil'
+          }
+        },
+        resolve:{
+          loginRequired: clienteLoggedRequired
         }
       })
     //-----------------------------------------proveedor--------------------------------------------------

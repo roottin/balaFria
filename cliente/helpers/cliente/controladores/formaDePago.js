@@ -1,5 +1,5 @@
 angular.module('balafria')
-.controller('ctrlFormaDePago', ['$scope', function($scope) {
+.controller('ctrlFormasDePago', ['$scope', function($scope) {
   var yo = this;
 
 }])

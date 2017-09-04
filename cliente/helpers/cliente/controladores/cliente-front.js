@@ -1,5 +1,5 @@
 angular.module('balafria')
-.controller('ctrlMap', ['leafletData','$sesion','$scope','Rubros','Sucursales','$rootScope','$state','$timeout', function (leafletData,$sesion,$scope,Rubros,Sucursales,$rootScope,$state,$timeout) {
+.controller('ctrlMap', ['$mdDialog','leafletData','$sesion','$scope','Rubros','Sucursales','$rootScope','$state','$timeout', function ($mdDialog,leafletData,$sesion,$scope,Rubros,Sucursales,$rootScope,$state,$timeout) {
   //declaracion de variables
   $scope.disponibles = [];
   $scope.rubros = [];
@@ -76,6 +76,9 @@ angular.module('balafria')
     }
     $scope.center = center;
   });
+  $scope.$on("ubicacion obtenida",function(event){
+    $scope.addUserUbication();
+  })
   $scope.$watch(function(scope) { return scope.search },
               function(newValue, oldValue) {
                   if(newValue){
@@ -86,6 +89,53 @@ angular.module('balafria')
               }
              );
 //------------------ Manejo de UI ---------------------------------
+  $scope.addUserUbication = function() {
+    var obtenida = false;
+    if(!$scope.ubicacion){
+      if($rootScope.position){
+        $scope.ubicacion = {"lat":$rootScope.position.coords.latitude,"lng":$rootScope.position.coords.longitude};
+        obtenida = true;
+      }
+    }else{
+      obtenida = true;
+    }
+    if(obtenida){
+      var html = "<div class='marker userUbi pulse'><i class='material-icons'>account_circle</i></div>"
+      $scope.addMark(html,$scope.ubicacion,{"trigger":true,"on":$scope.trigger});
+    }else{
+      $mdDialog.show(
+        $mdDialog.alert()
+          .parent(angular.element(document.body))
+          .clickOutsideToClose(true)
+          .title('Localizacion')
+          .textContent('Debes especificar tu ubicacion si deseas ordenar')
+          .ariaLabel('Alert Dialog Demo')
+          .ok('entendido')
+          .theme('light')
+      );
+    }
+  }
+  //disparo esto
+  $scope.addUserUbication();
+  //cada vez que llego al mapa
+
+  $scope.trigger = function(e){
+    $scope.ubicacion = {"lat":e.latlng.lat,"lng":e.latlng.lng};
+  };
+  $scope.abrirSeguridad = function(){
+    $state.go('cliente.seguridad');
+  };
+  $scope.filtrarFavoritos = function(){
+    /////////////////////////////////////////////////////////////////
+    // NOTE: aqui va le codigo para filtar por favoritos
+    /////////////////////////////////////////////////////////////////
+  };
+  $scope.abrirFormasDePago = function(){
+    $state.go("cliente.formasDePago");
+  };
+  $scope.verHistorial = function(){
+    $state.go("cliente.historial");
+  };
   $scope.buscar = function(value){
     Sucursales
       .filtro({filtro:value})
@@ -101,6 +151,7 @@ angular.module('balafria')
     $scope
       .removeAllMarkers()
       .then(function(){
+        $scope.addUserUbication();
         $scope.sucursales.forEach(function(letra){
           letra.sucursales.forEach(function(sucursal){
             if(sucursal.id_coordenada){
@@ -125,12 +176,16 @@ angular.module('balafria')
           });
       });
   }
-  $scope.addMark = function(html,latLng){
+  $scope.addMark = function(html,latLng,drag){
+    drag = drag || {"trigger":false,"on":null};
     var markerLocation = new L.LatLng(latLng.lat, latLng.lng);
     var helloLondonHtmlIcon = new L.HtmlIcon({
         "html" : html
     });
-    var marker = new L.Marker(markerLocation, {icon: helloLondonHtmlIcon});
+    var marker = new L.Marker(markerLocation, {icon: helloLondonHtmlIcon,draggable:drag.trigger});
+    if(drag.on){
+      marker.on('drag', drag.on);
+    }
     $scope.markers.push(marker);
     $scope.map.addLayer(marker);
   };
@@ -146,7 +201,10 @@ angular.module('balafria')
               }))
   };
   $scope.verSucursal = function(id){
-    $state.go('cliente.sucursal',{"sucursal":id});
+    console.log(id);
+    if(id){
+      $state.go('cliente.sucursal',{"sucursal":id});
+    }
   }
   $scope.organizarLista = function(result){
     $scope.letras = "abcdefghijklmnopqrstuvwxyz".toUpperCase().split('').map(function(letra){
