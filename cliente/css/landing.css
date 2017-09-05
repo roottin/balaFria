@@ -1432,19 +1432,21 @@ div.marker {
 
 div.titulo-perfil {
   width: 100%;
-  height: 400px;
+  height: 200px;
   background: #3F51B5;
-  position: relative; }
+  position: relative;
+  border-bottom: 4px solid white; }
   div.titulo-perfil img.banner {
     width: 100%;
     height: 100%; }
   div.titulo-perfil img.avatar {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     border-radius: 100px;
     position: absolute;
-    top: calc(50% - 50px);
-    left: calc(50% - 50px); }
+    bottom: calc(-75px);
+    left: calc(50% - 75px);
+    border: 4px solid white; }
 
 html, body {
   min-height: 100%; }
@@ -1477,6 +1479,8 @@ md-checkbox div.md-container div.md-icon {
   max-width: 500px;
   width: 100%;
   height: 100%; }
+  [login] h1 {
+    color: white; }
   [login] md-tabs-canvas {
     width: 100%; }
     [login] md-tabs-canvas md-pagination-wrapper {
@@ -1558,7 +1562,7 @@ md-content[landing] {
       float: left; }
     md-content[landing] header.cliente div[sociales] {
       float: right;
-      width: 340px;
+      width: auto;
       height: 50%;
       position: relative;
       top: 30%; }
