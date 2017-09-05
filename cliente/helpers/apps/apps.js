@@ -173,6 +173,25 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
           loginRequired: ProveedorLoggedRequired
         }
       })
+      .state('proveedor.perfil',{
+        url:'/perfil',
+        views:{
+          "header@proveedor":{
+            templateUrl:"/views/plantillas/proveedor/headerLogIn.html",
+            controller:'ctrlHeaderPro',
+            controllerAs:'header'
+          },
+          "body@proveedor":{
+            templateUrl: '/views/plantillas/proveedor/perfil.html'
+          },
+          "foot@proveedor":{
+            templateUrl: '/views/plantillas/proveedor/foot.html'
+          }
+        },
+        resolve:{
+          loginRequired: ProveedorLoggedRequired
+        }
+      })
       .state('proveedor.nuevaSucursal',{
         url:'/nuevaSucursal',
         views:{
