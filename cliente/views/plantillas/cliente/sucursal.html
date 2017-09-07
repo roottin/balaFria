@@ -40,16 +40,16 @@
 				<h2 >Menu</h2>
 				<!-- Filtrado -->
 				<!-- NOTE:miguel colocar aqui el html para la construccion de los mismos -->
-					<div layout="row">
-	      		<md-input-container>
-	        		<label>Items</label>
-	        			<md-select ng-model="selectedItem" md-selected-text="getSelectedText()">
-	          			<md-optgroup label="items">
-	            			<md-option ng-value="item" ng-repeat="sucursal.menu.categorias">Item {{sucursal.menu.categorias}}</md-option>
-	          				</md-optgroup>
-	        				</md-select>
-	      				</md-input-container>
-	    		</div>
+				<div layout="row">
+						<md-input-container>
+							<label>Items</label>
+								<md-select ng-model="selectedItem" md-selected-text="getSelectedText()">
+										<md-optgroup label="items">
+											<md-option ng-value="item" ng-repeat="item in sucursal.menu.categorias">Item {{item.titulo}}</md-option>
+											</md-optgroup>
+										</md-select>
+							</md-input-container>
+				<</div>
 				<!-- Filtrado -->
 				<div ng-repeat="categoria in sucursal.menu.categorias" class="categoria">
 					<div class="texto-categoria">
