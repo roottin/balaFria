@@ -87,18 +87,17 @@ angular.module('balafria')
 
   /////////////////////////////// FILTRADO //////////////////////////////////////
   // NOTE:miguel aqui coloca las funciones de filtrado para categoria y producto
-      scope.items = [1, 2, 3, 4, 5, 6, 7];
       $scope.selectedItem;
       $scope.getSelectedText = function() {
         if ($scope.yo.menu.categorias !== undefined) {
-          return "You have selected: Item " + $scope.yo.menu.categorias;
-        } else {
-          return "Por favor seleccione un item";
-        }
+            return "You have selected: Item " + $scope.yo.menu.categorias;
+              } else {
+                return "Por favor seleccione un item";
+              }
+          }
   /////////////////////////////// FILTRADO //////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
-
-
+}]);
 //////////////////////// Externas /////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 function crearPath(datos){
