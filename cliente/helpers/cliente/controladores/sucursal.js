@@ -87,14 +87,14 @@ angular.module('balafria')
 
   /////////////////////////////// FILTRADO //////////////////////////////////////
   // NOTE:miguel aqui coloca las funciones de filtrado para categoria y producto
-    $scope.items = [1, 2, 3, 4, 5, 6, 7];
-    $scope.selectedItem;
-    $scope.getSelectedText = function() {
-      if ($scope.yo.menu.categorias !== undefined) {
-        return "You have selected: Item " + $scope.yo.menu.categorias;
-      } else {
-        return "Please select an item";
-      }
+      scope.items = [1, 2, 3, 4, 5, 6, 7];
+      $scope.selectedItem;
+      $scope.getSelectedText = function() {
+        if ($scope.yo.menu.categorias !== undefined) {
+          return "You have selected: Item " + $scope.yo.menu.categorias;
+        } else {
+          return "Por favor seleccione un item";
+        }
   /////////////////////////////// FILTRADO //////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -103,17 +103,17 @@ angular.module('balafria')
 ///////////////////////////////////////////////////////////////////////////////
 function crearPath(datos){
   var path = {
-    id:datos.id,
-    type:"polygon",
-    color: '#303030',
-    weight: 2,
-    latlngs:[],
-    message: "<h3>"+datos.nombre+"</h3><p>"+datos.descripcion+"</p>"
+      id:datos.id,
+      type:"polygon",
+      color: '#303030',
+      weight: 2,
+      latlngs:[],
+      message: "<h3>"+datos.nombre+"</h3><p>"+datos.descripcion+"</p>"
   }
-  if(datos.coordenadas){
-    path.latlngs =datos.coordenadas.map(coordenada => {return coordenada.latlng});
-  }
-  {
+      if(datos.coordenadas){
+          path.latlngs =datos.coordenadas.map(coordenada => {return coordenada.latlng});
+        }
+
   return path;
 
   }
