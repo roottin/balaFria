@@ -239,8 +239,15 @@ md-dialog{
 			    width: 100%;
 			    [texto]{
 			    	float: left;
-
 			    }
+			}
+		}
+		div.filtrado-menu{
+			position: absolute;
+	    top: 5px;
+	    left: 130px;
+			md-input-container{
+				height: 58px;
 			}
 		}
 		div.descripcion,div.contactos,div.ubicacion{

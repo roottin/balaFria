@@ -40,8 +40,22 @@
 				<h2 >Menu</h2>
 				<!-- Filtrado -->
 				<!-- NOTE:miguel colocar aqui el html para la construccion de los mismos -->
+					<div class="filtrado-menu">
+						<md-input-container>
+							<label>Categorias</label>
+								<md-select ng-model="selectedItem" md-selected-text="getSelectedText()">
+									<md-optgroup label="Categorias">
+										<md-option ng-value="item" ng-repeat="item in sucursal.menu.categorias">{{item.titulo}}</md-option>
+									</md-optgroup>
+								</md-select>
+							</md-input-container>
+							<md-input-container>
+								 <label>Buscar</label>
+								 <input ng-model="campoBusqueda" type="text">
+							 </md-input-container>
+					</div>
 				<!-- Filtrado -->
-				<div ng-repeat="categoria in sucursal.menu.categorias" class="categoria">
+				<div ng-repeat="categoria in sucursal.menu.filtrado" class="categoria">
 					<div class="texto-categoria">
 						<img id="{{'cat'+categoria.id}}" ng-src="{{categoria.ruta}}" ng-click="sucursal.agregarCategoria(categoria.id)">
 							<div class="tit-cat" ng-show="categoria.titulo">

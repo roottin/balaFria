@@ -45,6 +45,7 @@ angular.module('balafria')
       });
       return categoria;
     });
+    menu.filtrado = angular.copy(menu.categorias);
     return menu;
   }
   //------------------------------Mapa------------------------------------------
@@ -86,22 +87,69 @@ angular.module('balafria')
   }
   /////////////////////////////// FILTRADO //////////////////////////////////////
   // NOTE:miguel aqui coloca las funciones de filtrado para categoria y producto
+      $scope.selectedItem;
+      $scope.getSelectedText = function() {
+        if ($scope.selectedItem !== undefined) {
+            yo.menu.filtrado = [];
+            yo.menu.filtrado = [$scope.selectedItem];
+            return $scope.selectedItem.titulo;
+        } else {
+          return "Por favor seleccione un item";
+        }
+      }
+      $scope.$watch(function(scope) { return scope.campoBusqueda },
+          function(valorNuevo, valorAnterior) {
+            if(valorNuevo){
+              yo.menu.filtrado = [];
+              yo.menu.categorias.forEach(function(categoria){
+                categoria.productos.forEach(function(producto){
+                  if(producto.nombre.toUpperCase().search(valorNuevo.toUpperCase()) !== -1){
+                    var agregar = false;
+                    yo.menu.filtrado.forEach(function(catFiltrada){
+                      if(catFiltrada.id_categoria == categoria.id_categoria){
+                        catFiltrada.productos.push(angular.copy(producto));
+                        agregar = false;
+                      }else{
+                        agregar = true;
+                      }
+                    });
+                    if(yo.menu.filtrado.length == 0){
+                      agregar = true;
+                    }
+                    if(agregar == true){
+                      yo.menu.filtrado.push(angular.copy(categoria));
+                      yo.menu.filtrado[yo.menu.filtrado.length -1].productos = [];
+                      yo.menu.filtrado[yo.menu.filtrado.length -1].productos.push(angular.copy(producto));
+                    }
+                  }
+                })
+              });
+            }else{
+              if(yo.menu){
+                yo.menu.filtrado = angular.copy(yo.menu.categorias);
+                $scope.selectedItem = undefined;
+              }
+            }
+          }
+         );
   /////////////////////////////// FILTRADO //////////////////////////////////////
-}]);
 ///////////////////////////////////////////////////////////////////////////////
+}]);
 //////////////////////// Externas /////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 function crearPath(datos){
   var path = {
-    id:datos.id,
-    type:"polygon",
-    color: '#303030',
-    weight: 2,
-    latlngs:[],
-    message: "<h3>"+datos.nombre+"</h3><p>"+datos.descripcion+"</p>"
+      id:datos.id,
+      type:"polygon",
+      color: '#303030',
+      weight: 2,
+      latlngs:[],
+      message: "<h3>"+datos.nombre+"</h3><p>"+datos.descripcion+"</p>"
   }
-  if(datos.coordenadas){
-    path.latlngs =datos.coordenadas.map(coordenada => {return coordenada.latlng});
-  }
+      if(datos.coordenadas){
+          path.latlngs =datos.coordenadas.map(coordenada => {return coordenada.latlng});
+        }
+
   return path;
-}
+
+  }

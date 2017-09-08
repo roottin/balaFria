@@ -1,0 +1,80 @@
+<header class="cliente">
+  <div titulo ng-click='toggleLeft()'>
+    BalaFria
+  </div>
+    <i class="material-icons" ng-click='toggleRight()'>account_circle</i>
+</header>
+<!-- Left side nav -->
+<md-sidenav class="md-sidenav-left" md-component-id="left" >
+  <!-- TODO:llenar con informacion de balafria y llamada a trabajar con nostros como proveedor  -->
+    <h1>asdasd</h1>
+     <div divider></div>
+     <h1>asdasd</h1>
+</md-sidenav>
+<!-- right side nav -->
+<md-sidenav   class="md-sidenav-right" md-component-id="right" >
+  <md-content login>
+  <md-toolbar class="md-theme-indigo">
+    <h1 class="md-toolbar-tools">Acceso</h1>
+  </md-toolbar>
+    <md-tabs md-dynamic-height md-border-bottom>
+       <md-tab label="Ingresar">
+           <div layout-padding layout="column" layout-sm="column"  layout-wrap>
+            <form name="formInicio" method="post">
+              <md-input-container md-no-float class="md-block">
+                <label>Nombre o Email</label>
+                <input required name="nombre" minlength="5"  ng-model="log.field">
+                  <!-- mensajes  -->
+                <div ng-messages="formInicio.nombre.$error" role="alert">
+                  <div ng-message="required">Este campo es requerido</div>
+                  <div ng-message="minlength">Debe poseer al menos 5 carateres</div>
+                </div>
+              </md-input-container>
+              <md-input-container md-no-float class="md-block" name="clave">
+                <label>Clave</label>
+                <input required type="password" ng-model="log.clave">
+                <div ng-messages="formInicio.clave.$error" role="alert">
+                  <div ng-message="required">Este campo es requerido</div>
+                </div>
+              </md-input-container>
+              <section   layout-align="center" >
+                <button class="md-raised md-primary inicio" ng-click="log.login()">Iniciar sesion</button>
+                <div divider></div>
+                <button class="google inicio" type="button" ng-click="log.authenticate('google')"><i class="ion-social-google"></i> Sign in with Google</button>
+
+              </section>
+            </form>
+          </div>
+       </md-tab>
+       <md-tab label="Registro" >
+           <div layout-padding layout="column" layout-sm="column"  layout-wrap>
+             <p >¿No posees cuenta? registrate ahora con nostros de forma totalmente gratuita y empiza a comprar con nostros</p>
+             <div divider></div><!-- linea divisora  -->
+             <md-input-container md-no-float class="md-block">
+               <label>Nombre</label>
+               <input ng-model="log.cliente.nombre">
+             </md-input-container>
+             <md-input-container md-no-float class="md-block">
+               <label>Apellido</label>
+               <input ng-model="log.cliente.apellido">
+             </md-input-container>
+             <md-input-container md-no-float class="md-block">
+               <label>Correo</label>
+               <input type="email" ng-model="log.cliente.correo">
+             </md-input-container>
+             <md-input-container md-no-float class="md-block">
+               <label>Clave</label>
+               <input type="password" ng-model="log.cliente.clave">
+             </md-input-container>
+             <md-input-container md-no-float class="md-block">
+               <label>Reingrese Clave</label>
+               <input type="password" ng-model="log.clave2">
+             </md-input-container>
+             <section layout="row"  layout-align="center" >
+               <md-button class="md-raised md-primary" ng-click="log.registro()">Enviar</md-button>
+             </section>
+           </div>
+        </md-tab>
+    </md-tabs>
+  </md-content>
+</md-sidenav>
