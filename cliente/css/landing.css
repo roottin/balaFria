@@ -944,6 +944,8 @@ md-dialog section.preview {
       position: absolute;
       top: 5px;
       left: 130px; }
+      .sucursal div[md-tabs-template] div.filtrado-menu md-input-container {
+        height: 58px; }
     .sucursal div[md-tabs-template] div.descripcion, .sucursal div[md-tabs-template] div.contactos, .sucursal div[md-tabs-template] div.ubicacion {
       margin-bottom: 20px;
       color: #303030;

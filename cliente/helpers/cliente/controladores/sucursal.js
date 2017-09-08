@@ -45,7 +45,7 @@ angular.module('balafria')
       });
       return categoria;
     });
-    menu.filtrado = menu.categorias;
+    menu.filtrado = angular.copy(menu.categorias);
     return menu;
   }
   //------------------------------Mapa------------------------------------------
@@ -98,6 +98,41 @@ angular.module('balafria')
                 return "Por favor seleccione un item";
               }
           }
+      $scope.$watch(function(scope) { return scope.campoBusqueda },
+          function(valorNuevo, valorAnterior) {
+            if(valorNuevo){
+              console.log(yo.menu.categorias);
+              yo.menu.filtrado = [];
+              yo.menu.categorias.forEach(function(categoria){
+                categoria.productos.forEach(function(producto){
+                  if(producto.nombre.toUpperCase().search(valorNuevo.toUpperCase()) !== -1){
+                    var agregar = false;
+                    yo.menu.filtrado.forEach(function(catFiltrada){
+                      if(catFiltrada.id_categoria == categoria.id_categoria){
+                        catFiltrada.productos.push(angular.copy(producto));
+                        agregar = false;
+                      }else{
+                        agregar = true;
+                      }
+                    });
+                    if(yo.menu.filtrado.length == 0){
+                      agregar = true;
+                    }
+                    if(agregar == true){
+                      yo.menu.filtrado.push(angular.copy(categoria));
+                      yo.menu.filtrado[yo.menu.filtrado.length -1].productos = [];
+                      yo.menu.filtrado[yo.menu.filtrado.length -1].productos.push(angular.copy(producto));
+                    }
+                  }
+                })
+              });
+            }else{
+              if(yo.menu){
+                yo.menu.filtrado = angular.copy(yo.menu.categorias);
+              }
+            }
+          }
+         );
   /////////////////////////////// FILTRADO //////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 }]);

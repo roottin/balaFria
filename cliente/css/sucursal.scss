@@ -246,6 +246,9 @@ md-dialog{
 			position: absolute;
 	    top: 5px;
 	    left: 130px;
+			md-input-container{
+				height: 58px;
+			}
 		}
 		div.descripcion,div.contactos,div.ubicacion{
 			margin-bottom: 20px;
