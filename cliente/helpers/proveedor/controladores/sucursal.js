@@ -10,6 +10,11 @@ angular.module('balafria')
   yo.newCat = {
     titulo:"Nombre de la categoria",
   }
+   yo.centro = {
+          lat: 31.353636941500987,
+          lng: -41.66015625000001,
+          zoom: 2
+  };
   //variables principales
   yo.SUID = 0; //Secuencia UID de objetos creados temporalmente
   yo.edit=false;
@@ -27,9 +32,16 @@ angular.module('balafria')
       yo.inicializarTemp();
     });
     //cargo menu
-    Sucursales.getMenu({id:result.id_menu},function(result){
-      yo.menu = yo.inicializarMenu(result);
-    });
+    Sucursales
+      .getMenu({id:result.id_menu})
+      .$promise
+      .then(function(result){
+        yo.menu = yo.inicializarMenu(result);
+      })
+      .catch(function(err){
+        console.log(err);
+        yo.claseMenu = "pulse";
+      });
     $sesion.obtenerPerfil()
       .then(function(result){
         yo.usuario = result;
@@ -58,6 +70,19 @@ angular.module('balafria')
         lng: temp.ubicacion.lng,
         message: "Estas Aqui"
       });
+      if(!temp.ubicacion){
+        yo.centro = {
+          lat: temp.latciu,
+          lng: temp.lngciu,
+          zoom: parseInt(temp.zoom),
+        }
+      }else{
+        yo.centro = {
+          lat: temp.ubicacion.lat,
+          lng: temp.ubicacion.lng,
+          zoom: parseInt(temp.zoom),
+        }
+      }
     }
     if(temp.contactos.length){
       var tipos={
@@ -295,9 +320,13 @@ angular.module('balafria')
       clickOutsideToClose:true,
     }).then(function(categoria){
       if(categoria){
-        Sucursales.getMenu({id:yo.menu.id_menu},function(result){
-          yo.menu = yo.inicializarMenu(result);
-        });
+        Sucursales
+          .getMenu({id:result.id_menu})
+          .$promise
+          .then(function(result){
+            yo.claseMenu = "";
+            yo.menu = yo.inicializarMenu(result);
+          });
       }
     });
   };

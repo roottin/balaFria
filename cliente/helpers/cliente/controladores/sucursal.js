@@ -85,7 +85,6 @@ angular.module('balafria')
       });
     });
   }
-
   /////////////////////////////// FILTRADO //////////////////////////////////////
   // NOTE:miguel aqui coloca las funciones de filtrado para categoria y producto
       $scope.selectedItem;

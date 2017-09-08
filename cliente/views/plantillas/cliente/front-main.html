@@ -70,19 +70,19 @@
     </div>
     <md-toolbar ng-show="usuario" class="md-hue-2 bottom">
       <div class="md-toolbar-tools" layout="row" layout-align="space-around center">
-        <md-button class="md-icon-button" aria-label="Favorite"  >
+        <md-button class="md-icon-button" ng-click="abrirFormasDePago()" aria-label="Favorite"  >
           <i class="material-icons">payment</i>
         </md-button>
 
-        <md-button class="md-icon-button" aria-label="More" >
+        <md-button class="md-icon-button" ng-click="verHistorial()" aria-label="More" >
           <i class="material-icons">history</i>
         </md-button>
 
-        <md-button class="md-icon-button" aria-label="More" >
+        <md-button class="md-icon-button" ng-click="filtrarFavoritos()" aria-label="More" >
           <i class="material-icons">favorite</i>
         </md-button>
 
-        <md-button class="md-icon-button" aria-label="More" >
+        <md-button class="md-icon-button" ng-click="abrirSeguridad()"aria-label="More" >
           <i class="material-icons">security</i>
         </md-button>
       </div>

@@ -86,10 +86,11 @@ md-dialog div.cont-pais {
     border-radius: 40px;
     background: #3F51B5;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
-md-dialog div.mod-form-map {
+
+div.mod-form-map {
   width: 100%;
   height: 300px; }
-  md-dialog div.mod-form-map div.angular-leaflet-map {
+  div.mod-form-map div.angular-leaflet-map {
     width: 100%;
     height: 100%; }
 
@@ -1420,9 +1421,41 @@ div.marker {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   margin-left: -15px;
   margin-top: -15px; }
+  div.marker.userUbi {
+    background: #3F51B5;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    width: 20px;
+    height: 20px;
+    color: white;
+    position: relative; }
+    div.marker.userUbi i {
+      position: absolute;
+      bottom: -3px;
+      right: -3px; }
   div.marker img {
     width: 100%;
     height: 100%; }
+
+div.titulo-perfil {
+  width: 100%;
+  height: 200px;
+  background: #3F51B5;
+  position: relative;
+  border-bottom: 1px solid white; }
+  div.titulo-perfil img.banner {
+    width: 100%;
+    height: 100%; }
+  div.titulo-perfil img.avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 100px;
+    position: absolute;
+    bottom: calc(-75px);
+    left: calc(50% - 75px);
+    border: 4px solid white; }
+
+div.cuerpo-perfil {
+  margin-top: 100px; }
 
 html, body {
   min-height: 100%; }
@@ -1455,6 +1488,8 @@ md-checkbox div.md-container div.md-icon {
   max-width: 500px;
   width: 100%;
   height: 100%; }
+  [login] h1 {
+    color: white; }
   [login] md-tabs-canvas {
     width: 100%; }
     [login] md-tabs-canvas md-pagination-wrapper {
@@ -1536,7 +1571,7 @@ md-content[landing] {
       float: left; }
     md-content[landing] header.cliente div[sociales] {
       float: right;
-      width: 340px;
+      width: auto;
       height: 50%;
       position: relative;
       top: 30%; }

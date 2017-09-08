@@ -21,8 +21,6 @@
         </md-option>
       </md-select>
     </md-input-container>
-    <div class="clear"></div>
-    <br>
     <md-input-container  md-no-float class="md-block" ng-show="sucursal.pais">
       <label>Ciudad</label>
       <md-select ng-model="sucursal.ciudad">
@@ -32,15 +30,22 @@
         </md-option>
       </md-select>
     </md-input-container>
+    <br>
     <h4 class="md-primary">Tipo de Sucursal</h4>
     <md-divider></md-divider>
     <br>
-    <md-radio-group  ng-model="sucursal.radio" layout="row">
+    <md-radio-group  ng-model="sucursal.tipo" layout="row">
 
       <md-radio-button value="F" class="md-primary">Fisica</md-radio-button>
       <md-radio-button value="V" class="md-primary">Virtual </md-radio-button>
 
     </md-radio-group>
+    <br>
+    <label ng-show="sucursal.tipo=='F'">Ubicacion</label>
+    <div class="mod-form-map" ng-show="sucursal.tipo=='F'">
+       <leaflet lf-center="sucursal.centro" markers="sucursal.markers"></leaflet>
+    </div>
+    <br>
     <br>
     <h4 class="md-primary">¿Que rubro vendera esta sucursal?</h4>
     <md-divider></md-divider>

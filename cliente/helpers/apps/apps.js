@@ -45,6 +45,58 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
           sucursal: null
         }
       })
+       .state('cliente.formasDePago', {
+        url:'/formaDePago',
+        views:{
+          "body@cliente":{
+            templateUrl: '/views/plantillas/cliente/formasDePago.html',
+            controller: 'ctrlFormasDePago',
+            controllerAs:'user'
+          }
+        },
+        resolve:{
+          loginRequired: clienteLoggedRequired
+        }
+      })
+       .state('cliente.historial', {
+        url:'/historial',
+        views:{
+          "body@cliente":{
+            templateUrl: '/views/plantillas/cliente/historial.html',
+            controller: 'ctrlHistorial',
+            controllerAs:'user'
+          }
+        },
+        resolve:{
+          loginRequired: clienteLoggedRequired
+        }
+      })
+       .state('cliente.seguridad', {
+        url:'/seguridad',
+        views:{
+          "body@cliente":{
+            templateUrl: '/views/plantillas/cliente/seguridad.html',
+            controller: 'ctrlSeguridad',
+            controllerAs:'user'
+          }
+        },
+        resolve:{
+          loginRequired: clienteLoggedRequired
+        }
+      })
+       .state('cliente.perfil', {
+        url:'/perfil',
+        views:{
+          "body@cliente":{
+            templateUrl: '/views/plantillas/cliente/perfil.html',
+            controller: 'ctrlPerfil',
+            controllerAs:'perfil'
+          }
+        },
+        resolve:{
+          loginRequired: clienteLoggedRequired
+        }
+      })
     //-----------------------------------------proveedor--------------------------------------------------
     .state('proveedor',{
       url: '/proveedor',
@@ -112,6 +164,25 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
           },
           "body@proveedor":{
             templateUrl: '/views/plantillas/proveedor/dashboard.html'
+          },
+          "foot@proveedor":{
+            templateUrl: '/views/plantillas/proveedor/foot.html'
+          }
+        },
+        resolve:{
+          loginRequired: ProveedorLoggedRequired
+        }
+      })
+      .state('proveedor.perfil',{
+        url:'/perfil',
+        views:{
+          "header@proveedor":{
+            templateUrl:"/views/plantillas/proveedor/headerLogIn.html",
+            controller:'ctrlHeaderPro',
+            controllerAs:'header'
+          },
+          "body@proveedor":{
+            templateUrl: '/views/plantillas/proveedor/perfil.html'
           },
           "foot@proveedor":{
             templateUrl: '/views/plantillas/proveedor/foot.html'
