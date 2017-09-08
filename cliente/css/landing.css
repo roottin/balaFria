@@ -940,6 +940,10 @@ md-dialog section.preview {
         width: 100%; }
         .sucursal div[md-tabs-template] H2 .menu [texto] {
           float: left; }
+    .sucursal div[md-tabs-template] div.filtrado-menu {
+      position: absolute;
+      top: 5px;
+      left: 130px; }
     .sucursal div[md-tabs-template] div.descripcion, .sucursal div[md-tabs-template] div.contactos, .sucursal div[md-tabs-template] div.ubicacion {
       margin-bottom: 20px;
       color: #303030;

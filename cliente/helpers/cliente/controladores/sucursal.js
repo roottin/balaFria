@@ -45,6 +45,7 @@ angular.module('balafria')
       });
       return categoria;
     });
+    menu.filtrado = menu.categorias;
     return menu;
   }
   //------------------------------Mapa------------------------------------------
@@ -89,8 +90,10 @@ angular.module('balafria')
   // NOTE:miguel aqui coloca las funciones de filtrado para categoria y producto
       $scope.selectedItem;
       $scope.getSelectedText = function() {
-        if ($scope.yo.menu.categorias !== undefined) {
-            return "You have selected: Item " + $scope.yo.menu.categorias;
+        if ($scope.selectedItem !== undefined) {
+            yo.menu.filtrado = [];
+            yo.menu.filtrado = [$scope.selectedItem];
+            return $scope.selectedItem.titulo;
               } else {
                 return "Por favor seleccione un item";
               }
