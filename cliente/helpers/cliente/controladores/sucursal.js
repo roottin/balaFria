@@ -94,14 +94,13 @@ angular.module('balafria')
             yo.menu.filtrado = [];
             yo.menu.filtrado = [$scope.selectedItem];
             return $scope.selectedItem.titulo;
-              } else {
-                return "Por favor seleccione un item";
-              }
-          }
+        } else {
+          return "Por favor seleccione un item";
+        }
+      }
       $scope.$watch(function(scope) { return scope.campoBusqueda },
           function(valorNuevo, valorAnterior) {
             if(valorNuevo){
-              console.log(yo.menu.categorias);
               yo.menu.filtrado = [];
               yo.menu.categorias.forEach(function(categoria){
                 categoria.productos.forEach(function(producto){
@@ -129,6 +128,7 @@ angular.module('balafria')
             }else{
               if(yo.menu){
                 yo.menu.filtrado = angular.copy(yo.menu.categorias);
+                $scope.selectedItem = undefined;
               }
             }
           }
