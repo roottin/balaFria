@@ -372,6 +372,9 @@ md-content[landing]{
               i.fav{
                 margin-top: 15px;
                 font-size: 28px;
+                &.fill{
+                  color:$color-favs;
+                }
               }
             }
           }

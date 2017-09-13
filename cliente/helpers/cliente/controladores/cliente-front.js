@@ -1,5 +1,5 @@
 angular.module('balafria')
-.controller('ctrlMap', ['$mdDialog','leafletData','$sesion','$scope','Rubros','Sucursales','$rootScope','$state','$timeout', function ($mdDialog,leafletData,$sesion,$scope,Rubros,Sucursales,$rootScope,$state,$timeout) {
+.controller('ctrlMap', ['Favs','$mdDialog','leafletData','$sesion','$scope','Rubros','Sucursales','$rootScope','$state','$timeout', function (Favs,$mdDialog,leafletData,$sesion,$scope,Rubros,Sucursales,$rootScope,$state,$timeout) {
   //declaracion de variables
   $scope.disponibles = [];
   $scope.rubros = [];
@@ -30,6 +30,13 @@ angular.module('balafria')
     .then(function(perfil){
       $scope.usuario = perfil;
       $scope.clase="logeado";
+      Favs
+        .get({id:perfil.id})
+        .$promise
+        .then(function(favs){
+          $scope.favs = favs;
+          $scope.gestionarFavs(favs);
+        });
     })
     .catch(function(error){
       $scope.usuario = null;
@@ -42,6 +49,7 @@ angular.module('balafria')
         $scope.sucursales = $scope.organizarLista(result);
         $scope.vistaLista();
         $scope.ubicarSucursales();
+        $scope.gestionarFavs();
       });
   }
   $scope.buscarSucursalesRubro = function(rubro){
@@ -53,6 +61,7 @@ angular.module('balafria')
         $scope.sucursales = $scope.organizarLista(result);
         $scope.vistaLista();
         $scope.ubicarSucursales();
+        $scope.gestionarFavs();
       })
   };
   //------------------ disparado de Eventos ---------------------------------
@@ -89,6 +98,43 @@ angular.module('balafria')
               }
              );
 //------------------ Manejo de UI ---------------------------------
+  $scope.toggleFav = function(sucursal){
+    if(!sucursal.fav){
+      Favs
+        .add({"id_sucursal":sucursal.id_sucursal,"id_cliente":$scope.usuario.id})
+        .$promise
+        .then(function(response){          
+            sucursal.class = "fill";
+            sucursal.icono = "favorite";
+            sucursal.fav = response.id;
+        });
+    }else{
+       Favs
+        .remove({"id":sucursal.fav})
+        .$promise
+        .then(function(response){          
+            sucursal.class = "";
+            sucursal.icono = "favorite_border";
+            sucursal.fav = false;
+        });
+    }
+  }
+  $scope.gestionarFavs = function(favs){
+    favs = favs || $scope.favs;
+    if(favs.length){
+      favs.forEach(function(fav){
+        $scope.sucursales.forEach(function(letra){
+          letra.sucursales.forEach(function(sucursal){
+            if(sucursal.id_sucursal == fav.id_sucursal){
+              sucursal.class = "fill";
+              sucursal.icono = "favorite";
+              sucursal.fav = fav.id;
+            }
+          });
+        });
+      })
+    }
+  }
   $scope.addUserUbication = function() {
     var obtenida = false;
     if(!$scope.ubicacion){
@@ -126,9 +172,16 @@ angular.module('balafria')
     $state.go('cliente.seguridad');
   };
   $scope.filtrarFavoritos = function(){
-    /////////////////////////////////////////////////////////////////
-    // NOTE: aqui va le codigo para filtar por favoritos
-    /////////////////////////////////////////////////////////////////
+    Sucursales
+      .getbyFavs({"id_cliente":$scope.usuario.id,"id_ciudad":$scope.ciudad.id_ciudad})
+      $promise
+      .then(function(sucursales){
+        $scope.sucursales = [];
+        $scope.sucursales = $scope.organizarLista(result);
+        $scope.vistaLista();
+        $scope.ubicarSucursales();
+        $scope.gestionarFavs();
+      })
   };
   $scope.abrirFormasDePago = function(){
     $state.go("cliente.formasDePago");
@@ -212,6 +265,7 @@ angular.module('balafria')
     });
     var sucursales = [];
     result.forEach(function(sucursal){
+      sucursal.icono = "favorite_border";
       $scope.letras.forEach(function(letra){
         if (sucursal.nombre.substr(0,1).toUpperCase() === letra.letra) {
           letra.estado = "activa";

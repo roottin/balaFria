@@ -39,7 +39,7 @@
               <h3>{{ sucursal.nombre }}</h3>
               <p>{{ sucursal.descripcion }}</p>
             </div>
-            <i class="material-icons fav" >favorite_border</i>
+            <i class="material-icons {{sucursal.class}} fav" ng-click="toggleFav(sucursal)" ng-show="usuario">{{sucursal.icono}}</i>
             <md-divider ></md-divider>
           </md-list-item>
         </div><!--- Letra -->

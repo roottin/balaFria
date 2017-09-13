@@ -1753,6 +1753,8 @@ md-content[landing] {
           md-content[landing] div[principal] div[lista] div.cont-sucursales md-list div.letra i.fav {
             margin-top: 15px;
             font-size: 28px; }
+            md-content[landing] div[principal] div[lista] div.cont-sucursales md-list div.letra i.fav.fill {
+              color: #b71c1c; }
         md-content[landing] div[principal] div[lista] div.cont-sucursales i.cerrar {
           position: absolute;
           right: 0px;

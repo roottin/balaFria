@@ -75,6 +75,21 @@ module.exports = function(app){
         res.json(sucursales);
       });
   });
+  //NOTE: obtener sucursales favoritas por un usuario
+  app.get('/api/sucursal/cliente/:id_cliente&:id_ciudad', function(req, res) {
+    models.sequelize
+      .query("select s.*, i.ruta,c.latitud, c.longitud from sucursal s "+
+        "join imagen_proveedor ip on s.id_proveedor = ip.id_proveedor "+
+        "join imagen i on ip.id_imagen = i.id_imagen "+
+        "join favorito f on s.id_sucursal = f.id_sucursal "+
+        "left join coordenada c on s.id_coordenada = c.id_coordenada " +
+        "where f.id_cliente = "+req.params.id_cliente+
+        " and s.id_ciudad = "+req.params.id_ciudad,
+        { model: models.sucursal})
+      .then(function(sucursales){
+        res.json(sucursales);
+      });
+  });
   //NOTE: obtener sucursales
   app.get('/api/sucursales/:id', function(req, res) {
     models.sucursal.findAll({

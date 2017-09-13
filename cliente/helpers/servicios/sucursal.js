@@ -33,6 +33,12 @@ angular.module('balafria')
       method:'GET',
       url:'/api/sucursal/ciudad/:id',
       params:{id: '@id'},
+    },
+    'getByFavs':{
+      method:'GET',
+      url:'/api/sucursal/cliente/:id_cliente&:id_ciudad',
+      params:{id_cliente: '@id_cliente',id_ciudad :'@id_ciudad'},
+      isArray:true
     }
   });
 }]);
