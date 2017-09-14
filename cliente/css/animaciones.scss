@@ -160,5 +160,30 @@
     100% {
       width: 80%;
       height: 600px;
+      border-radius: 3px;
+    }
+}
+.cerrar{
+  animation-name: cerrar;
+  animation-duration: 1s;
+  animation-delay: 0s;
+  animation-fill-mode:forwards;
+}
+@keyframes cerrar {
+    0%   {
+      width: 80%;
+      height: 600px;
+      border-radius: 3px;
+    }
+    25%{
+      width: 80%
+    }
+    75%{
+      height: 50px;
+    }
+    100% {
+      width: 50px;
+      height: 50px;
+      border-radius: 100px;
     }
 }
