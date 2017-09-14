@@ -1,0 +1,30 @@
+div[ui-view="cart"]{
+  height: 0px;
+  div.omni-cart{
+    z-index: 999999;
+    &.cerrado{
+      width: 50px;
+      height: 50px;
+      background-color: $color-primary;
+      border:2px solid white;
+      border-radius: 100px;
+      color: white;
+    }
+    &.abierto{
+      border-radius: 3px;
+      background: white;
+      border:1px solid silver;
+    }
+    &.inactivo{
+      display: none;
+    }
+    &.activo{
+      position: fixed !important;
+    }
+    i{
+      margin-top: 10px;
+      margin-left: 9px;
+      font-size: 28px;
+    }
+  }
+}

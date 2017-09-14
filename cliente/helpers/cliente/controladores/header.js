@@ -38,7 +38,7 @@ angular.module('balafria')
       });
     });
   }
-  //------------------ disparado de Eventos ---------------------------------
+  //------------------ Eventos ---------------------------------
   $scope.$on('sesion finalizada',function(event,args){
     $scope.usuario = null
   });

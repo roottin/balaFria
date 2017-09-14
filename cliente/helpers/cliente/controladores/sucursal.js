@@ -1,5 +1,5 @@
 angular.module('balafria')
-.controller('ctrlSucursalCliente', ['$stateParams','Categorias','Productos','$mdToast','$state','Sucursales','$scope','$timeout','$sesion','$mdDialog','$http','Proveedores', function ($stateParams,Categorias,Productos,$mdToast,$state,Sucursales,$scope,$timeout,$sesion,$mdDialog,$http,Proveedores){
+.controller('ctrlSucursalCliente', ['$rootScope','$stateParams','Categorias','Productos','$mdToast','$state','Sucursales','$scope','$timeout','$sesion','$mdDialog','$http','Proveedores', function ($rootScope,$stateParams,Categorias,Productos,$mdToast,$state,Sucursales,$scope,$timeout,$sesion,$mdDialog,$http,Proveedores){
   var yo = this;
   $state.params = $stateParams;
   yo.SUID = 0; //Secuencia UID de objetos creados temporalmente
@@ -85,6 +85,9 @@ angular.module('balafria')
       });
     });
   }
+  yo.agregarAlCarrito = function(producto){
+    $rootScope.$broadcast('actCart');
+  };
   /////////////////////////////// FILTRADO //////////////////////////////////////
   // NOTE:miguel aqui coloca las funciones de filtrado para categoria y producto
       $scope.selectedItem;
@@ -130,8 +133,7 @@ angular.module('balafria')
                 $scope.selectedItem = undefined;
               }
             }
-          }
-         );
+          });
   /////////////////////////////// FILTRADO //////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 }]);
@@ -145,11 +147,9 @@ function crearPath(datos){
       weight: 2,
       latlngs:[],
       message: "<h3>"+datos.nombre+"</h3><p>"+datos.descripcion+"</p>"
-  }
-      if(datos.coordenadas){
-          path.latlngs =datos.coordenadas.map(coordenada => {return coordenada.latlng});
-        }
-
+  };
+  if(datos.coordenadas){
+      path.latlngs =datos.coordenadas.map(coordenada => {return coordenada.latlng});
+    }
   return path;
-
-  }
+}

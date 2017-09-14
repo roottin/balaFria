@@ -13,6 +13,7 @@
 @import "foot.scss";
 @import "mapa.scss";
 @import "perfil.scss";
+@import "cart.scss";
 
 html,body{
   min-height: 100%;
@@ -144,7 +145,7 @@ md-content[landing]{
           float: left;
           margin-right: 5px;
         }
-        
+
       }
     }
     div[titulo]{

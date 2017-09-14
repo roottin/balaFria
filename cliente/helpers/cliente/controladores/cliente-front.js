@@ -103,7 +103,7 @@ angular.module('balafria')
       Favs
         .add({"id_sucursal":sucursal.id_sucursal,"id_cliente":$scope.usuario.id})
         .$promise
-        .then(function(response){          
+        .then(function(response){
             sucursal.class = "fill";
             sucursal.icono = "favorite";
             sucursal.fav = response.id;
@@ -112,7 +112,7 @@ angular.module('balafria')
        Favs
         .remove({"id":sucursal.fav})
         .$promise
-        .then(function(response){          
+        .then(function(response){
             sucursal.class = "";
             sucursal.icono = "favorite_border";
             sucursal.fav = false;
@@ -120,7 +120,7 @@ angular.module('balafria')
     }
   }
   $scope.gestionarFavs = function(favs){
-    favs = favs || $scope.favs;
+    favs = favs || $scope.favs || [];
     if(favs.length){
       favs.forEach(function(fav){
         $scope.sucursales.forEach(function(letra){

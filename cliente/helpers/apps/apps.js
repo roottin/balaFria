@@ -1,4 +1,4 @@
-angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','ui.router',"satellizer",'leaflet-directive','ngFileUpload'])
+angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','ui.router',"satellizer",'leaflet-directive','ngFileUpload','draggabilly'])
 .config(['$stateProvider','$urlRouterProvider','$mdThemingProvider','$authProvider','$compileProvider', function ($stateProvider,$urlRouterProvider,$mdThemingProvider,$authProvider,$compileProvider) {
   $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|tel|file|blob):/);
   //-------------------------------- Autenticacion ----------------------------------------
@@ -20,6 +20,11 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
       views:{
         "@":{
           templateUrl: '/views/plantillas/cliente/front.html',
+        },
+        "cart@cliente":{
+          templateUrl:"/views/plantillas/cliente/cart.html",
+          controller:'ctrlCart',
+          controllerAs:'cart'
         },
         "header@cliente":{
           templateUrl:"/views/plantillas/cliente/header.html",
