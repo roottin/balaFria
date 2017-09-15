@@ -1,7 +1,7 @@
 div[ui-view="cart"]{
   height: 0px;
   div.omni-cart{
-    z-index: 999999;    
+    z-index: 999999;
     @include BoxShadowHelper(3);
     left:160px;
     top:5px;
@@ -51,37 +51,44 @@ div[ui-view="cart"]{
         border-radius:50%;
       }
     }
-    div.item-cart,div.header-cart{     
-      height: 80px;
-      margin-top: 10px;  
+    div.item-cart,div.header-cart{
+      height: 120px;
+      margin-top: 10px;
       color:black;
       img.imagen{
-        width: 70px;
-        height: 70px;
+        width: 100px;
+        height: 100px;
         @include BoxShadowHelper(1);
         float:left;
       }
-      div{ 
-        width: calc((100% - 80px) / 4);
-        padding: 5px;
-        float:left;
-        text-align: center;
-        height: 100%;
-        input{
-          font-size: 15px;
-          width: calc(100% - 10px);
-          height: 100%;
-          margin: 5px;
-          border: none;
-          padding: 0px;
-        }
-        &.cantidad{
-          input{
-            font-size: 25px;
+      div{
+        width:calc(100% - 120px);
+        margin-left: 10px;
+        margin-top: 5px;
+        float: left;
+        &.nombre{
+          color:rgba($color-primary,0.6);
+          font-size: 18px;
+          p{
+            color:rgba(black,0.6);
+            font-size: 15px;
           }
         }
-        &.nombre{
-          padding-top: 10px;    
+        &.valor{
+          font-size: 15px;
+          div.cantidad{
+            width: auto;
+            float:right;
+          }
+          div.precio{
+            width: auto;
+            float: left;
+            color:$color-precio;
+            font-weight: bold;
+          }
+        }
+        i{
+          font-size: 15px;
         }
       }
     }
@@ -90,7 +97,7 @@ div[ui-view="cart"]{
       border-bottom: 1px solid rgba(black,0.3);
       margin-left: 10px;
     }
-    div.header-cart{         
+    div.header-cart{
       height: 35px;
       border-bottom: 1px solid rgba($color-primary,0.3);
       width: calc(100%);

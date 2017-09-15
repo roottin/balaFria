@@ -1573,31 +1573,37 @@ div[ui-view="cart"] {
       flex: none;
       border-radius: 50%; }
     div[ui-view="cart"] div.omni-cart div.item-cart, div[ui-view="cart"] div.omni-cart div.header-cart {
-      height: 80px;
+      height: 120px;
       margin-top: 10px;
       color: black; }
       div[ui-view="cart"] div.omni-cart div.item-cart img.imagen, div[ui-view="cart"] div.omni-cart div.header-cart img.imagen {
-        width: 70px;
-        height: 70px;
+        width: 100px;
+        height: 100px;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
         float: left; }
       div[ui-view="cart"] div.omni-cart div.item-cart div, div[ui-view="cart"] div.omni-cart div.header-cart div {
-        width: calc((100% - 80px) / 4);
-        padding: 5px;
-        float: left;
-        text-align: center;
-        height: 100%; }
-        div[ui-view="cart"] div.omni-cart div.item-cart div input, div[ui-view="cart"] div.omni-cart div.header-cart div input {
-          font-size: 15px;
-          width: calc(100% - 10px);
-          height: 100%;
-          margin: 5px;
-          border: none;
-          padding: 0px; }
-        div[ui-view="cart"] div.omni-cart div.item-cart div.cantidad input, div[ui-view="cart"] div.omni-cart div.header-cart div.cantidad input {
-          font-size: 25px; }
+        width: calc(100% - 120px);
+        margin-left: 10px;
+        margin-top: 5px;
+        float: left; }
         div[ui-view="cart"] div.omni-cart div.item-cart div.nombre, div[ui-view="cart"] div.omni-cart div.header-cart div.nombre {
-          padding-top: 10px; }
+          color: rgba(63, 81, 181, 0.6);
+          font-size: 18px; }
+          div[ui-view="cart"] div.omni-cart div.item-cart div.nombre p, div[ui-view="cart"] div.omni-cart div.header-cart div.nombre p {
+            color: rgba(0, 0, 0, 0.6);
+            font-size: 15px; }
+        div[ui-view="cart"] div.omni-cart div.item-cart div.valor, div[ui-view="cart"] div.omni-cart div.header-cart div.valor {
+          font-size: 15px; }
+          div[ui-view="cart"] div.omni-cart div.item-cart div.valor div.cantidad, div[ui-view="cart"] div.omni-cart div.header-cart div.valor div.cantidad {
+            width: auto;
+            float: right; }
+          div[ui-view="cart"] div.omni-cart div.item-cart div.valor div.precio, div[ui-view="cart"] div.omni-cart div.header-cart div.valor div.precio {
+            width: auto;
+            float: left;
+            color: #b71c1c;
+            font-weight: bold; }
+        div[ui-view="cart"] div.omni-cart div.item-cart div i, div[ui-view="cart"] div.omni-cart div.header-cart div i {
+          font-size: 15px; }
     div[ui-view="cart"] div.omni-cart div.item-cart {
       width: calc(100% - 20px);
       border-bottom: 1px solid rgba(0, 0, 0, 0.3);
