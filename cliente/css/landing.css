@@ -1,3 +1,9 @@
+.color-primario {
+  background-color: #3F51B5; }
+
+.texto-primario {
+  color: #3F51B5; }
+
 div[input-file] {
   border: 1px solid silver;
   width: 160px;
@@ -1370,46 +1376,52 @@ md-dialog section.preview {
     transform: scale(1);
     left: 0; } }
 /*-------------carrito--------------------------------*/
-.abrir {
-  animation-name: abrir;
-  animation-duration: 1s;
+.abrir-cart {
+  animation-name: abrir-cart;
+  animation-duration: 0.5s;
   animation-delay: 0s;
   animation-fill-mode: forwards; }
 
-@keyframes abrir {
+@keyframes abrir-cart {
   0% {
     width: 50px;
     height: 50px;
-    border-radius: 100px; }
+    border-radius: 100px;
+    background-color: #3F51B5; }
   25% {
-    height: 50px; }
+    height: 50px;
+    background-color: white; }
   75% {
-    width: 80%;
+    width: 500px;
     border-radius: 3px; }
   100% {
-    width: 80%;
+    width: 500px;
     height: 600px;
-    border-radius: 3px; } }
-.cerrar {
-  animation-name: cerrar;
-  animation-duration: 1s;
+    border-radius: 3px;
+    background-color: white; } }
+.cerrar-cart {
+  animation-name: cerrar-cart;
+  animation-duration: 0.5s;
   animation-delay: 0s;
   animation-fill-mode: forwards; }
 
-@keyframes cerrar {
+@keyframes cerrar-cart {
   0% {
-    width: 80%;
+    width: 500px;
     height: 600px;
-    border-radius: 3px; }
+    border-radius: 3px;
+    background-color: white; }
   25% {
-    width: 80%; }
+    width: 500px; }
   75% {
     height: 50px;
-    border-radius: 3px; }
+    border-radius: 3px;
+    background-color: white; }
   100% {
     width: 50px;
     height: 50px;
-    border-radius: 100px; } }
+    border-radius: 100px;
+    background-color: #3F51B5; } }
 div.foot {
   text-align: center; }
   div.foot h1 {
@@ -1523,7 +1535,10 @@ div[ui-view="cart"] {
   height: 0px; }
   div[ui-view="cart"] div.omni-cart {
     z-index: 999999;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); }
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    left: 160px;
+    top: 5px;
+    overflow: hidden; }
     div[ui-view="cart"] div.omni-cart.cerrado {
       width: 50px;
       height: 50px;
@@ -1531,10 +1546,18 @@ div[ui-view="cart"] {
       border: 2px solid white;
       border-radius: 100px;
       color: white; }
+      div[ui-view="cart"] div.omni-cart.cerrado i.icono-carro {
+        display: block; }
+      div[ui-view="cart"] div.omni-cart.cerrado div.cart-content {
+        display: none; }
     div[ui-view="cart"] div.omni-cart.abierto {
       border-radius: 3px;
       background: white;
       border: 1px solid silver; }
+      div[ui-view="cart"] div.omni-cart.abierto i.icono-carro {
+        display: none; }
+      div[ui-view="cart"] div.omni-cart.abierto div.cart-content {
+        display: block; }
     div[ui-view="cart"] div.omni-cart.inactivo {
       display: none; }
     div[ui-view="cart"] div.omni-cart.activo {
@@ -1542,7 +1565,50 @@ div[ui-view="cart"] {
     div[ui-view="cart"] div.omni-cart i {
       margin-top: 10px;
       margin-left: 9px;
-      font-size: 28px; }
+      font-size: 28px;
+      cursor: pointer; }
+    div[ui-view="cart"] div.omni-cart md-toolbar img {
+      width: 40px;
+      height: 40px;
+      flex: none;
+      border-radius: 50%; }
+    div[ui-view="cart"] div.omni-cart div.item-cart, div[ui-view="cart"] div.omni-cart div.header-cart {
+      height: 80px;
+      margin-top: 10px;
+      color: black; }
+      div[ui-view="cart"] div.omni-cart div.item-cart img.imagen, div[ui-view="cart"] div.omni-cart div.header-cart img.imagen {
+        width: 70px;
+        height: 70px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+        float: left; }
+      div[ui-view="cart"] div.omni-cart div.item-cart div, div[ui-view="cart"] div.omni-cart div.header-cart div {
+        width: calc((100% - 80px) / 4);
+        padding: 5px;
+        float: left;
+        text-align: center;
+        height: 100%; }
+        div[ui-view="cart"] div.omni-cart div.item-cart div input, div[ui-view="cart"] div.omni-cart div.header-cart div input {
+          font-size: 15px;
+          width: calc(100% - 10px);
+          height: 100%;
+          margin: 5px;
+          border: none;
+          padding: 0px; }
+        div[ui-view="cart"] div.omni-cart div.item-cart div.cantidad input, div[ui-view="cart"] div.omni-cart div.header-cart div.cantidad input {
+          font-size: 25px; }
+        div[ui-view="cart"] div.omni-cart div.item-cart div.nombre, div[ui-view="cart"] div.omni-cart div.header-cart div.nombre {
+          padding-top: 10px; }
+    div[ui-view="cart"] div.omni-cart div.item-cart {
+      width: calc(100% - 20px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+      margin-left: 10px; }
+    div[ui-view="cart"] div.omni-cart div.header-cart {
+      height: 35px;
+      border-bottom: 1px solid rgba(63, 81, 181, 0.3);
+      width: calc(100%); }
+      div[ui-view="cart"] div.omni-cart div.header-cart div.producto {
+        text-align: center;
+        width: calc(((100% - 80px) / 4) + 75px); }
 
 html, body {
   min-height: 100%; }

@@ -2,3 +2,9 @@ $color-primary:#3F51B5;
 $color-warn:#FFC107;
 $color-acent:#FFB300;
 $color-favs:#b71c1c;
+.color-primario{
+	background-color: $color-primary;
+}
+.texto-primario{
+	color:$color-primary;
+}

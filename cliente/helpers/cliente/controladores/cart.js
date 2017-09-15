@@ -2,22 +2,31 @@ angular.module('balafria')
 .controller('ctrlCart', ['$scope',"$sesion", function($scope,$sesion) {
   var yo = this;
   yo.nodo = document.querySelector('div.omni-cart');
+  yo.estado = "min";
   //------------------ Eventos ---------------------------------
   yo.nodo.ondblclick=function(nodo){
-    if(yo.nodo.classList.contains('abrir')){
-      yo.nodo.classList.add('cerrado');
-      yo.nodo.classList.add('cerrar');
-      yo.nodo.classList.remove('abierto');
-      yo.nodo.classList.remove('abrir');
+    if(yo.nodo.classList.contains('abrir-cart')){
+      yo.estado = 'min';
+      cerrar(yo.nodo);
     }else{
-      yo.nodo.classList.remove('cerrado');
-      yo.nodo.classList.remove('cerrar');
-      yo.nodo.classList.add('abierto');
-      yo.nodo.classList.add('abrir');
+      yo.estado = "max";
+      abrir(yo.nodo);
     }
   };
   $scope.$on('actCart',function(){
     yo.nodo.classList.remove('inactivo');
     yo.nodo.classList.add('activo');
   })
-}])
+}]);
+function cerrar(nodo){
+  nodo.classList.add('cerrado');
+  nodo.classList.add('cerrar-cart');
+  nodo.classList.remove('abierto');
+  nodo.classList.remove('abrir-cart');
+}
+function abrir(nodo){
+  nodo.classList.remove('cerrado');
+  nodo.classList.remove('cerrar-cart');
+  nodo.classList.add('abierto');
+  nodo.classList.add('abrir-cart');
+}
