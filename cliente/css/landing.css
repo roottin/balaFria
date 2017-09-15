@@ -1,8 +1,8 @@
 .color-primario {
-  background-color: #3F51B5; }
+  background-color: #FF5722; }
 
 .texto-primario {
-  color: #3F51B5; }
+  color: #FF5722; }
 
 div[input-file] {
   border: 1px solid silver;
@@ -90,7 +90,7 @@ md-dialog div.cont-pais {
     border: 1px solid white;
     padding: 10px;
     border-radius: 40px;
-    background: #3F51B5;
+    background: #FF5722;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
 
 div.mod-form-map {
@@ -281,7 +281,7 @@ div.titulo {
   div.titulo i {
     font-size: 50px;
     transform: translateY(9px);
-    color: #FFB300; }
+    color: #b71c1c; }
 
 div[form-central] {
   width: 50%;
@@ -310,14 +310,14 @@ div[form-central] {
       width: 148px;
       height: 148px;
       float: left;
-      border: 2px solid #FFB300;
+      border: 2px solid #b71c1c;
       position: relative; }
       div[form-central] div[lista] div[categoria].activo {
         border: 1px solid #303030; }
         div[form-central] div[lista] div[categoria].activo div[nombre] {
           color: white; }
       div[form-central] div[lista] div[categoria] div[nombre] {
-        color: #FFB300;
+        color: #b71c1c;
         position: absolute;
         width: 100%;
         height: 100%;
@@ -343,7 +343,7 @@ md-backdrop {
 
 md-sidenav section[cabecera] {
   height: 60px;
-  border-bottom: 1px solid #FFB300;
+  border-bottom: 1px solid #b71c1c;
   color: #303030;
   background-color: white;
   font-size: 20px;
@@ -362,13 +362,13 @@ md-sidenav h5 {
   margin: 0px;
   transition: all 0.3s ease-in-out;
   color: white;
-  background-color: #3F51B5; }
+  background-color: #FF5722; }
   md-sidenav h5 i {
     float: left;
     margin-right: 10px;
     margin-top: -5px;
     cursor: pointer;
-    color: #FFB300; }
+    color: #b71c1c; }
   md-sidenav h5:hover {
     background-color: white;
     color: black; }
@@ -411,7 +411,7 @@ md-sidenav section.perfil {
         transition: all 0.3s ease-in-out;
         border-bottom: 1px dashed rgba(255, 255, 255, 0.4);
         color: white;
-        background-color: #3F51B5; }
+        background-color: #FF5722; }
         md-sidenav section.perfil div[opciones] ul li:hover {
           background: rgba(0, 0, 0, 0.2); }
         md-sidenav section.perfil div[opciones] ul li:last-child {
@@ -425,7 +425,7 @@ md-sidenav section.perfil {
           transform: translateY(7px);
           margin-right: 5px;
           margin-top: -10px;
-          color: #FFB300; }
+          color: #b71c1c; }
 
 md-content[landing] div[registro][proovedor-full].inicio {
   padding: 0px;
@@ -721,7 +721,7 @@ div.contVerificacion {
     width: 100%;
     padding: 20px 0px;
     text-align: center;
-    background: #3F51B5;
+    background: #FF5722;
     color: white; }
   div.contVerificacion div.avatar {
     width: 200px;
@@ -1105,7 +1105,7 @@ md-dialog section.preview {
         .sucursal div[md-tabs-template] div.categoria div.texto-categoria i {
           transition: box-shadow 0.3s ease-in-out;
           position: absolute;
-          color: #3F51B5;
+          color: #FF5722;
           z-index: 10;
           cursor: pointer;
           border-radius: 100px;
@@ -1173,7 +1173,7 @@ md-dialog section.preview {
             .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.img i {
               transition: box-shadow 0.3s ease-in-out;
               position: absolute;
-              color: #3F51B5;
+              color: #FF5722;
               z-index: 10;
               cursor: pointer;
               border-radius: 100px;
@@ -1243,7 +1243,7 @@ md-dialog section.preview {
             .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.descrip button.shop-btn {
               transition: all 0.3s ease-in-out;
               color: white;
-              background-color: #FFB300;
+              background-color: #b71c1c;
               border: none;
               padding: 7px 6px 7px 0px;
               border-radius: 100px;
@@ -1269,7 +1269,7 @@ md-dialog section.preview {
   display: block;
   border-radius: 50%;
   cursor: pointer;
-  box-shadow: 0 0 0 rgba(63, 81, 181, 0.8);
+  box-shadow: 0 0 0 rgba(255, 87, 34, 0.8);
   animation: pulse 0.8s infinite; }
 
 .pulse:hover {
@@ -1277,20 +1277,20 @@ md-dialog section.preview {
 
 @keyframes pulse {
   0% {
-    -moz-box-shadow: 0 0 0 0 rgba(63, 81, 181, 0.8);
-    box-shadow: 0 0 0 0 rgba(63, 81, 181, 0.8); }
+    -moz-box-shadow: 0 0 0 0 rgba(255, 87, 34, 0.8);
+    box-shadow: 0 0 0 0 rgba(255, 87, 34, 0.8); }
   70% {
-    -moz-box-shadow: 0 0 0 40px rgba(63, 81, 181, 0);
-    box-shadow: 0 0 0 40px rgba(63, 81, 181, 0); }
+    -moz-box-shadow: 0 0 0 40px rgba(255, 87, 34, 0);
+    box-shadow: 0 0 0 40px rgba(255, 87, 34, 0); }
   100% {
-    -moz-box-shadow: 0 0 0 0 rgba(63, 81, 181, 0);
-    box-shadow: 0 0 0 0 rgba(63, 81, 181, 0); } }
+    -moz-box-shadow: 0 0 0 0 rgba(255, 87, 34, 0);
+    box-shadow: 0 0 0 0 rgba(255, 87, 34, 0); } }
 /*-------------Pulse sec--------------------------------*/
 .pulse-sec {
   display: block;
   border-radius: 50%;
   cursor: pointer;
-  box-shadow: 0 0 0 rgba(255, 179, 0, 0.8);
+  box-shadow: 0 0 0 rgba(183, 28, 28, 0.8);
   animation: pulse-sec 0.6s infinite; }
 
 .pulse-sec:hover {
@@ -1298,14 +1298,14 @@ md-dialog section.preview {
 
 @keyframes pulse-sec {
   0% {
-    -moz-box-shadow: 0 0 0 0 rgba(255, 179, 0, 0.8);
-    box-shadow: 0 0 0 0 rgba(255, 179, 0, 0.8); }
+    -moz-box-shadow: 0 0 0 0 rgba(183, 28, 28, 0.8);
+    box-shadow: 0 0 0 0 rgba(183, 28, 28, 0.8); }
   70% {
-    -moz-box-shadow: 0 0 0 40px rgba(255, 179, 0, 0);
-    box-shadow: 0 0 0 40px rgba(255, 179, 0, 0); }
+    -moz-box-shadow: 0 0 0 40px rgba(183, 28, 28, 0);
+    box-shadow: 0 0 0 40px rgba(183, 28, 28, 0); }
   100% {
-    -moz-box-shadow: 0 0 0 0 rgba(255, 179, 0, 0);
-    box-shadow: 0 0 0 0 rgba(255, 179, 0, 0); } }
+    -moz-box-shadow: 0 0 0 0 rgba(183, 28, 28, 0);
+    box-shadow: 0 0 0 0 rgba(183, 28, 28, 0); } }
 /*-------------salidas--------------------------------*/
 .salida-lateral-derecha {
   animation-name: salida-derecha;
@@ -1387,7 +1387,7 @@ md-dialog section.preview {
     width: 50px;
     height: 50px;
     border-radius: 100px;
-    background-color: #3F51B5; }
+    background-color: #FF5722; }
   25% {
     height: 50px;
     background-color: white; }
@@ -1421,7 +1421,7 @@ md-dialog section.preview {
     width: 50px;
     height: 50px;
     border-radius: 100px;
-    background-color: #3F51B5; } }
+    background-color: #FF5722; } }
 div.foot {
   text-align: center; }
   div.foot h1 {
@@ -1496,7 +1496,7 @@ div.marker {
   margin-left: -15px;
   margin-top: -15px; }
   div.marker.userUbi {
-    background: #3F51B5;
+    background: #FF5722;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
     width: 20px;
     height: 20px;
@@ -1513,7 +1513,7 @@ div.marker {
 div.titulo-perfil {
   width: 100%;
   height: 200px;
-  background: #3F51B5;
+  background: #FF5722;
   position: relative;
   border-bottom: 1px solid white; }
   div.titulo-perfil img.banner {
@@ -1542,7 +1542,7 @@ div[ui-view="cart"] {
     div[ui-view="cart"] div.omni-cart.cerrado {
       width: 50px;
       height: 50px;
-      background-color: #3F51B5;
+      background-color: #FF5722;
       border: 2px solid white;
       border-radius: 100px;
       color: white; }
@@ -1555,7 +1555,11 @@ div[ui-view="cart"] {
       background: white;
       border: 1px solid silver; }
       div[ui-view="cart"] div.omni-cart.abierto i.icono-carro {
-        display: none; }
+        position: absolute;
+        right: 20px;
+        top: 10px;
+        color: white;
+        z-index: 9; }
       div[ui-view="cart"] div.omni-cart.abierto div.cart-content {
         display: block; }
     div[ui-view="cart"] div.omni-cart.inactivo {
@@ -1566,51 +1570,64 @@ div[ui-view="cart"] {
       margin-top: 10px;
       margin-left: 9px;
       font-size: 28px;
-      cursor: pointer; }
+      cursor: pointer;
+      transition: right 0.5s ease-in-out; }
     div[ui-view="cart"] div.omni-cart md-toolbar img {
       width: 40px;
       height: 40px;
       flex: none;
       border-radius: 50%; }
-    div[ui-view="cart"] div.omni-cart div.item-cart, div[ui-view="cart"] div.omni-cart div.header-cart {
+    div[ui-view="cart"] div.omni-cart div.item-cart {
+      position: relative;
       height: 120px;
       margin-top: 10px;
       color: black; }
-      div[ui-view="cart"] div.omni-cart div.item-cart img.imagen, div[ui-view="cart"] div.omni-cart div.header-cart img.imagen {
+      div[ui-view="cart"] div.omni-cart div.item-cart img.imagen {
         width: 100px;
         height: 100px;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
         float: left; }
-      div[ui-view="cart"] div.omni-cart div.item-cart div, div[ui-view="cart"] div.omni-cart div.header-cart div {
+      div[ui-view="cart"] div.omni-cart div.item-cart div {
         width: calc(100% - 120px);
         margin-left: 10px;
         margin-top: 5px;
         float: left; }
-        div[ui-view="cart"] div.omni-cart div.item-cart div.nombre, div[ui-view="cart"] div.omni-cart div.header-cart div.nombre {
-          color: rgba(63, 81, 181, 0.6);
+        div[ui-view="cart"] div.omni-cart div.item-cart div.nombre {
+          color: rgba(255, 87, 34, 0.8);
           font-size: 18px; }
-          div[ui-view="cart"] div.omni-cart div.item-cart div.nombre p, div[ui-view="cart"] div.omni-cart div.header-cart div.nombre p {
+          div[ui-view="cart"] div.omni-cart div.item-cart div.nombre p {
             color: rgba(0, 0, 0, 0.6);
             font-size: 15px; }
-        div[ui-view="cart"] div.omni-cart div.item-cart div.valor, div[ui-view="cart"] div.omni-cart div.header-cart div.valor {
+        div[ui-view="cart"] div.omni-cart div.item-cart div.valor {
           font-size: 15px; }
-          div[ui-view="cart"] div.omni-cart div.item-cart div.valor div.cantidad, div[ui-view="cart"] div.omni-cart div.header-cart div.valor div.cantidad {
+          div[ui-view="cart"] div.omni-cart div.item-cart div.valor div.cantidad {
             width: auto;
-            float: right; }
-          div[ui-view="cart"] div.omni-cart div.item-cart div.valor div.precio, div[ui-view="cart"] div.omni-cart div.header-cart div.valor div.precio {
+            float: right;
+            position: absolute;
+            right: 5px;
+            width: 20px;
+            top: 0px;
+            font-size: 20px; }
+            div[ui-view="cart"] div.omni-cart div.item-cart div.valor div.cantidad i {
+              border: 2px solid;
+              border-radius: 50%;
+              font-size: 18px;
+              margin-left: -5px;
+              margin-top: 10px;
+              margin-bottom: 10px;
+              color: #FF5722; }
+          div[ui-view="cart"] div.omni-cart div.item-cart div.valor div.precio {
             width: auto;
             float: left;
             color: #b71c1c;
             font-weight: bold; }
-        div[ui-view="cart"] div.omni-cart div.item-cart div i, div[ui-view="cart"] div.omni-cart div.header-cart div i {
-          font-size: 15px; }
     div[ui-view="cart"] div.omni-cart div.item-cart {
       width: calc(100% - 20px);
       border-bottom: 1px solid rgba(0, 0, 0, 0.3);
       margin-left: 10px; }
     div[ui-view="cart"] div.omni-cart div.header-cart {
       height: 35px;
-      border-bottom: 1px solid rgba(63, 81, 181, 0.3);
+      border-bottom: 1px solid rgba(255, 87, 34, 0.3);
       width: calc(100%); }
       div[ui-view="cart"] div.omni-cart div.header-cart div.producto {
         text-align: center;
@@ -1621,7 +1638,7 @@ html, body {
 
 div.md-toast-content {
   background: white !important;
-  color: #3F51B5 !important; }
+  color: #FF5722 !important; }
 
 md-sidenav {
   background-color: white; }
@@ -1656,8 +1673,8 @@ md-checkbox div.md-container div.md-icon {
       [login] md-tabs-canvas md-pagination-wrapper md-tab-item {
         width: 50%; }
         [login] md-tabs-canvas md-pagination-wrapper md-tab-item.md-tab.md-active {
-          background-color: #3F51B5;
-          color: #FFB300; }
+          background-color: #FF5722;
+          color: #b71c1c; }
   [login] .inicio {
     background-color: rgba(0, 0, 0, 0.3);
     width: 100%;
@@ -1670,7 +1687,7 @@ md-checkbox div.md-container div.md-icon {
     [login] .inicio.google {
       background: #dd4b39; }
     [login] .inicio.md-raised {
-      background: #3F51B5; }
+      background: #FF5722; }
 
 div[divider] {
   margin: 10px 10px;
@@ -1692,7 +1709,7 @@ md-content[landing] {
   md-content[landing] header.cliente {
     width: 100%;
     height: 70px;
-    background-color: #3F51B5;
+    background-color: #FF5722;
     margin-top: -10px; }
     md-content[landing] header.cliente i.material-icons {
       float: right;
@@ -1702,7 +1719,7 @@ md-content[landing] {
       cursor: pointer;
       transition: all 0.3s ease-in-out; }
       md-content[landing] header.cliente i.material-icons:hover {
-        background: #3F51B5; }
+        background: #FF5722; }
     md-content[landing] header.cliente div.derecha {
       float: right;
       margin-top: 20px;
@@ -1785,10 +1802,10 @@ md-content[landing] {
           padding: 6px;
           border-radius: 3px;
           margin-top: 10px;
-          background-color: #3F51B5;
+          background-color: #FF5722;
           position: absolute; }
           md-content[landing] header.cliente div[sociales] i:hover div[tooltip]:after {
-            border-bottom: 10px solid #3F51B5; }
+            border-bottom: 10px solid #FF5722; }
     md-content[landing] header.cliente div[ubicaciones] {
       width: 300px;
       float: right; }

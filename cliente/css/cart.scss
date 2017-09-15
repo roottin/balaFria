@@ -25,7 +25,11 @@ div[ui-view="cart"]{
       background: white;
       border:1px solid silver;
       i.icono-carro{
-        display: none;
+        position: absolute;
+        right: 20px;
+        top: 10px;
+        color: white;
+        z-index: 9;
       }
       div.cart-content{
         display: block;
@@ -42,6 +46,7 @@ div[ui-view="cart"]{
       margin-left: 9px;
       font-size: 28px;
       cursor:pointer;
+      transition:right 0.5s ease-in-out;
     }
     md-toolbar{
       img{
@@ -51,7 +56,8 @@ div[ui-view="cart"]{
         border-radius:50%;
       }
     }
-    div.item-cart,div.header-cart{
+    div.item-cart{
+      position: relative;
       height: 120px;
       margin-top: 10px;
       color:black;
@@ -67,7 +73,7 @@ div[ui-view="cart"]{
         margin-top: 5px;
         float: left;
         &.nombre{
-          color:rgba($color-primary,0.6);
+          color:rgba($color-primary,0.8);
           font-size: 18px;
           p{
             color:rgba(black,0.6);
@@ -79,6 +85,20 @@ div[ui-view="cart"]{
           div.cantidad{
             width: auto;
             float:right;
+            position: absolute;
+            right: 5px;
+            width: 20px;
+            top: 0px;
+            font-size: 20px;
+            i{
+              border: 2px solid;
+              border-radius: 50%;
+              font-size: 18px;
+              margin-left: -5px;
+              margin-top: 10px;
+              margin-bottom: 10px;
+              color: $color-primary;
+            }
           }
           div.precio{
             width: auto;
@@ -86,9 +106,6 @@ div[ui-view="cart"]{
             color:$color-precio;
             font-weight: bold;
           }
-        }
-        i{
-          font-size: 15px;
         }
       }
     }

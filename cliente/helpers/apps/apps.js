@@ -273,10 +273,10 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
       });
     //------------------------ Tema -------------------------------------------------------
     $mdThemingProvider.theme('light')
-          .primaryPalette('indigo')
+          .primaryPalette('deep-orange')
           .accentPalette('blue-grey');
     $mdThemingProvider.theme('default')
-          .primaryPalette('indigo')
+          .primaryPalette('deep-orange')
           .accentPalette('blue-grey')
           .dark();
 
