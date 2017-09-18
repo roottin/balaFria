@@ -1,10 +1,24 @@
+//NOTE: Los numeros en los comentarios de este archivo es para
+//identificar el grado de intensidad en la paleta de colores de 
+//material design siguiendo los material design guide lines
+//500 - para estructura general
 $color-primary:#FF5722;
 $color-warn:#FFC107;
 $color-acent:#b71c1c;
 $color-favs:#b71c1c;
 $color-precio:#b71c1c;
+//700 - para barras principales
+$color-primary-dark:#E64A19; 
+//900 - para barra superior
+$color-primary-darkest:#BF360C;
 .color-primario{
 	background-color: $color-primary;
+}
+.color-primario-dark{
+	background-color: $color-primary-dark;
+}
+.color-primario-darkest{
+	background-color: $color-primary-darkest;
 }
 .texto-primario{
 	color:$color-primary;

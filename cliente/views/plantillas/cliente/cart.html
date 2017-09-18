@@ -1,49 +1,58 @@
 <div draggabilly class="omni-cart cerrado activo">
   <i class="material-icons icono-carro">shopping_cart</i>
   <div class="cart-content" >
-  {{cart.min}}
-  <md-toolbar>
-      <div class="md-toolbar-tools color-primario">
-       <img ng-src="storage\proveedor\file-1503879283939.jpg" class="md-avatar" />
-
+    {{cart.min}}
+    <div class="md-toolbar-tools color-primario-darkest cart-title">
+      <i class="material-icons">arrow_backward</i>
+      {{ "Mis Ordenes" }}
+    </div>
+    <!-- Barra superior -->
+    <div class="cart-order">
+      <div class="md-toolbar-tools color-primario-dark proveedor-title">
+        <img ng-src="storage\proveedor\file-1503879283939.jpg" class="md-avatar" />
         <md-truncate style="position: absolute; left: 70px; right: 170px; top: 13px; bottom: 13px; overflow:visible">
-        	Pizzeria el aguila
+          Pizzeria el aguila
         </md-truncate>
-
         <span flex></span>
-      </div>
-    </md-toolbar>
-    <div class="item-cart">
-    	<img src="storage\producto\file-1504151000194.jpg" class="imagen">
-    	<div class="nombre">
-    		Comida Gourmet
-        <p>comida gourmet de la mas fina estampa</p>
-    	</div>
-    	<div class="valor">
-        <div class="precio">
-          {{ 20000 | currency }}
+      </div><!-- Proveedor Title -->    
+      <div class="cart-item">
+        <img src="storage\producto\file-1504151000194.jpg" class="imagen">
+        <div class="nombre">
+          Comida Gourmet
+          <p>comida gourmet de la mas fina estampa</p>
         </div>
-        <div class="cantidad">
-          <i class="material-icons">add</i>1<i class="material-icons">remove</i>
+        <div class="valor">
+          <div class="precio">
+            {{ 20 | currency }}
+          </div>
+          <div class="cantidad">
+            <i class="material-icons">add</i>
+            1
+            <i class="material-icons">remove</i>
+          </div>
         </div>
-    	</div>
-    </div>
-    <md-divider ></md-divider>
-    <div class="item-cart">
-    	<img src="storage\rubro\file-1503846097245.jpg" class="imagen">
-    	<div class="nombre">
-    		Pizza Margarita
-        <p>Queso mozarella,salsa y jamon</p>
-    	</div>
-    	<div class="valor">
-        <div class="precio">
-          {{ 20000 | currency }}
+      </div><!-- Cart Item -->
+      <div class="cart-item">
+        <img src="storage\rubro\file-1503846097245.jpg" class="imagen">
+        <div class="nombre">
+          Pizza Margarita
+          <p>Queso mozarella,salsa y jamon</p>
         </div>
-        <div class="cantidad">
-          <i class="material-icons">add</i>1<i class="material-icons">remove</i>
+        <div class="valor">
+          <div class="precio">
+            {{ 20 | currency }}
+          </div>
+          <div class="cantidad">
+            <i class="material-icons">add</i>
+            1
+            <i class="material-icons">remove</i>
+          </div>
         </div>
-    	</div>
-    </div>
-    <md-divider ></md-divider>
-  </div>
+      </div><!-- Cart Item -->
+      <div class="order-total color-primario-dark">
+        Pagar: {{ 40  | currency }}
+        <i class="material-icons">arrow_forward</i>
+      </div><!-- Order total -->
+    </div><!-- Cart Order -->
+  </div><!-- Cart Content -->   
 </div>

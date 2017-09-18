@@ -6,10 +6,11 @@ div[ui-view="cart"]{
     left:160px;
     top:5px;
     overflow:hidden;
+    background: silver;
     &.cerrado{
       width: 50px;
       height: 50px;
-      background-color: $color-primary;
+      background-color: $color-primary-darkest;
       border:2px solid white;
       border-radius: 100px;
       color: white;
@@ -27,7 +28,7 @@ div[ui-view="cart"]{
       i.icono-carro{
         position: absolute;
         right: 20px;
-        top: 10px;
+        top: 0px;
         color: white;
         z-index: 9;
       }
@@ -48,79 +49,101 @@ div[ui-view="cart"]{
       cursor:pointer;
       transition:right 0.5s ease-in-out;
     }
-    md-toolbar{
-      img{
-        width: 40px;
-        height: 40px;
-        flex:none;
-        border-radius:50%;
+    div.cart-title{
+      max-height: 48px;
+      text-align: center;
+      i{
+        float:left;
+        margin-top: 0px;
+        margin-left: 0px;
       }
     }
-    div.item-cart{
-      position: relative;
-      height: 120px;
-      margin-top: 10px;
-      color:black;
-      img.imagen{
-        width: 100px;
-        height: 100px;
-        @include BoxShadowHelper(1);
-        float:left;
-      }
-      div{
-        width:calc(100% - 120px);
-        margin-left: 10px;
+    div.cart-order{
+      width: calc(100% - 10px);
+      margin-left: 5px;
+      @include BoxShadowHelper(2);     
+      div.proveedor-title{
+        position: relative;
         margin-top: 5px;
-        float: left;
-        &.nombre{
-          color:rgba($color-primary,0.8);
-          font-size: 18px;
-          p{
-            color:rgba(black,0.6);
-            font-size: 15px;
-          }
+        height: 50px !important;
+        width: calc(100%);  
+        img{
+          width: 40px;
+          height: 40px;
+          flex:none;
+          border-radius:50%;
         }
-        &.valor{
-          font-size: 15px;
-          div.cantidad{
-            width: auto;
-            float:right;
-            position: absolute;
-            right: 5px;
-            width: 20px;
-            top: 0px;
-            font-size: 20px;
-            i{
-              border: 2px solid;
-              border-radius: 50%;
-              font-size: 18px;
-              margin-left: -5px;
-              margin-top: 10px;
-              margin-bottom: 10px;
-              color: $color-primary;
+      }
+      div.cart-item:not(last-child){
+        border-bottom: 1px solid rgba(black,0.1);
+      }
+      div.cart-item{      
+        width: calc(100% - 20px);
+        margin-left: 10px;
+        position: relative;
+        height: 120px;
+        margin-top: 10px;
+        color:black;
+        img.imagen{
+          width: 110px;
+          height: 110px;
+          @include BoxShadowHelper(1);
+          float:left;
+        }
+        div{
+          width:calc(100% - 120px);
+          margin-left: 10px;
+          margin-top: 5px;
+          float: left;
+          &.nombre{
+            color:rgba($color-primary,0.8);
+            font-size: 18px;
+            p{
+              color:rgba(black,0.6);
+              font-size: 15px;
             }
           }
-          div.precio{
-            width: auto;
-            float: left;
-            color:$color-precio;
-            font-weight: bold;
+          &.valor{
+            font-size: 15px;
+            div.cantidad{
+              width: auto;
+              float:right;
+              position: absolute;
+              right: 5px;
+              width: 20px;
+              top: -10px;
+              font-size: 20px;
+              i{
+                border: 2px solid;
+                border-radius: 50%;
+                font-size: 18px;
+                margin-left: -5px;
+                margin-top: 10px;
+                margin-bottom: 10px;
+                color: $color-primary;
+              }
+            }
+            div.precio{
+              width: auto;
+              float: left;
+              color:$color-precio;
+              font-weight: bold;
+            }
           }
         }
       }
-    }
-    div.item-cart{
-      width: calc(100% - 20px);
-      border-bottom: 1px solid rgba(black,0.3);
-      margin-left: 10px;
-    }
-    div.header-cart{
-      height: 35px;
-      border-bottom: 1px solid rgba($color-primary,0.3);
-      width: calc(100%);
-      div.producto{
+      div.order-total{
+        margin-top: -1px;
         text-align: center;
-        width: calc(((100% - 80px) / 4) + 75px);
+        padding: 10px;
+        font-size: 18px;
+        position: relative;
+        i{
+          position: absolute;
+          top: -2px;
+          right: 10px;
+          z-index: 10;
+        }
       }
     }
   }
