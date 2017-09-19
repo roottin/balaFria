@@ -14,7 +14,7 @@
           Pizzeria el aguila
         </md-truncate>
         <span flex></span>
-      </div><!-- Proveedor Title -->    
+      </div><!-- Proveedor Title -->
       <div class="cart-item">
         <img src="storage\producto\file-1504151000194.jpg" class="imagen">
         <div class="nombre">
@@ -23,7 +23,7 @@
         </div>
         <div class="valor">
           <div class="precio">
-            {{ 20 | currency }}
+            {{ 20000 | bolivar }}
           </div>
           <div class="cantidad">
             <i class="material-icons">add</i>
@@ -40,7 +40,7 @@
         </div>
         <div class="valor">
           <div class="precio">
-            {{ 20 | currency }}
+            {{ 20000 | bolivar }}
           </div>
           <div class="cantidad">
             <i class="material-icons">add</i>
@@ -49,8 +49,13 @@
           </div>
         </div>
       </div><!-- Cart Item -->
+      <div class="subtitulo">Elije un Tipo</div>
+      <div class="order-type" layout="row" layout-align="space-around center" >
+        <md-button class="tipo ">A domicilio</md-button>        
+        <md-button class="tipo ">Retirar en Tienda</md-button>
+      </div><!-- Order type -->
       <div class="order-total color-primario-dark">
-        Pagar: {{ 40  | currency }}
+        Pagar: {{ 40000 | bolivar }}
         <i class="material-icons">arrow_forward</i>
       </div><!-- Order total -->
     </div><!-- Cart Order -->

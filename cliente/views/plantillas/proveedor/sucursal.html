@@ -148,7 +148,7 @@
 									<!-- display normal-->
 									<h4 ng-show="!producto.edit">{{producto.nombre}}</h4>
 									<p ng-show="!producto.edit">{{producto.descripcion}}</p>
-									<div ng-show="!producto.edit" class="precio arriba">{{producto.precio}}</div>
+									<div ng-show="!producto.edit" class="precio arriba">{{producto.precio | bolivar}}</div>
 									<button class="material-icons shop-btn">
 										<div class="texto-aparece">
 											Ordenar

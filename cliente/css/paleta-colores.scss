@@ -11,15 +11,14 @@ $color-precio:#b71c1c;
 $color-primary-dark:#E64A19; 
 //900 - para barra superior
 $color-primary-darkest:#BF360C;
-.color-primario{
-	background-color: $color-primary;
-}
-.color-primario-dark{
-	background-color: $color-primary-dark;
-}
-.color-primario-darkest{
-	background-color: $color-primary-darkest;
-}
-.texto-primario{
-	color:$color-primary;
-}
+//colores secundarios
+$color-texto-sub-titulo:rgba(black,0.3);
+//primario
+.color-primario{background-color: $color-primary !important;}
+.color-primario-dark{background-color: $color-primary-dark !important;}
+.color-primario-darkest{background-color: $color-primary-darkest !important;}
+.texto-primario{color:$color-primary !important;}
+.texto-primario-dark{color:$color-primary-dark !important;}
+.texto-primario-darkest{color:$color-primary-darkest !important;}
+//acent
+.color-acent{background-color: $color-acent;}

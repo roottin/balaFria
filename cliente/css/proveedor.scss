@@ -111,13 +111,12 @@ md-sidenav{
     margin: 0px;
     transition: all 0.3s ease-in-out;
     color:white;
-    background-color: $color-primary;
     i{
       float:left;
       margin-right: 10px;
       margin-top: -5px;
       cursor: pointer;
-      color: $color-acent;
+      color: white;
     }
     &:hover{
       background-color: white;
@@ -165,7 +164,6 @@ md-sidenav{
           transition: all 0.3s ease-in-out;
           border-bottom: 1px dashed rgba(255,255,255,0.4);
           color:white;
-          background-color:$color-primary;
           &:hover{
             background: rgba(0,0,0,0.2);
           }
@@ -182,7 +180,7 @@ md-sidenav{
             transform: translateY(7px);
             margin-right: 5px;
             margin-top: -10px;
-            color: $color-acent;
+            color: white;
           }
         }
       }
@@ -288,7 +286,6 @@ div.proveedor{
       width: 100%;
       height: auto;
       padding: 20px 0 !important;
-      color: #056ef9;
       text-align: center;
       i{
         font-size: 150px;
@@ -312,10 +309,7 @@ div.proveedor{
       }
       section{
         .md-raised{
-          background-color: #056ef9 !important;
-          &:hover{
-            background-color: #3f51b5 !important;
-          }
+          color:white;
         }
       }
     }
