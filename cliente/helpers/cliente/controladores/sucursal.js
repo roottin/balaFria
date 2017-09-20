@@ -86,7 +86,11 @@ angular.module('balafria')
     });
   }
   yo.agregarAlCarrito = function(producto){
-    $rootScope.$broadcast('actCart');
+    var data = {
+      "producto":producto,
+      "proveedor":yo.proveedor
+    }
+    $rootScope.$broadcast('actCart',data);
   };
   /////////////////////////////// FILTRADO //////////////////////////////////////
   // NOTE:miguel aqui coloca las funciones de filtrado para categoria y producto

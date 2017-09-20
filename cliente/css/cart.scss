@@ -5,7 +5,8 @@ div[ui-view="cart"]{
     @include BoxShadowHelper(3);
     left:160px;
     top:5px;
-    overflow:hidden;
+    overflow-x:hidden;
+    overflow-y:auto;
     background: silver;
     &.cerrado{
       width: 50px;
@@ -61,6 +62,7 @@ div[ui-view="cart"]{
     div.cart-order{
       width: calc(100% - 10px);
       margin-left: 5px;
+      margin-bottom: 10px;
       @include BoxShadowHelper(2);     
       div.proveedor-title{
         position: relative;
@@ -76,7 +78,7 @@ div[ui-view="cart"]{
       }
       div.subtitulo{
         width: 100%;
-        text-indent: 40px;
+        text-indent: 20px;
         font-weight: bold;
         font-size: 18px;
         text-align: left;
@@ -103,6 +105,7 @@ div[ui-view="cart"]{
           margin-top: 5px;
           float: left;
           &.nombre{
+            max-width: calc(100% - 150px);
             color:rgba($color-primary,0.8);
             font-size: 18px;
             p{

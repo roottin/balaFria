@@ -72,15 +72,14 @@
 									<h4 >{{producto.nombre}}</h4>
 									<p >{{producto.descripcion}}</p>
 									<div  class="precio arriba">{{producto.precio | bolivar}}</div>
-									<button class="material-icons shop-btn" ng-click="sucursal.agregarAlCarrito(producto)">
-										<div class="texto-aparece">
-											Ordenar
-										</div>
-										add_shopping_cart
-									</button>
 								</div>
-							</div>
-							<!-- producto -->
+								<button class="material-icons shop-btn" ng-click="sucursal.agregarAlCarrito(producto)">
+									<div class="texto-aparece">
+										Ordenar
+									</div>
+									add_shopping_cart
+								</button>
+							</div><!-- producto -->
 					</div><!-- cont-producto -->
 				</div>
 			</md-tab-body>

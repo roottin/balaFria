@@ -44,7 +44,9 @@ angular.module('balafria')
   });
   $scope.$watch(function(scope) { return scope.ciudad },
       function(newValue, oldValue) {
+        if(newValue){
           yo.asignarCiudad(newValue);
+        }
       }
      );
   $scope.$watch(function(scope) { return scope.pais },

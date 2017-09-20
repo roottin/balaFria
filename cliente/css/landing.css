@@ -1150,16 +1150,17 @@ md-dialog section.preview {
           border-radius: 3px;
           background-color: white;
           width: calc((100% / 2) - 5px);
-          margin-bottom: 10px; }
+          margin-bottom: 10px;
+          position: relative; }
           .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto:hover i.edit, .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto:hover i.guardar, .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto:hover i.borrar {
             left: 10px; }
           .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto:hover div.img img {
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
             transform: scale(1.05); }
-          .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto:hover div.descrip button.shop-btn {
+          .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto:hover button.shop-btn {
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
             width: 100px; }
-          .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto:hover div.descrip button.shop-btn div.texto-aparece {
+          .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto:hover button.shop-btn div.texto-aparece {
             width: 80px;
             opacity: 1; }
           .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto:nth-child(odd) {
@@ -1212,6 +1213,30 @@ md-dialog section.preview {
                 right: 15px;
                 top: 12px;
                 color: white; }
+          .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto button.shop-btn {
+            transition: all 0.3s ease-in-out;
+            color: white;
+            background-color: #b71c1c;
+            border: none;
+            padding: 7px 6px 7px 0px;
+            border-radius: 100px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            right: 20px;
+            bottom: 20px;
+            position: absolute;
+            width: 38px;
+            overflow: hidden;
+            text-align: right; }
+            .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto button.shop-btn div.texto-aparece {
+              width: 0px;
+              transition: all 0.5s;
+              position: absolute;
+              overflow: hidden;
+              font-size: 17px;
+              text-align: left;
+              padding: 5px 10px;
+              opacity: 0;
+              font-family: serif; }
           .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.descrip {
             color: grey;
             padding-top: 15px;
@@ -1242,31 +1267,8 @@ md-dialog section.preview {
             .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.descrip div.arriba {
               right: 20px;
               top: 10px;
-              font-size: 20px; }
-            .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.descrip button.shop-btn {
-              transition: all 0.3s ease-in-out;
-              color: white;
-              background-color: #b71c1c;
-              border: none;
-              padding: 7px 6px 7px 0px;
-              border-radius: 100px;
-              box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-              right: 20px;
-              bottom: 20px;
-              position: absolute;
-              width: 38px;
-              overflow: hidden;
-              text-align: right; }
-              .sucursal div[md-tabs-template] div.categoria div.cont-productos div.producto div.descrip button.shop-btn div.texto-aparece {
-                width: 0px;
-                transition: all 0.5s;
-                position: absolute;
-                overflow: hidden;
-                font-size: 17px;
-                text-align: left;
-                padding: 5px 10px;
-                opacity: 0;
-                font-family: serif; }
+              font-size: 20px;
+              height: 48px; }
 
 .pulse {
   display: block;
@@ -1537,7 +1539,8 @@ div[ui-view="cart"] {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
     left: 160px;
     top: 5px;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
     background: silver; }
     div[ui-view="cart"] div.omni-cart.cerrado {
       width: 50px;
@@ -1582,6 +1585,7 @@ div[ui-view="cart"] {
     div[ui-view="cart"] div.omni-cart div.cart-order {
       width: calc(100% - 10px);
       margin-left: 5px;
+      margin-bottom: 10px;
       box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
       div[ui-view="cart"] div.omni-cart div.cart-order div.proveedor-title {
         position: relative;
@@ -1595,7 +1599,7 @@ div[ui-view="cart"] {
           border-radius: 50%; }
       div[ui-view="cart"] div.omni-cart div.cart-order div.subtitulo {
         width: 100%;
-        text-indent: 40px;
+        text-indent: 20px;
         font-weight: bold;
         font-size: 18px;
         text-align: left;
@@ -1620,6 +1624,7 @@ div[ui-view="cart"] {
           margin-top: 5px;
           float: left; }
           div[ui-view="cart"] div.omni-cart div.cart-order div.cart-item div.nombre {
+            max-width: calc(100% - 150px);
             color: rgba(255, 87, 34, 0.8);
             font-size: 18px; }
             div[ui-view="cart"] div.omni-cart div.cart-order div.cart-item div.nombre p {
