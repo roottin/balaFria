@@ -1672,6 +1672,11 @@ div[ui-view="cart"] {
           right: 10px;
           z-index: 10; }
 
+button.mercadoPago {
+  border: 2px solid #2F3591; }
+  button.mercadoPago img {
+    width: 100px; }
+
 html, body {
   min-height: 100%; }
 
@@ -1712,8 +1717,8 @@ md-checkbox div.md-container div.md-icon {
       [login] md-tabs-canvas md-pagination-wrapper md-tab-item {
         width: 50%; }
         [login] md-tabs-canvas md-pagination-wrapper md-tab-item.md-tab.md-active {
-          background-color: #FF5722;
-          color: #b71c1c; }
+          background-color: #E64A19;
+          color: white; }
   [login] .inicio {
     background-color: rgba(0, 0, 0, 0.3);
     width: 100%;

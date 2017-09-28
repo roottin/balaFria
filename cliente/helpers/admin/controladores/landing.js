@@ -12,7 +12,7 @@ angular.module('balafria')
   $scope.ciudades = Ciudades.query(function(){});
   
   $scope.showAdvanced = function(ev) {
-      $mdDialog.show({
+    $mdDialog.show({
         controller: 'ctrlRubro',
         controllerAs:"up",
         templateUrl: '/views/plantillas/admin/rubro.tmpl.html',

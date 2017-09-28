@@ -4,34 +4,6 @@ angular.module('balafria')
   yo.nodo = document.querySelector('div.omni-cart');
   yo.estado = "min";
   yo.ordenes = [];
-  /*yo.ordenes = [
-    {
-      "tipo":"dom",
-      "total":40000,
-      "proveedor":{
-        "id":1,
-        "nombre":"Pizzeria el aguila",
-        "ruta":"storage\\proveedor\\file-1503879283939.jpg"
-      },
-      "productos":[
-        {
-          "id":1,
-          "ruta":"storage\\producto\\file-1504151000194.jpg",
-          "nombre":"Comida Gourmet",
-          "descripcion":"comida gourmet de la mas fina estampa",
-          "precio":20000,
-          "cantidad":1
-        },{
-          "id":2,
-          "ruta":"storage\\rubro\\file-1503846097245.jpg",
-          "nombre":"Pizza Margarita",
-          "descripcion":"Queso mozarella,salsa y jamon",
-          "precio":20000,
-          "cantidad":1
-        }
-      ]
-    }
-  ];*/
   //------------------ Eventos ---------------------------------
   yo.nodo.ondblclick=function(nodo){
     if(yo.nodo.classList.contains('abrir-cart')){

@@ -9,8 +9,8 @@ angular.module('balafria')
       $sesion
         .actualizarDatos($http)
         .then(function(usuarioFull){
-          yo.usuario = usuario;
-          yo.asignarCiudad(usuario.ciudad);
+          yo.usuario = usuarioFull.data;
+          yo.asignarCiudad(usuarioFull.data.ciudad);
         });
     })
     .catch(function(error){
@@ -128,10 +128,10 @@ angular.module('balafria')
         $sesion
           .actualizarDatos($http)
           .then(function(usuarioFull){
-            yo.usuario = usuarioFull;
+            yo.usuario = usuarioFull.data;
             $mdToast.show(
               $mdToast.simple()
-                .textContent('Bienvenido '+usuarioFull.nombre+' '+usuarioFull.apellido)
+                .textContent('Bienvenido '+yo.usuario.nombre+' '+yo.usuario.apellido)
                 .position('top left')
                 .hideDelay(3000)
             );

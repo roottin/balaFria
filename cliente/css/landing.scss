@@ -14,11 +14,11 @@
 @import "mapa.scss";
 @import "perfil.scss";
 @import "cart.scss";
+@import "externalIcons.scss";
 
 html,body{
   min-height: 100%;
 }
-
 div.md-toast-content{
   background: white !important;
   color:$color-primary !important;
@@ -67,8 +67,8 @@ md-checkbox{
       md-tab-item{
         width: 50%;
         &.md-tab.md-active{
-          background-color: $color-primary;
-          color: $color-acent;
+          background-color: $color-primary-dark;
+          color: white;
         }
       }
     }

@@ -123,16 +123,18 @@ angular.module('balafria')
     favs = favs || $scope.favs || [];
     if(favs.length){
       favs.forEach(function(fav){
-        $scope.sucursales.forEach(function(letra){
-          letra.sucursales.forEach(function(sucursal){
-            if(sucursal.id_sucursal == fav.id_sucursal){
-              sucursal.class = "fill";
-              sucursal.icono = "favorite";
-              sucursal.fav = fav.id;
-            }
+        if($scope.sucursales){
+          $scope.sucursales.forEach(function(letra){
+            letra.sucursales.forEach(function(sucursal){
+              if(sucursal.id_sucursal == fav.id_sucursal){
+                sucursal.class = "fill";
+                sucursal.icono = "favorite";
+                sucursal.fav = fav.id;
+              }
+            });
           });
-        });
-      })
+        }
+      });
     }
   }
   $scope.addUserUbication = function() {
