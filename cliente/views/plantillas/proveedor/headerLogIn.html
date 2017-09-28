@@ -16,11 +16,11 @@
   <!-- LEFT -->
   <md-sidenav md-component-id="left" class="md-sidenav-left" md-disable-scroll-target="body" md-disabled-backdrop="true">
     <section cabecera>Sucursales <i class="material-icons left">store</i></section>
-    <h5 ng-click="header.irASucursal(sucursal.id_sucursal)" ng-repeat="sucursal in header.sucursales">
+    <h5 class="color-primario-dark" ng-click="header.irASucursal(sucursal.id_sucursal)" ng-repeat="sucursal in header.sucursales">
       {{sucursal.nombre}}
       <i class="material-icons left">store</i>
     </h5>
-    <h5 ng-click="header.agregarSucursal();">AGREGAR <i class="material-icons">add</i></h5>
+    <h5 class="color-primario-dark" ng-click="header.agregarSucursal();">AGREGAR <i class="material-icons">add</i></h5>
     <div class="clear"></div>
   </md-sidenav>
   <!-- RIGHT -->
@@ -32,10 +32,10 @@
     <div opciones>
          <ul>
           <li>{{header.usuario.nombre}}</li>
-          <li ui-sref='proveedor.dashboard'><span class="material-icons">dashboard</span>dashboard</li>
-          <li><span class="material-icons">settings</span>Ajustes</li>
-          <li><span class="material-icons">security</span>Datos seguridad</li>
-          <li ng-click="header.logOut()"><span class="material-icons">power_settings_new</span>Cerrar Sesion</li>
+          <li class="color-primario-dark"  ui-sref='proveedor.dashboard'><span class="material-icons">dashboard</span>dashboard</li>
+          <li class="color-primario-dark"><span class="material-icons">settings</span>Ajustes</li>
+          <li class="color-primario-dark"><span class="material-icons">security</span>Datos seguridad</li>
+          <li class="color-primario-dark" ng-click="header.logOut()"><span class="material-icons">power_settings_new</span>Cerrar Sesion</li>
         </ul>
       </div>
     </section>

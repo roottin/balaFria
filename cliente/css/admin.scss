@@ -81,5 +81,27 @@ md-content[landing].admin{
       }
     }
   }
+}
+md-dialog{
+  div.cont-pais{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    div[pais]{
+      border: 1px solid white;
+      padding: 10px;
+      border-radius: 40px;
+      background: $color-primary;
+      @include BoxShadowHelper(2);
+    }
+  }
+}
+div.mod-form-map{
+  width: 100%;
+  height: 300px;
 
+  div.angular-leaflet-map{
+    width: 100%;
+    height: 100%;
+  }
 }

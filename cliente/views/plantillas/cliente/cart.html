@@ -1,0 +1,46 @@
+<div draggabilly class="omni-cart cerrado inactivo">
+  <i class="material-icons icono-carro">shopping_cart</i>
+  <div class="cart-content" >
+    {{cart.min}}
+    <div class="md-toolbar-tools color-primario-darkest cart-title">
+      <i class="material-icons">arrow_backward</i>
+      {{ "Mis Ordenes" }}
+    </div>
+    <!-- Barra superior -->
+    <div ng-repeat="orden in cart.ordenes"class="cart-order">
+      <div class="md-toolbar-tools color-primario-dark proveedor-title">
+        <img ng-src="{{ orden.proveedor.ruta }}" class="md-avatar" />
+        <md-truncate style="position: absolute; left: 70px; right: 170px; top: 13px; bottom: 13px; overflow:visible">
+          {{ orden.proveedor.nombre }}
+        </md-truncate>
+        <span flex></span>
+      </div><!-- Proveedor Title -->
+      <div ng-repeat = "producto in orden.productos" class="cart-item">
+        <img ng-src="{{ producto.ruta }}" class="imagen">
+        <div class="nombre">
+          {{ producto.nombre }}
+          <p>{{ producto.descripcion }}</p>
+        </div>
+        <div class="valor">
+          <div class="precio">
+            {{ producto.precio | bolivar }}
+          </div>
+          <div class="cantidad">
+            <i ng-click="cart.agregar(producto,orden)" class="material-icons">add</i>
+            {{ producto.cantidad}}
+            <i ng-click="cart.remover(producto,orden)" class="material-icons">remove</i>
+          </div>
+        </div>
+      </div><!-- Cart Item -->
+      <div class="subtitulo">Elije un Tipo</div>
+      <div class="order-type" layout="row" layout-align="space-around center" >
+        <md-button ng-click="cart.seleccionarTipo(this)" class="tipo ">A domicilio</md-button>        
+        <md-button ng-click="cart.seleccionarTipo(this)" class="tipo ">Retirar en Tienda</md-button>
+      </div><!-- Order type -->
+      <div class="order-total color-primario-dark">
+        Pagar: {{ orden.total | bolivar }}
+        <i class="material-icons">arrow_forward</i>
+      </div><!-- Order total -->
+    </div><!-- Cart Order -->
+  </div><!-- Cart Content -->   
+</div>

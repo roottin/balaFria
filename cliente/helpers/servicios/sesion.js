@@ -33,7 +33,7 @@ angular.module('balafria')
               }
             })
             .catch(function(err){
-              console.error(new Error(err));
+              console.error(err);
             });
         });
       }
@@ -57,13 +57,18 @@ angular.module('balafria')
   };
   self.actualizarDatos = function($http){
     return new Promise(function(completada,rechazada){
-      $http.get('/api/'+$rootScope.sesion.perfil.tipo+'/'+$rootScope.sesion.perfil.id)
+      if($rootScope.sesion.perfil){
+        $http.get('/api/'+$rootScope.sesion.perfil.tipo+'/'+$rootScope.sesion.perfil.id)
         .then(function(resultado){
-          console.log(resultado);
+          completada(resultado);
         })
-        .catch(function(err){
-          console.error(new Error(err));
+        .catch(function(err){          
+          console.error(err);
+          rechazada(err);
         })
+      }else{
+        completada();
+      }
     });
   }
   self.conectar = function(){

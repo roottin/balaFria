@@ -15,17 +15,32 @@ div.cont-mapa{
     height: calc(100%);
   }
 }
-div.marker{
-  width: 30px;
-  height: 30px;
-  border: 1px dashed black;
-  border-radius: 100px;
-  overflow: hidden;
-  @include BoxShadowHelper(2);
-  margin-left: -15px;
-  margin-top: -15px;
-  img{
-    width: 100%;
-    height: 100%;
+div{
+  &.marker{
+    width: 30px;
+    height: 30px;
+    border: 1px dashed black;
+    border-radius: 100px;
+    overflow: hidden;
+    @include BoxShadowHelper(2);
+    margin-left: -15px;
+    margin-top: -15px;
+    &.userUbi{
+      background: $color-primary;
+      @include BoxShadowHelper(3);
+      width: 20px;
+      height: 20px;
+      color:white;
+      position: relative;
+      i{
+        position: absolute;
+        bottom: -3px;
+        right: -3px;
+      }
+    }
+    img{
+      width: 100%;
+      height: 100%;
+    }
   }
 }

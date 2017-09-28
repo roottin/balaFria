@@ -1,30 +1,56 @@
 <header class="cliente">
-  <div titulo ng-click='toggleLeft()'>
+  <div titulo ng-click='header.irAlInicio();' style="cursor:pointer">
     BalaFria
   </div>
   <div sociales ng-show="header.usuario">
     <div avatar>
       <img
         src="{{header.usuario.avatar.ruta || '/img/thumbnails/thumbnail.png'}}" alt=""
-        ng-click="header.cambiarImagen($event)"
+        ng-click="header.toggleRight()"
       >
     </div>
     <div notificaciones ng-click="header.toggleRight()">
         <i class="material-icons">notifications_none</i>
     </div>
   </div>
-    <i ng-show="!header.usuario" class="material-icons" ng-click='header.toggleRight()'>account_circle</i>
+  <i ng-show="!header.usuario" class="material-icons" ng-click='header.toggleRight()'>account_circle</i>
+  <div ubicaciones>
+    <!-- combos -->
+    <md-input-container>
+      <label>Ciudad</label>
+      <md-select ng-model="ciudad">
+        <md-option><em>None</em></md-option>
+        <md-option ng-repeat="ciudad in header.ciudadesAct" ng-value="ciudad.id_ciudad" >
+          {{ciudad.nombre}}
+        </md-option>
+      </md-select>
+    </md-input-container>
+    <md-input-container>
+      <label>Pais</label>
+      <md-select ng-model="pais">
+        <md-option><em>None</em></md-option>
+        <md-option ng-repeat="pais in header.paises" ng-value="pais.id_pais" >
+          {{pais.nombre}}
+        </md-option>
+      </md-select>
+    </md-input-container>
+    <div class="clear"></div>
+    <!-- combos -->
+  </div>
 </header>
 <!-- Left side nav -->
 <md-sidenav class="md-sidenav-left" md-component-id="left" >
   <!-- TODO:llenar con informacion de balafria y llamada a trabajar con nostros como proveedor  -->
+    <h1>asdasd</h1>
+     <div divider></div>
+     <h1>asdasd</h1>
 </md-sidenav>
 <!-- right side nav -->
 <md-sidenav   class="md-sidenav-right" md-component-id="right" >
   <!-- Antes de logearce -->
   <md-content login ng-show="!header.usuario">
   <md-toolbar class="md-theme-indigo">
-    <h1 class="md-toolbar-tools">Acceso</h1>
+    <h1 class="md-toolbar-tools color-primario-darkest">Acceso</h1>
   </md-toolbar>
     <md-tabs md-dynamic-height md-border-bottom>
        <md-tab label="Ingresar">
@@ -88,15 +114,16 @@
     <!-- Despues de logueado-->
   <md-content ng-show="header.usuario">
     <section class="perfil">
-      <div avatar>
-      <img src="{{header.usuario.avatar.ruta || '/img/thumbnails/thumbnail.png'}}" alt="">
-    </div>
+      <div avatar ng-click="header.cambiarImagen($event)">
+        <img src="{{header.usuario.avatar.ruta || '/img/thumbnails/thumbnail.png'}}" alt="">
+      </div>
     <div opciones>
          <ul>
-          <li>{{header.usuario.nombre+" "+header.usuario.apellido}}</li>
-          <li><span class="material-icons">settings</span>Ajustes</li>
-          <li><span class="material-icons">security</span>Datos seguridad</li>
-          <li ng-click="header.logOut()"><span class="material-icons">power_settings_new</span>Cerrar Sesion</li>
+          <li class="texto-primario-dark" >{{header.usuario.nombre+" "+header.usuario.apellido}}</li>
+          <li class="color-primario-dark" ng-click="header.verPerfil()"><span class="material-icons">account_circle</span>Perfil</li>
+          <li class="color-primario-dark" ><span class="material-icons">settings</span>Ajustes</li>
+          <li class="color-primario-dark" ng-click="header.abrirSeguridad()"><span class="material-icons">security</span>Datos seguridad</li>
+          <li class="color-primario-dark" ng-click="header.logOut()"><span class="material-icons">power_settings_new</span>Cerrar Sesion</li>
         </ul>
       </div>
     </section>

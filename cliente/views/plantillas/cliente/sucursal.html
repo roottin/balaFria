@@ -38,7 +38,24 @@
 			<md-tab-label><i class="material-icons">shopping_basket</i></md-tab-label>
 			<md-tab-body>
 				<h2 >Menu</h2>
-				<div ng-repeat="categoria in sucursal.menu.categorias" class="categoria">
+				<!-- Filtrado -->
+				<!-- NOTE:miguel colocar aqui el html para la construccion de los mismos -->
+					<div class="filtrado-menu">
+						<md-input-container>
+							<label>Categorias</label>
+								<md-select ng-model="selectedItem" md-selected-text="getSelectedText()">
+									<md-optgroup label="Categorias">
+										<md-option ng-value="item" ng-repeat="item in sucursal.menu.categorias">{{item.titulo}}</md-option>
+									</md-optgroup>
+								</md-select>
+							</md-input-container>
+							<md-input-container>
+								 <label>Buscar</label>
+								 <input ng-model="campoBusqueda" type="text">
+							 </md-input-container>
+					</div>
+				<!-- Filtrado -->
+				<div ng-repeat="categoria in sucursal.menu.filtrado" class="categoria">
 					<div class="texto-categoria">
 						<img id="{{'cat'+categoria.id}}" ng-src="{{categoria.ruta}}" ng-click="sucursal.agregarCategoria(categoria.id)">
 							<div class="tit-cat" ng-show="categoria.titulo">
@@ -54,16 +71,15 @@
 									<!-- display normal-->
 									<h4 >{{producto.nombre}}</h4>
 									<p >{{producto.descripcion}}</p>
-									<div  class="precio arriba">{{producto.precio}}</div>
-									<button class="material-icons shop-btn">
-										<div class="texto-aparece">
-											Ordenar
-										</div>
-										add_shopping_cart
-									</button>
+									<div  class="precio arriba">{{producto.precio | bolivar}}</div>
 								</div>
-							</div>
-							<!-- producto -->
+								<button class="material-icons shop-btn" ng-click="sucursal.agregarAlCarrito(producto)">
+									<div class="texto-aparece">
+										Ordenar
+									</div>
+									add_shopping_cart
+								</button>
+							</div><!-- producto -->
 					</div><!-- cont-producto -->
 				</div>
 			</md-tab-body>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="balafria">
 <head>
+<title>Balafria</title>
 <link rel="stylesheet" href="/node_modules/angular-material/angular-material.css">
 <link href="../css/material-icons.css" rel="stylesheet">
 <link href="../css/ionicons.css" rel="stylesheet">
@@ -29,10 +30,16 @@
 <script src="/node_modules/satellizer/dist/satellizer.min.js"></script>
 <script src="/node_modules/ng-file-upload/dist/ng-file-upload.js"></script>
 <script src="/node_modules/socket.io-client/dist/socket.io.js"></script>
+<script src="/node_modules/socket.io-client/dist/socket.io.js"></script>
+<script src="/node_modules/draggabilly/dist/draggabilly.pkgd.min.js"></script>
+<script src="/node_modules/angular-draggabilly/dist/angular-draggabilly.min.js"></script>
+
 <script src="/helpers/vendor/LeafletHtmlIcon.js"></script>
 
 
 <script src="/helpers/apps/apps.js"></script>
+<!-- Filtros -->
+<script src="/helpers/filtros/bolivar.js"></script>
 <!-- Servicios -->
 <script src="/helpers/servicios/rubro.js"></script>
 <script src="/helpers/servicios/tipoImagen.js"></script>
@@ -43,6 +50,9 @@
 <script src="/helpers/servicios/categoria.js"></script>
 <script src="/helpers/servicios/producto.js"></script>
 <script src="/helpers/servicios/proveedor.js"></script>
+<script src="/helpers/servicios/pais.js"></script>
+<script src="/helpers/servicios/ciudad.js"></script>
+<script src="/helpers/servicios/fav.js"></script>
 <!-- Directivas -->
 <script src="/helpers/directivas/fileInput.js"></script>
 <script src="/helpers/directivas/reloj.js"></script>
@@ -53,12 +63,20 @@
 	<script src="/helpers/admin/controladores/tipoImagen.js"></script>
 	<script src="/helpers/admin/controladores/front.js"></script>
 	<script src="/helpers/admin/controladores/landing.js"></script>
+	<script src="/helpers/admin/controladores/pais.js"></script>
+	<script src="/helpers/admin/controladores/ciudad.js"></script>
 
 	<!-- cliente -->
 	<script src="/helpers/cliente/controladores/cliente-front.js"></script>
 	<script src="/helpers/cliente/controladores/sucursal.js"></script>
 	<script src="/helpers/cliente/controladores/header.js"></script>
 	<script src="/helpers/cliente/controladores/cambiarImagen.js"></script>
+	<script src="/helpers/cliente/controladores/formaDePago.js"></script>
+	<script src="/helpers/cliente/controladores/historial.js"></script>
+	<script src="/helpers/cliente/controladores/seguridad.js"></script>
+	<script src="/helpers/cliente/controladores/perfil.js"></script>
+	<script src="/helpers/cliente/controladores/cart.js"></script>
+	<script src="/helpers/cliente/controladores/authTerceros.js"></script>
 
 	<!-- proveedor -->
 	<script src="/helpers/proveedor/controladores/front.js"></script>
@@ -73,6 +91,7 @@
 	<script src="/helpers/proveedor/controladores/cambiarMenu.js"></script>
 	<script src="/helpers/proveedor/controladores/buscarCategorias.js"></script>
 	<script src="/helpers/proveedor/controladores/buscarProductos.js"></script>
+	<script src="/helpers/proveedor/controladores/perfil.js"></script>
 
 </body>
 </html>

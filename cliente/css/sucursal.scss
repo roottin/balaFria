@@ -239,8 +239,15 @@ md-dialog{
 			    width: 100%;
 			    [texto]{
 			    	float: left;
-
 			    }
+			}
+		}
+		div.filtrado-menu{
+			position: absolute;
+	    top: 5px;
+	    left: 130px;
+			md-input-container{
+				height: 58px;
 			}
 		}
 		div.descripcion,div.contactos,div.ubicacion{
@@ -473,19 +480,20 @@ md-dialog{
 					border-radius: 3px;
 					background-color: white;
 					width: calc((100% / 2) - 5px);
-  				margin-bottom: 10px;
-  				&:hover i.edit,&:hover i.guardar,&:hover i.borrar{
+	  				margin-bottom: 10px;
+	  				position: relative;
+	  				&:hover i.edit,&:hover i.guardar,&:hover i.borrar{
 						left:10px;
 					}
 					&:hover div.img img{
 						@include BoxShadowHelper(3);
 						transform: scale(1.05);
 					}
-					&:hover div.descrip button.shop-btn{
+					&:hover button.shop-btn{
 						@include BoxShadowHelper(3);
 						width: 100px;
 					}
-					&:hover div.descrip button.shop-btn div.texto-aparece{
+					&:hover button.shop-btn div.texto-aparece{
 						width: 80px;
 						opacity: 1;
 					}
@@ -554,12 +562,38 @@ md-dialog{
 							}
 						}
 					}
-
+					button.shop-btn{
+						transition: all 0.3s ease-in-out;
+						color: white;
+						background-color: $color-acent;
+						border:none;
+						padding: 7px 6px 7px 0px;
+						border-radius: 100px;
+						@include BoxShadowHelper(1);
+						right: 20px;
+						bottom: 20px;
+						position: absolute;
+						width: 38px;
+						overflow: hidden;
+						text-align: right;
+						div.texto-aparece{
+							width: 0px;
+							transition: all 0.5s;
+							position: absolute;
+							overflow: hidden;
+							font-size: 17px;
+						    text-align: left;
+						    padding: 5px 10px;
+							opacity: 0;
+							font-family: serif;
+						}
+					}
 					div.descrip{
 						color: grey;
 						padding-top: 15px;
 						padding-bottom: 15px;
 						height: 100%;
+						max-height: 240px;
 						textarea{
 							min-height: 100px;
     						border: 1px dashed silver;
@@ -583,16 +617,6 @@ md-dialog{
 						    bottom: 10px;
 						    font-size: 25px;
 						    color: #303030;
-							&:before{
-								content:"Bs ";
-								color: grey;
-								font-size: 15px;
-							}
-							&:after{
-								content:"00";
-								font-size: 10px;
-								transform:translateX(-15px);
-							}
 							input{
 								width: 100px;
 							}
@@ -601,32 +625,7 @@ md-dialog{
 							right: 20px;
 							top:10px;
 							font-size: 20px;
-						}
-						button.shop-btn{
-							transition: all 0.3s ease-in-out;
-							color: white;
-							background-color: $color-acent;
-							border:none;
-							padding: 7px 6px 7px 0px;
-							border-radius: 100px;
-							@include BoxShadowHelper(1);
-							right: 20px;
-							bottom: 20px;
-							position: absolute;
-							width: 38px;
-							overflow: hidden;
-							text-align: right;
-							div.texto-aparece{
-								width: 0px;
-								transition: all 0.5s;
-								position: absolute;
-								overflow: hidden;
-								font-size: 17px;
-							    text-align: left;
-							    padding: 5px 10px;
-								opacity: 0;
-								font-family: serif;
-							}
+							height: 48px;
 						}
 					}
 				}

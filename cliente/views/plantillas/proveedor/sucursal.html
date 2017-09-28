@@ -26,7 +26,7 @@
 						<label>visitas hoy</label>
 					</li>
 					<li>
-						3<br>
+						<br>
 						<label>favoritos</label>
 					</li>
 					<li>
@@ -51,9 +51,9 @@
 			<md-tab-body>
 				<h2 ng-show="sucursal.proveedor">
 					Menu {{sucursal.menu.nombre}}
-					<md-fab-toolbar class="menu" md-open="open" count="0" md-direction="left">
+					<md-fab-toolbar class="menu " md-open="open" count="0" md-direction="left">
 					    <md-fab-trigger class="align-with-text">
-					      <md-button aria-label="menu" class="md-fab md-primary">
+					      <md-button aria-label="menu" class="md-fab md-primary {{sucursal.claseMenu}}">
 					        <md-icon class="material-icons">menu</md-icon>
 					      </md-button>
 					    </md-fab-trigger>
@@ -148,7 +148,7 @@
 									<!-- display normal-->
 									<h4 ng-show="!producto.edit">{{producto.nombre}}</h4>
 									<p ng-show="!producto.edit">{{producto.descripcion}}</p>
-									<div ng-show="!producto.edit" class="precio arriba">{{producto.precio}}</div>
+									<div ng-show="!producto.edit" class="precio arriba">{{producto.precio | bolivar}}</div>
 									<button class="material-icons shop-btn">
 										<div class="texto-aparece">
 											Ordenar
@@ -188,7 +188,7 @@
 							</li>
 						</ul>
 					</div>
-					<leaflet lf-center="Acarigua" markers="sucursal.temp.markers" paths="sucursal.paths"></leaflet>
+					<leaflet lf-center="sucursal.centro" markers="sucursal.temp.markers" paths="sucursal.paths" ></leaflet>
 				</div>
 				<div class="descripcion">
 					<h3>Conocenos</h3>

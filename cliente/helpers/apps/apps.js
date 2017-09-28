@@ -1,4 +1,4 @@
-angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','ui.router',"satellizer",'leaflet-directive','ngFileUpload'])
+angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','ui.router',"satellizer",'leaflet-directive','ngFileUpload','draggabilly'])
 .config(['$stateProvider','$urlRouterProvider','$mdThemingProvider','$authProvider','$compileProvider', function ($stateProvider,$urlRouterProvider,$mdThemingProvider,$authProvider,$compileProvider) {
   $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|tel|file|blob):/);
   //-------------------------------- Autenticacion ----------------------------------------
@@ -20,6 +20,11 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
       views:{
         "@":{
           templateUrl: '/views/plantillas/cliente/front.html',
+        },
+        "cart@cliente":{
+          templateUrl:"/views/plantillas/cliente/cart.html",
+          controller:'ctrlCart',
+          controllerAs:'cart'
         },
         "header@cliente":{
           templateUrl:"/views/plantillas/cliente/header.html",
@@ -43,6 +48,58 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
         },
         params:{
           sucursal: null
+        }
+      })
+       .state('cliente.formasDePago', {
+        url:'/formaDePago',
+        views:{
+          "body@cliente":{
+            templateUrl: '/views/plantillas/cliente/formasDePago.html',
+            controller: 'ctrlFormasDePago',
+            controllerAs:'user'
+          }
+        },
+        resolve:{
+          loginRequired: clienteLoggedRequired
+        }
+      })
+       .state('cliente.historial', {
+        url:'/historial',
+        views:{
+          "body@cliente":{
+            templateUrl: '/views/plantillas/cliente/historial.html',
+            controller: 'ctrlHistorial',
+            controllerAs:'user'
+          }
+        },
+        resolve:{
+          loginRequired: clienteLoggedRequired
+        }
+      })
+       .state('cliente.seguridad', {
+        url:'/seguridad',
+        views:{
+          "body@cliente":{
+            templateUrl: '/views/plantillas/cliente/seguridad.html',
+            controller: 'ctrlSeguridad',
+            controllerAs:'user'
+          }
+        },
+        resolve:{
+          loginRequired: clienteLoggedRequired
+        }
+      })
+       .state('cliente.perfil', {
+        url:'/perfil',
+        views:{
+          "body@cliente":{
+            templateUrl: '/views/plantillas/cliente/perfil.html',
+            controller: 'ctrlPerfil',
+            controllerAs:'perfil'
+          }
+        },
+        resolve:{
+          loginRequired: clienteLoggedRequired
         }
       })
     //-----------------------------------------proveedor--------------------------------------------------
@@ -112,6 +169,25 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
           },
           "body@proveedor":{
             templateUrl: '/views/plantillas/proveedor/dashboard.html'
+          },
+          "foot@proveedor":{
+            templateUrl: '/views/plantillas/proveedor/foot.html'
+          }
+        },
+        resolve:{
+          loginRequired: ProveedorLoggedRequired
+        }
+      })
+      .state('proveedor.perfil',{
+        url:'/perfil',
+        views:{
+          "header@proveedor":{
+            templateUrl:"/views/plantillas/proveedor/headerLogIn.html",
+            controller:'ctrlHeaderPro',
+            controllerAs:'header'
+          },
+          "body@proveedor":{
+            templateUrl: '/views/plantillas/proveedor/perfil.html'
           },
           "foot@proveedor":{
             templateUrl: '/views/plantillas/proveedor/foot.html'
@@ -194,28 +270,13 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
         resolve:{
           loginRequired: AdminLoggedRequired
         }
-      })
-      .state('admin.rubro',{
-        url:'/rubros',
-        views:{
-          "body@admin":{
-            templateUrl: '/views/plantillas/admin/rubro.html',
-            controller: 'ctrlRubro as up',
-          },
-          "header@admin":{
-            templateUrl: '/views/plantillas/admin/headerIn.html'
-          }
-        },
-        resolve:{
-          loginRequired: AdminLoggedRequired
-        }
       });
     //------------------------ Tema -------------------------------------------------------
     $mdThemingProvider.theme('light')
-          .primaryPalette('indigo')
+          .primaryPalette('deep-orange')
           .accentPalette('blue-grey');
     $mdThemingProvider.theme('default')
-          .primaryPalette('indigo')
+          .primaryPalette('deep-orange')
           .accentPalette('blue-grey')
           .dark();
 

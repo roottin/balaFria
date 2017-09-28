@@ -7,10 +7,13 @@ module.exports = function(app){
   //rutas clientes
   require('./cliente')(app);
   require('./autenticar')(app);
+  require('./favorito')(app);
   //rutas administrador
   require('./tipo_imagen')(app);
   require('./adminPanel')(app);
   require('./rubro')(app);
+  require('./pais')(app);
+  require('./ciudad')(app);
   //rutas proveedor
   require('./proveedor')(app);
   require('./sucursal')(app);
