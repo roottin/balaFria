@@ -1,0 +1,14 @@
+<div class="titulo">
+  <i class="material-icons ">payment</i> Formas De Pago
+</div>
+<div form-central md-theme="light">
+   <form name="sucursal.form" ng-model="sucursal.form">
+    <!-- NOTE: Aqui va todo el contenido de formas de pago -->
+    <h2>Conecte con una forma de pago para empezar comprar:</h2>
+    <br>
+	<button class="md-raised central md-button md-ink-ripple md-light-theme mercadoPago" ng-click="user.autorizar($event,'mercadoPago')">
+		<img src="/img/iconos/mercadopago_on.png">
+	</button>
+    
+   </form>
+</div>

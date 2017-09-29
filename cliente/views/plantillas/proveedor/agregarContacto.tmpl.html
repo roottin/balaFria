@@ -1,0 +1,38 @@
+<md-dialog aria-label="contactos">
+   <md-toolbar>
+     <div class="md-toolbar-tools">
+      <h2>Contacto</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="contact.cancel()">
+         <md-icon class="material-icons" aria-label="Close dialog">close</md-icon>
+      </md-button>
+     </div>
+   </md-toolbar>
+    <div class="inicio"  md-theme="default" registro  layout="column" layout-sm="column"  layout-wrap>
+      <form name="contact.formulario">
+        <div class="barra">
+          <label ng-click="contact.cambiarTipo('insta')" class="insta first">Instagram</label>
+          <label ng-click="contact.cambiarTipo('face')" class="face">Facebook</label>
+          <label ng-click="contact.cambiarTipo('tweet')" class="tweet">Twitter</label>
+          <label ng-click="contact.cambiarTipo('phone')" class="phone">Telefono</label>
+          <label ng-click="contact.cambiarTipo('web')" class="web last">Pagina Web</label>
+        </div>
+        <md-input-container md-no-float class="md-block">
+          <label>contenido</label>
+          <input required name="contenido" minlength="5"  ng-model="contact.contacto.contenido">
+            <!-- mensajes  -->
+          <div ng-messages="contact.formulario.contenido.$error" role="alert">
+            <div ng-message="required">Este campo es requerido</div>
+            <div ng-message="minlength">Debe poseer al menos 5 carateres</div>
+          </div>
+        </md-input-container>
+            <section class="{{contact.contacto.clase}} preview">
+              <div >
+                <i class="{{contact.contacto.icono}} "></i>
+              </div>
+              {{contact.contacto.contenido}}
+            </section>
+           <md-button class="md-raised md-primary" type="submit" ng-click="contact.submit()">Enviar</md-button>
+      </form>
+   </div>
+</md-dialog>

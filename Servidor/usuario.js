@@ -1,4 +1,5 @@
 var plugAssembler = require('./plug');
+var moduloNotificaciones = require('./socket/notificacion.socket');
 var consUsuario = {};
 
 consUsuario.crear = function(){
@@ -18,6 +19,7 @@ var Usuario = function(){
 		if(socket){
 			var plug = plugAssembler.configure(socket,this.perfil.tipo,token);
 			this.conexiones.push(plug);
+			moduloNotificaciones(self,plug);
 		}
 		return this;
 	};
@@ -49,6 +51,12 @@ var Usuario = function(){
 			conexion.socket.disconnect();
 		});
 	};
+	//emito un mensaje por todas las conexiones
+	self.emit = function(evento,data){
+			self.conexiones.forEach(function(conexion){
+				conexion.socekt.emit(evento,data);
+			});
+	}
 };
 module.exports = consUsuario;
 //TODO: notificaciones de usuario

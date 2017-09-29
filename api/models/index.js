@@ -70,6 +70,7 @@ db.sequelize.sync({force:recrearBaseDeDatos})
     console.log('----------------------------------------');
     console.log('servidor de Base de Datos inicializado');
     console.log('----------------------------------------');
+
   })
   .catch(function(err) {
     console.log('Server failed to start due to error: %s', err);

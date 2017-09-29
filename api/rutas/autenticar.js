@@ -49,6 +49,7 @@ module.exports = function(app){
             if(registro.dataValues.clave === pass){
               var usuario = {
                 "nombre":registro.dataValues.nombre,
+                "apellido":registro.dataValues.apellido,
                 "documento":registro.dataValues.documento,
                 "id":registro.dataValues['id_'+req.body.tipo],
                 "email":registro.dataValues.email,
@@ -89,7 +90,6 @@ module.exports = function(app){
   });
   app.post('/api/recuperar',function(req,res){
     var datos = req.body;
-    console.log(datos);
     var usuario = servidor.buscarUsuario(datos.id,datos.tipo);
     if(!usuario){
       console.log('SESION: error de recuperacion');

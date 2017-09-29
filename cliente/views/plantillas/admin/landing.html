@@ -89,7 +89,7 @@
           <div nombre >Agregar</div>
 
       </div>
-  </div>
+  </div> <!-- rubro -->
   <!-- tipo de imagen -->
   <div class="proveedores listas">
     <h3>
@@ -108,7 +108,45 @@
         </md-list-item>
       </md-list>
     </div>
-  </div>
+  </div><!-- tipo de imagen -->
+   <!-- Paises -->
+  <div class="proveedores listas">
+    <h3>
+      <i class="material-icons">language</i>
+      <div>Paises</div>
+      <i class="material-icons" ng-click='showPaises($event)'>add</i>
+    </h3>
+    <div class="display">
+      <md-list flex>
+        <md-list-item class="md-3-line list-mini" ng-repeat="pais in paises" ng-click="null">
+          <i class="md-avatar material-icons">language</i>
+          <div class="md-list-item-text" layout="column">
+            <h4>{{ pais.nombre }}</h4>
+            <p>{{ pais.descripcion }}</p>
+          </div>
+        </md-list-item>
+      </md-list>
+    </div>
+  </div><!-- Paises -->
+   <!-- ciudades-->
+  <div class="proveedores listas">
+    <h3>
+      <i class="material-icons">gps_fixed</i>
+      <div>Ciudades</div>
+      <i class="material-icons" ng-click='showCiudades($event)'>add</i>
+    </h3>
+    <div class="display">
+      <md-list flex>
+        <md-list-item class="md-3-line list-mini" ng-repeat="ciudad in ciudades" ng-click="null">
+          <i class="md-avatar material-icons">gps_fixed</i>
+          <div class="md-list-item-text" layout="column">
+            <h4>{{ ciudad.nombre }}</h4>
+            <p>{{ ciudad.descripcion }}</p>
+          </div>
+        </md-list-item>
+      </md-list>
+    </div>
+  </div><!-- ciudades -->
   <div class="clear"></div>
   <div class="botonera">
     <md-button class="md-fab md-primary" ng-click="logOut();">

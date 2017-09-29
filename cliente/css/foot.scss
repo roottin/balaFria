@@ -1,0 +1,72 @@
+div.foot{
+  h1{
+    font-size: 24px;
+    margin: 5px 0 10px;
+  }
+  text-align: center;
+  div.box{
+    padding: 0px 5px;
+    margin-top: 20px;
+    border: none;
+    @include BoxShadowHelper(1);
+    margin-bottom: 10px;
+    textarea#message{
+      height: 100px;
+    }
+    button{
+      padding: 5px;
+      font-size: 12px;
+    }
+    div.form{
+      border-right:2px dashed rgba(255, 255, 255, 0.25);
+      margin: 10px 0px;
+      p{
+        font-size: 12px;
+      }
+    }
+    div.nav{
+      div{
+        height: 130px;
+        margin-top: 10px;
+        &:not(:last-child){
+          border-right:2px dashed rgba(255, 255, 255, 0.25);
+        }
+      }
+    }
+    div.promo{
+      div.borde{
+        margin: 10px 0px 10px 10px;
+        width: 100%;
+        height: 1px;
+        border-top:2px dashed rgba(255, 255, 255, 0.25);
+      }
+    }
+  }
+  div.power{
+    padding: 10px;
+    color: white;
+    font-size: 24px;
+  }
+  ul{
+    text-align: left;
+    &.nav{
+      list-style: none;
+      li{
+        padding-left: 40px;
+      }
+    }
+    &.social{
+      display: flex;
+      justify-content: space-around;
+      height: 45px;
+      li{
+        a{
+          font-size: 14px !important;
+          i{
+            font-size: 24px !important;
+          }
+        }
+      }
+    }
+  }
+}

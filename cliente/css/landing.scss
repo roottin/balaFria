@@ -8,16 +8,28 @@
 @import "cliente.scss";
 @import "menu.scss";
 @import "verificacionCorreo.scss";
+@import "sucursal.scss";
+@import "animaciones.scss";
+@import "foot.scss";
+@import "mapa.scss";
+@import "perfil.scss";
+@import "cart.scss";
+@import "externalIcons.scss";
 
 html,body{
   min-height: 100%;
 }
-.leaflet-bottom {
-  display: none;
-}
 div.md-toast-content{
   background: white !important;
   color:$color-primary !important;
+}
+md-sidenav{
+  background-color: white;
+}
+div.md-toolbar-tools{
+  h2{
+    color:white;
+  }
 }
 md-menu-content{
   h4{
@@ -44,6 +56,23 @@ md-checkbox{
 [login]{
   max-width: 500px;
   width: 100%;
+  height: 100%;
+  h1{
+    color:white;
+  }
+  md-tabs-canvas{
+    width: 100%;
+    md-pagination-wrapper{
+      width: 100%;
+      md-tab-item{
+        width: 50%;
+        &.md-tab.md-active{
+          background-color: $color-primary-dark;
+          color: white;
+        }
+      }
+    }
+  }
   .inicio{
     background-color: rgba(0,0,0,0.3);
     width: 100%;
@@ -68,6 +97,7 @@ div[divider]{
   height: 1px;
   background: silver;
   margin-left: -2px;
+  padding: 0px;
 }
 md-content[landing].cliente{
   div[ui-view="body"]{
@@ -77,20 +107,13 @@ md-content[landing].cliente{
 }
 md-content[landing]{
   background-size: cover;
-  .md-primary{
-    background: $color-primary;
-    &.md-raised{
-      background-color: $color-acent;
-    }
-  }
-  //overflow: hidden;
   width: 100%;
   height: 100%;
   position: relative;
   header.cliente{
     width: 100%;
     height: 70px;
-    background-color: transparent;
+    background-color: $color-primary-darkest;
     margin-top: -10px;
     i.material-icons{
       float: right;
@@ -100,7 +123,29 @@ md-content[landing]{
       cursor: pointer;
       transition: all 0.3s ease-in-out;
       &:hover{
-        background: $color-primary;
+        background: $color-primary-darkest;
+      }
+    }
+    div.derecha{
+      float: right;
+      margin-top: 20px;
+      margin-right: 25px;
+      font-size: 30px;
+      a{
+        font-size: 15px;
+        margin-right: 5px;
+        margin-bottom: 10px;
+        margin-top: 10px;
+        color: white;
+        &.derecha{
+          float: right;
+          margin-left: 5px;
+        }
+        &.izquierda{
+          float: left;
+          margin-right: 5px;
+        }
+
       }
     }
     div[titulo]{
@@ -114,7 +159,7 @@ md-content[landing]{
     }
     div[sociales]{
       float: right;
-      width: 340px;
+      width: auto;
       height: 50%;
       position: relative;
       top: 30%;
@@ -181,6 +226,15 @@ md-content[landing]{
         }
       }
     }
+    div[ubicaciones]{
+      width: 300px;
+      float: right;
+      md-input-container{
+        float: right;
+        margin-top: 25px;
+        margin-bottom: 10px;
+      }
+    }
   }
   div[principal]{
     width: 100%;
@@ -205,14 +259,7 @@ md-content[landing]{
             background-color: rgba(0,0,0,0.2);
           }
         }
-
       }
-
-      div.angular-leaflet-map{
-        width: calc(100% - 0px);
-        height: calc(100% - 96px);
-      }
-
       md-toolbar.bottom{
         bottom: 0;
         position: absolute;
@@ -232,36 +279,146 @@ md-content[landing]{
       float: left;
       border-top: 1px solid silver;
       border-right:1px solid silver;
-
-      div[categoria]{
-        width: 148px;
-        height: 148px;
-        float: left;
-        border: 1px solid white;
-        position: relative;
-
-        div[nombre]{
-          color: white;
-          position: absolute;
+      position: relative;
+      div{
+        &.toolbar-search{
           width: 100%;
-          height: 100%;
-          cursor: pointer;
-          background-color: rgba(0, 0, 0, 0.6);
-          text-align: center;
-          z-index: 2;
-          font-family: bebas;
-          display: flex;
-          align-content: space-between;
-          justify-content: center;
-          align-items: center;
-          font-size: 31px;
+          height: 48px;
+          margin-bottom: 2px;
+          @include BoxShadowHelper(3);
+          background-color: white;
+          input{
+            height: 100%;
+            border:none;
+            padding: 5px;
+            float: right;
+            outline: none;
+            width: calc(100% - 78px);
+          }
+          i{
+            color: #777;
+            padding-top: 10px;
+            &.buscar{
+              padding-left: 20px;
+            }
+            &.lista{
+              padding-right: 10px;
+              float: right;
+              cursor: pointer;
+            }
+          }
         }
-        img{
+        &.cont-rubros{
+          position: absolute;
+          background-color: #303030;
+          padding-bottom:  3px;
+          overflow: hidden;
+          height: calc(100% - 51px);
+          width: 100%;
+          left: 0px;
+          top:51px;
+          [categoria]{
+            width: 148px;
+            height: 148px;
+            float: left;
+            border: 1px solid white;
+            position: relative;
+            background: white;
+            div[nombre]{
+              color: white;
+              position: absolute;
+              width: 100%;
+              height: 100%;
+              cursor: pointer;
+              background-color: rgba(0, 0, 0, 0.6);
+              text-align: center;
+              z-index: 2;
+              font-family: bebas;
+              display: flex;
+              align-content: space-between;
+              justify-content: center;
+              align-items: center;
+              font-size: 31px;
+            }
+            img{
+              position: absolute;
+              width: 100%;
+              height: 100%;
+              cursor: pointer;
+              z-index: 1;
+            }
+          }
+        }
+        &.cont-sucursales{
           position: absolute;
           width: 100%;
-          height: 100%;
-          cursor: pointer;
-          z-index: 1;
+          height: calc(100% - 51px);
+          left: 100%;
+          top:51px;
+          background-color: #303030;
+          md-list{
+            width: 100%;
+            z-index: 1;
+            position: absolute;
+            top: 3px;
+            background-color: #303030;
+            min-height: calc(100% - 3px);
+            div.letra{
+              h4{
+                cursor: pointer;
+                margin: 10px 0px;
+                text-indent: 15px;
+                font-size: 25px;
+              }
+              i.fav{
+                margin-top: 15px;
+                font-size: 28px;
+                &.fill{
+                  color:$color-favs;
+                }
+              }
+            }
+          }
+          i.cerrar{
+            position: absolute;
+            right: 0px;
+            padding: 10px;
+            cursor:pointer;
+            top:0px;
+            z-index: 2;
+          }
+          div.busq-rap{
+            transition: all 0.3s linear;
+            overflow: hidden;
+            position: absolute;
+            z-index: 2;
+            background: #303030;
+            width: 0%;
+            padding: 40px 0px;
+            height: 100%;
+            &.visible{
+              opacity: 1;
+              width: 100%;
+            }
+            div.cls-letra{
+              transition: all 0.3s ease-in-out;
+              cursor:pointer;
+              width: 60px;
+              height: 60px;
+              color: white;
+              float: left;
+              padding: 15px;
+              font-size: 30px;
+              margin-left: 10px;
+              margin-bottom: 10px;
+              &.inactiva{
+                color:gray;
+              }
+              &.activa:hover{
+                border:1px solid white;
+              }
+            }
+          }
         }
       }
     }
