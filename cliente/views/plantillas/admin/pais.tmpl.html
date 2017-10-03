@@ -1,0 +1,39 @@
+<md-dialog aria-label="pais" login>
+   <md-toolbar>
+     <div class="md-toolbar-tools">
+      <h2><i class="material-icons">language</i>Paises</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="up.cancel()">
+         <md-icon class="material-icons" aria-label="Close dialog">close</md-icon>
+      </md-button>
+     </div>
+   </md-toolbar>
+    <div class="inicio" registro  layout="column" layout-sm="column"  layout-wrap>
+      <form name="up.upload_form">
+        <md-input-container md-no-float class="md-block">
+          <label>Nombre</label>
+          <input required name="nombre" minlength="5"  ng-model="up.pais.nombre">
+            <!-- mensajes  -->
+          <div ng-messages="up.upload_form.nombre.$error" role="alert">
+            <div ng-message="required">Este campo es requerido</div>
+            <div ng-message="minlength">Debe poseer al menos 5 carateres</div>
+          </div>
+        </md-input-container>
+        <md-input-container md-no-float class="md-block">
+          <label>Codigo postal</label>
+          <input required name="codigo_postal" minlength="3"  ng-model="up.pais.codigo_postal">
+            <!-- mensajes  -->
+          <div ng-messages="up.upload_form.codigo_postal.$error" role="alert">
+            <div ng-message="required">Este campo es requerido</div>
+            <div ng-message="minlength">Debe poseer al menos 3 carateres</div>
+          </div>
+        </md-input-container>
+        <!-- mapa  -->
+        <label>Ubicacion</label>
+        <div class="mod-form-map" >
+           <leaflet lf-center="up.centro" markers="up.markers"  ></leaflet>
+        </div>
+        <md-button class="md-raised md-primary" type="submit" ng-click="up.submit()">Enviar</md-button>
+      </form>
+    </div>
+</md-dialog>

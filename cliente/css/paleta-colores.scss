@@ -1,4 +1,24 @@
-//$color-primary:rgb(63,81,181);
-$color-primary:#3F51B5;
+//NOTE: Los numeros en los comentarios de este archivo es para
+//identificar el grado de intensidad en la paleta de colores de 
+//material design siguiendo los material design guide lines
+//500 - para estructura general
+$color-primary:#FF5722;
 $color-warn:#FFC107;
-$color-acent:#607D8B;
+$color-acent:#b71c1c;
+$color-favs:#b71c1c;
+$color-precio:#b71c1c;
+//700 - para barras principales
+$color-primary-dark:#E64A19; 
+//900 - para barra superior
+$color-primary-darkest:#BF360C;
+//colores secundarios
+$color-texto-sub-titulo:rgba(black,0.3);
+//primario
+.color-primario{background-color: $color-primary !important;}
+.color-primario-dark{background-color: $color-primary-dark !important;}
+.color-primario-darkest{background-color: $color-primary-darkest !important;}
+.texto-primario{color:$color-primary !important;}
+.texto-primario-dark{color:$color-primary-dark !important;}
+.texto-primario-darkest{color:$color-primary-darkest !important;}
+//acent
+.color-acent{background-color: $color-acent;}

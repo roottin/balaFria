@@ -1,0 +1,34 @@
+<md-dialog aria-label="tipoImagen">
+   <md-toolbar>
+     <div class="md-toolbar-tools">
+      <h2>Zona de Atencion</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="form.cancel()">
+         <md-icon class="material-icons" aria-label="Close dialog">close</md-icon>
+      </md-button>
+     </div>
+   </md-toolbar>
+    <div class="inicio"  md-theme="default" registro  layout="column" layout-sm="column"  layout-wrap>
+      <form name="form.formulario">
+        <md-input-container md-no-float class="md-block">
+          <label>Nombre</label>
+          <input required name="nombre" minlength="5"  ng-model="form.zona.nombre">
+            <!-- mensajes  -->
+          <div ng-messages="form.formulario.nombre.$error" role="alert">
+            <div ng-message="required">Este campo es requerido</div>
+            <div ng-message="minlength">Debe poseer al menos 5 carateres</div>
+          </div>
+        </md-input-container>
+        <md-input-container md-no-float class="md-block">
+          <label>Descripcion</label>
+          <input required name="descripcion" minlength="5"  ng-model="form.zona.descripcion">
+            <!-- mensajes  -->
+          <div ng-messages="form.formulario.descripcion.$error" role="alert">
+            <div ng-message="required">Este campo es requerido</div>
+            <div ng-message="minlength">Debe poseer al menos 10 carateres</div>
+          </div>
+        </md-input-container>
+           <md-button class="md-raised md-primary" type="submit" ng-click="form.submit()">Enviar</md-button>
+      </form>
+   </div>
+</md-dialog>

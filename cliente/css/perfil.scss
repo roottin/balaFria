@@ -1,0 +1,25 @@
+div.titulo-perfil{
+	width: 100%;
+	height: 200px;
+	background: $color-primary;
+	position: relative;	
+	border-bottom: 1px solid white;
+	img{
+		&.banner{
+			width: 100%;
+			height: 100%;
+		}
+		&.avatar{
+			width: 150px;
+		    height: 150px;
+		    border-radius: 100px;
+		    position: absolute;
+		    bottom: calc(-75px);
+		    left: calc(50% - 75px);
+		    border: 4px solid white;
+		}
+	}
+}
+div.cuerpo-perfil{
+	margin-top: 100px;
+}

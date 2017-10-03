@@ -1,0 +1,193 @@
+.pulse {
+  display: block;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 0  rgba($color-primary, 0.8);
+  animation: pulse 0.8s infinite;
+}
+.pulse:hover {
+  animation: none;
+}
+
+@keyframes pulse {
+  0% {
+    -moz-box-shadow: 0 0 0 0  rgba($color-primary, 0.8);
+    box-shadow: 0 0 0 0  rgba($color-primary, 0.8);
+  }
+  70% {
+      -moz-box-shadow: 0 0 0 40px  rgba($color-primary, 0);
+      box-shadow: 0 0 0 40px  rgba($color-primary, 0);
+  }
+  100% {
+      -moz-box-shadow: 0 0 0 0  rgba($color-primary, 0);
+      box-shadow: 0 0 0 0  rgba($color-primary, 0);
+  }
+}
+
+/*-------------Pulse sec--------------------------------*/
+.pulse-sec {
+  display: block;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 0  rgba($color-acent, 0.8);
+  animation: pulse-sec 0.6s infinite;
+}
+.pulse-sec:hover {
+  animation: none;
+}
+
+@keyframes pulse-sec {
+  0% {
+    -moz-box-shadow: 0 0 0 0  rgba($color-acent, 0.8);
+    box-shadow: 0 0 0 0  rgba($color-acent, 0.8);
+  }
+  70% {
+      -moz-box-shadow: 0 0 0 40px rgba($color-acent, 0);
+      box-shadow: 0 0 0 40px  rgba($color-acent, 0);
+  }
+  100% {
+      -moz-box-shadow: 0 0 0 0  rgba($color-acent, 0);
+      box-shadow: 0 0 0 0  rgba($color-acent, 0);
+  }
+}
+
+/*-------------salidas--------------------------------*/
+.salida-lateral-derecha{
+  animation-name: salida-derecha;
+  animation-duration: 1s;
+  animation-delay: 0s;
+  animation-fill-mode:forwards;
+}
+@keyframes salida-derecha {
+    0%   {transform: scale(1);}
+    50%  {
+      transform: scale(0.9);
+      left: 0px
+    }
+    100% {
+      transform: scale(0.9);
+      left: -100%
+    }
+}
+.salida-lateral-izquierda{
+  animation-name: salida-izquierda;
+  animation-duration: 1s;
+  animation-delay: 0s;
+  animation-fill-mode:forwards;
+}
+@keyframes salida-izquierda {
+    0%   {
+      transform: scale(1);
+      left: 0px
+    }
+    50%  {
+      transform: scale(0.9);
+      left: 0px
+    }
+    100% {
+      transform: scale(0.9);
+      left: 100%
+    }
+}
+
+/*-------------entradas--------------------------------*/
+.entrada-lateral-izquierda{
+  animation-name: entrada-izquierda;
+  animation-duration: 1s;
+  animation-delay: 0s;
+  animation-fill-mode:forwards;
+}
+@keyframes entrada-izquierda {
+    0%   {
+      transform: scale(0.9);
+      left: -100%;
+    }
+    50%  {
+      transform: scale(0.9);
+      left: -100%;
+    }
+    90%{
+      transform: scale(0.9);
+    }
+    100% {
+      transform: scale(1);
+      left: 0%;
+    }
+}
+.entrada-lateral-derecha{
+  animation-name: entrada-derecha;
+  animation-duration: 1s;
+  animation-delay: 0s;
+  animation-fill-mode:forwards;
+}
+@keyframes entrada-derecha {
+    0%   {
+      transform: scale(0.9);
+      left: 100%;
+    }
+    50%  {
+      transform: scale(0.9);
+      left: 100%;
+    }
+    90%{
+      transform: scale(0.9);
+    }
+    100% {
+      transform: scale(1);
+      left: 0;
+    }
+}
+/*-------------carrito--------------------------------*/
+.abrir-cart{
+  animation-name: abrir-cart;
+  animation-duration: 0.5s;
+  animation-delay: 0s;
+  animation-fill-mode:forwards;
+}
+@keyframes abrir-cart {
+    0%   {
+      width: 50px;
+      height: 50px;
+      border-radius: 100px;      
+    }
+    25%{
+      height: 50px;
+      background-color: white;
+    }
+    75%{
+      width: 510px;
+      border-radius: 3px;
+
+    }
+    100% {
+      width: 510px;
+      height: 600px;
+      border-radius: 3px;      
+    }
+}
+.cerrar-cart{
+  animation-name: cerrar-cart;
+  animation-duration: 0.5s;
+  animation-delay: 0s;
+  animation-fill-mode:forwards;
+}
+@keyframes cerrar-cart {
+    0%{
+      width: 510px;
+      height: 600px;
+      border-radius: 3px;
+    }
+    25%{
+      width: 510px
+    }
+    75%{
+      height: 50px;
+      border-radius: 3px;      
+      background-color: white;
+    }
+    100% {
+      width: 50px;
+      height: 50px;
+      border-radius: 100px;      
+    }
+}

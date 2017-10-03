@@ -11,7 +11,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DOUBLE,
       allowNull: true
     },
-    logitud: {
+    longitud: {
       type: DataTypes.DOUBLE,
       allowNull: true
     }
