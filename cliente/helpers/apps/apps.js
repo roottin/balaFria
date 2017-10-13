@@ -84,9 +84,6 @@ angular.module('balafria', ['ngMaterial','ngMessages','ngRoute', 'ngResource','u
             controller: 'ctrlSeguridad',
             controllerAs:'user'
           }
-        },
-        resolve:{
-          loginRequired: clienteLoggedRequired
         }
       })
        .state('cliente.perfil', {

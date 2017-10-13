@@ -1,11 +1,19 @@
 <div class="titulo">
-  <i class="material-icons ">security</i> Seguridad
+  <i class="material-icons ">security</i> {{titulo}}
 </div>
 <div form-central md-theme="light">
    <form name="sucursal.form" ng-model="sucursal.form">
     <!-- NOTE: Aqui va todo el contenido de seguridad -->
     <br>
     <br>
+    <input type="text" ng-model="especie" placeholder="especie">
+    <input type="text" ng-model="nombre" placeholder="nombre">
+    <button type="button" name="button" ng-click="agregar()">agregar</button>
+
+    <div ng-repeat = "animal in animales">
+      <h2>{{animal.especie}}</h2>
+      <p>{{animal.nombre}}</p>
+    </div>
         <md-button ng-disabled="sucursal.form.$invalid" class="md-raised md-primary central" type="submit" ng-click="sucursal.submit()">Guardar</md-button>
    </form>
 </div>

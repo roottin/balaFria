@@ -20,7 +20,7 @@ angular.module('balafria')
 			if(!partes[1]){
 				partes[1]="00";
 			}
-			return partes[0]+","+partes[1]+" BsF";
+			return partes[0]+","+partes[1]+" Bs";
 		}
 	}
 })
